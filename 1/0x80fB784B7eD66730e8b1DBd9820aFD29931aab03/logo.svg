@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="lend-a" x1="0%" x2="100%" y1="50%" y2="50%">
+      <stop offset="0%" stop-color="#20AEC7"/>
+      <stop offset="100%" stop-color="#2A90C8"/>
+    </linearGradient>
+  </defs>
+  <g fill="none">
+    <path fill="url(#lend-a)" d="M16,0 C7.16366102,0 0,7.16366102 0,16 C0,24.836339 7.16366102,32 16,32 C24.836339,32 32,24.836339 32,16 L32,15.9902373 C31.9951186,7.15932203 24.8330847,0 16,0 Z"/>
+    <polygon fill="#FFF" points="10.92 27.62 8.964 25.654 13.548 21.072 8.964 16.488 10.923 14.528 17.464 21.068"/>
+    <polygon fill="#FFF" points="18.292 20.24 11.751 13.698 13.703 11.746 20.242 18.289"/>
+    <polygon fill="#FFF" points="23.039 15.506 21.078 17.461 14.536 10.92 21.078 4.378 23.039 6.335 18.457 10.918"/>
+  </g>
+</svg>
