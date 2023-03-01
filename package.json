@@ -1,0 +1,17 @@
+{
+	"name": "tokenlistooor_asset",
+	"main": "index.js",
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"ethers": "^6.0.8",
+		"fs-extra": "^9.1.0"
+	},
+	"scripts": {
+		"format": "prettier --write . --verbose",
+		"format:check": "prettier --check ."
+	},
+	"devDependencies": {
+		"prettier": "2.5.1"
+	}
+}
