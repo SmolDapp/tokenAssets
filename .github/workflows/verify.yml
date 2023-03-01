@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Install deps (with cache)
-        uses: bahmutov/npm-install@v1
+      - name: Install deps
+        run: npm install
 
       - name: Verify checksum
         run: node ./.github/scripts/verify.mjs
