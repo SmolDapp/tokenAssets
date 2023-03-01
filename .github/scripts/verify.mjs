@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 import {getAddress} from "ethers";
-const DataDirectory = "../";
+const DataDirectory = "../../";
 const IndexName = "index.json";
 
 function validate(directory) {
