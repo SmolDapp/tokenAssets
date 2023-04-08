@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 
 type TContext = {
@@ -16,22 +15,12 @@ export async function GET(request: Request, context: TContext): Promise<Response
 		return new Response('Not found', {status: 404});
 	}
 
-	const file = path.join(process.cwd());
-	console.log(file);
-	console.log(fs.readdirSync(file));
-
-	console.log(fs.readdirSync('./.next'));
-
-	console.log(fs.readdirSync('./..'));
-
-	console.log(fs.readdirSync('./../../'));
-
-	console.log(fs.readdirSync('./../../..'));
-
-	const logo = fs.readFileSync(`/${chainIDStr}/${tokenAddress}/${fileName}`);
+	// const dir = path.resolve('./public', chainIDStr, tokenAddress);
+	const image = path.join('/', chainIDStr, tokenAddress, fileName);
+	// const logo = fs.readFileSync(`/${chainIDStr}/${tokenAddress}/${fileName}`);
 
 	if (fileName.endsWith('.svg')) {
-		return new Response(logo, {headers: {'Content-Type': 'image/svg+xml'}});
+		return new Response(image, {headers: {'Content-Type': 'image/svg+xml'}});
 	}
-	return new Response(logo, {headers: {'Content-Type': 'image/png'}});
+	return new Response(image, {headers: {'Content-Type': 'image/png'}});
 }
