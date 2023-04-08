@@ -20,7 +20,7 @@ export async function GET(request: Request, context: TContext): Promise<Response
 	console.log(file);
 	console.log(fs.readdirSync(file));
 
-	console.log(fs.readdirSync('./'));
+	console.log(fs.readdirSync('./.next/'));
 
 	console.log(fs.readdirSync('./..'));
 
