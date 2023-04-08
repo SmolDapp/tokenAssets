@@ -8,7 +8,7 @@
     "dev": "next dev",
     "dev:ts": "tsc --watch",
     "start": "tsc && next build && next start",
-    "build": "sh build.sh && tsc && next build",
+    "build": "tsc && next build && sh build.sh",
     "export": "tsc && next build && next export -o ipfs",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
