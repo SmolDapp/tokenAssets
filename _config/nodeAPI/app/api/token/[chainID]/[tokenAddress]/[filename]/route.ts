@@ -14,6 +14,8 @@ export async function GET(request: Request, context: TContext) {
 	if (!['logo.svg', 'logo-32.png', 'logo-128.png'].includes(fileName)) {
 		return new Response('Not found', {status: 404})
 	}
+	console.log(fs.readdirSync(`./`));
+
 	const logo = fs.readFileSync(`../../${chainIDStr}/${tokenAddress}/${fileName}`)
 
 	if (fileName.endsWith('.svg')) {
