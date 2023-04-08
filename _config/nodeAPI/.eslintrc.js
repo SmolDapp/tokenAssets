@@ -9,7 +9,6 @@ module.exports = {
 		'plugin:import/recommended',
 		'plugin:react/recommended',
 		'plugin:react-hooks/recommended',
-		'plugin:tailwindcss/recommended',
 		'plugin:@typescript-eslint/recommended',
 		'next/core-web-vitals'
 	],
@@ -24,7 +23,6 @@ module.exports = {
 	'plugins': [
 		'@typescript-eslint',
 		'react',
-		'tailwindcss',
 		'unused-imports',
 		'simple-import-sort',
 		'import'
@@ -46,7 +44,6 @@ module.exports = {
 		'no-else-return': ['error', {'allowElseIf': false}],
 		'eol-last': ['error', 'always'],
 		'import/no-named-as-default-member': 2,
-		'tailwindcss/no-custom-classname': 0,
 		'array-bracket-newline': ['error', {'multiline': true}],
 		'react/jsx-curly-brace-presence': ['error', {'props': 'always', 'children': 'always'}],
 		'react/jsx-first-prop-new-line': ['error', 'multiline'],
@@ -179,7 +176,6 @@ module.exports = {
 								'^next',
 								'^(ethers|ethcall)?\\w',
 								'^axios', '^swr',
-								'^tailwindcss', '^framer-motion', '^nprogress',
 								'^@?\\w',
 								'^(@yearn-finance/.*)?\\w',
 								'^(@common/.*)?\\w',
