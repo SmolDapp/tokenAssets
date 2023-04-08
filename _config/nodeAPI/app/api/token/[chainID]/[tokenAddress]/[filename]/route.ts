@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 
 type TContext = {
 	params: {
@@ -16,13 +14,13 @@ export async function GET(request: Request, context: TContext): Promise<Response
 		return new Response('Not found', {status: 404});
 	}
 
-	// const dir = path.resolve('./public', chainIDStr, tokenAddress);
-	const image = path.resolve('/', chainIDStr, tokenAddress, fileName);
-	console.log(image);
-	const logo = fs.readFileSync(image);
-
-	if (fileName.endsWith('.svg')) {
-		return new Response(logo, {headers: {'Content-Type': 'image/svg+xml'}});
+	const baseURI = process.env.NEXT_PUBLIC_VERCEL_URL || (request as any)?.nextUrl?.origin;
+	const result = await fetch(`${baseURI}/${chainIDStr}/${tokenAddress}/${fileName}`);
+	if (result.ok) {
+		if (fileName.endsWith('.svg')) {
+			return new Response(result.body, {headers: {'Content-Type': 'image/svg+xml'}});
+		}
+		return new Response(result.body, {headers: {'Content-Type': 'image/png'}});
 	}
-	return new Response(logo, {headers: {'Content-Type': 'image/png'}});
+	return new Response('Not found', {status: 404});
 }
