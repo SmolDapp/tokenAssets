@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 type TContext = {
 	params: {
@@ -14,6 +15,11 @@ export async function GET(request: Request, context: TContext): Promise<Response
 	if (!['logo.svg', 'logo-32.png', 'logo-128.png'].includes(fileName)) {
 		return new Response('Not found', {status: 404});
 	}
+
+	const file = path.join(process.cwd());
+	console.log(file);
+	console.log(fs.readdirSync(file));
+
 	console.log(fs.readdirSync('./'));
 
 	console.log(fs.readdirSync('./..'));
