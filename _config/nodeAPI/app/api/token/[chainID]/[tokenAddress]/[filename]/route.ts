@@ -28,7 +28,7 @@ export async function GET(request: Request, context: TContext): Promise<Response
 
 	console.log(fs.readdirSync('./../../..'));
 
-	const logo = fs.readFileSync(`../public/${chainIDStr}/${tokenAddress}/${fileName}`);
+	const logo = fs.readFileSync(`.next/public/${chainIDStr}/${tokenAddress}/${fileName}`);
 
 	if (fileName.endsWith('.svg')) {
 		return new Response(logo, {headers: {'Content-Type': 'image/svg+xml'}});
