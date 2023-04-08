@@ -12,6 +12,7 @@
 		"format:check": "prettier --check ."
 	},
 	"devDependencies": {
+		"next": "^13.2.4",
 		"prettier": "2.5.1"
 	}
 }
