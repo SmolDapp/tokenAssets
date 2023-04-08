@@ -1,0 +1,25 @@
+name: Validation
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  verify:
+    name: Checksum check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Use Node 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install deps
+        run: npm install
+
+      - name: Verify checksum
+        run: node ./.github/scripts/verify.mjs
