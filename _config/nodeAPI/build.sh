@@ -1,6 +1,13 @@
 # bin bash
-mkdir ./_config/nodeAPI/next/public
-cp -r ../../1 ./_config/nodeAPI/next/public/1
-cp -r ../../10 ./_config/nodeAPI/next/public/10
-cp -r ../../250 ./_config/nodeAPI/next/public/250
-cp -r ../../42161 ./_config/nodeAPI/next/public/42161
+mkdir .next/public
+mkdir .next/public/1
+cp -rf ../../1 .next/public/1
+
+mkdir .next/public/10
+cp -rf ../../10 .next/public/10
+
+mkdir .next/public/250
+cp -rf ../../250 .next/public/250
+
+mkdir .next/public/42161
+cp -rf ../../42161 .next/public/42161
