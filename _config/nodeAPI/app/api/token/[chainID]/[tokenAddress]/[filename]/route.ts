@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 
 type TContext = {
@@ -16,11 +17,12 @@ export async function GET(request: Request, context: TContext): Promise<Response
 	}
 
 	// const dir = path.resolve('./public', chainIDStr, tokenAddress);
-	const image = path.join('/', chainIDStr, tokenAddress, fileName);
-	// const logo = fs.readFileSync(`/${chainIDStr}/${tokenAddress}/${fileName}`);
+	const image = path.resolve('/', chainIDStr, tokenAddress, fileName);
+	console.log(image);
+	const logo = fs.readFileSync(image);
 
 	if (fileName.endsWith('.svg')) {
-		return new Response(image, {headers: {'Content-Type': 'image/svg+xml'}});
+		return new Response(logo, {headers: {'Content-Type': 'image/svg+xml'}});
 	}
-	return new Response(image, {headers: {'Content-Type': 'image/png'}});
+	return new Response(logo, {headers: {'Content-Type': 'image/png'}});
 }
