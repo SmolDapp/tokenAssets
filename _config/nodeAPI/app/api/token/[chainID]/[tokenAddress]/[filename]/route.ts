@@ -15,8 +15,10 @@ export async function GET(request: Request, context: TContext) {
 		return new Response('Not found', {status: 404})
 	}
 	console.log(fs.readdirSync(`./`));
+
 	console.log(fs.readdirSync(`./..`));
-	console.log(fs.readdirSync(`./../..`));
+
+	console.log(fs.readdirSync(`./../../`));
 
 	const logo = fs.readFileSync(`../../${chainIDStr}/${tokenAddress}/${fileName}`)
 
