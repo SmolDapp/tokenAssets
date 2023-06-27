@@ -7,17 +7,35 @@ type TContext = {
 	}
 }
 async function resolveNotFound(request: Request): Promise<Response> {
-	const baseURI = (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : (request as any)?.nextUrl?.origin);
-	const result = await fetch(`${baseURI}/not-found.png`);
-
-	return new Response(result.body, {headers: {'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400'}});
+	const fallback = new URL(request.url).searchParams.get('fallback');
+	if (fallback === 'true') {
+		const baseURI = (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : (request as any)?.nextUrl?.origin);
+		const result = await fetch(`${baseURI}/not-found.png`);
+		return new Response(result.body, {headers: {'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400'}});
+	}
+	if (fallback) {
+		const result = await fetch(fallback);
+		const fallbackImageTypeFromString = fallback.split('.').pop();
+		const fallbackImageType = fallbackImageTypeFromString ? `image/${fallbackImageTypeFromString}` : 'image/png';
+		return new Response(result.body, {headers: {'Content-Type': fallbackImageType, 'Cache-Control': 'public, max-age=86400'}});
+	}
+	return new Response('Not found', {status: 404});
 }
 
 async function resolveGasToken(request: Request): Promise<Response> {
-	const baseURI = (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : (request as any)?.nextUrl?.origin);
-	const result = await fetch(`${baseURI}/gas-token.png`);
-
-	return new Response(result.body, {headers: {'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400'}});
+	const fallback = new URL(request.url).searchParams.get('fallback');
+	if (fallback === 'true') {
+		const baseURI = (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : (request as any)?.nextUrl?.origin);
+		const result = await fetch(`${baseURI}/gas-token.png`);
+		return new Response(result.body, {headers: {'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400'}});
+	}
+	if (fallback) {
+		const result = await fetch(fallback);
+		const fallbackImageTypeFromString = fallback.split('.').pop();
+		const fallbackImageType = fallbackImageTypeFromString ? `image/${fallbackImageTypeFromString}` : 'image/png';
+		return new Response(result.body, {headers: {'Content-Type': fallbackImageType, 'Cache-Control': 'public, max-age=86400'}});
+	}
+	return new Response('Not found', {status: 404});
 }
 
 export async function GET(request: Request, context: TContext): Promise<Response> {
