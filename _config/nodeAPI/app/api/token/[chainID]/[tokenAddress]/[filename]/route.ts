@@ -13,11 +13,14 @@ async function resolveNotFound(request: Request): Promise<Response> {
 		const result = await fetch(`${baseURI}/not-found.png`);
 		return new Response(result.body, {headers: {'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400'}});
 	}
+
 	if (fallback) {
 		const result = await fetch(fallback);
-		const fallbackImageTypeFromString = fallback.split('.').pop();
-		const fallbackImageType = fallbackImageTypeFromString ? `image/${fallbackImageTypeFromString}` : 'image/png';
-		return new Response(result.body, {headers: {'Content-Type': fallbackImageType, 'Cache-Control': 'public, max-age=86400'}});
+		const contentTypeFromFallback = result.headers.get('Content-Type');
+		if (contentTypeFromFallback?.startsWith('image/')) {
+			console.warn(`Using fallback image for gas token: ${fallback}`);
+			return new Response(result.body, {headers: {'Content-Type': contentTypeFromFallback, 'Cache-Control': 'public, max-age=86400'}});
+		}
 	}
 	return new Response('Not found', {status: 404});
 }
@@ -31,9 +34,11 @@ async function resolveGasToken(request: Request): Promise<Response> {
 	}
 	if (fallback) {
 		const result = await fetch(fallback);
-		const fallbackImageTypeFromString = fallback.split('.').pop();
-		const fallbackImageType = fallbackImageTypeFromString ? `image/${fallbackImageTypeFromString}` : 'image/png';
-		return new Response(result.body, {headers: {'Content-Type': fallbackImageType, 'Cache-Control': 'public, max-age=86400'}});
+		const contentTypeFromFallback = result.headers.get('Content-Type');
+		if (contentTypeFromFallback?.startsWith('image/')) {
+			console.warn(`Using fallback image for gas token: ${fallback}`);
+			return new Response(result.body, {headers: {'Content-Type': contentTypeFromFallback, 'Cache-Control': 'public, max-age=86400'}});
+		}
 	}
 	return new Response('Not found', {status: 404});
 }
