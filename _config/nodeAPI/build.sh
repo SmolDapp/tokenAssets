@@ -1,6 +1,10 @@
 # bin bash
 mkdir ./public
-cp -rf ../../1 ./public/
-cp -rf ../../10 ./public/
-cp -rf ../../250 ./public/
-cp -rf ../../42161 ./public/
+
+# Copy all files from the root directory starting with a number (chainID)
+allDirectories=$(find . -type f -name '[0-9]*')
+for directory in $allDirectories
+do
+  echo $directory
+  cp -rf ../../$directory ./public/
+done

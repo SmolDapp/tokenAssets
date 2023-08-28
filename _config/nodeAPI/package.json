@@ -5,7 +5,7 @@
     "."
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "sh build.sh && next dev",
     "dev:ts": "tsc --watch",
     "start": "sh build.sh && tsc && next build && next start",
     "build": " sh build.sh && tsc && next build",
