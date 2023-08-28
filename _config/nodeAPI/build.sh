@@ -1,10 +1,11 @@
 # bin bash
-mkdir ./public
+mkdir -p ./public
 
 # Copy all files from the root directory starting with a number (chainID)
-allDirectories=$(find . -type f -name '[0-9]*')
+# cp -rf ../../1 ./public/
+
+allDirectories=$(find ../.. -maxdepth 1 -type d -name '[0-9]*')
 for directory in $allDirectories
 do
-  echo $directory
-  cp -rf ../../$directory ./public/
+  cp -rf $directory ./public/
 done
