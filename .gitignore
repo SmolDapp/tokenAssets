@@ -6,7 +6,11 @@ out
 build
 _config/nodeAPI/public/1
 _config/nodeAPI/public/10
+_config/nodeAPI/public/56
+_config/nodeAPI/public/100
+_config/nodeAPI/public/137
 _config/nodeAPI/public/250
+_config/nodeAPI/public/8453
 _config/nodeAPI/public/42161
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
