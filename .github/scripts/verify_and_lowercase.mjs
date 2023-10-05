@@ -47,9 +47,16 @@ function validate(directory) {
 					console.error(`Error: "${file}" is missing logo-32.png`);
 					allValid = false;
 				}
+
 				if (!fs.existsSync(path.join(file, "logo.svg"))) {
 					console.error(`Error: "${file}" is missing logo.svg`);
 					allValid = false;
+				} else {
+					const svgValue = fs.readFileSync(path.join(file, "logo.svg"));
+					if (svgValue.includes(`data:image/png;base64`) || svgValue.includes(`data:image/jpeg;base64`)) {
+						console.error(`Error: "${file}" logo.svg contains base64 encoded image.`);
+						allValid = false;
+					}
 				}
 			}
 		}
