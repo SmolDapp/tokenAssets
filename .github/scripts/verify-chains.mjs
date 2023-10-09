@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 
-const DataDirectory = ".";
+const DataDirectory = "./chains";
 const IndexName = "index.json";
 
 function validate(directory) {
@@ -11,21 +11,10 @@ function validate(directory) {
 		const file = path.join(directory, name);
 		const stat = fs.lstatSync(file);
 		if (stat.isDirectory()) {
-			if (name.startsWith("0x")) {
-				try {
-					if (name.toLowerCase() !== name) {
-						console.error(`Error: "${name}" is not lowercased. Should be "${name.toLowerCase()}".`);
-						allValid = false;
-					}
-				} catch(error) {
-					console.error(`Error: "${name}" is not lowercased. Should be "${name.toLowerCase()}".`);
-					allValid = false;
-				}
-			}
 			if (name.startsWith("_")) {
 				continue
 			}
-			if (name.startsWith("0x")) {
+			if (name.match(/^[0-9]+$/) != null) {
 				if (!fs.existsSync(path.join(file, "logo-128.png"))) {
 					console.error(`Error: "${file}" is missing logo-128.png`);
 					allValid = false;
