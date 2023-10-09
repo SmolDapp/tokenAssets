@@ -25,6 +25,14 @@ $ inkscape -w 128 -h 128 logo.svg -e logo-18.png
 $ inkscape -w 32 -h 32 logo.svg -e logo-32.png
 ```
 
+You can also use `rsvg-convert` from the [`librsvg2`](https://formulae.brew.sh/formula/librsvg) package:
+```
+$ rsvg-convert -w 128 -h 128 logo.svg > logo-128.png
+$ rsvg-convert -h 32 logo.svg > logo-32.png
+<!-- or -->
+$ rsvg-convert -h 32 logo.svg > logo-32.png && rsvg-convert -h 128 logo.svg > logo-128.png
+```
+
 Once ready, create a new directory with the chain ID, or use the existing one,
 and create a new directory for the token address (in lower case) you are adding.
 
