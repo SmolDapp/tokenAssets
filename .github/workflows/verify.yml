@@ -21,5 +21,8 @@ jobs:
       - name: Install deps
         run: npm install
 
-      - name: Verify checksum
-        run: node ./.github/scripts/verify.mjs
+      - name: Verify tokens
+        run: node ./.github/scripts/verify-tokens.mjs
+
+      - name: Verify chains
+        run: node ./.github/scripts/verify-chains.mjs
