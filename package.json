@@ -5,7 +5,8 @@
 	"private": true,
 	"dependencies": {
 		"ethers": "^6.0.8",
-		"fs-extra": "^9.1.0"
+		"fs-extra": "^9.1.0",
+		"keccak": "^3.0.4"
 	},
 	"scripts": {
 		"format": "prettier --write . --verbose",

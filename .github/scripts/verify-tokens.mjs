@@ -39,7 +39,7 @@ function validate(directory) {
 					allValid = false;
 				} else {
 					const svgValue = fs.readFileSync(path.join(file, "logo.svg"));
-					if (svgValue.includes(`data:image/png;base64`) || svgValue.includes(`data:image/jpeg;base64`)) {
+						if (svgValue.includes(`data:image/png;base64`) || svgValue.includes(`data:img/png;base64`) || svgValue.includes(`data:image/jpeg;base64`) || svgValue.includes(`data:img/jpeg;base64`)) {
 						console.error(`Error: "${file}" logo.svg contains base64 encoded image.`);
 						allValid = false;
 					}

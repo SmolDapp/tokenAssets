@@ -1,0 +1,58 @@
+name: 📑 Updating lists
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      if: "!contains(github.event.head_commit.message, '[bot] - Update lists')"
+      steps:
+        - name: Checkout repo
+          uses: actions/checkout@v2
+          with:
+           persist-credentials: false
+           fetch-depth: 0
+
+        - name: Use Node 14.x
+          uses: actions/setup-node@v1
+          with:
+            node-version: 14.x
+
+        - name: Install deps
+          run: npm install
+
+        - name: Build token lists
+          run: node ./.github/scripts/generate-lists.mjs
+
+        - name: Commit files
+          run: |
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git commit -a -m "[bot] - Update lists"
+
+        - name: Temporarily disable "include administrators" branch protection
+          uses: benjefferies/branch-protection-bot@master
+          if: always()
+          with:
+           access_token: ${{ secrets.ACCESS_TOKEN }}
+           branch: ${{ github.event.repository.default_branch }}
+           enforce_admins: false
+
+        - name: Push changes
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.ACCESS_TOKEN }}
+            branch: ${{ github.ref }}
+
+        - name: Enable "include administrators" branch protection
+          uses: benjefferies/branch-protection-bot@master
+          if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
+          with:
+            access_token: ${{ secrets.ACCESS_TOKEN }}
+            owner: smoldapp
+            repo: tokenAssets
+            branch: ${{ github.event.repository.default_branch }}
+            enforce_admins: true
