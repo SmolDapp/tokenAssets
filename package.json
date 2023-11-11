@@ -13,7 +13,8 @@
 		"format:check": "prettier --check ."
 	},
 	"devDependencies": {
-		"next": "^13.2.4",
-		"prettier": "2.5.1"
+		"next": "^14.0.2",
+		"prettier": "3.0.3",
+		"styled-jsx": "^5.1.2"
 	}
 }
