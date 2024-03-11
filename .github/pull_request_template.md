@@ -16,4 +16,4 @@ Please review the following token assets:
 - [ ] I added the token's logo as a `128x128` PNG file, named `logo-128.png`
 - [ ] I added the token's logo as a SVG file, named `logo.svg`
 - [ ] My SVG logo is a proper SVG and not some base64 stuff
-- [ ] My documentation/Website clearly display the token address somewhere
+- [ ] My documentation/website clearly display the token address somewhere
