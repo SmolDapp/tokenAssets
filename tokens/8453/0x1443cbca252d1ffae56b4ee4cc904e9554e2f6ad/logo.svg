@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1012 1004">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-3 {
+        fill: #0052ff;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #28c2ff;
+      }
+
+      .cls-6 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cls-8 {
+        isolation: isolate;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="874.9" y="442.1" width="137.1" height="117.5"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <path class="cls-1" d="m501.8,119.7c102.9,0,272.7-21.3,341.4,45,72.1,69.6,40.5,229.5,40.5,337.8,0,211.4-171,382.8-382,382.8S119.9,713.9,119.9,502.5c0-48.3-46.2-239.7,34.9-323.3,81.2-83.7,289.7-59.5,347-59.5h0Z"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect class="cls-1" x="128.7" y="81.1" width="746.2" height="841.6"/>
+    </clipPath>
+  </defs>
+  <path class="cls-3" d="m502.8,885.3c-210.8,0-382-171.6-382-382.8S292,119.7,502.8,119.7c196.9,0,358.7,149.2,379.5,341.1h117.8C978.8,204,764.5,2.1,502.8,2.1,227.2,2.1,3.6,225.8,3.6,502s223.1,499.8,499.2,499.8c261.2,0,476-201.8,497.2-458.7h-117.7c-20.3,192.9-182.6,342.2-379.5,342.2Z"/>
+  <g class="cls-2">
+    <ellipse class="cls-4" cx="500.8" cy="502" rx="500.8" ry="502"/>
+  </g>
+  <ellipse class="cls-5" cx="501.8" cy="502.5" rx="382" ry="382.8"/>
+  <g class="cls-6">
+    <g class="cls-7">
+      <image class="cls-8" width="1024" height="1024" transform="translate(60.13 36.21) scale(.86)" xlink:href="https://baldcat.xyz/wp-content/uploads/2024/03/baldcat-asset.png"/>
+    </g>
+  </g>
+  <rect class="cls-1" x="97.2" y="69.4" width="846.3" height="245.4"/>
+</svg>
