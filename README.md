@@ -20,12 +20,14 @@ You will need an SVG file of the logo of the asset. You can use
 https://cloudconvert.com/svg-to-png to convert the SVG file into the PNGs.
 
 With Inkscape you can run:
+
 ```
 $ inkscape -w 128 -h 128 logo.svg -e logo-18.png
 $ inkscape -w 32 -h 32 logo.svg -e logo-32.png
 ```
 
 You can also use `rsvg-convert` from the [`librsvg2`](https://formulae.brew.sh/formula/librsvg) package:
+
 ```
 $ rsvg-convert -w 128 -h 128 logo.svg > logo-128.png
 $ rsvg-convert -h 32 logo.svg > logo-32.png

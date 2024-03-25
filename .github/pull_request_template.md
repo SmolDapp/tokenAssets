@@ -1,6 +1,7 @@
 Please review the following token assets:
 
 ## 📑 Description
+
 <!-- Some basic information about the token you want to add -->
 - Token Name: ...
 - Project Website: https://... <!-- ⚠️ Your website MUST contain of the token address or the PR will be rejected -->
@@ -10,6 +11,7 @@ Please review the following token assets:
 ---
 
 ## ✅ Checks
+
 <!-- Make sure your pr passes the CI checks and do check the following fields as needed - -->
 - [ ] I created a new folder with the token address, **all in lowercase**
 - [ ] I added the token's logo as a `32x32` PNG file, named `logo-32.png`
