@@ -10,8 +10,10 @@ export function middleware(req: NextRequest): NextResponse | Response {
 	const githubBaseURL = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main/';
 	const pathname = req.nextUrl.pathname.toLowerCase();
 	const splitURL = pathname.split('/');
-	const [/*_api*/, /*_token*/, /*chainID*/, tokenAddress, filename] = splitURL;
+	const [/*_api*/, /*_token*/, /*chainID*/, tokenAddress, filenameWithArgs] = splitURL;
 
+	//remove any query parameters
+	const [filename] = filenameWithArgs.split('?');
 	if (!['logo.svg', 'logo-32.png', 'logo-128.png'].includes(filename)) {
 		if (tokenAddress === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
 			const newURL = new URL(`${githubBaseURL}_config/nodeAPI/public/gas-token.png`);
