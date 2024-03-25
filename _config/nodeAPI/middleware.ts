@@ -3,7 +3,7 @@ import {NextResponse} from 'next/server';
 import type {NextRequest} from 'next/server';
 
 export const config = {
-	matcher: '/api/token/:chainID/:tokenAddress/:filename'
+	matcher: '/api/token/:path*'
 };
 
 export function middleware(req: NextRequest): NextResponse | Response {
