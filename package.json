@@ -10,7 +10,7 @@
 	},
 	"scripts": {
 		"format": "prettier --write . --verbose",
-		"prettier-format": "prettier --config .prettierrc \"./**/**/*.{js,ts,tsx,scss,md}\" --write",
+		"prettier-format": "prettier --config .prettierrc \"./**/**/*.{js,mjs,ts,tsx,scss,md}\" --write",
 		"format:check": "prettier --check ."
 	},
 	"devDependencies": {
