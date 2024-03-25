@@ -69,7 +69,6 @@ async function resolveGasToken(request: Request): Promise<Response> {
 }
 
 export async function GET(request: Request, context: TContext): Promise<Response> {
-	console.log('HELLO2');
 	const chainIDStr = (context?.params?.chainID || 1).toString();
 	const tokenAddress = (context?.params?.tokenAddress || '').toLowerCase();
 	const fileName = (context?.params?.filename || '').toLowerCase();

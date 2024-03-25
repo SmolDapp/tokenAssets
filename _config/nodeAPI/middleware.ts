@@ -14,6 +14,7 @@ export function middleware(req: NextRequest): NextResponse | Response {
 
 	//remove any query parameters
 	const [filename] = filenameWithArgs.split('?');
+	console.log(tokenAddress, filename, splitURL);
 	if (!['logo.svg', 'logo-32.png', 'logo-128.png'].includes(filename)) {
 		if (tokenAddress === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
 			const newURL = new URL(`${githubBaseURL}_config/nodeAPI/public/gas-token.png`);
