@@ -7,9 +7,9 @@ export const config = {
 };
 
 export function middleware(req: NextRequest): NextResponse | Response {
-	console.log('HELLO');
 	const githubBaseURL = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main/tokens/';
-	req.nextUrl.pathname = req.nextUrl.pathname.toLowerCase();
-	const newURL = new URL(`${githubBaseURL}${req.nextUrl.pathname.replace('/api/token/', '')}`);
-	return NextResponse.redirect(newURL, {status: 308});
+	const newURL = new URL(`${githubBaseURL}${req.nextUrl.pathname.toLowerCase().replace('/api/token/', '')}`);
+	console.log(newURL);
+	return NextResponse.next();
+	// return NextResponse.redirect(newURL, {status: 308});
 }
