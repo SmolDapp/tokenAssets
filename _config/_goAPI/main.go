@@ -23,7 +23,7 @@ var originOfAccess = []string{}
 func main() {
 	fmt.Println("Starting SmolAssets API")
 	go accessLogger()
-	NewRouter().Run(`:8080`)
+	NewRouter().Run(`:8081`)
 }
 
 func accessLogger() {
