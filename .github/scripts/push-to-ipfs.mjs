@@ -39,10 +39,10 @@ const uploadDirectoryToIPFS = async (path) => {
 }
 
 
-const setIPNSRecord = async (cid, retry) => {
+const setIPNSRecord = async (record, cid, retry) => {
 	try {
 		console.log(`Setting IPNS record for ${cid}`)
-		const {id} = await fleekSdk.ipns().getRecord({name: CHAIN_RECORD_NAME});
+		const {id} = await fleekSdk.ipns().getRecord({name: record});
 		await new Promise(resolve => setTimeout(resolve, 10000));
 		const record = await fleekSdk.ipns().publishRecord({id: id, hash: cid});
 		console.log(record)
@@ -76,7 +76,7 @@ async function executeChains() {
 		}
 	}
 
-	await setIPNSRecord(cid.toString(), 0)
+	await setIPNSRecord(CHAIN_RECORD_NAME, cid.toString(), 0)
 }
 
 async function executeTokens() {
@@ -97,7 +97,7 @@ async function executeTokens() {
 		}
 	}
 
-	await setIPNSRecord(cid.toString(), 0)
+	await setIPNSRecord(TOKEN_RECORD_NAME, cid.toString(), 0)
 }
 
 async function execute() {
