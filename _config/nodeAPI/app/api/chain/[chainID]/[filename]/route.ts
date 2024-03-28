@@ -42,10 +42,9 @@ export async function GET(request: Request, context: TContext): Promise<Response
 		return await resolveNotFound(request);
 	}
 
-	const baseURI = process.env.NEXT_PUBLIC_VERCEL_URL
-		? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-		: (request as any)?.nextUrl?.origin;
-	const result = await fetch(`${baseURI}/chains/${chainIDStr}/${fileName}`);
+	const baseURI = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main';
+	const finalURI = (`${baseURI}/chains/${chainIDStr}/${fileName}`).toLowerCase();
+	const result = await fetch(finalURI);
 	if (result.ok) {
 		if (fileName.endsWith('.svg')) {
 			return new Response(result.body, {
