@@ -39,18 +39,18 @@ const uploadDirectoryToIPFS = async (path) => {
 }
 
 
-const setIPNSRecord = async (record, cid, retry) => {
+const setIPNSRecord = async (name, cid, retry) => {
 	try {
 		console.log(`Setting IPNS record for ${cid}`)
-		const {id} = await fleekSdk.ipns().getRecord({name: record});
-		await new Promise(resolve => setTimeout(resolve, 10000));
+		const {id} = await fleekSdk.ipns().getRecord({name: name});
+		await new Promise(resolve => setTimeout(resolve, 4000));
 		const record = await fleekSdk.ipns().publishRecord({id: id, hash: cid});
 		console.log(record)
 		return record
 	} catch (error) {
 		console.error(`Error setting IPNS record: ${error}`)
 		if (retry < 10) {
-			await new Promise(resolve => setTimeout(resolve, 10000));
+			await new Promise(resolve => setTimeout(resolve, 4000));
 			retry += 1
 			await setIPNSRecord(cid, retry)
 		}
