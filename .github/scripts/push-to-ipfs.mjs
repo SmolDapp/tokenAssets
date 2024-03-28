@@ -15,7 +15,7 @@ const uploadDirectoryToIPFS = async (path) => {
 		const result = await fleekSdk.ipfs().addFromPath(path, {wrapWithDirectory: true});
 		return result
 	} catch (error) {
-		console.error(error)
+		console.error(`Error uploading directory to IPFS: ${error}`)
 	}
 }
 
@@ -49,6 +49,8 @@ async function execute() {
 	}
 	fs.writeFileSync(file, JSON.stringify(infoJSON, null, 2))
 
+
+	console.log(`Uploading directory ${pathToData}`)
 	const results = await uploadDirectoryToIPFS(pathToData)
 	if (results) {
 		for (const item of results) {
