@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 const CHAIN_RECORD_NAME = 'k51qzi5uqu5dljyjy7wm6qdvoqrscpg7t4kjabdm3y8nawvjucpefnoxi25ko0'
+const TOKEN_RECORD_NAME = 'k51qzi5uqu5dh311gjp23ymb82owles107sl1z4jmdbzzek6ejjeb8uuso2yil'
 
 try {
 	if (!process.env.PERSONAL_ACCESS_TOKEN) {
@@ -57,16 +58,12 @@ const setIPNSRecord = async (cid, retry) => {
 }
 
 let cid;
-const pathToData = path.join(process.cwd(), 'chains');
-async function execute() {
+async function executeChains() {
+	const pathToData = path.join(process.cwd(), 'chains');
 	const timestamp = new Date().getTime().toString()
 	const file = path.join(pathToData, '_info.json')
-	const infoJSON = {
-		timestamp: timestamp,
-		record: CHAIN_RECORD_NAME
-	}
+	const infoJSON = {timestamp: timestamp, record: CHAIN_RECORD_NAME}
 	fs.writeFileSync(file, JSON.stringify(infoJSON, null, 2))
-
 
 	console.log(`Uploading directory ${pathToData}`)
 	const results = await uploadDirectoryToIPFS(pathToData)
@@ -80,16 +77,34 @@ async function execute() {
 	}
 
 	await setIPNSRecord(cid.toString(), 0)
+}
+
+async function executeTokens() {
+	const pathToData = path.join(process.cwd(), 'tokens');
+	const timestamp = new Date().getTime().toString()
+	const file = path.join(pathToData, '_info.json')
+	const infoJSON = {timestamp: timestamp, record: TOKEN_RECORD_NAME}
+	fs.writeFileSync(file, JSON.stringify(infoJSON, null, 2))
+
+	console.log(`Uploading directory ${pathToData}`)
+	const results = await uploadDirectoryToIPFS(pathToData)
+	if (results) {
+		for (const item of results) {
+			if (item.path === '') {
+				cid = item.cid
+				break;
+			}
+		}
+	}
+
+	await setIPNSRecord(cid.toString(), 0)
+}
+
+async function execute() {
+	await executeChains()
+	await executeTokens()
+
 	process.exit(0)
 }
 
 execute()
-// fleekSdk.ipns().listRecords()
-// 	.then(async (records) => {
-// 		console.log(records)
-// 	})
-// 	.catch((error) => {
-// 		console.error(error)
-// 		process.exit(1)
-// 	})
-
