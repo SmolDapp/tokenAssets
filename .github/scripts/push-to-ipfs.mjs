@@ -83,4 +83,13 @@ async function execute() {
 	process.exit(0)
 }
 
-execute()
+// execute()
+fleekSdk.ipns().listRecords()
+	.then(async (records) => {
+		console.log(records)
+	})
+	.catch((error) => {
+		console.error(error)
+		process.exit(1)
+	})
+
