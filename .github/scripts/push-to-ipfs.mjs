@@ -4,6 +4,24 @@ import fs from 'fs';
 
 const CHAIN_RECORD_NAME = 'k51qzi5uqu5dljyjy7wm6qdvoqrscpg7t4kjabdm3y8nawvjucpefnoxi25ko0'
 
+try {
+	if (!process.env.PERSONAL_ACCESS_TOKEN) {
+		throw new Error('PERSONAL_ACCESS_TOKEN is not set');
+	}
+	if (!process.env.PROJECT_ID) {
+		throw new Error('PROJECT_ID is not set');
+	}
+	const newAccessTokenService = new PersonalAccessTokenService({
+		personalAccessToken: process.env.PERSONAL_ACCESS_TOKEN,
+		projectId: process.env.PROJECT_ID,
+	})
+	new FleekSdk({accessTokenService: newAccessTokenService});
+
+} catch (error) {
+	console.error(error)
+	process.exit(1)
+}
+
 const newAccessTokenService = new PersonalAccessTokenService({
 	personalAccessToken: process.env.PERSONAL_ACCESS_TOKEN,
 	projectId: process.env.PROJECT_ID,
