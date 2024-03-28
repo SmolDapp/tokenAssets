@@ -11,12 +11,6 @@ const nextConfig = {
 				permanent: true,
 
 			},
-			{
-
-				source: '/api/token/:chainID/:tokenAddress/:slug*',
-				destination: 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main/tokens/:chainID/:tokenAddress/:slug*',
-				permanent: true
-			}
 		];
 	}
 };
