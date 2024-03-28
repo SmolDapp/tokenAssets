@@ -4,6 +4,7 @@
 	"license": "MIT",
 	"private": true,
 	"dependencies": {
+		"@fleekxyz/sdk": "^0.7.3",
 		"ethers": "^6.0.8",
 		"fs-extra": "^9.1.0",
 		"keccak": "^3.0.4"
