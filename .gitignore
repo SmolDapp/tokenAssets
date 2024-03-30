@@ -33,3 +33,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+_config/_goAPI/vendor
+_config/_goAPI/assets

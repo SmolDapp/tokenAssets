@@ -1,35 +1,35 @@
-import fs from "fs-extra";
-import path from "path";
-import createKeccakHash from 'keccak'
+import fs from 'fs-extra';
+import path from 'path';
+import createKeccakHash from 'keccak';
 
-const DataDirectory = "./tokens";
-const IndexName = "list.json";
+const DataDirectory = './tokens';
+const IndexName = 'list.json';
 
 function toChecksumAddress(address) {
-	address = address.toLowerCase().replace('0x', '')
-	var hash = createKeccakHash('keccak256').update(address).digest('hex')
-	var ret = '0x'
+	address = address.toLowerCase().replace('0x', '');
+	var hash = createKeccakHash('keccak256').update(address).digest('hex');
+	var ret = '0x';
 
 	for (var i = 0; i < address.length; i++) {
 		if (parseInt(hash[i], 16) >= 8) {
-			ret += address[i].toUpperCase()
+			ret += address[i].toUpperCase();
 		} else {
-			ret += address[i]
+			ret += address[i];
 		}
 	}
 
-	return ret
+	return ret;
 }
 
 const perChain = {};
 function generate(directory) {
 	for (let name of fs.readdirSync(directory)) {
-		if (name.startsWith(".") || name === IndexName || name === 'node_modules') continue;
+		if (name.startsWith('.') || name === IndexName || name === 'node_modules') continue;
 		const file = path.join(directory, name);
 		const stat = fs.lstatSync(file);
 		if (stat.isDirectory()) {
-			if (name.startsWith("0x")) {
-				const currentChain = Number(directory.split("/").pop());
+			if (name.startsWith('0x')) {
+				const currentChain = Number(directory.split('/').pop());
 				if (perChain[currentChain] === undefined) {
 					perChain[currentChain] = [];
 				}
@@ -41,8 +41,8 @@ function generate(directory) {
 }
 
 const cwd = process.cwd();
-if (!fs.existsSync(path.join(cwd, ".git"))) {
-	console.error("Error: script should be run in the root of the repo.");
+if (!fs.existsSync(path.join(cwd, '.git'))) {
+	console.error('Error: script should be run in the root of the repo.');
 	process.exit(1);
 }
 
@@ -50,12 +50,14 @@ try {
 	generate(DataDirectory);
 	for (const chain in perChain) {
 		//load the existing list
-		const previousLists = fs.existsSync(path.join(DataDirectory, chain, IndexName)) ? JSON.parse(fs.readFileSync(path.join(DataDirectory, chain, IndexName))) : {};
+		const previousLists = fs.existsSync(path.join(DataDirectory, chain, IndexName))
+			? JSON.parse(fs.readFileSync(path.join(DataDirectory, chain, IndexName)))
+			: {};
 		if (!previousLists.version) {
 			previousLists.version = {
-				'major': 0,
-				'minor': 0,
-				'patch': 0
+				major: 0,
+				minor: 0,
+				patch: 0
 			};
 		}
 		if (!previousLists.tokens) {
@@ -64,7 +66,7 @@ try {
 		const newList = {
 			version: previousLists.version,
 			tokens: perChain[chain]
-		}
+		};
 		//compare the new list with the old one
 		if (JSON.stringify(previousLists.tokens) === JSON.stringify(newList.tokens)) {
 			console.log(`No changes detected for chain ${chain}`);

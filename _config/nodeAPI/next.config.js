@@ -1,17 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	experimental: {
-		appDir: true,
+		appDir: true
 	},
 	redirects() {
 		return [
 			{
 				source: '/',
 				destination: 'https://github.com/SmolDapp/tokenAssets',
-				permanent: true
-			}
-		];
-	},
-}
+				permanent: true,
 
-module.exports = nextConfig
+			},
+		];
+	}
+};
+
+module.exports = nextConfig;
