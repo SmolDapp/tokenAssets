@@ -1,0 +1,33 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_11_45723)">
+<path d="M32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0C24.8366 0 32 7.16344 32 16Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28ZM16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="url(#paint0_linear_11_45723)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 17.5791L15.9998 26.0002L22 17.5955L15.9998 20.737L10 17.5791Z" fill="url(#paint1_radial_11_45723)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.9927 19.6846L10 16.5116L16 13.3682L22 16.5261L15.9927 19.6846Z" fill="url(#paint2_radial_11_45723)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 6L10 16.5076L16 13.3684L22 16.5263L16 6Z" fill="url(#paint3_radial_11_45723)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_11_45723" x1="32" y1="0" x2="0" y2="32" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8DEBF9"/>
+<stop offset="1" stop-color="#C0F9B7"/>
+</linearGradient>
+<radialGradient id="paint1_radial_11_45723" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16 20.737) rotate(90) scale(11.5789 10.7532)">
+<stop offset="0.0677083" stop-color="#874FFF"/>
+<stop offset="0.463542" stop-color="#36AFE2"/>
+<stop offset="0.859375" stop-color="#57FF68"/>
+</radialGradient>
+<radialGradient id="paint2_radial_11_45723" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16 13.3682) rotate(90) scale(10 9.49565)">
+<stop offset="0.0677083" stop-color="#874FFF"/>
+<stop offset="0.463542" stop-color="#36AFE2"/>
+<stop offset="0.859375" stop-color="#57FF68"/>
+</radialGradient>
+<radialGradient id="paint3_radial_11_45723" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16 13.8947) rotate(90) scale(14.2105 13.4972)">
+<stop stop-color="#57FF68"/>
+<stop offset="0.5" stop-color="#36AFE2"/>
+<stop offset="1" stop-color="#874FFF"/>
+</radialGradient>
+<clipPath id="clip0_11_45723">
+<rect width="32" height="32" fill="white"/>
+</clipPath>
+</defs>
+</svg>
