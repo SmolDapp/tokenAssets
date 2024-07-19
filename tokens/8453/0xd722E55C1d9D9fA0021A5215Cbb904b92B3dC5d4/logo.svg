@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 500 500"
+   style="enable-background:new 0 0 500 500;"
+   xml:space="preserve"
+   sodipodi:docname="Radiant-token-color-v2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs18" /><sodipodi:namedview
+   id="namedview16"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1" />
+<style
+   type="text/css"
+   id="style2">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:#FFFFFF;}
+</style>
+<g
+   id="g11">
+
+		<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="251.9952"
+   y1="412.9505"
+   x2="251.9952"
+   y2="88.3465"
+   gradientTransform="matrix(-1 0 0 -1 503.9905 501.3302)">
+		<stop
+   offset="0.1028"
+   style="stop-color:#00FFAA"
+   id="stop4" />
+		<stop
+   offset="0.999"
+   style="stop-color:#5F00FA"
+   id="stop6" />
+	</linearGradient>
+	<ellipse
+   class="st0"
+   cx="252"
+   cy="250.67"
+   rx="166.27"
+   ry="163.61"
+   id="ellipse9" />
+</g>
+<polygon
+   class="st1"
+   points="288.11,265.79 383.94,250 288.11,234.21 344.71,155.29 265.79,211.89 250,116.06 234.21,211.89   155.29,155.29 211.89,234.21 116.06,250 211.89,265.79 155.29,344.71 234.21,288.11 250,383.94 265.79,288.11 344.71,344.71 "
+   id="polygon13" />
+</svg>
