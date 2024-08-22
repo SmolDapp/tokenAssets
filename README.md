@@ -15,7 +15,7 @@ https://assets.smold.app/api/token/[chainID]/[tokenAddress]/[fileName].[ext]
 
 ## Usage
 
-It's recommanded to use PNG files. They are smaller and faster to load, come in two sizes (32x32 and 128x128) and are supported by all browsers.
+It's recommended to use PNG files. They are smaller and faster to load, come in two sizes (32x32 and 128x128) and are supported by all browsers.
 SVG files are also available, but they are larger and slower to load and can hurt performances for poorly optimized assets or very complex ones (ex: curvefi icon).
 
 ## (Self) Hosting
