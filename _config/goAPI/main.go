@@ -121,7 +121,7 @@ func NewRouter() *gin.Engine {
 	router.GET(`api/chain/:chainID/:filename`, ServeChain)
 	router.GET(`api/chains/:chainID/:filename`, ServeChain)
 
-	// Ommitting the /api/ prefix
+	// Omitting the /api/ prefix
 	router.GET(`token/:chainID/:tokenAddress/:filename`, ServeToken)
 	router.GET(`tokens/:chainID/:tokenAddress/:filename`, ServeToken)
 	router.GET(`chain/:chainID/:filename`, ServeChain)
