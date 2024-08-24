@@ -5,7 +5,8 @@ CDN with pragmatic access.
 
 The CDN supports SVG and PNGs (small, larger).
 
-## Usage
+## Usage 
+https://assets.smold.app/api/token/[chainID]/[tokenAddress]/[fileName].[ext]
 
 Currently the API/CDN endpoint is at:
 
