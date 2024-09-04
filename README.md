@@ -43,7 +43,7 @@ https://cloudconvert.com/svg-to-png to convert the SVG file into the PNGs.
 With Inkscape you can run:
 
 ```
-$ inkscape -w 128 -h 128 logo.svg -e logo-18.png
+$ inkscape -w 128 -h 128 logo.svg -e logo-128.png
 $ inkscape -w 32 -h 32 logo.svg -e logo-32.png
 ```
 
