@@ -1,7 +1,7 @@
 {
     "version": {
         "major": 1,
-        "minor": 122,
+        "minor": 123,
         "patch": 0
     },
     "tokens": [
@@ -235,6 +235,7 @@
         "0xA19328fb05ce6FD204D16c2a2A98F7CF434c12F4",
         "0xa334884bF6b0A066d553D19e507315E839409e62",
         "0xA3386F0a4034184ECB8A0d1E7E79b4f720634317",
+        "0xa3a2Cdd230f9B3ff6E01A01534a3eD3CBf049815",
         "0xA3d1a8DEB97B111454B294E2324EfAD13a9d8396",
         "0xa4220a2B0Cb10BF5FDC3B8c3D9E13728f5E7ca56",
         "0xA49dCCD9425cc38d4111Df2e665f2a33fe799C42",
