@@ -66,8 +66,12 @@ async function resolveGasToken(request: Request): Promise<Response> {
 
 export async function GET(request: Request, context: TContext): Promise<Response> {
 	const chainIDStr = (context?.params?.chainID || 1).toString();
-	const tokenAddress = (context?.params?.tokenAddress || '').toLowerCase();
 	const fileName = (context?.params?.filename || '').toLowerCase();
+	let tokenAddress = (context?.params?.tokenAddress || '');
+	if (tokenAddress.startsWith('0x')) {
+		tokenAddress = tokenAddress.toLowerCase();
+	}
+
 	if (!['logo.svg', 'logo-32.png', 'logo-128.png'].includes(fileName)) {
 		if (tokenAddress === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
 			return await resolveGasToken(request);
@@ -76,7 +80,7 @@ export async function GET(request: Request, context: TContext): Promise<Response
 	}
 
 	const baseURI = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main';
-	const finalURI = (`${baseURI}/tokens/${chainIDStr}/${tokenAddress}/${fileName}`).toLowerCase();
+	const finalURI = (`${baseURI}/tokens/${chainIDStr}/${tokenAddress}/${fileName}`);
 	const result = await fetch(finalURI);
 	if (result.ok) {
 		if (fileName.endsWith('.svg')) {
