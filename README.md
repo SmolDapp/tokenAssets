@@ -21,8 +21,10 @@ SVG files are also available, but they are larger and slower to load and can hur
 ## (Self) Hosting
 
 The repo comes with two different server systems in `_config`:
-- a `golang` server, that serve the assets from github
-- a `node` server, configured to work with Vercel. If you want to self host, here is the config we are using:
+
+-   a `golang` server, that serve the assets from github
+-   a `node` server, configured to work with Vercel. If you want to self host, here is the config we are using:
+
 ```
 Framework Preset: Next.js
 Build Command: yarn --cwd _config/nodeAPI/ run build
@@ -33,6 +35,23 @@ Node Version: 18.x
 Environment Variables: None
 ```
 
+## Supported chains
+
+-   1: Ethereum
+-   10: Optimism
+-   56: BSC
+-   100: Gnosis
+-   137: Polygon
+-   250: Fantom
+-   1101: Polygon zkEVM
+-   8453: Base
+-   34443: Mode
+-   42161: Arbitrum
+-   43114: Avalanche
+-   60808: BOB
+-   81457: Blast
+-   1380012617: Rari
+-   1151111081099710: Solana
 
 ## Contributing
 
