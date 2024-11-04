@@ -41,7 +41,7 @@ export async function GET(request: Request, context: TContext): Promise<Response
 	}
 
 	const baseURI = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main';
-	const finalURI = (`${baseURI}/chains/${chainIDStr}/${fileName}`).toLowerCase();
+	const finalURI = (`${baseURI}/chains/${chainIDStr}/${fileName}`);
 	const result = await fetch(finalURI);
 	if (result.ok) {
 		if (fileName.endsWith('.svg')) {
