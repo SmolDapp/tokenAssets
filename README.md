@@ -76,7 +76,7 @@ $ rsvg-convert -h 32 logo.svg > logo-32.png && rsvg-convert -h 128 logo.svg > lo
 ```
 
 Once ready, create a new directory with the chain ID, or use the existing one,
-and create a new directory for the token address (in lower case) you are adding.
+and create a new directory for the token address (in lower case for EVM chains, or case sensitive for Solana) you are adding.
 
 Fill-in the details when creating the pull-request, and we'll merge it shortly!
 
