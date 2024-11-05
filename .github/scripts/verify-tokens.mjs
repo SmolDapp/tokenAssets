@@ -31,7 +31,7 @@ function validate(directory) {
 			if (name.startsWith('_')) {
 				continue;
 			}
-			if (name.startsWith('0x')) {
+			if (name.startsWith('0x') || file.includes('tokens/1151111081099710/')) {
 				if (!fs.existsSync(path.join(file, 'logo-128.png'))) {
 					console.error(`Error: "${file}" is missing logo-128.png`);
 					allValid = false;

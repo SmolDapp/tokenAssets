@@ -66,8 +66,12 @@ func resolveGasToken(c *gin.Context) {
 
 func ServeToken(c *gin.Context) {
 	chainIDStr := c.Param("chainID")
-	tokenAddress := strings.ToLower(c.Param("tokenAddress"))
+	tokenAddress := c.Param("tokenAddress")
 	fileName := c.Param("filename")
+
+	if strings.HasPrefix(tokenAddress, "0x") {
+		tokenAddress = strings.ToLower(tokenAddress)
+	}
 
 	if !ContainsSubString([]string{"logo.svg", "logo-32.png", "logo-128.png"}, fileName) {
 		if tokenAddress == "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" {
