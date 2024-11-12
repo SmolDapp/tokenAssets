@@ -44,6 +44,7 @@ Environment Variables: None
 -   137: Polygon
 -   250: Fantom
 -   1101: Polygon zkEVM
+-   1135: Lisk
 -   8453: Base
 -   34443: Mode
 -   42161: Arbitrum
