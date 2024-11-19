@@ -42,8 +42,10 @@ Environment Variables: None
 -   56: BSC
 -   100: Gnosis
 -   137: Polygon
+-   223: BSquared
 -   250: Fantom
 -   1101: Polygon zkEVM
+-   1135: Lisk
 -   8453: Base
 -   34443: Mode
 -   42161: Arbitrum
