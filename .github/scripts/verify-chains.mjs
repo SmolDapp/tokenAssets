@@ -32,7 +32,8 @@ function validate(directory) {
 						svgValue.includes(`data:image/png;base64`) ||
 						svgValue.includes(`data:img/png;base64`) ||
 						svgValue.includes(`data:image/jpeg;base64`) ||
-						svgValue.includes(`data:img/jpeg;base64`)
+						svgValue.includes(`data:img/jpeg;base64`) ||
+						svgValue.includes(`href="http`)
 					) {
 						console.error(`Error: "${file}" logo.svg contains base64 encoded image.`);
 						allValid = false;
