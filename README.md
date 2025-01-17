@@ -45,13 +45,16 @@ Environment Variables: None
 -   223: BSquared
 -   250: Fantom
 -   252: Fraxtal
+-   957: Derive
 -   1101: Polygon zkEVM
 -   1135: Lisk
 -   1750: Metal L2
+-   1868: Soneium
 -   8453: Base
 -   34443: Mode
 -   42161: Arbitrum
 -   43114: Avalanche
+-   57073: Ink
 -   60808: BOB
 -   81457: Blast
 -   1380012617: Rari
