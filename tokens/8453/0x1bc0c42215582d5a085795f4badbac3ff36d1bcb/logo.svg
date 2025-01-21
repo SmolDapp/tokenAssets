@@ -1,0 +1,11 @@
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+     width="104.000000pt" height="105.000000pt" viewBox="0 0 104.000000 105.000000"
+     preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(0.000000,105.000000) scale(0.100000,-0.100000)"
+     fill="#9B51E0" stroke="none">
+    <path d="M690 550 l0 -330 60 0 60 0 0 330 0 330 -60 0 -60 0 0 -330z"/>
+    <path d="M442 428 l3 -203 58 -3 57 -3 0 206 0 205 -60 0 -60 0 2 -202z"/>
+    <path d="M197 373 c-4 -3 -7 -39 -7 -80 l0 -73 60 0 60 0 0 80 0 80 -53 0
+             c-30 0 -57 -3 -60 -7z"/>
+  </g>
+</svg>
