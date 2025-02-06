@@ -2,7 +2,7 @@
     "version": {
         "major": 0,
         "minor": 0,
-        "patch": 293
+        "patch": 294
     },
     "tokens": {
         "1": [
@@ -2016,6 +2016,9 @@
             "0xc4a20a608616F18aA631316eEDa9Fb62d089361e",
             "0xe75D0fB2C24A55cA1e3F96781a2bCC7bdba058F0",
             "0xf7EF136751D7496021858c048FFA4f978C27831A"
+        ],
+        "80094": [
+            "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
         ],
         "81457": [
             "0x000000dAA580e54635a043D2773f2c698593836a",
