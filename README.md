@@ -50,6 +50,7 @@ Environment Variables: None
 -   1135: Lisk
 -   1750: Metal L2
 -   1868: Soneium
+-   1923: Swellchain
 -   8453: Base
 -   34443: Mode
 -   42161: Arbitrum
