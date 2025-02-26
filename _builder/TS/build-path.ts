@@ -43,7 +43,7 @@ const createTokenFolders = async (tokenConfig: {tokens: IToken[]}, company: stri
 
 	for (const token of tokenConfig.tokens) {
 		const chainDir = path.join(tokensDir, token.chain.toString());
-		const tokenDir = path.join(chainDir, token.address);
+		const tokenDir = path.join(chainDir, token.address.length == 42 ? token.address.toLowerCase() : token.address);
 
 		if (!fs.existsSync(chainDir)) {
 			fs.mkdirSync(chainDir);
