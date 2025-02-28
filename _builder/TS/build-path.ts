@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
 import {extname} from 'path';
@@ -41,50 +42,45 @@ const createTokenFolders = async (tokenConfig: {tokens: IToken[]}, company: stri
 	console.log(tokensDir);
 
 	for (const token of tokenConfig.tokens) {
+		console.log('-'.repeat(80));
+
 		const chainDir = path.join(tokensDir, token.chain.toString());
 		const tokenDir = path.join(chainDir, token.address.length == 42 ? token.address.toLowerCase() : token.address);
 
 		if (fs.existsSync(tokenDir)) {
 			fs.rmdirSync(tokenDir, {recursive: true});
-			console.log('Deleted existing token directory:', tokenDir);
 		}
-
-		// fs.mkdirSync(tokenDir, {recursive: true});
-		console.log('Created new token directory:', tokenDir);
-
-		console.log('Loading', token.logo);
+		fs.mkdirSync(tokenDir, {recursive: true});
 
 		const logoUrl = token.logo;
 		const logoExt = extname(logoUrl);
-		const logoOriginalPath = path.join(tokenDir, `temp${logoExt}`);
-		const logoPngPath = path.join(tokenDir, 'logo.png');
+
 		const logoSvgPath = path.join(tokenDir, 'logo.svg');
 		const logo32Path = path.join(tokenDir, 'logo-32.png');
 		const logo128Path = path.join(tokenDir, 'logo-128.png');
 
-		// try {
-		// 	const response = await axios.get(logoUrl, {responseType: 'arraybuffer'});
-		// 	fs.writeFileSync(logoOriginalPath, response.data);
+		try {
+			const response = await axios.get(logoUrl, {responseType: 'arraybuffer'});
+			fs.writeFileSync(logoSvgPath, response.data);
+			console.log(`Original logo: ${logoSvgPath}`);
 
-		// 	if (logoExt === '.svg') {
-		// 		const svgContent = fs.readFileSync(logoOriginalPath, 'utf8');
-		// 		svg2img(svgContent, (error, buffer) => {
-		// 			if (error) throw error;
-		// 			fs.writeFileSync(logoPngPath, buffer);
-		// 			convertPngToSvgAndResize(logoPngPath, logoSvgPath, logo32Path, logo128Path);
-		// 		});
-		// 	} else {
-		// 		// Convert the original logo to PNG format
-		// 		await sharp(logoOriginalPath).toFormat('png').toFile(logoPngPath);
-		// 		convertPngToSvgAndResize(logoPngPath, logoSvgPath, logo32Path, logo128Path);
-		// 	}
+			if (logoExt !== '.svg') {
+				// Convert the original logo to PNG format
+				await sharp(logoSvgPath).toFile(logoSvgPath);
+				console.log(`Converted logo: ${logoSvgPath}`);
+				await convertPngToSvgAndResize(logoSvgPath, logoSvgPath, logo32Path, logo128Path);
+			}
 
-		// 	// Remove the temporary file
-		// 	fs.unlinkSync(logoOriginalPath);
-		// 	console.log('Loaded');
-		// } catch (error) {
-		// 	console.error(`Failed to download or process logo from URL: ${logoUrl}`, error);
-		// }
+			// Save the resized logos
+			await sharp(logoSvgPath).resize(128, 128).toFile(logo128Path);
+			console.log(`128px logo: ${logo128Path}`);
+			await sharp(logoSvgPath).resize(32, 32).toFile(logo32Path);
+			console.log(`32px logo: ${logo32Path}`);
+
+			console.log('-'.repeat(80));
+		} catch (error) {
+			console.error(`Failed to download or process logo from URL: ${logoUrl}`, error);
+		}
 	}
 };
 
@@ -96,15 +92,24 @@ const convertPngToSvgAndResize = async (
 ) => {
 	if (extname(logoPngPath) !== '.svg') {
 		// Convert PNG to SVG using potrace
-		trace(logoPngPath, (err, svg) => {
-			if (err) throw err;
-			fs.writeFileSync(logoSvgPath, svg);
+		await new Promise<void>((resolve, reject) => {
+			trace(logoPngPath, (err, svg) => {
+				if (err) {
+					reject(err);
+				} else {
+					fs.writeFileSync(logoSvgPath, svg);
+					console.log(`Converted PNG to SVG at ${logoSvgPath}`);
+					resolve();
+				}
+			});
 		});
 	}
 
 	// Resize the PNG to 128x128 and 32x32
 	await sharp(logoPngPath).resize(128, 128).toFile(logo128Path);
+	console.log(`Resized PNG to 128x128 at ${logo128Path}`);
 	await sharp(logoPngPath).resize(32, 32).toFile(logo32Path);
+	console.log(`Resized PNG to 32x32 at ${logo32Path}`);
 };
 
 main(...process.argv.slice(2));
