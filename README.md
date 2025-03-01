@@ -41,6 +41,7 @@ Environment Variables: None
 -   10: Optimism
 -   56: BSC
 -   100: Gnosis
+-   130: Unichain
 -   137: Polygon
 -   223: BSquared
 -   250: Fantom
