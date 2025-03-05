@@ -10,6 +10,7 @@
 	"type": "commonjs",
 	"main": "build-path.ts",
 	"scripts": {
+		"clear-aryze": "ts-node clear-path --company aryze",
 		"build-aryze": "ts-node build-path --company aryze"
 	},
 	"dependencies": {
