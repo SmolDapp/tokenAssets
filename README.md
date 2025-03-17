@@ -41,6 +41,7 @@ Environment Variables: None
 -   10: Optimism
 -   56: BSC
 -   100: Gnosis
+-   130: Unichain
 -   137: Polygon
 -   223: BSquared
 -   250: Fantom
@@ -50,7 +51,9 @@ Environment Variables: None
 -   1135: Lisk
 -   1750: Metal L2
 -   1868: Soneium
+-   1923: Swellchain
 -   8453: Base
+-   98866: Plume
 -   34443: Mode
 -   42161: Arbitrum
 -   43114: Avalanche
