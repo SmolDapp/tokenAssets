@@ -53,7 +53,7 @@ Environment Variables: None
 -   1868: Soneium
 -   1923: Swellchain
 -   8453: Base
--   98865: Plume
+-   98866: Plume
 -   34443: Mode
 -   42161: Arbitrum
 -   43114: Avalanche
