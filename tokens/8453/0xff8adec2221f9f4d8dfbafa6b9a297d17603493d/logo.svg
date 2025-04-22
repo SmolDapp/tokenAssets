@@ -1,15 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 27.7.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#2474DA;}
-	.st1{fill:#F2F2F2;}
-</style>
-<rect class="st0" width="200" height="200"/>
-<g id="Layer_1-2">
-	<path class="st1" d="M84.7,143c-4.8,1.7-9.9,2.7-15.3,2.7c-25.2,0-45.7-20.5-45.7-45.7s20.5-45.7,45.7-45.7c5.4,0,10.5,1,15.3,2.7
-		C67,63.3,54.3,80.1,54.3,100S67,136.7,84.7,143L84.7,143z M130.6,54.3c-5.4,0-10.5,1-15.3,2.7c17.7,6.3,30.4,23.1,30.4,43
-		s-12.7,36.7-30.4,43c4.8,1.7,9.9,2.7,15.3,2.7c25.2,0,45.7-20.5,45.7-45.7S155.9,54.3,130.6,54.3z"/>
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6304_27185)">
+<circle cx="120" cy="120" r="120" fill="#2474DA"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M107.126 77.2646C89.1971 83.1911 76.2601 100.085 76.2601 120C76.2601 139.915 89.1971 156.809 107.126 162.735C102.681 164.205 97.9288 165 92.9912 165C68.1384 165 47.9912 144.853 47.9912 120C47.9912 95.1472 68.1384 75 92.9912 75C97.9288 75 102.681 75.7952 107.126 77.2646Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M133.374 77.2646C151.303 83.1911 164.24 100.085 164.24 120C164.24 139.915 151.303 156.809 133.374 162.735C137.819 164.205 142.571 165 147.509 165C172.362 165 192.509 144.853 192.509 120C192.509 95.1472 172.362 75 147.509 75C142.571 75 137.819 75.7952 133.374 77.2646Z" fill="white"/>
 </g>
+<defs>
+<clipPath id="clip0_6304_27185">
+<rect width="240" height="240" fill="white"/>
+</clipPath>
+</defs>
 </svg>
