@@ -2,7 +2,7 @@
     "version": {
         "major": 0,
         "minor": 0,
-        "patch": 400
+        "patch": 401
     },
     "tokens": {
         "1": [
@@ -1533,6 +1533,7 @@
         "5330": [
             "0x1217BfE6c773EEC6cc4A38b5Dc45B92292B6E189",
             "0x4200000000000000000000000000000000000006",
+            "0x6EA1fFcbD7F5D210dB07D9E773862B0512fA219B",
             "0x6f36DBD829DE9b7e077DB8A35b480d4329ceB331",
             "0x7f9AdFbd38b669F03d1d11000Bc76b9AaEA28A81",
             "0xafcc6AE807187A31E84138F3860D4CE27973e01b",
