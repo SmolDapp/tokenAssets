@@ -1,33 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<!-- Created with Vectornator (http://vectornator.io/) -->
-<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 320 320" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink" data-ember-extension="1">
-<metadata>
-<vectornator:setting key="IsTimeLapseWatermarkDisabled" value="false"/>
-<vectornator:setting key="UndoHistoryDisabled" value="true"/>
-<vectornator:setting key="VNDimensionsVisible" value="true"/>
-<vectornator:setting key="VNSnapToGuides" value="true"/>
-<vectornator:setting key="WDCMYKEnabledKey" value="false"/>
-<vectornator:setting key="WDDisplayWhiteBackground" value="false"/>
-<vectornator:setting key="WDDynamicGuides" value="false"/>
-<vectornator:setting key="WDGuidesVisible" value="true"/>
-<vectornator:setting key="WDIsolateActiveLayer" value="false"/>
-<vectornator:setting key="WDOutlineMode" value="false"/>
-<vectornator:setting key="WDRulersVisible" value="true"/>
-<vectornator:setting key="WDSnapToEdges" value="false"/>
-<vectornator:setting key="WDSnapToGrid" value="false"/>
-<vectornator:setting key="WDSnapToPoints" value="false"/>
-<vectornator:setting key="WDUnits" value="Points"/>
-</metadata>
-<defs/>
-<g id="Untitled" vectornator:layerName="Untitled">
-<path d="M11 160C11 77.7096 77.7096 11 160 11C242.29 11 309 77.7096 309 160C309 242.29 242.29 309 160 309C77.7096 309 11 242.29 11 160Z" fill="#10151b" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="11"/>
-<path d="M241.3 151.3L160.9 16.7L78.7 151.3L160 203.1L241.3 151.3Z" fill="none" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.77"/>
-<path d="M160.9 16.7L160 94.1L160 203.1" fill="none" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.77"/>
-<path d="M241.3 151.3L160 115.4L78.7 151.3" fill="none" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.77"/>
-<path d="M114.8 174.4L78.7 189.5" fill="none" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.77"/>
-<path d="M241.4 189.5L205.2 174.4" fill="none" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.77"/>
-<path d="M160.5 244.5L241.3 189.4L160.5 303.3L78.7 189.4L160.5 244.5Z" fill="none" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.77"/>
-<path d="M160.5 303.3L160.5 251.1L160.5 244.5" fill="none" fill-rule="evenodd" opacity="1" stroke="#f5c09a" stroke-linecap="round" stroke-linejoin="round" stroke-width="9.77"/>
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_797)">
+<path d="M120 240C186.274 240 240 186.274 240 120C240 53.7258 186.274 0 120 0C53.7258 0 0 53.7258 0 120C0 186.274 53.7258 240 120 240Z" fill="black"/>
+<path d="M118.369 19.3208C118.827 18.5442 119.749 18.1702 120.619 18.4077C121.489 18.6453 122.092 19.4358 122.092 20.3374V150.688C122.092 151.422 121.69 152.097 121.044 152.447C120.399 152.796 119.614 152.764 118.999 152.363L63.4689 116.122C62.5734 115.537 62.2958 114.352 62.839 113.431L118.369 19.3208ZM67.255 113.817L118.092 146.995V27.6626L67.255 113.817Z" fill="#F5C09A"/>
+<path d="M120.061 89.1629C121.025 88.8496 122.09 89.3119 122.508 90.2595C122.953 91.2701 122.495 92.4506 121.484 92.8963L67.1218 116.862C66.1111 117.308 64.9306 116.849 64.4851 115.839C64.0396 114.828 64.4978 113.647 65.5085 113.202L119.87 89.2361L120.061 89.1629Z" fill="#F5C09A"/>
+<path d="M88.8927 128.983C89.9041 128.539 91.0834 128.999 91.5274 130.011C91.9714 131.022 91.5115 132.202 90.5001 132.646L68.7579 142.19L118.092 213.273V151.857C118.092 150.753 118.987 149.858 120.092 149.857C121.196 149.857 122.092 150.753 122.092 151.857V219.663C122.092 220.538 121.524 221.311 120.69 221.572C119.855 221.833 118.948 221.522 118.449 220.804L64.088 142.477C63.7473 141.986 63.6435 141.368 63.8058 140.793C63.9682 140.218 64.3796 139.745 64.9269 139.505L88.8927 128.983Z" fill="#F5C09A"/>
+<path d="M64.1942 140.547C64.7539 139.676 65.8762 139.385 66.7801 139.844L66.9578 139.946L120.881 174.58C121.81 175.177 122.08 176.414 121.483 177.343C120.886 178.272 119.649 178.541 118.72 177.945L64.7957 143.311L64.6297 143.192C63.8364 142.561 63.6345 141.419 64.1942 140.547Z" fill="#F5C09A"/>
+<path d="M121.631 19.3208C121.173 18.5442 120.251 18.1702 119.381 18.4077C118.511 18.6453 117.908 19.4358 117.908 20.3374V150.688C117.908 151.422 118.31 152.097 118.956 152.447C119.601 152.796 120.386 152.764 121.001 152.363L176.531 116.122C177.427 115.537 177.704 114.352 177.161 113.431L121.631 19.3208ZM172.745 113.817L121.908 146.995V27.6626L172.745 113.817Z" fill="#F5C09A"/>
+<path d="M119.939 89.1629C118.975 88.8496 117.91 89.3119 117.492 90.2595C117.047 91.2701 117.505 92.4506 118.516 92.8963L172.878 116.862C173.889 117.308 175.069 116.849 175.515 115.839C175.96 114.828 175.502 113.647 174.491 113.202L120.13 89.2361L119.939 89.1629Z" fill="#F5C09A"/>
+<path d="M151.107 128.983C150.096 128.539 148.917 128.999 148.473 130.011C148.029 131.022 148.489 132.202 149.5 132.646L171.242 142.19L121.908 213.273V151.857C121.908 150.753 121.013 149.858 119.908 149.857C118.804 149.857 117.908 150.753 117.908 151.857V219.663C117.908 220.538 118.476 221.311 119.31 221.572C120.145 221.833 121.052 221.522 121.551 220.804L175.912 142.477C176.253 141.986 176.356 141.368 176.194 140.793C176.032 140.218 175.62 139.745 175.073 139.505L151.107 128.983Z" fill="#F5C09A"/>
+<path d="M175.806 140.547C175.246 139.676 174.124 139.385 173.22 139.844L173.042 139.946L119.119 174.58C118.19 175.177 117.92 176.414 118.517 177.343C119.114 178.272 120.351 178.541 121.28 177.945L175.204 143.311L175.37 143.192C176.164 142.561 176.365 141.419 175.806 140.547Z" fill="#F5C09A"/>
+<path d="M217.663 120C217.663 66.063 173.938 22.3376 120.001 22.3374C66.0631 22.3374 22.3376 66.0629 22.3376 120C22.3379 173.938 66.0633 217.663 120.001 217.663C173.938 217.662 217.663 173.938 217.663 120ZM221.663 120C221.663 176.147 176.147 221.662 120.001 221.663C63.8541 221.663 18.3379 176.147 18.3376 120C18.3376 63.8537 63.854 18.3374 120.001 18.3374C176.147 18.3376 221.663 63.8539 221.663 120Z" fill="#F5C09A"/>
 </g>
+<defs>
+<clipPath id="clip0_6_797">
+<rect width="240" height="240" fill="white"/>
+</clipPath>
+</defs>
 </svg>
