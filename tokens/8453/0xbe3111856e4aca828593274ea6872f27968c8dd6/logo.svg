@@ -1,11 +1,19 @@
-<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M29.026 26.2123H0V30H29.026V26.2123Z" fill="#DEDEDE"/>
-    <path d="M29.026 0H0V3.78775H29.026V0Z" fill="#DEDEDE"/>
-    <path d="M29.026 5.14514H0V7.30196H29.026V5.14514Z" fill="#DEDEDE"/>
-    <path d="M29.026 22.7692H0V24.926H29.026V22.7692Z" fill="#DEDEDE"/>
-    <path d="M4.62482 8.60596H0V21.4474H4.62482V8.60596Z" fill="#DEDEDE"/>
-    <path d="M10.7252 8.60596H6.10034V21.4474H10.7252V8.60596Z" fill="#DEDEDE"/>
-    <path d="M16.8254 8.60596H12.2006V21.4474H16.8254V8.60596Z" fill="#DEDEDE"/>
-    <path d="M22.9257 8.60596H18.3009V21.4474H22.9257V8.60596Z" fill="#DEDEDE"/>
-    <path d="M29.0259 8.60596H24.4011V21.4474H29.0259V8.60596Z" fill="#DEDEDE"/>
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_7589_53507)">
+<circle cx="120" cy="120" r="120" fill="#0E0E0E"/>
+<rect x="70.6629" y="64.0435" width="98.674" height="14.0963" fill="white"/>
+<rect x="70.6629" y="162.717" width="98.674" height="14.0963" fill="white"/>
+<rect width="98.674" height="7.04814" transform="matrix(1 0 0 -1 70.6629 92.2363)" fill="white"/>
+<rect width="98.674" height="7.04814" transform="matrix(1 0 0 -1 70.6629 155.669)" fill="white"/>
+<rect width="14.0963" height="42.2888" transform="matrix(1 0 0 -1 70.6629 141.573)" fill="white"/>
+<rect width="14.0963" height="42.2888" transform="matrix(1 0 0 -1 91.8057 141.573)" fill="white"/>
+<rect width="14.0963" height="42.2888" transform="matrix(1 0 0 -1 112.952 141.573)" fill="white"/>
+<rect width="14.0963" height="42.2888" transform="matrix(1 0 0 -1 134.095 141.573)" fill="white"/>
+<rect width="14.0963" height="42.2888" transform="matrix(1 0 0 -1 155.242 141.573)" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_7589_53507">
+<rect width="240" height="240" fill="white"/>
+</clipPath>
+</defs>
 </svg>

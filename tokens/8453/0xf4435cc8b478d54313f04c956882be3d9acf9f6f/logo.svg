@@ -1,22 +1,24 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 8 8" style="enable-background:new 0 0 8 8;" xml:space="preserve">
-<g>
-	<polygon style="fill:#E5B839;" points="7,2 7,1 6,1 6,0 5,0 4,0 3,0 2,0 2,1 1,1 1,2 0,2 0,3 0,4 0,5 0,6 1,6 1,7 2,7 2,8 3,8 4,8 
-		5,8 6,8 6,7 7,7 7,6 8,6 8,5 8,4 8,3 8,2 	"/>
-	<g>
-		<polygon style="fill:#CEA236;" points="7,2 7,3 7,4 7,5 7,6 8,6 8,5 8,4 8,3 8,2 		"/>
-		<rect x="6" y="6" style="fill:#CEA236;" width="1" height="1"/>
-		<polygon style="fill:#CEA236;" points="4,7 3,7 2,7 2,8 3,8 4,8 5,8 6,8 6,7 5,7 		"/>
-	</g>
-	<g>
-		<polygon style="fill:#F2C041;" points="5,0 4,0 3,0 2,0 2,1 3,1 4,1 5,1 6,1 6,0 		"/>
-		<polygon style="fill:#F2C041;" points="0,3 0,4 0,5 0,6 1,6 1,5 1,4 1,3 1,2 0,2 		"/>
-		<rect x="1" y="1" style="fill:#F2C041;" width="1" height="1"/>
-	</g>
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2_628)">
+<circle cx="120" cy="120" r="120" fill="white"/>
+<rect x="55.4661" y="55.3799" width="130.24" height="130.24" fill="#E5B839"/>
+<rect x="32" y="76.4995" width="176" height="88" fill="#E5B839"/>
+<rect x="185.706" y="76.4995" width="22.2933" height="88" fill="#CEA236"/>
+<rect x="32" y="76.4995" width="23.4667" height="88" fill="#F2C041"/>
+<rect x="77.7601" y="207.913" width="176" height="85.6533" transform="rotate(-90 77.7601 207.913)" fill="#E5B839"/>
+<rect x="77.7587" y="143.379" width="21.12" height="21.12" fill="#CEA236"/>
+<rect x="98.8765" y="122.259" width="21.12" height="21.12" fill="#CEA236"/>
+<rect x="119.999" y="101.14" width="21.12" height="21.12" fill="#CEA236"/>
+<rect x="141.12" y="80.0195" width="21.12" height="63.36" fill="#CEA236"/>
+<rect x="98.8765" y="80.0195" width="63.36" height="21.12" fill="#CEA236"/>
+<rect x="163.412" y="164.5" width="22.2933" height="21.12" fill="#CEA236"/>
+<rect x="55.4661" y="55.3799" width="22.2933" height="21.12" fill="#F2C041"/>
+<rect x="77.7601" y="31.9131" width="85.6533" height="23.4667" fill="#F2C041"/>
+<rect x="77.7601" y="185.62" width="85.6533" height="23.4667" fill="#CEA236"/>
 </g>
-<g>
-	<rect x="2" y="5" style="fill:#CEA236;" width="1" height="1"/>
-	<rect x="3" y="4" style="fill:#CEA236;" width="1" height="1"/>
-	<polygon style="fill:#CEA236;" points="5,2 4,2 3,2 3,3 4,3 4,4 5,4 5,5 6,5 6,4 6,3 6,2 	"/>
-</g>
+<defs>
+<clipPath id="clip0_2_628">
+<rect width="240" height="240" fill="white"/>
+</clipPath>
+</defs>
 </svg>
