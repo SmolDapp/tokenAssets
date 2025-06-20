@@ -1,18 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 420 420">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #ff1249;
-      }
-    </style>
-  </defs>
-  <!-- Generator: Adobe Illustrator 28.7.3, SVG Export Plug-In . SVG Version: 1.2.0 Build 164)  -->
-  <g>
-    <g id="Camada_2">
-      <g id="Camada_1-2">
-        <path class="cls-1" d="M210,18L43.7,114v192l166.3,96,166.3-96V114L210,18ZM226.4,65.3l100.8,58.2-100.8,58.2v-116.3ZM193.6,181.6l-100.8-58.2,100.8-58.2v116.3ZM177.2,210l-100.8,58.2v-116.3l100.8,58.2h0ZM193.6,238.4v116.3l-100.8-58.2,100.8-58.2h0ZM226.4,238.4l100.8,58.2-100.8,58.2v-116.3h0ZM242.8,210l100.8-58.2v116.3l-100.8-58.2h0Z"/>
-      </g>
-    </g>
-  </g>
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_3965_20426)">
+<path d="M120 240C186.5 240 240 186.5 240 120C240 53.4996 186.5 0 120 0C53.4996 0 0 53.4996 0 120C0 186.5 53.4996 240 120 240Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M119.5 57.7017L65.1152 89.1009V151.899L119.5 183.298L173.885 151.899V89.1009L119.5 57.7017ZM184.885 82.75L119.5 45L54.1152 82.75V158.25L119.5 196L184.885 158.25V82.75Z" fill="#FF1249"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M65.8297 80.8918L180.998 149.413L173.839 161.444L58.6713 92.9233L65.8297 80.8918Z" fill="#FF1249"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M57.5605 147.903L174.561 81.9033L181.439 94.097L64.439 160.097L57.5605 147.903Z" fill="#FF1249"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M111.956 188.076L113.713 54.0771L127.712 54.2606L125.955 188.259L111.956 188.076Z" fill="#FF1249"/>
+</g>
+<defs>
+<clipPath id="clip0_3965_20426">
+<rect width="240" height="240" fill="white"/>
+</clipPath>
+</defs>
 </svg>
