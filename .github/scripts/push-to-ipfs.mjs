@@ -67,6 +67,7 @@ async function executeChains() {
 
 	console.log(`Uploading directory ${pathToData}`)
 	const results = await uploadDirectoryToIPFS(pathToData)
+	console.log(result
 	if (results) {
 		for (const item of results) {
 			if (item.path === '') {
@@ -76,7 +77,9 @@ async function executeChains() {
 		}
 	}
 
-	await setIPNSRecord(CHAIN_RECORD_NAME, cid.toString(), 0)
+	if (cid) {
+		await setIPNSRecord(CHAIN_RECORD_NAME, cid.toString(), 0)
+	}
 }
 
 async function executeTokens() {
