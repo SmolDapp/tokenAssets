@@ -91,6 +91,7 @@ async function executeTokens() {
 
 	console.log(`Uploading directory ${pathToData}`)
 	const results = await uploadDirectoryToIPFS(pathToData)
+	console.log(results)
 	if (results) {
 		for (const item of results) {
 			if (item.path === '') {
@@ -99,8 +100,9 @@ async function executeTokens() {
 			}
 		}
 	}
-
-	await setIPNSRecord(TOKEN_RECORD_NAME, cid.toString(), 0)
+	if (cid) {
+		await setIPNSRecord(TOKEN_RECORD_NAME, cid.toString(), 0)
+	}
 }
 
 async function execute() {
