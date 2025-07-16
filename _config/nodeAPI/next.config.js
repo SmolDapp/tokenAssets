@@ -7,7 +7,7 @@ const nextConfig = {
 		return [
 			{
 				source: '/',
-				destination: 'https://github.com/SmolDapp/tokenAssets',
+				destination: 'https://github.com/yearn/tokenAssets',
 				permanent: true,
 
 			},

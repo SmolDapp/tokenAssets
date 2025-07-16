@@ -10,7 +10,7 @@ type TContext = {
 async function resolveNotFound(request: Request): Promise<Response> {
 	const fallback = new URL(request.url).searchParams.get('fallback');
 	if (fallback === 'true') {
-		const baseURI = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main/_config/nodeAPI/public';
+		const baseURI = 'https://raw.githubusercontent.com/yearn/tokenAssets/main/_config/nodeAPI/public';
 		const result = await fetch(`${baseURI}/not-found.png`);
 		return new Response(result.body, {
 			headers: {
@@ -39,7 +39,7 @@ async function resolveNotFound(request: Request): Promise<Response> {
 async function resolveGasToken(request: Request): Promise<Response> {
 	const fallback = new URL(request.url).searchParams.get('fallback');
 	if (fallback === 'true') {
-		const baseURI = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main/_config/nodeAPI/public';
+		const baseURI = 'https://raw.githubusercontent.com/yearn/tokenAssets/main/_config/nodeAPI/public';
 		const result = await fetch(`${baseURI}/gas-token.png`);
 		return new Response(result.body, {
 			headers: {
@@ -79,7 +79,7 @@ export async function GET(request: Request, context: TContext): Promise<Response
 		return await resolveNotFound(request);
 	}
 
-	const baseURI = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main';
+	const baseURI = 'https://raw.githubusercontent.com/yearn/tokenAssets/main';
 	const finalURI = (`${baseURI}/tokens/${chainIDStr}/${tokenAddress}/${fileName}`);
 	const result = await fetch(finalURI);
 	if (result.ok) {

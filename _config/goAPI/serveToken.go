@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const BASE_TOKENS_URI = `https://raw.githubusercontent.com/SmolDapp/tokenAssets/main`
+const BASE_TOKENS_URI = `https://raw.githubusercontent.com/yearn/tokenAssets/main`
 
 func resolveNotFound(c *gin.Context) {
 	fallback := c.Query("fallback")
