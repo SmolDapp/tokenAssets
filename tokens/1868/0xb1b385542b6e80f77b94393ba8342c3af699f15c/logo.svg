@@ -1,0 +1,27 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_78_1476)">
+<path d="M127.953 64C127.953 81.184 121.182 96.7817 110.161 108.279C109.845 108.608 109.525 108.933 109.205 109.253C108.885 109.573 108.579 109.87 108.263 110.176C106.01 112.338 103.601 114.336 101.054 116.151C99.7377 117.093 98.3799 117.984 96.9857 118.825C87.3445 124.649 76.0394 128 63.9525 128C51.8657 128 40.5925 124.658 30.9559 118.843C29.5617 118.007 28.1994 117.115 26.8782 116.169C24.3319 114.359 21.9228 112.366 19.6737 110.208C19.0291 109.591 18.3982 108.96 17.7811 108.315C6.73651 96.8183 -0.0474854 81.2023 -0.0474854 64C-0.0474854 46.7977 7.11594 30.3269 18.6999 18.7474C30.2794 7.16343 46.2794 0 63.9525 0C81.6257 0 97.6257 7.16343 109.205 18.7474C120.789 30.3269 127.953 46.3269 127.953 64Z" fill="#4281A4" style="fill:#4281A4;fill:color(display-p3 0.2588 0.5059 0.6431);fill-opacity:1;"/>
+<g opacity="0.2">
+<path d="M17.0662 107.114C16.0248 108.156 16.0248 109.844 17.0662 110.886C18.1076 111.927 19.796 111.927 20.8374 110.886L17.0662 107.114ZM111.837 19.8856L113.723 18L109.952 14.2288L108.066 16.1144L111.837 19.8856ZM18.9518 109L20.8374 110.886L111.837 19.8856L109.952 18L108.066 16.1144L17.0662 107.114L18.9518 109Z" fill="#F6E8D7" style="fill:#F6E8D7;fill:color(display-p3 0.9647 0.9098 0.8431);fill-opacity:1;"/>
+<path d="M19.3374 15.6144C18.296 14.573 16.6076 14.573 15.5662 15.6144C14.5248 16.6558 14.5248 18.3442 15.5662 19.3856L19.3374 15.6144ZM108.243 112.063L110.129 113.948L113.9 110.177L112.014 108.291L108.243 112.063ZM17.4518 17.5L15.5662 19.3856L108.243 112.063L110.129 110.177L112.014 108.291L19.3374 15.6144L17.4518 17.5Z" fill="#F6E8D7" style="fill:#F6E8D7;fill:color(display-p3 0.9647 0.9098 0.8431);fill-opacity:1;"/>
+<path d="M63.9518 0L63.9518 128" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M2.99867 44L83.4987 124.5" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M-0.0482178 64L127.952 64" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M63.9518 105C86.5955 105 104.952 86.6437 104.952 64C104.952 41.3563 86.5955 23 63.9518 23C41.3081 23 22.9518 41.3563 22.9518 64C22.9518 86.6437 41.3081 105 63.9518 105Z" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M104.952 64C104.952 41.3563 86.5955 23 63.9518 23V64L92.9518 92.9827C100.366 85.5639 104.952 75.3175 104.952 64Z" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M63.9525 23C41.3088 23 22.9525 41.3563 22.9525 64H63.9525V23Z" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M63.9518 64H22.9518L63.9518 105H104.952L63.9518 64Z" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.9518 105H63.9518L43.4518 84.5L22.9518 105Z" stroke="#F6E8D7" style="stroke:#F6E8D7;stroke:color(display-p3 0.9647 0.9098 0.8431);stroke-opacity:1;" stroke-width="5.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<rect x="1.33333" y="1.33333" width="125.333" height="125.333" rx="62.6667" stroke="url(#paint0_linear_78_1476)" style="" stroke-width="2.66667"/>
+<defs>
+<linearGradient id="paint0_linear_78_1476" x1="64" y1="0" x2="64" y2="128" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.3" style="stop-color:white;stop-opacity:0.3;"/>
+<stop offset="1" stop-opacity="0.1" style="stop-color:black;stop-opacity:0.1;"/>
+</linearGradient>
+<clipPath id="clip0_78_1476">
+<rect width="128" height="128" rx="64" fill="white" style="fill:white;fill-opacity:1;"/>
+</clipPath>
+</defs>
+</svg>
