@@ -41,6 +41,7 @@ Environment Variables: None
 -   10: Optimism
 -   56: BSC
 -   100: Gnosis
+-   130: Unichain
 -   137: Polygon
 -   223: BSquared
 -   250: Fantom
@@ -50,15 +51,20 @@ Environment Variables: None
 -   1135: Lisk
 -   1750: Metal L2
 -   1868: Soneium
+-   1923: Swellchain
+-   5330: Superseed
 -   8453: Base
 -   34443: Mode
 -   42161: Arbitrum
+-   42220: Celo
 -   43114: Avalanche
 -   57073: Ink
 -   60808: BOB
 -   81457: Blast
+-   98866: Plume
 -   1380012617: Rari
 -   1151111081099710: Solana
+-	btcm: Bitcoin
 
 ## Contributing
 

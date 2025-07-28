@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .c {
+        fill: url(#b);
+      }
+
+      .d {
+        fill: #f6ff0d;
+      }
+    </style>
+    <linearGradient id="b" x1="500" y1="1002" x2="500" y2="-414.5" gradientTransform="translate(0 1002) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset=".06" stop-color="#101631" />
+      <stop offset=".39" stop-color="#0541b2" />
+      <stop offset=".57" stop-color="#059eed" />
+      <stop offset=".7" stop-color="#c5eafc" />
+    </linearGradient>
+  </defs>
+  <path class="c" d="M500,0h0c276.14,0,500,223.86,500,500h0c0,276.14-223.86,500-500,500h0C223.86,1000,0,776.14,0,500h0C0,223.86,223.86,0,500,0Z" />
+  <path class="d" d="M485.63,439.9l123.74-215.93h123.74l-92.81,309.06h-92.02l247.49,123.62-124.52,186.98-185.62-217.35v153.99h-216.55l74.25-247.25h-74.25l92.81-309.06h123.74v215.93Z" />
+</svg>
