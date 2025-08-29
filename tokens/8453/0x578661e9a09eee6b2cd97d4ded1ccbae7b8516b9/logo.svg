@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="250 250 500 500" width="161" height="161">
+	<defs>
+		<style>
+			.cls-1{fill:none;}.cls-2{clip-path:url(#clip-path);}.cls-3{fill:#fbb400;}.cls-4{clip-path:url(#clip-path-3);}.cls-5{fill:url(#linear-gradient);}.cls-6{clip-path:url(#clip-path-4);}.cls-7{fill:#fff;}</style>
+		<clipPath id="clip-path" transform="translate(250 250)">
+			<rect class="cls-1" width="500" height="500" />
+		</clipPath>
+		<clipPath id="clip-path-3" transform="translate(250 250)">
+			<path class="cls-1"
+				d="M160.48,461.93A230.78,230.78,0,1,1,250,480a229.43,229.43,0,0,1-89.52-18.07M250,0C111.93,0,0,111.93,0,250S111.93,500,250,500,500,388.07,500,250,388.07,0,250,0Z" />
+		</clipPath>
+		<linearGradient id="linear-gradient" x1="-571.4" y1="-1064.01" x2="-570.4" y2="-1064.01"
+			gradientTransform="matrix(500, 0, 0, -500, 285700.72, -531756.88)"
+			gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#ffcf00" />
+			<stop offset="1" stop-color="#ff6a00" />
+		</linearGradient>
+		<clipPath id="clip-path-4" transform="translate(250 250)">
+			<rect class="cls-1" x="130.34" y="122.98" width="239.32" height="254.03" />
+		</clipPath>
+	</defs>
+	<g id="Layer_2" data-name="Layer 2">
+		<g id="Layer_11" data-name="Layer 11">
+			<g id="Artwork_172" data-name="Artwork 172">
+				<g class="cls-2">
+					<g class="cls-2">
+						<path
+							d="M250,490A240,240,0,0,1,80.29,80.29,240,240,0,0,1,419.71,419.71,238.47,238.47,0,0,1,250,490"
+							transform="translate(250 250)" />
+						<path class="cls-3"
+							d="M250,20a230.06,230.06,0,0,1,89.52,441.93,230.06,230.06,0,0,1-179-423.86A228.49,228.49,0,0,1,250,20m0-20C111.93,0,0,111.93,0,250S111.93,500,250,500,500,388.07,500,250,388.07,0,250,0"
+							transform="translate(250 250)" />
+					</g>
+					<g class="cls-6">
+						<polygon class="cls-7"
+							points="468.06 566.95 438.08 624 436.49 627.02 500 627.02 468.25 566.6 468.06 566.95" />
+						<path class="cls-7"
+							d="M155.94,283l-1.2-3.7L153.21,284l-22.87,70.4A48.25,48.25,0,0,0,171.25,377h15.24l-.72-2.23Z"
+							transform="translate(250 250)" />
+						<polygon class="cls-7"
+							points="531.94 566.95 531.75 566.6 500 627.02 563.51 627.02 561.92 624 531.94 566.95" />
+						<path class="cls-7"
+							d="M345.26,279.26l-1.2,3.7-29.83,91.83-.72,2.23h15.24a48.25,48.25,0,0,0,40.91-22.65L346.79,284Z"
+							transform="translate(250 250)" />
+						<polygon class="cls-7"
+							points="468.06 433.05 468.25 433.4 500 372.98 436.49 372.98 438.08 376 468.06 433.05" />
+						<polygon class="cls-7"
+							points="531.94 433.05 561.92 376 563.51 372.98 500 372.98 531.75 433.4 531.94 433.05" />
+						<path class="cls-7"
+							d="M154.74,220.74l1.2-3.7,29.83-91.83.72-2.23H171.25a48.25,48.25,0,0,0-40.91,22.65L153.21,216Z"
+							transform="translate(250 250)" />
+						<path class="cls-7"
+							d="M344.06,217l1.2,3.7,1.53-4.71,22.87-70.4A48.25,48.25,0,0,0,328.75,123H313.51l.72,2.23Z"
+							transform="translate(250 250)" />
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
