@@ -1,0 +1,18 @@
+ACES.fun logo PR
+
+Please review the following token assets:
+
+📑 Description
+
+Token Name: ACES (Aces.fun)
+Project Website: https://aces.fun/
+Explorer URI: https://basescan.org/token/0x55337650856299363c496065C836B9C6E9dE0367
+
+✅ Checks
+
+✅ I created a new folder with the token address (all in lowercase for EVM chains, case sensitive for Solana)
+✅ I added the token's logo as a 32x32 PNG file, named logo-32.png
+✅ I added the token's logo as a 128x128 PNG file, named logo-128.png
+✅ I added the token's logo as a SVG file, named logo.svg
+✅ My SVG logo is a proper SVG and does not contain base64 encoded elements
+✅ My documentation/website clearly display the token address
