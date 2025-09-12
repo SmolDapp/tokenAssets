@@ -14,7 +14,7 @@ function validate(directory) {
 			if (name.startsWith('_')) {
 				continue;
 			}
-			if (name.match(/^[0-9]+$/) != null) {
+			if (name.match(/^[a-zA-Z0-9]+$/) != null) {
 				if (!fs.existsSync(path.join(file, 'logo-128.png'))) {
 					console.error(`Error: "${file}" is missing logo-128.png`);
 					allValid = false;
