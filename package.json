@@ -5,7 +5,7 @@
 	"private": true,
 	"dependencies": {
 		"@fleekxyz/sdk": "^0.7.3",
-		"ethers": "^6.0.8",
+		"ethers": "^6.15.0",
 		"fs-extra": "^9.1.0",
 		"keccak": "^3.0.4"
 	},
@@ -15,7 +15,7 @@
 		"format:check": "prettier --check ."
 	},
 	"devDependencies": {
-		"next": "^14.0.2",
+		"next": "^14.2.32",
 		"prettier": "3.0.3",
 		"styled-jsx": "^5.1.2"
 	}
