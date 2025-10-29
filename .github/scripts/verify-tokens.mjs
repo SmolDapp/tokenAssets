@@ -4,12 +4,6 @@ import path from 'path';
 const DataDirectory = './tokens';
 const IndexName = 'index.json';
 
-function getFilesizeInBytes(filename) {
-	var stats = fs.statSync(filename);
-	var fileSizeInBytes = stats.size;
-	return fileSizeInBytes;
-}
-
 function validate(directory) {
 	let allValid = true;
 	for (let name of fs.readdirSync(directory)) {
@@ -60,7 +54,6 @@ function validate(directory) {
 					// 	console.error(`Error: "${file}" logo.svg is larger than 0.15mb.`);
 					// 	allValid = false;
 					// }
-
 				}
 			}
 			allValid &= validate(file);

@@ -47,6 +47,7 @@ Environment Variables: None
 -   250: Fantom
 -   252: Fraxtal
 -   957: Derive
+-   964: Subtensor EVM
 -   1101: Polygon zkEVM
 -   1135: Lisk
 -   1750: Metal L2
