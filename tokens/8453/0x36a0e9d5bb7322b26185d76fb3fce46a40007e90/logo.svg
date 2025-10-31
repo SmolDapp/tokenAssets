@@ -1,0 +1,30 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_482_210)">
+<rect width="500" height="500" fill="black" style="fill:black;fill-opacity:1;"/>
+<mask id="mask0_482_210" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="100" y="92" width="300" height="317">
+<path d="M336.7 192.954V245.446C336.7 255.296 347.951 261.471 356.985 256.531L393.249 236.707C397.424 234.423 400 230.192 400 225.623V150.405C400 144.631 395.891 139.568 390.021 138.055L212.154 92.4488C203.544 90.2565 195.098 96.3702 195.098 104.8L194.609 383.869C194.609 389.643 198.685 394.707 204.588 396.22L249.169 407.706C257.746 409.929 266.192 403.846 266.258 395.417L267.595 258.538C267.627 252.64 263.42 247.515 257.387 246.063L110.208 210.801C104.175 209.35 99.9355 204.194 100.001 198.265L100.49 142.161C100.555 133.855 108.871 127.803 117.35 129.872L326.525 180.511C332.525 181.962 336.7 187.057 336.7 192.924V192.954Z" fill="white" style="fill:white;fill-opacity:1;"/>
+</mask>
+<g mask="url(#mask0_482_210)">
+<mask id="mask1_482_210" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="69" y="63" width="362" height="374">
+<path d="M430.329 63.2698H69.6062V436.947H430.329V63.2698Z" fill="white" style="fill:white;fill-opacity:1;"/>
+</mask>
+<g mask="url(#mask1_482_210)">
+<mask id="mask2_482_210" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="69" y="63" width="362" height="374">
+<path d="M430.329 63.2698H69.6062V436.947H430.329V63.2698Z" fill="white" style="fill:white;fill-opacity:1;"/>
+</mask>
+<g mask="url(#mask2_482_210)">
+<rect x="69.3453" y="62.5596" width="361.604" height="374.974" fill="url(#pattern0_482_210)" style=""/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<pattern id="pattern0_482_210" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_482_210" transform="scale(0.004329 0.00398406)"/>
+</pattern>
+<clipPath id="clip0_482_210">
+<rect width="500" height="500" fill="white" style="fill:white;fill-opacity:1;"/>
+</clipPath>
+<image id="image0_482_210" width="231" height="251" preserveAspectRatio="none" xlink:href="gradient-background.png"/>
+</defs>
+</svg>
