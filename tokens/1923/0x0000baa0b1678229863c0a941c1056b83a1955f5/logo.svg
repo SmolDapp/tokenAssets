@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Logo" width="256" height="256" version="1.1" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+ <!-- Generator: Adobe Illustrator 29.2.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 116)  -->
+ <defs>
+  <style>.st0 {
+        fill: #fff;
+      }
+
+      .st1 {
+        fill: #2973eb;
+      }</style>
+ </defs>
+ <g stroke-width=".37072">
+  <circle class="st1" cx="127.9" cy="127.9" r="127.9"/>
+  <path class="st0" d="m161.27 77.849v-11.118h-22.247v-22.247h-11.118v66.727h-11.118v-11.118h-11.129v-22.247h-11.118v11.118h-11.129v22.247h11.129v11.129h22.247v11.118h11.118v44.48h-22.247v-11.118h-11.118v-11.118h-11.129v22.236h11.129v11.129h33.362v22.247h11.118v-22.247h11.129v-11.129h11.118v-11.118h11.118v-33.362h-11.118v-11.118h-22.247v-44.491h11.129v11.118h11.118v11.129h11.118v-22.247h-11.118zm-22.247 88.974v-22.247h11.129v22.247z"/>
+  <rect class="st0" x="105.66" y="66.734" width="11.129" height="11.118"/>
+ </g>
+</svg>
