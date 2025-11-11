@@ -2,7 +2,7 @@
     "version": {
         "major": 0,
         "minor": 0,
-        "patch": 546
+        "patch": 547
     },
     "tokens": {
         "1": [
@@ -815,6 +815,7 @@
             "0xe97F6dDE78b11B58cB3e394F15ab592Cb2ACd290",
             "0xe9Dc63083c464d6EDcCFf23444fF3CFc6886f6FB",
             "0xe9f6D9898f9269B519E1435E6ebafF766c7f46BF",
+            "0xea17Df5Cf6D172224892B5477A16ACb111182478",
             "0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D",
             "0xec0d8D3ED5477106c6D4ea27D90a60e594693C90",
             "0xEC213F83defB583af3A000B1c0ada660b1902A0F",
@@ -1308,6 +1309,7 @@
             "0xDd673Ef19CB3B0574F4FcbBFbC42AD7d9A5b1614",
             "0xE231DB5F348d709239Ef1741EA30961B3B635a61",
             "0xE5c7E29a2BBad0C6C1B68CbD9ab0CF6837F02d7c",
+            "0xea17Df5Cf6D172224892B5477A16ACb111182478",
             "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
             "0xfb6115445Bff7b52FeB98650C87f44907E58f802"
         ],
@@ -2309,6 +2311,7 @@
             "0xe932099eC1e79246f4655E2c17266f745F20E767",
             "0xE99D2F7988c5F2d013A34E7484f079cAB87f469F",
             "0xe9f6D9898f9269B519E1435E6ebafF766c7f46BF",
+            "0xea17Df5Cf6D172224892B5477A16ACb111182478",
             "0xEA1D649dDC8e2A6E6EE40b89b2997518476caFa5",
             "0xEab49138BA2Ea6dd776220fE26b7b8E446638956",
             "0xEB466342C4d449BC9f53A865D5Cb90586f405215",
