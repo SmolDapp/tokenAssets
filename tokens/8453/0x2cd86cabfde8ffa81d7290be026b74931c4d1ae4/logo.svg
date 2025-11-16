@@ -1,14 +1,14 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="128.000000pt" height="128.000000pt" viewBox="0 0 128.000000 128.000000"
- preserveAspectRatio="xMidYMid meet">
-<metadata>
-Created by potrace 1.16, written by Peter Selinger 2001-2019
-</metadata>
-<g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M0 640 l0 -640 640 0 640 0 0 640 0 640 -640 0 -640 0 0 -640z"/>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="256" height="256" fill="black"/>
+<g clip-path="url(#clip0_1090_22)">
+<path d="M160.668 69L143.935 98.0674H177.402L160.668 69Z" fill="white"/>
+<path d="M93.7335 185.241L110.441 156.174H77L93.7335 185.241Z" fill="white"/>
+<path d="M127.201 127.133L143.935 156.174L160.668 185.215L177.402 156.174L160.668 127.133H127.201Z" fill="white"/>
+<path d="M110.467 98.0683L93.7335 69.0273L77 98.0683L93.7071 127.136H127.201V127.109L110.467 98.0683Z" fill="white"/>
 </g>
+<defs>
+<clipPath id="clip0_1090_22">
+<rect width="101" height="117" fill="white" transform="translate(77 69)"/>
+</clipPath>
+</defs>
 </svg>
