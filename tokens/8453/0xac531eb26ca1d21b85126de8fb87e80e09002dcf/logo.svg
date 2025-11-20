@@ -1,0 +1,12 @@
+<svg version="1.1" viewBox="0 0 200 200" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:#FFFFFF;}
+</style>
+<linearGradient id="SVGID_1_" x1="25.214" x2="25.837" y1="1024.8" y2="1024.1" gradientTransform="matrix(200 0 0 -200 -5e3 205000)" gradientUnits="userSpaceOnUse">
+	<stop stop-color="#00ADEF" offset="0"/>
+	<stop stop-color="#0084FF" offset="1"/>
+</linearGradient>
+<circle class="st0" cx="100" cy="100" r="100" fill="url(#SVGID_1_)" stroke-width="4"/>
+<path class="st1" d="m66.4 47.2-10.8 10.8v42.8l10.8 10.8h42.8v21.6h-21.2v-10.8h-32.4v21.6l10.8 10.8h64.4l10.8-10.8v-43.2l-10.8-10.8h-42.8v-21.6h21.6v10.8h32.4v-21.6l-10.8-10.8h-64.8z" stroke-width="4"/>
+</svg>
