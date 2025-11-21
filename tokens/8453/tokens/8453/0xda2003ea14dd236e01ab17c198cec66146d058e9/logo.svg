@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="82px" height="82px" viewBox="0 0 82 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>USDtz_Green_WhiteBorder</title>
+    <g id="USDtz_Green_WhiteBorder" stroke="none" fill="none">
+        <circle id="Oval" fill="#189DA3" fill-rule="evenodd" cx="41" cy="41" r="41"></circle>
+        <rect id="Rectangle" transform="translate(41, 40.65) rotate(90) translate(-41, -40.65)" x="1" y="30" width="80" height="21.3"></rect>
+        <circle id="Oval" cx="41" cy="41" r="35"></circle>
+        <circle id="Oval" stroke="#FFFFFF" stroke-width="5" cx="41" cy="41" r="28.5"></circle>
+        <rect id="Rectangle" fill="#189DA3" fill-rule="evenodd" x="1.42885835" y="30.35" width="80" height="21.3" rx="4"></rect>
+        <circle id="Oval" stroke="#FFFFFF" stroke-width="3" cx="41" cy="41" r="39.5"></circle>
+        <path d="M43.5793718,20.25 L43.5792399,25.7802142 C47.3378916,26.2693946 51.469,27.9940868 51.469,31.546 L51.469,35.084 L46.539,35.084 L46.539,33.17 C46.539,31.372 44.219,30.154 41.377,30.154 C38.593,30.154 36.157,31.314 36.157,33.692 C36.157,36.476 39.405,37.636 42.943,38.854 L43.6880442,39.1048957 L44.178827,39.2743838 C48.3564424,40.7361736 52.629,42.7678957 52.629,47.728 C52.629,52.5088625 48.8660822,55.4510266 43.5798904,56.1873376 L43.5793718,61.75 L38.4206282,61.75 L38.4204764,56.2096138 C33.811643,55.6050357 29.371,53.2954286 29.371,49.352 L29.371,46.22 L34.301,46.22 L34.301,48.134 C34.301,50.628 37.781,51.788 41.029,51.788 C44.335,51.788 46.945,50.454 46.945,48.018 C46.945,45.06 43.697,44.132 39.637,42.682 L38.6648407,42.3141569 C34.6002291,40.7473937 30.473,38.6907407 30.473,33.75 C30.473,29.0383529 34.2622451,26.6232181 38.4205083,25.882736 L38.4206282,20.25 L43.5793718,20.25 Z" id="Combined-Shape" stroke="#FFFFFF" stroke-width="1" fill="#FFFFFF" fill-rule="evenodd"></path>
+    </g>
+</svg>
