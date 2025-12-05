@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns:xodm="http://www.corel.com/coreldraw/odm/2003" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 2500 2500" style="enable-background:new 0 0 2500 2500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{fill:url(#SVGID_1_);}
+	.st2{fill:url(#SVGID_00000117654013004584412760000000196808338820801165_);}
+	.st3{fill:url(#SVGID_00000176740629823990107560000005803076583538413477_);}
+</style>
+<g id="Layer_x0020_1">
+	<g id="_2202962644304">
+		<rect y="0" class="st0" width="2500" height="2500"></rect>
+		<g>
+			
+				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="889.7789" y1="1298.8082" x2="3366.7788" y2="3280.8083" gradientTransform="matrix(1 0 0 -1 0 2499.2756)">
+				<stop offset="0" style="stop-color:#48D5FF"></stop>
+				<stop offset="1" style="stop-color:#1FA5FF"></stop>
+			</linearGradient>
+			<polygon class="st1" points="0,2236 883,601 1662,259 779,1894    "></polygon>
+			
+				<linearGradient id="SVGID_00000073710605731998811960000013091818206569335482_" gradientUnits="userSpaceOnUse" x1="1112.8181" y1="847.6749" x2="3770.8181" y2="2829.6748" gradientTransform="matrix(1 0 0 -1 0 2499.2756)">
+				<stop offset="0" style="stop-color:#48D5FF"></stop>
+				<stop offset="1" style="stop-color:#1FA5FF"></stop>
+			</linearGradient>
+			<polygon style="fill:url(#SVGID_00000073710605731998811960000013091818206569335482_);" points="878,1863 1550,619 1932,993      1270,2241    "></polygon>
+			
+				<linearGradient id="SVGID_00000085237319741576451740000009126571120728534455_" gradientUnits="userSpaceOnUse" x1="1335.9049" y1="563.8232" x2="3903.905" y2="2455.8232" gradientTransform="matrix(1 0 0 -1 0 2499.2756)">
+				<stop offset="0" style="stop-color:#48D5FF"></stop>
+				<stop offset="1" style="stop-color:#1FA5FF"></stop>
+			</linearGradient>
+			<polygon style="fill:url(#SVGID_00000085237319741576451740000009126571120728534455_);" points="2005,1034 2500,1214 2252,1669      1649,1691    "></polygon>
+		</g>
+	</g>
+</g>
+</svg>
