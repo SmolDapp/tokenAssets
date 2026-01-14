@@ -1,22 +1,22 @@
 {
-	"name": "tokenlistooor_asset",
-	"main": "index.js",
-	"license": "MIT",
-	"private": true,
-	"dependencies": {
-		"@fleekxyz/sdk": "^0.7.3",
-		"ethers": "^6.0.8",
-		"fs-extra": "^9.1.0",
-		"keccak": "^3.0.4"
-	},
-	"scripts": {
-		"format": "prettier --write . --verbose",
-		"prettier-format": "prettier --config .prettierrc \"./**/**/*.{js,mjs,ts,tsx,scss,md}\" --write",
-		"format:check": "prettier --check ."
-	},
-	"devDependencies": {
-		"next": "^14.0.2",
-		"prettier": "3.0.3",
-		"styled-jsx": "^5.1.2"
-	}
+  "name": "tokenlistooor_asset",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@fleekxyz/sdk": "^0.7.3",
+    "ethers": "^6.15.0",
+    "fs-extra": "^9.1.0",
+    "keccak": "^3.0.4"
+  },
+  "scripts": {
+    "format": "prettier --write . --verbose",
+    "prettier-format": "prettier --config .prettierrc \"./**/**/*.{js,mjs,ts,tsx,scss,md}\" --write",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "next": "14.2.35",
+    "prettier": "3.0.3",
+    "styled-jsx": "^5.1.2"
+  }
 }

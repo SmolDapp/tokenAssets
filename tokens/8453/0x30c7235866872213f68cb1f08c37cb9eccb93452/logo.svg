@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="24.943596"
+   height="25.075855"
+   viewBox="0 0 24.943596 25.075855"
+   fill="none"
+   version="1.1"
+   id="svg13"
+   sodipodi:docname="way1.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="24.719094"
+     inkscape:cx="12.905004"
+     inkscape:cy="13.309549"
+     inkscape:window-width="2056"
+     inkscape:window-height="1257"
+     inkscape:window-x="468"
+     inkscape:window-y="1736"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg13" />
+  <rect
+     style="fill:#041512;fill-opacity:1;stroke-width:1.00057"
+     id="rect14"
+     width="25.024"
+     height="25.024"
+     x="0"
+     y="5.2203668e-09" />
+  <g
+     clip-path="url(#clip0_417_39703)"
+     id="g4"
+     transform="translate(0.51163256,0.51309813)">
+    <path
+       d="m 23.7661,14.6696 c -0.0994,0.4356 -0.2217,0.8623 -0.3675,1.2775 H 18.3392 L 14.3573,11.9898 H 9.6366 L 5.65773,15.9471 H 0.601386 C 0.455596,15.5319 0.332585,15.1052 0.233873,14.6696 H 2.2104 L 6.18926,10.713 H 17.8047 l 3.9849,3.9566 z"
+       fill="#e0d1aa"
+       id="path1" />
+    <path
+       d="m 21.4046,19.5202 c -0.1048,0.1306 -0.2133,0.2582 -0.3242,0.3835 H 16.2951 L 13.5972,17.221 H 10.3974 L 7.69956,19.9037 H 2.91733 C 2.80647,19.7791 2.69864,19.6515 2.5931,19.5201 L 6.18698,15.9464 H 17.8047 Z"
+       fill="#e0d1aa"
+       id="path2" />
+    <path
+       d="M 24,10.7122 H 18.3392 L 14.3573,6.75564 H 9.6366 L 5.65773,10.7122 H 0 C 0.648465,4.69127 5.77164,-5.44402e-7 11.9989,0 18.2261,5.44402e-7 23.3515,4.69127 24,10.7122 Z"
+       fill="#e0d1aa"
+       id="path3" />
+    <path
+       d="M 18.2891,22.2437 C 16.4561,23.3582 14.3042,24 11.9981,24 9.69203,24 7.5401,23.3582 5.70937,22.2437 l 2.35315,-2.34 h 7.87118 z"
+       fill="#e0d1aa"
+       id="path4" />
+  </g>
+  <defs
+     id="defs13">
+    <clipPath
+       id="clip0_417_39703">
+      <rect
+         width="24"
+         height="24"
+         rx="12"
+         fill="#ffffff"
+         id="rect13"
+         x="0"
+         y="0" />
+    </clipPath>
+  </defs>
+</svg>
