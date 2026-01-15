@@ -1,0 +1,94 @@
+name: Validate Fork PRs
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  verify:
+    name: Verify tokens (fork-safe)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Check for forbidden changes
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git fetch origin "$BASE_REF" --depth=1
+          CHANGED=$(git diff --name-only "origin/$BASE_REF"...HEAD -- '_config/' || true)
+          if [ -n "$CHANGED" ]; then
+            echo "Error: Changes to _config/ directory are not allowed in fork PRs"
+            echo "Modified files:"
+            echo "$CHANGED"
+            exit 1
+          fi
+          echo "Ok: no forbidden changes detected"
+
+      - name: Verify tokens
+        run: |
+          FAILED=0
+
+          while IFS= read -r -d '' svg; do
+            if grep -qE 'data:image/png;base64|data:img/png;base64|data:image/jpeg;base64|data:img/jpeg;base64|href="http' "$svg"; then
+              echo "Error: $svg contains base64 encoded image or external link"
+              FAILED=1
+            fi
+          done < <(find ./tokens -name "logo.svg" -print0)
+
+          while IFS= read -r -d '' dir; do
+            name=$(basename "$dir")
+            lower=$(echo "$name" | tr '[:upper:]' '[:lower:]')
+            if [ "$name" != "$lower" ]; then
+              echo "Error: $name is not lowercased. Should be $lower"
+              FAILED=1
+            fi
+            for file in logo-128.png logo-32.png logo.svg; do
+              if [ ! -f "$dir/$file" ]; then
+                echo "Error: $dir is missing $file"
+                FAILED=1
+              fi
+            done
+          done < <(find ./tokens -type d -name "0x*" -print0)
+
+          while IFS= read -r -d '' dir; do
+            for file in logo-128.png logo-32.png logo.svg; do
+              if [ ! -f "$dir/$file" ]; then
+                echo "Error: $dir is missing $file"
+                FAILED=1
+              fi
+            done
+          done < <(find ./tokens/1151111081099710 -mindepth 1 -maxdepth 1 -type d -print0 2>/dev/null)
+
+          if [ $FAILED -eq 1 ]; then exit 1; fi
+          echo "Ok: all files match schema definitions!"
+
+      - name: Verify chains
+        run: |
+          FAILED=0
+
+          while IFS= read -r -d '' dir; do
+            name=$(basename "$dir")
+            if [[ "$name" == _* ]] || ! [[ "$name" =~ ^[a-zA-Z0-9]+$ ]]; then
+              continue
+            fi
+            for file in logo-128.png logo-32.png logo.svg; do
+              if [ ! -f "$dir/$file" ]; then
+                echo "Error: Chain $dir is missing $file"
+                FAILED=1
+              fi
+            done
+            if [ -f "$dir/logo.svg" ]; then
+              if grep -qE 'data:image/png;base64|data:img/png;base64|data:image/jpeg;base64|data:img/jpeg;base64|href="http' "$dir/logo.svg"; then
+                echo "Error: $dir/logo.svg contains base64 encoded image or external link"
+                FAILED=1
+              fi
+            fi
+          done < <(find ./chains -mindepth 1 -maxdepth 1 -type d -print0 2>/dev/null)
+
+          if [ $FAILED -eq 1 ]; then exit 1; fi
+          echo "Ok: all chain directories are valid!"
