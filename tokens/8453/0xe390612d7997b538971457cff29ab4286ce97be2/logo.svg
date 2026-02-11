@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a1a3e"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6ecf6e"/>
+      <stop offset="50%" stop-color="#3d8b3d"/>
+      <stop offset="100%" stop-color="#2d6b2d"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <circle cx="64" cy="64" r="64" fill="url(#bg)"/>
+  <!-- Purple ring -->
+  <circle cx="64" cy="64" r="58" fill="none" stroke="#a855f7" stroke-width="3" opacity="0.85"/>
+  <!-- Inner glow -->
+  <circle cx="64" cy="48" r="30" fill="url(#glow)"/>
+  <!-- Cannabis leaf -->
+  <g transform="translate(64, 50)">
+    <!-- Center leaflet (tall) -->
+    <path d="M0,-30 C-5,-18 -4,-8 0,2 C4,-8 5,-18 0,-30Z" fill="url(#leaf)"/>
+    <!-- Upper left -->
+    <path d="M-2,-2 C-10,-16 -20,-26 -24,-30 C-20,-22 -12,-12 -2,-2Z" fill="url(#leaf)"/>
+    <!-- Upper right -->
+    <path d="M2,-2 C10,-16 20,-26 24,-30 C20,-22 12,-12 2,-2Z" fill="url(#leaf)"/>
+    <!-- Mid left -->
+    <path d="M-2,0 C-14,-10 -26,-14 -32,-14 C-24,-10 -14,-6 -2,0Z" fill="url(#leaf)"/>
+    <!-- Mid right -->
+    <path d="M2,0 C14,-10 26,-14 32,-14 C24,-10 14,-6 2,0Z" fill="url(#leaf)"/>
+    <!-- Lower left -->
+    <path d="M-1,0 C-10,-2 -22,-2 -26,0 C-20,0 -10,0 -1,0Z" fill="url(#leaf)"/>
+    <!-- Lower right -->
+    <path d="M1,0 C10,-2 22,-2 26,0 C20,0 10,0 1,0Z" fill="url(#leaf)"/>
+    <!-- Purple edges on main leaflets -->
+    <path d="M0,-30 C-5,-18 -4,-8 0,2 C4,-8 5,-18 0,-30Z" fill="none" stroke="#a855f7" stroke-width="0.8" opacity="0.6"/>
+    <path d="M-2,-2 C-10,-16 -20,-26 -24,-30" fill="none" stroke="#a855f7" stroke-width="0.6" opacity="0.5"/>
+    <path d="M2,-2 C10,-16 20,-26 24,-30" fill="none" stroke="#a855f7" stroke-width="0.6" opacity="0.5"/>
+    <path d="M-2,0 C-14,-10 -26,-14 -32,-14" fill="none" stroke="#a855f7" stroke-width="0.6" opacity="0.5"/>
+    <path d="M2,0 C14,-10 26,-14 32,-14" fill="none" stroke="#a855f7" stroke-width="0.6" opacity="0.5"/>
+    <!-- Stem -->
+    <path d="M0,2 C-0.5,8 -0.5,16 0,22" fill="none" stroke="#3d8b3d" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- Rasta hat -->
+  <g transform="translate(64, 20)">
+    <ellipse cx="0" cy="2" rx="16" ry="5" fill="#cc0000"/>
+    <ellipse cx="0" cy="-1" rx="14" ry="5" fill="#f4c430"/>
+    <ellipse cx="0" cy="-4" rx="12" ry="5" fill="#006b3f"/>
+    <ellipse cx="0" cy="-7" rx="8" ry="4" fill="#006b3f"/>
+  </g>
+  <!-- MON text -->
+  <text x="64" y="102" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="bold" font-size="24" fill="#a855f7" letter-spacing="3">MON</text>
+</svg>
