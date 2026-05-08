@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 120 122.3">
+  <defs>
+    <clipPath id="yuty-clippath">
+      <rect fill="none" width="120" height="122.3"/>
+    </clipPath>
+    <linearGradient id="yuty-linear-gradient" x1="206.8" y1="-232.9" x2="206.8" y2="-110.2" gradientTransform="translate(-128.2 -114.4) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006100"/>
+      <stop offset="1" stop-color="#00db07"/>
+    </linearGradient>
+    <linearGradient id="yuty-linear-gradient1" x1="207.4" y1="-143.9" x2="207.4" y2="-125.2" gradientTransform="translate(-128.2 -114.4) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006100"/>
+      <stop offset="1" stop-color="#00db07"/>
+    </linearGradient>
+    <linearGradient id="yuty-linear-gradient2" x1="207.4" y1="-259.7" x2="207.4" y2="-232.3" gradientTransform="translate(-128.2 -114.4) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006100"/>
+      <stop offset="1" stop-color="#00db07"/>
+    </linearGradient>
+    <linearGradient id="yuty-linear-gradient3" x1="161.5" y1="-134.9" x2="251.1" y2="-134.9" gradientTransform="translate(-128.2 -114.4) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00bd05"/>
+      <stop offset=".5" stop-color="#13ff0f"/>
+      <stop offset="1" stop-color="#00b305"/>
+    </linearGradient>
+    <linearGradient id="yuty-linear-gradient4" x1="173.9" y1="-245.5" x2="253.6" y2="-245.6" gradientTransform="translate(-128.2 -114.4) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00bd05"/>
+      <stop offset=".5" stop-color="#02d300"/>
+      <stop offset="1" stop-color="#00b305"/>
+    </linearGradient>
+    <linearGradient id="yuty-linear-gradient5" x1="208.4" y1="-156" x2="208.4" y2="-218.5" gradientTransform="translate(-128.2 -114.4) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff5f0f"/>
+      <stop offset="1" stop-color="#a30"/>
+    </linearGradient>
+    <linearGradient id="yuty-linear-gradient6" x1="208.4" y1="-230.6" x2="208.4" y2="-155.4" gradientTransform="translate(-128.2 -114.4) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f65000"/>
+      <stop offset=".5" stop-color="#ff7139"/>
+      <stop offset="1" stop-color="#ff956b"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#yuty-clippath)">
+    <g>
+      <path fill="url(#yuty-linear-gradient)" d="M59.8,1.3C26.8,1.3,0,28.1,0,61.1s26.8,59.8,59.8,59.8,59.8-26.8,59.8-59.8S92.8,1.3,59.8,1.3Z"/>
+      <path d="M59.8,117.2c31,0,56.2-25.1,56.2-56.1s0-.5,0-.8v-.2c-.5-30.6-25.4-55.2-56.2-55.2S4.1,29.6,3.6,60.1v.9c0,31,25.1,56.1,56.2,56.1Z"/>
+      <path fill="url(#yuty-linear-gradient1)" d="M59.8,0C44.8,0,31.1,5.5,20.6,14.6l3.2,3.8c1.1,1.3,2.9,1.5,4.2.5,8.8-6.8,19.8-10.9,31.8-10.9s23.9,4.4,32.8,11.7c1.3,1.1,3.2.9,4.3-.4l3.1-3.7C89.4,5.9,75.3,0,59.8,0Z"/>
+      <path fill="url(#yuty-linear-gradient2)" d="M59.8,122.1c-15,0-28.7-5.5-39.2-14.6l3.2-3.8c1.1-1.3,2.9-1.5,4.2-.5,8.8,6.8,19.8,10.9,31.8,10.9s23.9-4.4,32.8-11.7c1.3-1.1,3.2-.9,4.3.4l3.1,3.7c-10.6,9.7-24.7,15.6-40.2,15.6Z"/>
+      <path fill="url(#yuty-linear-gradient3)" d="M59.8,0C44.8,0,31.1,5.5,20.6,14.6l.7.9C31.8,6.7,45.2,1.5,59.8,1.5s29,5.6,39.5,14.9l.7-.9C89.4,5.9,75.3,0,59.8,0Z"/>
+      <path fill="url(#yuty-linear-gradient4)" d="M24.3,103.3c1.1-.9,2.6-.9,3.8,0,8.8,6.8,19.8,10.9,31.8,10.9s23.9-4.4,32.8-11.7c1.1-.9,2.7-.9,3.8,0-10,8.5-22.7,13.5-36.6,13.5s-25.7-4.7-35.4-12.6h0Z"/>
+      <path fill="url(#yuty-linear-gradient5)" d="M53.8,73.4v5.3c5.9-9.4,29.3-32.4,38.2-42.8h-11.5c-6.1,0-11.3,2.8-14.6,7.9-12.1,18.7-12.2,13.4-12.2,29.6ZM54.2,40.4c-3.2-3-7.2-4.6-11.7-4.6h-12l19.2,22.4c1.9-2,3.9-4.2,5.6-6.5,2.6-3.5,2.1-8.3-1.1-11.3ZM55.1,90.4h6.7c3.8,0,6.9-3.1,6.9-6.9v-14.6c-5.4,4.8-13.3,12.9-13.5,19.8,0,.6,0,1.1,0,1.6Z"/>
+      <path fill="url(#yuty-linear-gradient6)" d="M53.8,73.4v.8c0-15.3.3-10.5,12.2-28.9,3.3-5.1,8.5-7.9,14.6-7.9h10.1c.5-.5.9-1,1.3-1.5h-11.5c-6.1,0-11.3,2.8-14.6,7.9-12.1,18.7-12.2,13.4-12.2,29.6ZM54.2,40.4c-3.2-3-7.2-4.6-11.7-4.6h-12l1.3,1.5h10.7c4.6,0,8.6,1.6,11.7,4.6,1.6,1.5,2.5,3.5,2.7,5.5.2-2.6-.7-5.1-2.7-7ZM55.1,90.4h0c.2-7.1,8.1-15.2,13.5-19.9v-1.5c-5.4,4.8-13.3,12.9-13.5,19.8,0,.6,0,1.1,0,1.6Z"/>
+    </g>
+  </g>
+</svg>
