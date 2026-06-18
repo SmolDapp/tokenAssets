@@ -1,1 +1,0 @@
-Rusty Token Assets
