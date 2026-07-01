@@ -53,6 +53,7 @@ Environment Variables: None
 -   1750: Metal L2
 -   1868: Soneium
 -   1923: Swellchain
+-   4326: MegaETH
 -   5330: Superseed
 -   8453: Base
 -   34443: Mode
