@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
+import {ForbiddenSVGPattern} from './forbidden-svg-pattern.mjs';
 
 const DataDirectory = './tokens';
 const IndexName = 'index.json';
@@ -38,15 +39,9 @@ function validate(directory) {
 					console.error(`Error: "${file}" is missing logo.svg`);
 					allValid = false;
 				} else {
-					const svgValue = fs.readFileSync(path.join(file, 'logo.svg'));
-					if (
-						svgValue.includes(`data:image/png;base64`) ||
-						svgValue.includes(`data:img/png;base64`) ||
-						svgValue.includes(`data:image/jpeg;base64`) ||
-						svgValue.includes(`data:img/jpeg;base64`) ||
-						svgValue.includes(`href="http`)
-					) {
-						console.error(`Error: "${file}" logo.svg contains base64 encoded image.`);
+					const svgValue = fs.readFileSync(path.join(file, 'logo.svg'), 'utf8');
+					if (ForbiddenSVGPattern.test(svgValue)) {
+						console.error(`Error: "${file}" logo.svg contains a base64 image, external link or script.`);
 						allValid = false;
 					}
 					// const fileSize = getFilesizeInBytes(path.join(file, 'logo.svg')) / 1000000;
