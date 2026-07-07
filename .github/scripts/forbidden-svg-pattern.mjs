@@ -1,1 +1,1 @@
-export const ForbiddenSVGPattern = /data:\s*(image|img)\/[a-zA-Z+.-]+;base64|href\s*=\s*["']?https?:|<script|javascript:|onload\s*=/i;
+export const ForbiddenSVGPattern = /data:[^,]{0,200};base64|href\s*=\s*["']?(https?:|\/\/)|<script|javascript:|[^a-z0-9_-]on[a-z]+\s*=/i;

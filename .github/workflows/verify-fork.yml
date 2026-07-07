@@ -11,7 +11,7 @@ jobs:
         name: Verify tokens (fork-safe)
         runs-on: ubuntu-latest
         env:
-            SVG_FORBIDDEN_PATTERN: 'data:[[:space:]]*(image|img)/[a-zA-Z+.-]+;base64|href[[:space:]]*=[[:space:]]*["'']?https?:|<script|javascript:|onload[[:space:]]*='
+            SVG_FORBIDDEN_PATTERN: 'data:[^,]{0,200};base64|href[[:space:]]*=[[:space:]]*["'']?(https?:|//)|<script|javascript:|[^a-zA-Z0-9_-]on[a-z]+[[:space:]]*='
 
         steps:
             - name: Checkout PR code
@@ -24,8 +24,8 @@ jobs:
               env:
                   BASE_REF: ${{ github.base_ref }}
               run: |
-                  git fetch origin "$BASE_REF" --depth=1
-                  CHANGED=$(git diff --name-only "origin/$BASE_REF"...HEAD -- '_config/' || true)
+                  git fetch origin "$BASE_REF"
+                  CHANGED=$(git diff --name-only "origin/$BASE_REF"...HEAD -- '_config/')
                   if [ -n "$CHANGED" ]; then
                     echo "Error: Changes to _config/ directory are not allowed in fork PRs"
                     echo "Modified files:"
@@ -39,8 +39,8 @@ jobs:
               env:
                   BASE_REF: ${{ github.base_ref }}
               run: |
-                  git fetch origin "$BASE_REF" --depth=1
-                  CHANGED=$(git diff --name-only "origin/$BASE_REF"...HEAD || true)
+                  git fetch origin "$BASE_REF"
+                  CHANGED=$(git diff --name-only "origin/$BASE_REF"...HEAD)
                   MISPLACED=$(echo "$CHANGED" | grep -vE '^(tokens|chains)/' || true)
                   if [ -n "$MISPLACED" ]; then
                     echo "Error: Fork PRs may only add or modify files under tokens/ or chains/"
@@ -55,15 +55,17 @@ jobs:
               env:
                   BASE_REF: ${{ github.base_ref }}
               run: |
-                  git fetch origin "$BASE_REF" --depth=1
+                  git fetch origin "$BASE_REF"
+                  CHANGED_SVGS=$(git diff --name-only "origin/$BASE_REF"...HEAD -- '*.svg')
                   FAILED=0
                   while IFS= read -r svg; do
+                    [ -n "$svg" ] || continue
                     [ -f "$svg" ] || continue
                     if grep -qiE "$SVG_FORBIDDEN_PATTERN" "$svg"; then
                       echo "Error: $svg contains a base64 image, external link or script"
                       FAILED=1
                     fi
-                  done < <(git diff --name-only "origin/$BASE_REF"...HEAD -- '*.svg')
+                  done <<< "$CHANGED_SVGS"
                   if [ $FAILED -eq 1 ]; then exit 1; fi
                   echo "Ok: no base64 images, external links or scripts in changed SVGs"
 
