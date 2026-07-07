@@ -14,11 +14,15 @@ jobs:
             SVG_FORBIDDEN_PATTERN: 'data:[^,]{0,200};base64|href[[:space:]]*=[[:space:]]*["'']?(https?:|//)|<script|javascript:|[^a-zA-Z0-9_-]on[a-z]+[[:space:]]*='
 
         steps:
+            # Safe by design: the token is contents:read only and no code
+            # from this checkout is ever executed, only grepped. Never add
+            # npm install or run scripts from this checkout.
             - name: Checkout PR code
               uses: actions/checkout@v4
               with:
                   ref: ${{ github.event.pull_request.head.sha }}
                   fetch-depth: 0
+                  allow-unsafe-pr-checkout: true
 
             - name: Check for forbidden changes
               env:
