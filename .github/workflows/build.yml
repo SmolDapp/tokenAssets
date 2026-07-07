@@ -41,7 +41,8 @@ jobs:
               run: |
                   git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git config --local user.name "github-actions[bot]"
-                  git diff --quiet || git commit -a -m "[bot] - Update lists"
+                  git add tokens chains
+                  git diff --quiet && git diff --cached --quiet || git commit -a -m "[bot] - Update lists"
 
             - name: Temporarily disable "include administrators" branch protection
               uses: benjefferies/branch-protection-bot@958128d33ada137a4c6012f838fc7c914c999190 # master 2024-02-22

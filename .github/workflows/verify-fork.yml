@@ -11,7 +11,7 @@ jobs:
         name: Verify tokens (fork-safe)
         runs-on: ubuntu-latest
         env:
-            SVG_FORBIDDEN_PATTERN: 'data:[^,]{0,200};base64|href[[:space:]]*=[[:space:]]*["'']?(https?:|//)|<script|javascript:|[^a-zA-Z0-9_-]on[a-z]+[[:space:]]*='
+            SVG_FORBIDDEN_PATTERN: 'data:[^,]*;[[:space:]]*base64|href[[:space:]]*=[[:space:]]*["'']?(https?:|//)|<script|javascript:|[^a-zA-Z0-9_-]on[a-z]+[[:space:]]*='
 
         steps:
             # Safe by design: the token is contents:read only and no code
