@@ -69,6 +69,10 @@ jobs:
                       echo "Error: $svg contains a base64 image, external link or script"
                       FAILED=1
                     fi
+                    if [ "$(wc -c < "$svg")" -gt 153600 ]; then
+                      echo "Error: $svg is larger than 150KB"
+                      FAILED=1
+                    fi
                   done <<< "$CHANGED_SVGS"
                   if [ $FAILED -eq 1 ]; then exit 1; fi
                   echo "Ok: no base64 images, external links or scripts in changed SVGs"
