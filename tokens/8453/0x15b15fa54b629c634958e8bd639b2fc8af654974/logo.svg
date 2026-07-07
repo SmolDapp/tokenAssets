@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" shape-rendering="crispEdges">
+  <rect width="32" height="32" fill="#E7DFD2"/>
+  <!-- black tips -->
+  <rect x="18" y="0"  width="14" height="3" fill="#0A0A0A"/>
+  <rect x="18" y="29" width="14" height="3" fill="#0A0A0A"/>
+  <!-- green -->
+  <rect x="13" y="3"  width="19" height="4" fill="#15784A"/>
+  <rect x="13" y="25" width="19" height="4" fill="#15784A"/>
+  <!-- teal -->
+  <rect x="8"  y="7"  width="24" height="4" fill="#1799A6"/>
+  <rect x="8"  y="21" width="24" height="4" fill="#1799A6"/>
+  <!-- cyan -->
+  <rect x="2"  y="11" width="30" height="3" fill="#62D2C6"/>
+  <rect x="2"  y="18" width="30" height="3" fill="#62D2C6"/>
+  <!-- white center -->
+  <rect x="0"  y="14" width="32" height="4" fill="#FFFFFF"/>
+</svg>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 120.5 123.1">
+  <defs>
+    <linearGradient id="uty-linear-gradient" x1="207.1" y1="-5.4" x2="207.1" y2="117.7" gradientTransform="translate(-128.2 92.7) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006100"/>
+      <stop offset="1" stop-color="#00db07"/>
+    </linearGradient>
+    <linearGradient id="uty-linear-gradient1" x1="207.7" y1="84" x2="207.7" y2="102.7" gradientTransform="translate(-128.2 92.7) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006100"/>
+      <stop offset="1" stop-color="#00db07"/>
+    </linearGradient>
+    <linearGradient id="uty-linear-gradient2" x1="207.7" y1="-32.2" x2="207.7" y2="-4.8" gradientTransform="translate(-128.2 92.7) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006100"/>
+      <stop offset="1" stop-color="#00db07"/>
+    </linearGradient>
+    <linearGradient id="uty-linear-gradient3" x1="161.5" y1="93" x2="251.5" y2="93" gradientTransform="translate(-128.2 92.7) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00bd05"/>
+      <stop offset=".5" stop-color="#13ff0f"/>
+      <stop offset="1" stop-color="#00b305"/>
+    </linearGradient>
+    <linearGradient id="uty-linear-gradient4" x1="174" y1="-18" x2="254" y2="-18.1" gradientTransform="translate(-128.2 92.7) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00bd05"/>
+      <stop offset=".5" stop-color="#02d300"/>
+      <stop offset="1" stop-color="#00b305"/>
+    </linearGradient>
+    <linearGradient id="uty-linear-gradient5" x1="207.1" y1="60.2" x2="207.1" y2="2.7" gradientTransform="translate(-128.2 92.7) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00db07"/>
+      <stop offset="1" stop-color="#006100"/>
+    </linearGradient>
+    <linearGradient id="uty-linear-gradient6" x1="208.7" y1="1.9" x2="206.9" y2="60.6" gradientTransform="translate(-128.2 92.7) scale(.9 -.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00bd05"/>
+      <stop offset=".5" stop-color="#13ff0f"/>
+      <stop offset="1" stop-color="#4fff4c"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#uty-linear-gradient)" d="M60,1.3C26.9,1.3,0,28.2,0,61.3s26.9,60,60,60,60-26.9,60-60S93.1,1.3,60,1.3Z"/>
+  <path d="M60,117.6c31.1,0,56.4-25.2,56.4-56.3s0-.5,0-.8v-.2c-.5-30.7-25.5-55.4-56.4-55.4S4.1,29.7,3.6,60.3v.9c0,31.1,25.2,56.3,56.4,56.3Z"/>
+  <path fill="url(#uty-linear-gradient1)" d="M60,0c-15,0-28.8,5.5-39.3,14.6l3.2,3.8c1.1,1.3,2.9,1.5,4.2.5,8.8-6.8,19.9-10.9,31.9-10.9s24,4.4,32.9,11.8c1.3,1.1,3.2.9,4.3-.4l3.1-3.8C89.7,5.9,75.5,0,60,0Z"/>
+  <path fill="url(#uty-linear-gradient2)" d="M60,122.6c-15,0-28.8-5.5-39.3-14.6l3.2-3.8c1.1-1.3,2.9-1.5,4.2-.5,8.8,6.8,19.9,10.9,31.9,10.9s24-4.4,32.9-11.8c1.3-1.1,3.2-.9,4.3.4l3.1,3.8c-10.6,9.7-24.8,15.6-40.4,15.6Z"/>
+  <path fill="url(#uty-linear-gradient3)" d="M60,0c-15,0-28.8,5.5-39.3,14.6l.7.9C31.9,6.8,45.3,1.5,60,1.5s29.1,5.6,39.7,15l.7-.9C89.7,5.9,75.5,0,60,0Z"/>
+  <path fill="url(#uty-linear-gradient4)" d="M24.4,103.7c1.1-.9,2.7-.9,3.8,0,8.8,6.8,19.9,10.9,31.9,10.9s24-4.4,32.9-11.8c1.1-.9,2.7-.9,3.8,0-10,8.5-22.8,13.6-36.8,13.6s-25.7-4.7-35.6-12.6h0Z"/>
+  <path fill="url(#uty-linear-gradient5)" d="M84.7,65.5v-27.5h-3.9c-5.5,0-10,4.5-10,10v17.4c0,7.8-5.9,11.5-11.5,11.2,3.2,2.5,7.6,4.1,12,5,4.8,1.1,9.5-1.4,11.4-5.9,1.2-3,1.9-6.4,1.9-10.2ZM49.1,65.4v-27.4h-3.9c-5.5,0-10,4.5-10,10v17.6c0,23.6,25.3,30.1,39.7,20-10.4-1-25.8-7.5-25.8-20.1Z"/>
+  <path fill="url(#uty-linear-gradient6)" d="M84.7,39.4v-1.4h-3.9c-5.5,0-10,4.5-10,10v1.4c0-5.5,4.5-10,10-10h3.9ZM70.9,65.4c0,7.8-5.9,11.5-11.5,11.2.6.5,1.3.9,2,1.3,4.9-.5,9.5-4.2,9.5-11.1v-1.4ZM49.1,39.4v-1.4h-3.9c-5.5,0-10,4.5-10,10v1.4c0-5.5,4.5-10,10-10h3.9ZM73.1,86.7c.6-.4,1.2-.7,1.8-1.1-10.4-1-25.8-7.5-25.8-20.1v1.4c0,11.9,13.7,18.3,24,19.9Z"/>
+</svg>

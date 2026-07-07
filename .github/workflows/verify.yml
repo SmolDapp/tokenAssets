@@ -1,28 +1,31 @@
 name: Validation
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+    push:
+        branches:
+            - main
+
+permissions:
+    contents: read
+
 jobs:
-  verify:
-    name: Checksum check
-    runs-on: ubuntu-latest
+    verify:
+        name: Checksum check
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
 
-      - name: Use Node 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
+            - name: Use Node 20.x
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
 
-      - name: Install deps
-        run: npm install
+            - name: Install deps
+              run: npm install
 
-      - name: Verify tokens
-        run: node ./.github/scripts/verify-tokens.mjs
+            - name: Verify tokens
+              run: node ./.github/scripts/verify-tokens.mjs
 
-      - name: Verify chains
-        run: node ./.github/scripts/verify-chains.mjs
+            - name: Verify chains
+              run: node ./.github/scripts/verify-chains.mjs
