@@ -3,6 +3,9 @@ on:
     pull_request_target:
         types: [opened, synchronize, reopened]
 
+permissions:
+    contents: read
+
 jobs:
     verify:
         name: Verify tokens (fork-safe)
