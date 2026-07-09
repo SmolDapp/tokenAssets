@@ -36,7 +36,15 @@ export function useGlobalSearch(query: string, enabled: boolean): {results: TSea
 	const [isLoading, setIsLoading] = useState(() => cachedIndex === null);
 
 	useEffect(() => {
-		if (!enabled || cachedIndex) {
+		if (!enabled) {
+			return;
+		}
+		// If another instance already populated the shared index while this one was disabled, adopt it
+		// instead of returning early — otherwise this instance stays stuck on its initial empty/loading
+		// state forever.
+		if (cachedIndex) {
+			setEntries(cachedIndex);
+			setIsLoading(false);
 			return;
 		}
 		let isCancelled = false;

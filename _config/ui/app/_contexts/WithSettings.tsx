@@ -1,6 +1,6 @@
 'use client';
 
-import {createContext, useContext} from 'react';
+import {createContext, useCallback, useContext, useMemo} from 'react';
 
 import {setCookieView} from './WithSettings.server';
 
@@ -23,28 +23,22 @@ type TSettingsProps = {
 
 export const WithSettings = ({children, cookieView}: TSettingsProps): ReactElement => {
 	const isGridView = cookieView === 'grid';
-	const handleViewChange = (): void => {
+	const handleViewChange = useCallback((): void => {
 		if (isGridView) {
 			setCookieView('list');
 			return;
 		}
 		setCookieView('grid');
-	};
+	}, [isGridView]);
 
 	let view: 'grid' | 'list' = 'list';
 	if (isGridView) {
 		view = 'grid';
 	}
 
-	return (
-		<WithSettingsContext.Provider
-			value={{
-				view,
-				handleViewChange
-			}}>
-			{children}
-		</WithSettingsContext.Provider>
-	);
+	const value = useMemo(() => ({view, handleViewChange}), [view, handleViewChange]);
+
+	return <WithSettingsContext.Provider value={value}>{children}</WithSettingsContext.Provider>;
 };
 
 export const useSettings = (): TWithSettings => {
