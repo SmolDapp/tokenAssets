@@ -10,7 +10,7 @@ The CDN supports SVG and PNGs (small, larger).
 Currently the API/CDN endpoint is at:
 
 ```
-https://assets.smold.app/api/token/[chainID]/[tokenAddress]/[fileName].[ext]
+https://assets.smold.app/token/[chainID]/[tokenAddress]/[fileName].[ext]
 ```
 
 ## Usage
