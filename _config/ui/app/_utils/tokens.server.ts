@@ -1,27 +1,29 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import {CHAINS} from '@utils/constants';
+
 import type {TToken} from '@utils/types';
 
 const GAS_TOKEN = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
 const chainTokensCache = new Map<string, TToken[]>();
 
-// chainID reaches this from route params, so it is user-controlled: reject anything that is not a
-// plain alphanumeric chain identifier before it becomes part of a filesystem path (path traversal).
-const CHAIN_ID_RE = /^[0-9a-zA-Z]{1,32}$/;
-
 export function readChainTokens(chainID: string): TToken[] {
-	if (!CHAIN_ID_RE.test(chainID)) {
+	// chainID reaches this from route params, so it is user-controlled: resolve it through the
+	// CHAINS allowlist and use the canonical id, so no user-derived string ever becomes part of
+	// a filesystem path (path traversal).
+	const knownChainID = CHAINS.find(chain => chain.id === chainID)?.id;
+	if (!knownChainID) {
 		return [];
 	}
-	const cached = chainTokensCache.get(chainID);
+	const cached = chainTokensCache.get(knownChainID);
 	if (cached) {
 		return cached;
 	}
 	try {
-		const file = path.join(process.cwd(), 'public', 'data', 'tokens', `${chainID}.json`);
+		const file = path.join(process.cwd(), 'public', 'data', 'tokens', `${knownChainID}.json`);
 		const tokens = JSON.parse(fs.readFileSync(file, 'utf8')) as TToken[];
-		chainTokensCache.set(chainID, tokens);
+		chainTokensCache.set(knownChainID, tokens);
 		return tokens;
 	} catch {
 		return [];
