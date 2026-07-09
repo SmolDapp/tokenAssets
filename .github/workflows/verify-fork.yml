@@ -66,7 +66,7 @@ jobs:
                   while IFS= read -r svg; do
                     [ -n "$svg" ] || continue
                     [ -f "$svg" ] || continue
-                    if grep -qiE "$SVG_FORBIDDEN_PATTERN" "$svg"; then
+                    if grep -qziE "$SVG_FORBIDDEN_PATTERN" "$svg"; then
                       echo "Error: $svg contains a base64 image, external link or script"
                       FAILED=1
                     fi
@@ -83,7 +83,7 @@ jobs:
                   FAILED=0
 
                   while IFS= read -r -d '' svg; do
-                    if grep -qiE "$SVG_FORBIDDEN_PATTERN" "$svg"; then
+                    if grep -qziE "$SVG_FORBIDDEN_PATTERN" "$svg"; then
                       echo "Error: $svg contains a base64 image, external link or script"
                       FAILED=1
                     fi
@@ -132,7 +132,7 @@ jobs:
                       fi
                     done
                     if [ -f "$dir/logo.svg" ]; then
-                      if grep -qiE "$SVG_FORBIDDEN_PATTERN" "$dir/logo.svg"; then
+                      if grep -qziE "$SVG_FORBIDDEN_PATTERN" "$dir/logo.svg"; then
                         echo "Error: $dir/logo.svg contains a base64 image, external link or script"
                         FAILED=1
                       fi
@@ -157,6 +157,19 @@ jobs:
                       *) echo "Error: $f is not allowed (chain folders: logo.svg, logo-32.png, logo-128.png, logo-alt.*)"; FAILED=1 ;;
                     esac
                   done < <(find ./chains -mindepth 2 -type f -print0)
+                  # Files ABOVE the token/chain folder depth: only the generated indexes belong there.
+                  while IFS= read -r -d '' f; do
+                    case "$(basename "$f")" in
+                      list.json|_info.json) ;;
+                      *) echo "Error: $f is not allowed above token folders (only list.json/_info.json)"; FAILED=1 ;;
+                    esac
+                  done < <(find ./tokens -maxdepth 2 -type f -print0)
+                  while IFS= read -r -d '' f; do
+                    case "$(basename "$f")" in
+                      list.json|_info.json) ;;
+                      *) echo "Error: $f is not allowed at the chains root (only list.json/_info.json)"; FAILED=1 ;;
+                    esac
+                  done < <(find ./chains -maxdepth 1 -type f -print0)
                   if [ $FAILED -eq 1 ]; then exit 1; fi
                   echo "Ok: only allowed files in token/chain folders"
 

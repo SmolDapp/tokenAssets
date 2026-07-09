@@ -18,9 +18,7 @@ export function MenuButtons(): ReactElement {
 	return (
 		<div className={'flex gap-4 max-md:items-center max-md:pb-4'}>
 			<div className={'flex items-center gap-4'}>
-				<Link
-					href={'/'}
-					aria-label={'Token Assets home'}>
+				<Link href={'/'} aria-label={'Token Assets home'}>
 					<BrandLogo className={'transition-colors hover:bg-primary-light'} />
 				</Link>
 				<div className={'flex flex-col'}>
@@ -36,15 +34,10 @@ export function MenuButtons(): ReactElement {
 				</div>
 			</div>
 			<div className={'ml-auto md:hidden'}>
-				<button
-					type={'button'}
-					onClick={() => setIsOpen(true)}>
-					<Grid className={'size-6 min-h-6 min-w-6 text-white'} />
+				<button type={'button'} onClick={() => setIsOpen(true)} aria-label={'Open menu'}>
+					<Grid aria-hidden={'true'} className={'size-6 min-h-6 min-w-6 text-white'} />
 				</button>
-				<MobileMenuDrawer
-					isOpen={isOpen}
-					onClose={() => setIsOpen(false)}
-				/>
+				<MobileMenuDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
 			</div>
 		</div>
 	);

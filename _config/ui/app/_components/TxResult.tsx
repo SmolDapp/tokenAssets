@@ -6,7 +6,7 @@ import type {ReactElement} from 'react';
 type TProps = {
 	state: 'success' | 'error';
 	message: ReactElement;
-	action: ReactElement;
+	action?: ReactElement;
 };
 
 export const TxResult = ({state, message, action}: TProps): ReactElement => {
@@ -22,7 +22,7 @@ export const TxResult = ({state, message, action}: TProps): ReactElement => {
 
 				<div className={'flex w-full max-w-[600px] flex-col items-start gap-4 sm:flex-row sm:gap-8'}>
 					<div className={'max-w-[400px] flex-1'}>{message}</div>
-					<div className={'max-w-[400px] whitespace-pre break-all'}>{action}</div>
+					{action && <div className={'max-w-[400px] whitespace-pre break-all'}>{action}</div>}
 				</div>
 			</div>
 		</div>

@@ -94,21 +94,26 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 	// Auto-read name/symbol/decimals whenever the address or chain changes. Debounced and race-safe:
 	// a newer address/chain cancels the in-flight result so stale metadata never lands.
 	useEffect(() => {
-		setName('');
-		setSymbol('');
-		setDecimals('');
 		if (!isValidAddress(chainID, address)) {
+			setName('');
+			setSymbol('');
+			setDecimals('');
 			setMetaStatus('idle');
 			return;
 		}
 		if (!canFetchOnchain(chainID)) {
+			// No browser-reachable RPC for this chain: the metadata fields become manual inputs,
+			// so leave whatever is typed (or stash-restored after the OAuth redirect) untouched.
 			setMetaStatus('unsupported');
 			return;
 		}
+		setName('');
+		setSymbol('');
+		setDecimals('');
 		let cancelled = false;
 		setMetaStatus('loading');
 		const timer = setTimeout(() => {
-			fetchOnchainToken(chainID, address)
+			fetchOnchainToken(chainID, address.trim())
 				.then(token => {
 					if (cancelled) {
 						return;
@@ -203,6 +208,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 			setAddress(stash.address || '');
 			setSvgText(stash.svgText || '');
 			setSvgFileName(stash.svgFileName || '');
+			setName(stash.name || '');
+			setSymbol(stash.symbol || '');
+			setDecimals(stash.decimals || '');
 			setDescription(stash.description || '');
 			setWebsite(stash.website || '');
 			setTagsRaw(stash.tagsRaw || '');
@@ -237,9 +245,22 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 	}
 
 	function stashForm(): void {
+		// name/symbol/decimals are included for manual-entry chains (no RPC): on supported chains
+		// the on-chain fetch simply overwrites them after the restore.
 		sessionStorage.setItem(
 			STASH_KEY,
-			JSON.stringify({chainID, address, svgText, svgFileName, description, website, tagsRaw})
+			JSON.stringify({
+				chainID,
+				address,
+				svgText,
+				svgFileName,
+				name,
+				symbol,
+				decimals,
+				description,
+				website,
+				tagsRaw
+			})
 		);
 	}
 
@@ -265,7 +286,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				headers: {'content-type': 'application/json'},
 				body: JSON.stringify({
 					chainID,
-					address,
+					address: address.trim(),
 					svg: svgText,
 					name,
 					symbol,
@@ -307,25 +328,33 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 		setSubmitError('');
 	}
 
+	// Chains without a browser-reachable RPC fall back to manual metadata entry: the same
+	// name/symbol/decimals state, but typed by the user instead of read from the contract.
+	const isManualMeta = metaStatus === 'unsupported';
+	const hasManualMeta = name.trim().length > 0 && symbol.trim().length > 0 && decimals.trim().length > 0;
+	const metaReady = metaStatus === 'ready' || (isManualMeta && hasManualMeta);
+
 	// The submit button is the single status surface (fixed size → no layout shift):
 	// disabled until everything is present, a spinner while reading the chain or opening the PR.
-	const canSubmit = metaStatus === 'ready' && !existingToken && svgText.length > 0 && website.trim().length > 0;
+	const canSubmit = metaReady && !existingToken && svgText.length > 0 && website.trim().length > 0;
 	const isBusy = isSubmitting || metaStatus === 'loading';
 
 	let submitContent: ReactNode = 'Open pull request →';
 	if (isBusy) {
 		submitContent = (
-			<span className={'size-4 animate-spin rounded-full border-2 border-primary border-t-transparent'} />
+			<span className={'size-4 animate-spin rounded-full border-2 border-primary border-t-transparent'}>
+				<span className={'sr-only'}>{isSubmitting ? 'Submitting…' : 'Reading token metadata…'}</span>
+			</span>
 		);
 	} else if (metaStatus === 'error') {
 		submitContent = 'Token not readable';
-	} else if (metaStatus === 'unsupported') {
-		submitContent = 'Chain not supported';
-	} else if (metaStatus === 'ready' && existingToken) {
+	} else if ((metaStatus === 'ready' || isManualMeta) && existingToken) {
 		submitContent = 'Token already exists';
-	} else if (metaStatus === 'ready' && !svgText) {
+	} else if (isManualMeta && !hasManualMeta) {
+		submitContent = 'Fill in the token details';
+	} else if (metaReady && !svgText) {
 		submitContent = 'Add a logo';
-	} else if (metaStatus === 'ready' && !website.trim()) {
+	} else if (metaReady && !website.trim()) {
 		submitContent = 'Add a project link';
 	} else if (!signedIn) {
 		submitContent = 'Sign in with GitHub →';
@@ -370,6 +399,44 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 						className={inputClassName}
 					/>
 				</Field>
+
+				{isManualMeta && (
+					<div className={'space-y-4'}>
+						<p className={'font-mono text-white/50 text-xxs leading-relaxed'}>
+							{'This chain has no public RPC we can read from — fill in the token metadata manually.'}
+						</p>
+						<div className={'grid grid-cols-2 gap-4'}>
+							<Field label={'Name'} htmlFor={'submit-name'}>
+								<Input
+									id={'submit-name'}
+									value={name}
+									onChange={event => setName(event.target.value)}
+									placeholder={'Token name'}
+									className={inputClassName}
+								/>
+							</Field>
+							<Field label={'Symbol'} htmlFor={'submit-symbol'}>
+								<Input
+									id={'submit-symbol'}
+									value={symbol}
+									onChange={event => setSymbol(event.target.value)}
+									placeholder={'TKN'}
+									className={inputClassName}
+								/>
+							</Field>
+						</div>
+						<Field label={'Decimals'} htmlFor={'submit-decimals'}>
+							<Input
+								id={'submit-decimals'}
+								value={decimals}
+								onChange={event => setDecimals(event.target.value)}
+								placeholder={'18'}
+								inputMode={'numeric'}
+								className={inputClassName}
+							/>
+						</Field>
+					</div>
+				)}
 
 				<Field label={'Logo (SVG)'}>
 					<div className={'space-y-2'}>
@@ -468,7 +535,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				</div>
 
 				{errors.length > 0 && (
-					<div className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
+					<div role={'alert'} className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
 						{errors.map(error => (
 							<p key={`${error.field}-${error.message}`} className={'font-mono text-error text-xs'}>
 								{`• ${error.message}`}
@@ -477,7 +544,11 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 					</div>
 				)}
 
-				{submitError && <p className={'font-mono text-error text-xs'}>{submitError}</p>}
+				{submitError && (
+					<p role={'alert'} className={'font-mono text-error text-xs'}>
+						{submitError}
+					</p>
+				)}
 
 				<Button
 					type={'button'}

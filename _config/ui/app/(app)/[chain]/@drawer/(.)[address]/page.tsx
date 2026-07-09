@@ -14,8 +14,24 @@ export default function InterceptedTokenDrawer({params}: {params: Promise<{addre
 	const {address} = use(params);
 	const router = useRouter();
 	const {chain} = useChain();
-	const {findToken} = useTokens(chain.id);
+	const {findToken, isLoading, hasError} = useTokens(chain.id);
 	const [isOpen, setIsOpen] = useState(true);
+
+	// Once the chain list has loaded (or failed), a missing token must not leave the drawer
+	// spinning forever — show an honest state the user can dismiss.
+	let emptyState: ReactElement | undefined;
+	if (!isLoading && (hasError || !findToken(address))) {
+		emptyState = (
+			<div className={'flex h-[400px] w-full flex-col items-center justify-center gap-2 p-6 text-center'}>
+				<p className={'font-mono font-semibold text-black text-sm uppercase'}>
+					{hasError ? 'Could not load token data' : 'Token not found on this chain'}
+				</p>
+				<p className={'font-mono text-subtle text-xs'}>
+					{hasError ? 'Check your connection and try again.' : 'Verify the contract address and chain.'}
+				</p>
+			</div>
+		);
+	}
 
 	return (
 		<TokenDrawerWrapper
@@ -23,6 +39,7 @@ export default function InterceptedTokenDrawer({params}: {params: Promise<{addre
 			isOpen={isOpen}
 			onClose={() => setIsOpen(false)}
 			onClosed={() => router.back()}
+			emptyState={emptyState}
 		/>
 	);
 }

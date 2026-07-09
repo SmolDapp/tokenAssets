@@ -60,33 +60,25 @@ export async function fetchOnchainToken(chainID: string, address: string): Promi
 	// Cap each RPC call so a hung/slow public endpoint surfaces as an error (→ metaStatus 'error')
 	// instead of leaving the submit flow spinning indefinitely.
 	const client = createPublicClient({transport: http(rpcURL, {timeout: 10_000})});
-	const contract = {address: getAddress(address), abi: erc20Abi} as const;
+	const checksummed = getAddress(address);
+	const contract = {address: checksummed, abi: erc20Abi} as const;
 
-	const decimals = await client.readContract({...contract, functionName: 'decimals'});
+	// The three reads are independent — one round-trip of latency instead of three. Each
+	// string read keeps its own bytes32 fallback for legacy tokens (MKR and friends).
+	const readStringWithBytes32Fallback = async (functionName: 'name' | 'symbol'): Promise<string> => {
+		try {
+			return await client.readContract({...contract, functionName});
+		} catch {
+			const raw = await client.readContract({address: checksummed, abi: erc20Bytes32Abi, functionName});
+			return decodeBytes32(raw as `0x${string}`);
+		}
+	};
 
-	let name = '';
-	try {
-		name = await client.readContract({...contract, functionName: 'name'});
-	} catch {
-		const raw = await client.readContract({
-			address: getAddress(address),
-			abi: erc20Bytes32Abi,
-			functionName: 'name'
-		});
-		name = decodeBytes32(raw as `0x${string}`);
-	}
-
-	let symbol = '';
-	try {
-		symbol = await client.readContract({...contract, functionName: 'symbol'});
-	} catch {
-		const raw = await client.readContract({
-			address: getAddress(address),
-			abi: erc20Bytes32Abi,
-			functionName: 'symbol'
-		});
-		symbol = decodeBytes32(raw as `0x${string}`);
-	}
+	const [decimals, name, symbol] = await Promise.all([
+		client.readContract({...contract, functionName: 'decimals'}),
+		readStringWithBytes32Fallback('name'),
+		readStringWithBytes32Fallback('symbol')
+	]);
 
 	return {name, symbol, decimals: Number(decimals)};
 }

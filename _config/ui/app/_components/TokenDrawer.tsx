@@ -23,6 +23,9 @@ type TTokenDrawerProps = {
 	onClose: () => void;
 	onClosed?: () => void;
 	isOpen: boolean;
+	// Rendered instead of the loading spinner when the token list has finished loading but the
+	// requested token is not in it — without this a bad address would spin forever.
+	emptyState?: ReactElement;
 };
 
 function TokenDrawer({token}: {token: TToken}): ReactElement {
@@ -55,8 +58,8 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 
 					<DrawerHeader className={'flex justify-end p-0'}>
 						<DrawerClose asChild>
-							<Button className={'text-black'} variant={'ghost'} size={'icon'}>
-								<Cross className={'size-4'} />
+							<Button aria-label={'Close'} className={'text-black'} variant={'ghost'} size={'icon'}>
+								<Cross aria-hidden={'true'} className={'size-4'} />
 							</Button>
 						</DrawerClose>
 					</DrawerHeader>
@@ -88,10 +91,11 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 										key={file}
 										type={'button'}
 										onClick={() => setSelectedFile(file)}
-										disabled={selectedFile === file}
-										className={
-											'w-fit rounded-sm bg-subtle px-1 py-px text-white text-xxs leading-[14px] transition-colors disabled:bg-primary'
-										}>
+										aria-pressed={selectedFile === file}
+										className={cn(
+											'w-fit rounded-sm px-1 py-px text-white text-xxs leading-[14px] transition-colors',
+											selectedFile === file ? 'bg-primary' : 'bg-black/60 hover:bg-black/80'
+										)}>
 										{label}
 									</button>
 								))}
@@ -130,7 +134,13 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 	);
 }
 
-export function TokenDrawerWrapper({token, onClose, onClosed, isOpen}: TTokenDrawerProps): ReactElement | null {
+export function TokenDrawerWrapper({
+	token,
+	onClose,
+	onClosed,
+	isOpen,
+	emptyState
+}: TTokenDrawerProps): ReactElement | null {
 	return (
 		<Drawer
 			modal={true}
@@ -154,10 +164,12 @@ export function TokenDrawerWrapper({token, onClose, onClosed, isOpen}: TTokenDra
 				{token ? (
 					<TokenDrawer token={token} />
 				) : (
-					<div className={'flex h-[400px] w-full items-center justify-center'}>
-						<DrawerTitle className={'sr-only'}>{'Loading...'}</DrawerTitle>
-						<Spinner />
-					</div>
+					(emptyState ?? (
+						<div className={'flex h-[400px] w-full items-center justify-center'}>
+							<DrawerTitle className={'sr-only'}>{'Loading...'}</DrawerTitle>
+							<Spinner />
+						</div>
+					))
 				)}
 			</DrawerContent>
 		</Drawer>

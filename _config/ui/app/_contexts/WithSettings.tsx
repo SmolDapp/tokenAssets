@@ -1,8 +1,6 @@
 'use client';
 
-import {createContext, useCallback, useContext, useMemo} from 'react';
-
-import {setCookieView} from './WithSettings.server';
+import {createContext, useCallback, useContext, useMemo, useState} from 'react';
 
 import type {ReactElement, ReactNode} from 'react';
 
@@ -21,20 +19,19 @@ type TSettingsProps = {
 	cookieView: string;
 };
 
+// The view preference is plain UI state: seeded from the cookie the server read (so SSR and
+// hydration agree), flipped instantly in client state, and persisted with a client-side cookie
+// write — no server action round-trip or server re-render per toggle.
 export const WithSettings = ({children, cookieView}: TSettingsProps): ReactElement => {
-	const isGridView = cookieView === 'grid';
-	const handleViewChange = useCallback((): void => {
-		if (isGridView) {
-			setCookieView('list');
-			return;
-		}
-		setCookieView('grid');
-	}, [isGridView]);
+	const [view, setView] = useState<'grid' | 'list'>(cookieView === 'list' ? 'list' : 'grid');
 
-	let view: 'grid' | 'list' = 'list';
-	if (isGridView) {
-		view = 'grid';
-	}
+	const handleViewChange = useCallback((): void => {
+		setView(current => {
+			const next = current === 'grid' ? 'list' : 'grid';
+			document.cookie = `view=${next}; path=/; max-age=31536000; samesite=lax`;
+			return next;
+		});
+	}, []);
 
 	const value = useMemo(() => ({view, handleViewChange}), [view, handleViewChange]);
 
@@ -42,9 +39,5 @@ export const WithSettings = ({children, cookieView}: TSettingsProps): ReactEleme
 };
 
 export const useSettings = (): TWithSettings => {
-	const ctx = useContext(WithSettingsContext);
-	if (!ctx) {
-		throw new Error('WithSettingsContext not found');
-	}
-	return ctx;
+	return useContext(WithSettingsContext);
 };

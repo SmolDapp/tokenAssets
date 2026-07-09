@@ -26,25 +26,28 @@ function loadSearchIndex(): Promise<TSearchEntry[]> {
 			.then(entries => {
 				cachedIndex = entries;
 				return entries;
+			})
+			.catch(error => {
+				// Clear the memo so the next palette open retries, instead of one transient
+				// failure disabling global search for the whole session.
+				indexPromise = null;
+				throw error;
 			});
 	}
 	return indexPromise;
 }
 
-export function useGlobalSearch(query: string, enabled: boolean): {results: TSearchEntry[]; isLoading: boolean} {
+export function useGlobalSearch(query: string, enabled: boolean): {results: TSearchEntry[]} {
 	const [entries, setEntries] = useState<TSearchEntry[]>(() => cachedIndex || []);
-	const [isLoading, setIsLoading] = useState(() => cachedIndex === null);
 
 	useEffect(() => {
 		if (!enabled) {
 			return;
 		}
 		// If another instance already populated the shared index while this one was disabled, adopt it
-		// instead of returning early — otherwise this instance stays stuck on its initial empty/loading
-		// state forever.
+		// instead of returning early — otherwise this instance stays stuck on its initial empty state.
 		if (cachedIndex) {
 			setEntries(cachedIndex);
-			setIsLoading(false);
 			return;
 		}
 		let isCancelled = false;
@@ -52,14 +55,10 @@ export function useGlobalSearch(query: string, enabled: boolean): {results: TSea
 			.then(loaded => {
 				if (!isCancelled) {
 					setEntries(loaded);
-					setIsLoading(false);
 				}
 			})
 			.catch(error => {
 				console.error(error);
-				if (!isCancelled) {
-					setIsLoading(false);
-				}
 			});
 		return () => {
 			isCancelled = true;
@@ -85,5 +84,5 @@ export function useGlobalSearch(query: string, enabled: boolean): {results: TSea
 			.map(item => item.entry);
 	}, [entries, query]);
 
-	return {results, isLoading};
+	return {results};
 }

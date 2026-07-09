@@ -182,8 +182,17 @@ export async function POST(request: Request): Promise<Response> {
 		return NextResponse.json({prUrl: url});
 	} catch (error) {
 		console.error('createPullRequest failed', error);
+		// An expired/revoked OAuth token surfaces as 401 (or an OAuth-restricted 403) from GitHub:
+		// tell the user to re-authenticate instead of blaming the server.
+		const status = (error as {status?: number}).status;
+		if (status === 401 || status === 403) {
+			return NextResponse.json(
+				{error: 'Your GitHub authorization is no longer valid — sign in with GitHub again.'},
+				{status: 401}
+			);
+		}
 		return NextResponse.json(
-			{error: 'Could not open the pull request — the server token may lack access to the repository.'},
+			{error: 'Could not open the pull request — GitHub rejected the request.'},
 			{status: 502}
 		);
 	}

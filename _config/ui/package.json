@@ -19,7 +19,6 @@
 		"@resvg/resvg-js": "^2.6.2",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"framer-motion": "^12.4.3",
 		"gill": "^0.14.0",
 		"lucide-react": "^0.474.0",
 		"next": "15.2.8",

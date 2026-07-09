@@ -1,7 +1,9 @@
 import {cn} from '@components/lib/utils';
 import {Input} from '@components/ui/input';
+import {useChain} from '@contexts/WithChain';
 import Cross from '@icons/cross.svg';
 import SearchIcon from '@icons/search.svg';
+import {withSearch} from '@utils/helpers';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {useDebounceValue} from 'usehooks-ts';
@@ -11,6 +13,7 @@ import type {ReactElement} from 'react';
 export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactElement {
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const {chain} = useChain();
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const currentSearch = searchParams.get('search') || '';
@@ -18,8 +21,10 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	const [debouncedValue] = useDebounceValue(inputValue, 300);
 
 	// Push the debounced query to the URL. Fires only on the user's own input (not on route
-	// changes), and reads the live URL, so a search/token set elsewhere (the command palette,
-	// or a cross-chain navigation) is preserved instead of clobbered.
+	// changes), and reads the live URL, so a search set elsewhere (the command palette, or a
+	// cross-chain navigation) is preserved instead of clobbered. Always targets the chain LIST
+	// path: pushing the raw pathname from a token detail page would re-match the @drawer
+	// interceptor and pop a drawer of the current token instead of searching.
 	useEffect(() => {
 		const params = new URLSearchParams(window.location.search);
 		if ((params.get('search') || '') === debouncedValue) {
@@ -30,8 +35,8 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 		} else {
 			params.delete('search');
 		}
-		router.push(`${window.location.pathname}?${params.toString()}`, {scroll: false});
-	}, [debouncedValue, router]);
+		router.push(withSearch(`/${chain.slug}`, params.toString()), {scroll: false});
+	}, [debouncedValue, router, chain.slug]);
 
 	// Mirror an externally-set search (e.g. the command palette) into the field, unless the user is typing here.
 	useEffect(() => {
@@ -75,12 +80,15 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 				<button
 					type={'button'}
 					onClick={handleClearSearch}
+					aria-label={'Clear search'}
+					aria-hidden={!inputValue}
+					tabIndex={inputValue ? 0 : -1}
 					className={cn(
 						'-translate-y-1/2 absolute top-1/2 right-3 text-white md:right-[80px]',
 						'transition-opacity',
-						inputValue ? 'opacity-100' : 'opacity-0'
+						inputValue ? 'opacity-100' : 'pointer-events-none opacity-0'
 					)}>
-					<Cross className={'size-4'} />
+					<Cross aria-hidden={'true'} className={'size-4'} />
 				</button>
 				<button
 					type={'button'}

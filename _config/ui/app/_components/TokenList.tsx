@@ -68,7 +68,7 @@ export function TokenList(): ReactElement {
 	const {view} = useSettings();
 
 	const searchQuery = searchParams.get('search') || '';
-	const {tokens, isLoading, hasNextPage, fetchNextPage} = useTokens(chain.id, searchQuery);
+	const {tokens, isLoading, hasError, hasNextPage, fetchNextPage} = useTokens(chain.id, searchQuery);
 
 	// Keep a live ref to searchParams so handleTokenSelect stays referentially stable
 	// and selecting a token does not re-render the whole grid (which reloads logos).
@@ -88,7 +88,20 @@ export function TokenList(): ReactElement {
 
 	return (
 		<div className={'w-full'}>
-			{!isLoading && tokens.length === 0 && (
+			{!isLoading && hasError && (
+				<TxResult
+					state={'error'}
+					message={
+						<div>
+							<p className={'font-semibold text-lg text-primary'}>{'COULD NOT LOAD TOKENS.'}</p>
+							<p className={'text-sm text-subtle'}>
+								{'A network error prevented loading the token list. Reload the page to retry.'}
+							</p>
+						</div>
+					}
+				/>
+			)}
+			{!isLoading && !hasError && tokens.length === 0 && (
 				<TxResult
 					state={'error'}
 					message={
@@ -100,11 +113,11 @@ export function TokenList(): ReactElement {
 						</div>
 					}
 					action={
-						<Link href={GITHUB_URI} target={'_blank'} rel={'noopener noreferrer'}>
-							<Button className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
+						<Button asChild className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
+							<Link href={GITHUB_URI} target={'_blank'} rel={'noopener noreferrer'}>
 								{'ADD TOKEN LOGO'}
-							</Button>
-						</Link>
+							</Link>
+						</Button>
 					}
 				/>
 			)}

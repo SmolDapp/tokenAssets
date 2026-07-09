@@ -31,10 +31,7 @@ type THeroPageProps = {
 export function HeroPage({tagline, heading, description, stats, leftExtra, children}: THeroPageProps): ReactElement {
 	return (
 		<main className={'relative flex min-h-screen w-full flex-col overflow-hidden bg-primary'}>
-			<div
-				aria-hidden={'true'}
-				className={dotGridClassName}
-			/>
+			<div aria-hidden={'true'} className={dotGridClassName} />
 			<div className={'relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 py-8 md:px-10 md:py-10'}>
 				<BrandMark />
 
@@ -52,10 +49,7 @@ export function HeroPage({tagline, heading, description, stats, leftExtra, child
 							{stats.map((stat, index) => (
 								<Fragment key={stat.label}>
 									{index > 0 && <div className={'w-px self-stretch bg-white/15'} />}
-									<Stat
-										value={stat.value}
-										label={stat.label}
-									/>
+									<Stat value={stat.value} label={stat.label} />
 								</Fragment>
 							))}
 						</div>

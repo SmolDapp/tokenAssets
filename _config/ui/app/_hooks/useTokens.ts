@@ -16,7 +16,9 @@ function byMcapDesc(first: TToken, second: TToken): number {
 }
 
 // Default (no-search) order, two deterministic tiers:
-//  1. Recently added tokens (< 1 month, flagged "new" in the UI), newest first.
+//  1. Recently added tokens (< 1 month, flagged "new" in the UI), newest first; market cap breaks
+//     ties so a bulk import (hundreds of tokens sharing one addedAt) still surfaces recognizable
+//     tokens first instead of burying the ranking alphabetically for a month.
 //  2. Everything else by market cap, biggest first; tokens without a market cap fall to
 //     the bottom, sorted alphabetically for a stable order.
 function rankTokens(tokens: TToken[]): TToken[] {
@@ -30,7 +32,7 @@ function rankTokens(tokens: TToken[]): TToken[] {
 		}
 	}
 
-	recent.sort((first, second) => (second.addedAt || 0) - (first.addedAt || 0));
+	recent.sort((first, second) => (second.addedAt || 0) - (first.addedAt || 0) || byMcapDesc(first, second));
 	rest.sort((first, second) => {
 		const mcapDiff = byMcapDesc(first, second);
 		if (mcapDiff !== 0) {
@@ -44,8 +46,8 @@ function rankTokens(tokens: TToken[]): TToken[] {
 
 type TUseTokensResult = {
 	tokens: TToken[];
-	totalCount: number;
 	isLoading: boolean;
+	hasError: boolean;
 	hasNextPage: boolean;
 	fetchNextPage: () => void;
 	findToken: (address: string) => TToken | undefined;
@@ -54,6 +56,7 @@ type TUseTokensResult = {
 export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 	const [allTokens, setAllTokens] = useState<TToken[]>(() => tokensCache.get(chainID) || []);
 	const [isLoading, setIsLoading] = useState(() => !tokensCache.has(chainID));
+	const [hasError, setHasError] = useState(false);
 	const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
 	useEffect(() => {
@@ -70,11 +73,13 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 		if (cached) {
 			setAllTokens(cached);
 			setIsLoading(false);
+			setHasError(false);
 			return;
 		}
 
 		let isCancelled = false;
 		setIsLoading(true);
+		setHasError(false);
 		setAllTokens([]);
 
 		fetch(`/data/tokens/${knownChainID}.json`)
@@ -95,6 +100,7 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 				console.error(error);
 				if (!isCancelled) {
 					setAllTokens([]);
+					setHasError(true);
 					setIsLoading(false);
 				}
 			});
@@ -147,8 +153,8 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 
 	return {
 		tokens: visibleTokens,
-		totalCount: filteredTokens.length,
 		isLoading,
+		hasError,
 		hasNextPage: visibleCount < filteredTokens.length,
 		fetchNextPage,
 		findToken

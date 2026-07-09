@@ -4,17 +4,21 @@ import {Drawer, DrawerContent, DrawerDescription, DrawerTitle} from '@components
 import {useChain} from '@contexts/WithChain';
 import Cross from '@icons/cross.svg';
 import {CHAINS, GITHUB_URI} from '@utils/constants';
+import {withSearch} from '@utils/helpers';
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 
 import type {ReactElement} from 'react';
 
 export function MobileMenuDrawer({isOpen, onClose}: {isOpen: boolean; onClose: () => void}): ReactElement {
 	const {chain} = useChain();
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
+	// Same contract as Navbar's chain switch: land on the bare chain list but keep the active
+	// search so the destination stays filtered.
 	const handleChainSelect = (slug: string): void => {
-		router.replace(`/${slug}`, {scroll: false});
+		router.replace(withSearch(`/${slug}`, searchParams.toString()), {scroll: false});
 		onClose();
 	};
 
@@ -39,24 +43,22 @@ export function MobileMenuDrawer({isOpen, onClose}: {isOpen: boolean; onClose: (
 						<button
 							type={'button'}
 							onClick={onClose}
+							aria-label={'Close menu'}
 							className={'absolute top-0 right-0'}>
-							<Cross className={'size-4 text-white'} />
+							<Cross aria-hidden={'true'} className={'size-4 text-white'} />
 						</button>
 					</div>
 					<Link
 						href={GITHUB_URI}
 						target={'_blank'}
-						rel={'noopener noreferrer'}>
-						<button
-							type={'button'}
-							className={cn(
-								'flex h-10 w-full items-center justify-center rounded-sm p-3',
-								'text-primary text-xs uppercase',
-								'bg-white transition-colors hover:bg-border-gray',
-								'border border-transparent'
-							)}>
-							<p className={'truncate text-sm'}>{'CONTRIBUTE ON GITHUB'}</p>
-						</button>
+						rel={'noopener noreferrer'}
+						className={cn(
+							'flex h-10 w-full items-center justify-center rounded-sm p-3',
+							'text-primary text-xs uppercase',
+							'bg-white transition-colors hover:bg-border-gray',
+							'border border-transparent'
+						)}>
+						<p className={'truncate text-sm'}>{'CONTRIBUTE ON GITHUB'}</p>
 					</Link>
 					<div className={'max-h-[40vh] overflow-y-auto'}>
 						<div className={'flex flex-col gap-1'}>

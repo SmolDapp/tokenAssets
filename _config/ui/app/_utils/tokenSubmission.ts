@@ -65,11 +65,14 @@ export function isNonEvmChain(chainID: string): boolean {
 }
 
 // EVM folders are lowercased; non-EVM (Solana) addresses are case-sensitive and kept verbatim.
+// Trimmed first so a pasted address with stray whitespace maps to the same folder the
+// validation saw, instead of leaking the raw string into the path.
 export function toFolderAddress(address: string): string {
-	if (address.startsWith('0x')) {
-		return address.toLowerCase();
+	const trimmed = address.trim();
+	if (trimmed.startsWith('0x')) {
+		return trimmed.toLowerCase();
 	}
-	return address.trim();
+	return trimmed;
 }
 
 export function parseTags(raw: string): string[] {
@@ -95,6 +98,10 @@ export function validateSubmission(input: TSubmissionInput): TValidationError[] 
 	}
 	if (!input.svgText.includes('<svg')) {
 		errors.push({field: 'svg', message: 'Upload the token logo as an SVG file'});
+	} else if (input.svgText.length > 153_600) {
+		// Mirrors the repo CI's 150KB cap so an oversized logo is rejected here (with instant
+		// feedback client-side, and before rasterization server-side) instead of in a doomed PR.
+		errors.push({field: 'svg', message: 'The SVG must be under 150KB'});
 	}
 
 	const name = input.name.trim();

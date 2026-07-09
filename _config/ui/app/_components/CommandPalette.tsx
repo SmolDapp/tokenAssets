@@ -24,11 +24,13 @@ type TCommandPaletteProps = {
 
 function ResultRow({
 	entry,
+	optionID,
 	isActive,
 	onSelect,
 	onHover
 }: {
 	entry: TSearchEntry;
+	optionID: string;
 	isActive: boolean;
 	onSelect: () => void;
 	onHover: () => void;
@@ -46,6 +48,11 @@ function ResultRow({
 		<button
 			ref={ref}
 			type={'button'}
+			id={optionID}
+			// biome-ignore lint/a11y/useSemanticElements: WAI-ARIA combobox options live outside a <select>; a native <option> cannot render this row.
+			role={'option'}
+			aria-selected={isActive}
+			tabIndex={-1}
 			onClick={onSelect}
 			onMouseEnter={onHover}
 			className={cn(
@@ -118,13 +125,20 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 			const href = withSearch(tokenPageURI(chain.slug, entry.address), params.toString());
 			// A same-chain pick is intercepted into the drawer; a cross-chain pick changes the
 			// [chain] segment, which the interceptor can't handle, so hard-navigate to the full page.
+			// When a drawer is already open (we are on a token URL), replace instead of push so the
+			// drawer flow only ever holds one history entry — one close returns to the list.
 			if (chain.id === currentChain.id) {
-				router.push(href, {scroll: false});
+				const onTokenPage = window.location.pathname.startsWith(`/${currentChain.slug}/`);
+				if (onTokenPage) {
+					router.replace(href, {scroll: false});
+				} else {
+					router.push(href, {scroll: false});
+				}
 			} else {
 				window.location.assign(href);
 			}
 		},
-		[router, onOpenChange, query, currentChain.id]
+		[router, onOpenChange, query, currentChain.id, currentChain.slug]
 	);
 
 	const handleInputKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>): void => {
@@ -172,24 +186,38 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 							}}
 							onKeyDown={handleInputKeyDown}
 							placeholder={'Search all chains or paste an address'}
+							role={'combobox'}
+							aria-expanded={results.length > 0}
+							aria-controls={'palette-results'}
+							aria-activedescendant={results.length > 0 ? `palette-option-${activeIndex}` : undefined}
+							aria-autocomplete={'list'}
 							className={
 								'h-14 w-full bg-transparent font-mono text-black text-sm outline-none placeholder:text-subtle'
 							}
 						/>
 					</div>
 
-					<div className={'scrollbar-none max-h-[56vh] overflow-y-auto'}>
+					<div
+						id={'palette-results'}
+						// biome-ignore lint/a11y/useSemanticElements: ARIA combobox pattern — the listbox is driven via aria-activedescendant, which a native <select> cannot do.
+						// biome-ignore lint/a11y/useFocusableInteractive: focus stays on the combobox input by design; the listbox itself must not be a tab stop.
+						role={'listbox'}
+						aria-label={'Search results'}
+						className={'scrollbar-none max-h-[56vh] overflow-y-auto'}>
 						{results.map((entry, index) => (
 							<ResultRow
 								key={`${entry.chainID}-${entry.address}`}
 								entry={entry}
+								optionID={`palette-option-${index}`}
 								isActive={index === activeIndex}
 								onSelect={() => goToEntry(entry)}
 								onHover={() => setActiveIndex(index)}
 							/>
 						))}
 						{showEmpty && (
-							<p className={'px-4 py-8 text-center font-mono text-sm text-subtle'}>
+							<p
+								aria-live={'polite'}
+								className={'px-4 py-8 text-center font-mono text-sm text-subtle'}>
 								{`No token matches "${trimmed}"`}
 							</p>
 						)}

@@ -1,13 +1,11 @@
 'use client';
 
+import {cn} from '@components/lib/utils';
 import {tokenLogoURI} from '@utils/helpers';
-import {motion} from 'framer-motion';
 import Image from 'next/image';
 
 import type {TLogoFile, TToken} from '@utils/types';
 import type {ReactElement} from 'react';
-
-const MotionImage = motion.create(Image);
 
 // The first tokens on screen load eagerly with high priority; the rest lazily.
 function loadingProps(index: number): {priority: boolean; fetchPriority: 'high' | 'low'; loading: 'eager' | 'lazy'} {
@@ -28,15 +26,14 @@ type TTokenLogoProps = {
 
 export function TokenLogo({token, chainID, size, className, index = 0, file}: TTokenLogoProps): ReactElement {
 	return (
-		<MotionImage
-			initial={{opacity: 0, scale: 0.9}}
-			animate={{opacity: 1, scale: 1}}
-			transition={{duration: 0.3}}
+		<Image
 			unoptimized
 			{...loadingProps(index)}
 			src={tokenLogoURI(chainID, token.address, file)}
 			alt={`${token.symbol || token.address} icon`}
-			className={className}
+			// The mount fade-in previously used framer-motion; a CSS enter animation
+			// (tailwindcss-animate) does the same without shipping the library.
+			className={cn('fade-in zoom-in-90 animate-in duration-300', className)}
 			width={size}
 			height={size}
 			onError={e => {

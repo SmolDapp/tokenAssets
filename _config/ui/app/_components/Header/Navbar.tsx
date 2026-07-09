@@ -10,35 +10,25 @@ import {CHAINS} from '@utils/constants';
 import {withSearch} from '@utils/helpers';
 import {useSettings} from 'app/_contexts/WithSettings';
 import {useRouter, useSearchParams} from 'next/navigation';
-import {useIsMounted} from 'usehooks-ts';
 
 import type {ReactElement} from 'react';
 
+// The view cookie is read server-side, so SSR and the client agree — no mount guard needed
+// (a callback-style mount check would never re-render, leaving list users a stale grid icon).
 function GridOrListIcon(): ReactElement {
 	const {view} = useSettings();
-	const isMounted = useIsMounted();
 
-	if (!isMounted() || view === 'grid') {
-		return (
-			<Grid
-				suppressHydrationWarning
-				className={'size-6 min-h-6 min-w-6'}
-			/>
-		);
+	if (view === 'grid') {
+		return <Grid className={'size-6 min-h-6 min-w-6'} />;
 	}
 
-	return (
-		<List
-			suppressHydrationWarning
-			className={'size-6 min-h-6 min-w-6'}
-		/>
-	);
+	return <List className={'size-6 min-h-6 min-w-6'} />;
 }
 
 export function NavBar(): ReactElement {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const {handleViewChange} = useSettings();
+	const {view, handleViewChange} = useSettings();
 	const {chain} = useChain();
 
 	// Switching chains always lands on the bare chain list (dropping any open token), keeping
@@ -56,18 +46,15 @@ export function NavBar(): ReactElement {
 		<div className={'flex items-center justify-end gap-2 max-md:hidden'}>
 			<button
 				type={'button'}
+				aria-label={view === 'grid' ? 'Switch to list view' : 'Switch to grid view'}
 				className={cn(
 					'flex size-10 items-center justify-center rounded-sm',
 					'bg-transparent text-white transition-colors hover:bg-primary-light'
 				)}
-				suppressHydrationWarning
 				onClick={handleViewChange}>
-				<p className={'sr-only'}>{'Toggle view'}</p>
 				<GridOrListIcon />
 			</button>
-			<Select
-				value={chain.id}
-				onValueChange={handleChainChange}>
+			<Select value={chain.id} onValueChange={handleChainChange}>
 				<SelectTrigger
 					className={cn(
 						'h-10 w-[154px] rounded-sm bg-transparent text-white uppercase transition-colors',
@@ -84,9 +71,7 @@ export function NavBar(): ReactElement {
 				</SelectTrigger>
 				<SelectContent className={'uppercase'}>
 					{CHAINS.map(network => (
-						<SelectItem
-							key={network.id}
-							value={network.id}>
+						<SelectItem key={network.id} value={network.id}>
 							<span className={'flex items-center gap-2'}>
 								<ChainLogo id={network.id} />
 								{network.name}
