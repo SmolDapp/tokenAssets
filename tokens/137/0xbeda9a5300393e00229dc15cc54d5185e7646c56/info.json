@@ -1,0 +1,5 @@
+{
+  "name": "AaveV3 WETH Lender",
+  "symbol": "ysWETH",
+  "decimals": 18
+}

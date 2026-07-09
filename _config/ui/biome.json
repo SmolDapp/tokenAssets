@@ -1,0 +1,132 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": {"enabled": false, "clientKind": "git", "useIgnoreFile": false},
+	"files": {"ignoreUnknown": false, "ignore": []},
+	"formatter": {
+		"enabled": true,
+		"useEditorconfig": true,
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"indentWidth": 4,
+		"lineEnding": "lf",
+		"lineWidth": 120,
+		"attributePosition": "auto",
+		"bracketSpacing": false
+	},
+	"organizeImports": {"enabled": true},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noNewSymbol": "error",
+				"noUndeclaredVariables": "error",
+				"noUnusedImports": "error",
+				"noUnusedVariables": "error",
+				"useArrayLiterals": "error",
+				"useHookAtTopLevel": "error"
+			},
+			"style": {
+				"useNodejsImportProtocol": "off",
+				"noNamespace": "error",
+				"useBlockStatements": "error",
+				"useConsistentArrayType": {
+					"level": "error",
+					"options": {"syntax": "shorthand"}
+				},
+				"useForOf": "error",
+				"useNamingConvention": {
+					"level": "error",
+					"options": {
+						"strictCase": false,
+						"conventions": [
+							{
+								"selector": {"kind": "function"},
+								"formats": ["camelCase", "PascalCase", "CONSTANT_CASE"]
+							},
+							{
+								"selector": {"kind": "const"},
+								"formats": ["camelCase", "PascalCase", "CONSTANT_CASE"]
+							},
+							{
+								"selector": {"kind": "objectLiteralProperty"},
+								"formats": ["camelCase", "PascalCase", "CONSTANT_CASE"]
+							},
+							{
+								"selector": {"kind": "interface"},
+								"match": "(?:I)(.*)",
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": {"kind": "typeParameter"},
+								"match": "(?:T)(.*)",
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": {"kind": "typeAlias"},
+								"match": "(?:T)(.*)",
+								"formats": ["PascalCase"]
+							},
+							{
+								"selector": {"kind": "variable"},
+								"match": "_?([^_]*)",
+								"formats": ["camelCase", "PascalCase"]
+							},
+							{
+								"selector": {"kind": "function"},
+								"match": "_?([^_]*)",
+								"formats": ["camelCase", "PascalCase", "CONSTANT_CASE"]
+							},
+							{
+								"selector": {"kind": "functionParameter"},
+								"match": "_?([^_]*)",
+								"formats": ["camelCase", "PascalCase", "CONSTANT_CASE"]
+							}
+						]
+					}
+				}
+			},
+			"suspicious": {
+				"noEmptyBlockStatements": "error"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"options": {
+						"attributes": ["classList", "className", "class"],
+						"functions": ["clsx", "cva", "tw", "cl", "cn"]
+					},
+					"level": "error",
+					"fix": "unsafe"
+				}
+			},
+			"performance": {
+				"noReExportAll": "error",
+				"noBarrelFile": "error"
+			}
+		},
+		"ignore": ["ipfs/*", "**/sw.js", "**/workbox*"]
+	},
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "single",
+			"quoteProperties": "asNeeded",
+			"trailingCommas": "none",
+			"semicolons": "always",
+			"arrowParentheses": "asNeeded",
+			"quoteStyle": "single",
+			"bracketSameLine": true
+		}
+	},
+	"overrides": [
+		{
+			"include": ["app/manifest.ts"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useNamingConvention": "off"
+					}
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" fill="none">
+    <path d="M300 600C465.685 600 600 465.685 600 300C600 134.315 465.685 0 300 0C134.315 0 0 134.315 0 300C0 465.685 134.315 600 300 600Z" fill="url(#paint0_radial_440_36)"/>
+    <g transform="matrix(1.75943237931,0,0,1.75943237931,50.37,51.5)" fill="none">
+        <polygon fill="#FFFFFF" points="145.03,116.52 145.03,178.36 205.57,141.67"/>
+        <polygon fill="#FFFFFF" points="145.03,109.54 205.02,134.47 190.68,111.09 221.17,80.6 202.95,62.37 176.83,88.5 145.03,36.66"/>
+        <polygon fill="#FFFFFF" points="138.59,178.36 138.59,116.52 78.05,141.67"/>
+        <polygon fill="#FFFFFF" points="78.6,134.47 138.59,109.54 138.59,36.66 106.8,88.5 80.67,62.37 62.45,80.6 92.94,111.08"/>
+        <polygon fill="#FFFFFF" points="204.89,160.92 145.03,197.2 145.03,245.25 169.66,210.54 195.37,236.25 213.59,218.03 184.79,189.23"/>
+        <polygon fill="#FFFFFF" points="138.59,197.2 78.73,160.92 98.83,189.23 70.03,218.03 88.25,236.25 113.96,210.55 138.59,245.24"/>
+    </g>
+    <defs>
+        <radialGradient id="paint0_radial_440_36" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.5) rotate(54.1675) scale(497.082)">
+            <stop stop-color="#323638"/>
+            <stop offset="1"/>
+        </radialGradient>
+    </defs>
+</svg>

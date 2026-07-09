@@ -1,0 +1,41 @@
+.DS_Store
+node_modules
+/dist
+ipfs
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.env
+.next
+.vercel
+tsconfig.tsbuildinfo
+
+
+# Auto Generated PWA files
+**/sw.js.map
+**/workbox-*.js
+**/workbox-*.js.map
+**/worker-*.js.map
+
+*/sw.js
+**/sw.js
+
+# Generated token index
+public/data

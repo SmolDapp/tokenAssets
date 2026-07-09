@@ -1,0 +1,5 @@
+{
+  "name": "Aave interest bearing WETH",
+  "symbol": "aWETH",
+  "decimals": 18
+}

@@ -1,0 +1,51 @@
+<svg viewBox="0 0 96 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="96" height="72" rx="4" fill="currentColor" fill-opacity="0.05" />
+    <rect x="0.5" y="0.5" width="95" height="71" rx="3.5" stroke="currentColor" stroke-opacity="0.5" />
+    <rect x="18" y="25" width="3" height="3" fill="currentColor" />
+    <rect x="24" y="29.5" width="3" height="3" fill="currentColor" />
+    <rect x="21" y="28" width="3" height="3" fill="currentColor" />
+    <rect x="21" y="26.5" width="3" height="3" fill="currentColor" />
+    <rect x="24" y="32.5" width="3" height="3" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 36 25)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 30 29.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 33 28)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 33 26.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 30 32.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 18 43)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 24 38.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 21 40)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 21 41.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 24 35.5)" fill="currentColor" />
+    <rect x="36" y="43" width="3" height="3" transform="rotate(180 36 43)" fill="currentColor" />
+    <rect x="30" y="38.5" width="3" height="3" transform="rotate(180 30 38.5)" fill="currentColor" />
+    <rect x="33" y="40" width="3" height="3" transform="rotate(180 33 40)" fill="currentColor" />
+    <rect x="33" y="41.5" width="3" height="3" transform="rotate(180 33 41.5)" fill="currentColor" />
+    <rect x="30" y="35.5" width="3" height="3" transform="rotate(180 30 35.5)" fill="currentColor" />
+    <rect x="60" y="25" width="3" height="3" fill="currentColor" />
+    <rect x="66" y="29.5" width="3" height="3" fill="currentColor" />
+    <rect x="63" y="28" width="3" height="3" fill="currentColor" />
+    <rect x="63" y="26.5" width="3" height="3" fill="currentColor" />
+    <rect x="66" y="32.5" width="3" height="3" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 78 25)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 72 29.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 75 28)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 75 26.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(-1 0 0 1 72 32.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 60 43)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 66 38.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 63 40)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 63 41.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 66 35.5)" fill="currentColor" />
+    <rect x="78" y="43" width="3" height="3" transform="rotate(180 78 43)" fill="currentColor" />
+    <rect x="72" y="38.5" width="3" height="3" transform="rotate(180 72 38.5)" fill="currentColor" />
+    <rect x="75" y="40" width="3" height="3" transform="rotate(180 75 40)" fill="currentColor" />
+    <rect x="75" y="41.5" width="3" height="3" transform="rotate(180 75 41.5)" fill="currentColor" />
+    <rect x="72" y="35.5" width="3" height="3" transform="rotate(180 72 35.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 36 62.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 39 59.5)" fill="currentColor" />
+    <rect width="3" height="3" transform="matrix(1 0 0 -1 39 61)" fill="currentColor" />
+    <rect x="60" y="62.5" width="3" height="3" transform="rotate(180 60 62.5)" fill="currentColor" />
+    <rect x="54" y="59.5" width="12" height="3" transform="rotate(180 54 59.5)" fill="currentColor" />
+    <rect x="57" y="59.5" width="3" height="3" transform="rotate(180 57 59.5)" fill="currentColor" />
+    <rect x="57" y="61" width="3" height="3" transform="rotate(180 57 61)" fill="currentColor" />
+</svg>

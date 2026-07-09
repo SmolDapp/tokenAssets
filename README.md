@@ -10,7 +10,7 @@ The CDN supports SVG and PNGs (small, larger).
 Currently the API/CDN endpoint is at:
 
 ```
-https://assets.smold.app/api/token/[chainID]/[tokenAddress]/[fileName].[ext]
+https://assets.smold.app/token/[chainID]/[tokenAddress]/[fileName].[ext]
 ```
 
 ## Usage
@@ -22,8 +22,8 @@ SVG files are also available, but they are larger and slower to load and can hur
 
 The repo comes with two different server systems in `_config`:
 
--   a `golang` server, that serve the assets from github
--   a `node` server, configured to work with Vercel. If you want to self host, here is the config we are using:
+- a `golang` server, that serve the assets from github
+- a `node` server, configured to work with Vercel. If you want to self host, here is the config we are using:
 
 ```
 Framework Preset: Next.js
@@ -37,35 +37,36 @@ Environment Variables: None
 
 ## Supported chains
 
--   1: Ethereum
--   10: Optimism
--   56: BSC
--   100: Gnosis
--   130: Unichain
--   137: Polygon
--   223: BSquared
--   250: Fantom
--   252: Fraxtal
--   957: Derive
--   964: Subtensor EVM
--   1101: Polygon zkEVM
--   1135: Lisk
--   1750: Metal L2
--   1868: Soneium
--   1923: Swellchain
--   5330: Superseed
--   8453: Base
--   34443: Mode
--   42161: Arbitrum
--   42220: Celo
--   43114: Avalanche
--   57073: Ink
--   60808: BOB
--   81457: Blast
--   98866: Plume
--   1380012617: Rari
--   1151111081099710: Solana
--	btcm: Bitcoin
+- 1: Ethereum
+- 10: Optimism
+- 56: BSC
+- 100: Gnosis
+- 130: Unichain
+- 137: Polygon
+- 223: BSquared
+- 250: Fantom
+- 252: Fraxtal
+- 957: Derive
+- 964: Subtensor EVM
+- 1101: Polygon zkEVM
+- 1135: Lisk
+- 1750: Metal L2
+- 1868: Soneium
+- 1923: Swellchain
+- 4663: Robinhood
+- 5330: Superseed
+- 8453: Base
+- 34443: Mode
+- 42161: Arbitrum
+- 42220: Celo
+- 43114: Avalanche
+- 57073: Ink
+- 60808: BOB
+- 81457: Blast
+- 98866: Plume
+- 1380012617: Rari
+- 1151111081099710: Solana
+- btcm: Bitcoin
 
 ## Contributing
 
