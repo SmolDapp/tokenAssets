@@ -1,5 +1,6 @@
 'use client';
 
+import {CHAINS} from '@utils/constants';
 import {isNewToken} from '@utils/helpers';
 import {getSearchScore} from '@utils/searchScore';
 import {useCallback, useEffect, useMemo, useState} from 'react';
@@ -56,7 +57,16 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 	const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
 	useEffect(() => {
-		const cached = tokensCache.get(chainID);
+		// Resolve through the CHAINS allowlist and fetch with the canonical id, so a user-controlled
+		// chainID (route param) can never steer the request URL anywhere else.
+		const knownChainID = CHAINS.find(chain => chain.id === chainID)?.id;
+		if (!knownChainID) {
+			setAllTokens([]);
+			setIsLoading(false);
+			return;
+		}
+
+		const cached = tokensCache.get(knownChainID);
 		if (cached) {
 			setAllTokens(cached);
 			setIsLoading(false);
@@ -67,7 +77,7 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 		setIsLoading(true);
 		setAllTokens([]);
 
-		fetch(`/data/tokens/${chainID}.json`)
+		fetch(`/data/tokens/${knownChainID}.json`)
 			.then(async response => {
 				if (!response.ok) {
 					throw new Error(`Failed to load tokens for chain ${chainID}`);
@@ -75,7 +85,7 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 				return (await response.json()) as TToken[];
 			})
 			.then(tokens => {
-				tokensCache.set(chainID, tokens);
+				tokensCache.set(knownChainID, tokens);
 				if (!isCancelled) {
 					setAllTokens(tokens);
 					setIsLoading(false);

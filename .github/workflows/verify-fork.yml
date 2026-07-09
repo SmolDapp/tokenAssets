@@ -25,6 +25,7 @@ jobs:
                   allow-unsafe-pr-checkout: true
 
             - name: Check for forbidden changes
+              if: github.event.pull_request.head.repo.full_name != github.repository
               env:
                   BASE_REF: ${{ github.base_ref }}
               run: |

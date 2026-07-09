@@ -6,7 +6,14 @@ import type {TToken} from '@utils/types';
 const GAS_TOKEN = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
 const chainTokensCache = new Map<string, TToken[]>();
 
+// chainID reaches this from route params, so it is user-controlled: reject anything that is not a
+// plain alphanumeric chain identifier before it becomes part of a filesystem path (path traversal).
+const CHAIN_ID_RE = /^[0-9a-zA-Z]{1,32}$/;
+
 export function readChainTokens(chainID: string): TToken[] {
+	if (!CHAIN_ID_RE.test(chainID)) {
+		return [];
+	}
 	const cached = chainTokensCache.get(chainID);
 	if (cached) {
 		return cached;
