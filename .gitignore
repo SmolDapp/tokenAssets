@@ -4,6 +4,7 @@ scripts/
 node_modules
 .vscode
 .next
+.claude
 out
 build
 _config/nodeAPI/public/1
