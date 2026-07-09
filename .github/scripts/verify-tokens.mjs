@@ -15,6 +15,8 @@ const AllowedTokenFiles = new Set([
 	'info.json'
 ]);
 
+const AllowedInfoKeys = new Set(['name', 'symbol', 'decimals', 'description', 'website', 'tags']);
+
 const Base58Alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 
 function base58Decode(value) {
@@ -46,6 +48,54 @@ function isValidSolanaAddress(value) {
 	return base58Decode(value)?.length === 32;
 }
 
+// info.json schema: name/symbol (non-empty strings) and decimals (non-negative int) are required;
+// description/website (strings) and tags (string[]) are optional; unknown fields are rejected.
+function validateInfoJson(file) {
+	const infoPath = path.join(file, 'info.json');
+	if (!fs.existsSync(infoPath)) {
+		return true;
+	}
+	let info;
+	try {
+		info = JSON.parse(fs.readFileSync(infoPath, 'utf8'));
+	} catch (error) {
+		console.error(`Error: "${infoPath}" is not valid JSON.`);
+		return false;
+	}
+	let valid = true;
+	if (typeof info.name !== 'string' || info.name.length === 0) {
+		console.error(`Error: "${infoPath}" must have a non-empty string "name".`);
+		valid = false;
+	}
+	if (typeof info.symbol !== 'string' || info.symbol.length === 0) {
+		console.error(`Error: "${infoPath}" must have a non-empty string "symbol".`);
+		valid = false;
+	}
+	if (!Number.isInteger(info.decimals) || info.decimals < 0) {
+		console.error(`Error: "${infoPath}" must have a non-negative integer "decimals".`);
+		valid = false;
+	}
+	if (info.description !== undefined && typeof info.description !== 'string') {
+		console.error(`Error: "${infoPath}" "description" must be a string.`);
+		valid = false;
+	}
+	if (info.website !== undefined && typeof info.website !== 'string') {
+		console.error(`Error: "${infoPath}" "website" must be a string.`);
+		valid = false;
+	}
+	if (info.tags !== undefined && (!Array.isArray(info.tags) || info.tags.some(tag => typeof tag !== 'string'))) {
+		console.error(`Error: "${infoPath}" "tags" must be an array of strings.`);
+		valid = false;
+	}
+	for (const key of Object.keys(info)) {
+		if (!AllowedInfoKeys.has(key)) {
+			console.error(`Error: "${infoPath}" has an unknown field "${key}". Allowed: ${[...AllowedInfoKeys].join(', ')}.`);
+			valid = false;
+		}
+	}
+	return valid;
+}
+
 function validate(directory) {
 	let allValid = true;
 	for (let name of fs.readdirSync(directory)) {
@@ -72,6 +122,9 @@ function validate(directory) {
 					console.error(
 						`Error: "${file}" folder name is not a valid base58 Solana address. Solana addresses are case-sensitive — a lowercased or corrupted mint is rejected.`
 					);
+					allValid = false;
+				}
+				if (!validateInfoJson(file)) {
 					allValid = false;
 				}
 				if (!fs.existsSync(path.join(file, 'logo-128.png'))) {

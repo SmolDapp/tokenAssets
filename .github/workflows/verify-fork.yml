@@ -158,3 +158,59 @@ jobs:
                   done < <(find ./chains -mindepth 2 -type f -print0)
                   if [ $FAILED -eq 1 ]; then exit 1; fi
                   echo "Ok: only allowed files in token/chain folders"
+
+            # Fork-safe: the script below lives in this trusted workflow (not the PR checkout) and
+            # only READS folder names + info.json as data — JSON.parse cannot execute code. No PR
+            # code runs and nothing is installed. VALIDATE_SCRIPT is a static constant, not input.
+            - name: Verify Solana addresses and info.json schema
+              env:
+                  VALIDATE_SCRIPT: |
+                      const fs = require('fs');
+                      const path = require('path');
+                      const TOKENS = './tokens';
+                      const SOLANA = '1151111081099710';
+                      const B58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+                      const ALLOWED = new Set(['name', 'symbol', 'decimals', 'description', 'website', 'tags']);
+                      let failed = false;
+                      function base58Length(value) {
+                          const bytes = [];
+                          for (const char of value) {
+                              let carry = B58.indexOf(char);
+                              if (carry === -1) return -1;
+                              for (let j = 0; j < bytes.length; j++) { carry += bytes[j] * 58; bytes[j] = carry & 0xff; carry >>= 8; }
+                              while (carry > 0) { bytes.push(carry & 0xff); carry >>= 8; }
+                          }
+                          for (let i = 0; i < value.length && value[i] === '1'; i++) bytes.push(0);
+                          return bytes.length;
+                      }
+                      function checkInfo(dir) {
+                          const p = path.join(dir, 'info.json');
+                          if (!fs.existsSync(p)) return;
+                          let info;
+                          try { info = JSON.parse(fs.readFileSync(p, 'utf8')); }
+                          catch (e) { console.error('Error: ' + p + ' is not valid JSON'); failed = true; return; }
+                          if (typeof info.name !== 'string' || !info.name) { console.error('Error: ' + p + ' needs a non-empty string name'); failed = true; }
+                          if (typeof info.symbol !== 'string' || !info.symbol) { console.error('Error: ' + p + ' needs a non-empty string symbol'); failed = true; }
+                          if (!Number.isInteger(info.decimals) || info.decimals < 0) { console.error('Error: ' + p + ' needs a non-negative integer decimals'); failed = true; }
+                          if (info.description !== undefined && typeof info.description !== 'string') { console.error('Error: ' + p + ' description must be a string'); failed = true; }
+                          if (info.website !== undefined && typeof info.website !== 'string') { console.error('Error: ' + p + ' website must be a string'); failed = true; }
+                          if (info.tags !== undefined && (!Array.isArray(info.tags) || info.tags.some(t => typeof t !== 'string'))) { console.error('Error: ' + p + ' tags must be an array of strings'); failed = true; }
+                          for (const k of Object.keys(info)) { if (!ALLOWED.has(k)) { console.error('Error: ' + p + ' has unknown field ' + k); failed = true; } }
+                      }
+                      for (const chain of fs.readdirSync(TOKENS)) {
+                          const chainDir = path.join(TOKENS, chain);
+                          if (!fs.statSync(chainDir).isDirectory()) continue;
+                          for (const name of fs.readdirSync(chainDir)) {
+                              if (name.startsWith('.') || name.startsWith('_')) continue;
+                              const dir = path.join(chainDir, name);
+                              if (!fs.statSync(dir).isDirectory()) continue;
+                              if (chain === SOLANA && !name.startsWith('0x') && base58Length(name) !== 32) {
+                                  console.error('Error: ' + dir + ' is not a valid base58 Solana address (case-sensitive; lowercased/corrupted rejected)');
+                                  failed = true;
+                              }
+                              checkInfo(dir);
+                          }
+                      }
+                      if (failed) process.exit(1);
+                      console.log('Ok: Solana addresses and info.json schemas valid');
+              run: node -e "$VALIDATE_SCRIPT"
