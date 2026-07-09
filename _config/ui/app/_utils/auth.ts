@@ -1,15 +1,9 @@
 import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 
-// Persist the GitHub OAuth access token on the session so /api/submit can open the PR AS the signed-in
-// user (from their own fork). `public_repo` scope covers fork + push + pull request on public repos.
-declare module 'next-auth' {
-	// biome-ignore lint/style/useNamingConvention: augmenting next-auth's own Session interface
-	interface Session {
-		accessToken?: string;
-	}
-}
-
+// The GitHub OAuth access token is kept ONLY in the encrypted JWT (server-side). It is never copied onto
+// the session, so /api/auth/session never serves it to the browser. /api/submit reads it back from the
+// JWT with getToken(). `public_repo` scope covers fork + push + pull request on public repos.
 export const {handlers, auth, signIn, signOut} = NextAuth({
 	trustHost: true,
 	providers: [
@@ -25,10 +19,6 @@ export const {handlers, auth, signIn, signOut} = NextAuth({
 				token.accessToken = account.access_token;
 			}
 			return token;
-		},
-		session({session, token}) {
-			session.accessToken = token.accessToken as string | undefined;
-			return session;
 		}
 	}
 });

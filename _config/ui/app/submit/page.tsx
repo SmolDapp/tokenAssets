@@ -35,7 +35,7 @@ export default async function SubmitPage(): Promise<ReactElement> {
 				{value: '2', label: 'Add a logo'},
 				{value: '3', label: 'Open a PR'}
 			]}>
-			<SubmitForm signedIn={Boolean(session?.accessToken)} />
+			<SubmitForm signedIn={Boolean(session?.user)} />
 		</HeroPage>
 	);
 }
