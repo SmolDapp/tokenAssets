@@ -4,6 +4,7 @@ import {ForbiddenSVGPattern} from './forbidden-svg-pattern.mjs';
 
 const DataDirectory = './tokens';
 const IndexName = 'index.json';
+const SolanaChainDirectory = 'tokens/1151111081099710/';
 const AllowedTokenFiles = new Set([
 	'logo.svg',
 	'logo-32.png',
@@ -13,6 +14,37 @@ const AllowedTokenFiles = new Set([
 	'logo-alt-128.png',
 	'info.json'
 ]);
+
+const Base58Alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+function base58Decode(value) {
+	const bytes = [];
+	for (const char of value) {
+		let carry = Base58Alphabet.indexOf(char);
+		if (carry === -1) {
+			return null;
+		}
+		for (let j = 0; j < bytes.length; j++) {
+			carry += bytes[j] * 58;
+			bytes[j] = carry & 0xff;
+			carry >>= 8;
+		}
+		while (carry > 0) {
+			bytes.push(carry & 0xff);
+			carry >>= 8;
+		}
+	}
+	for (let i = 0; i < value.length && value[i] === '1'; i++) {
+		bytes.push(0);
+	}
+	return bytes;
+}
+
+// A valid Solana mint folder decodes from base58 to a 32-byte pubkey; base58 is case-sensitive,
+// so a lowercased/corrupted name (e.g. an out-of-alphabet 'l') is rejected.
+function isValidSolanaAddress(value) {
+	return base58Decode(value)?.length === 32;
+}
 
 function validate(directory) {
 	let allValid = true;
@@ -35,7 +67,13 @@ function validate(directory) {
 			if (name.startsWith('_')) {
 				continue;
 			}
-			if (name.startsWith('0x') || file.includes('tokens/1151111081099710/')) {
+			if (name.startsWith('0x') || file.includes(SolanaChainDirectory)) {
+				if (!name.startsWith('0x') && !isValidSolanaAddress(name)) {
+					console.error(
+						`Error: "${file}" folder name is not a valid base58 Solana address. Solana addresses are case-sensitive — a lowercased or corrupted mint is rejected.`
+					);
+					allValid = false;
+				}
 				if (!fs.existsSync(path.join(file, 'logo-128.png'))) {
 					console.error(`Error: "${file}" is missing logo-128.png`);
 					allValid = false;
