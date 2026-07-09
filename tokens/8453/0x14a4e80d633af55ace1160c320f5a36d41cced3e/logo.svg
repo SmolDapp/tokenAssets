@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="dotGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="disc">
+      <circle cx="256" cy="256" r="256"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <circle cx="256" cy="256" r="256" fill="#000000"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="82" stroke-opacity="0.019"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="78" stroke-opacity="0.023"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="74" stroke-opacity="0.029"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="70" stroke-opacity="0.036"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="66" stroke-opacity="0.046"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="62" stroke-opacity="0.057"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="58" stroke-opacity="0.071"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="54" stroke-opacity="0.089"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="50" stroke-opacity="0.111"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="46" stroke-opacity="0.138"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="42" stroke-opacity="0.173"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="38" stroke-opacity="0.216"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="34" stroke-opacity="0.269"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="30" stroke-opacity="0.336"/>
+    <circle cx="256" cy="256" r="132" fill="none" stroke="#ffffff" stroke-width="26"/>
+    <circle cx="256" cy="256" r="46" fill="url(#dotGlow)"/>
+    <circle cx="256" cy="256" r="18" fill="#ffffff"/>
+  </g>
+</svg>
