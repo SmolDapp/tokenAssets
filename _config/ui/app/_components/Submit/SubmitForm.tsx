@@ -21,12 +21,30 @@ type TMetaStatus = 'idle' | 'loading' | 'ready' | 'error' | 'unsupported';
 const inputClassName = 'border border-white/15 bg-white/5 text-white placeholder:text-white/30 focus:border-white/40';
 const STASH_KEY = 'token-submit-stash';
 
-function Field({label, hint, children}: {label: string; hint?: string; children: ReactNode}): ReactElement {
+const labelClassName = 'block font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]';
+
+// `htmlFor` associates the label with its control for assistive tech. Omitted for the logo field,
+// whose child is itself a <label> (nesting labels would be invalid), so it stays a plain <span>.
+function Field({
+	label,
+	hint,
+	htmlFor,
+	children
+}: {
+	label: string;
+	hint?: string;
+	htmlFor?: string;
+	children: ReactNode;
+}): ReactElement {
 	return (
 		<div className={'space-y-1.5'}>
-			<span className={'block font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]'}>
-				{label}
-			</span>
+			{htmlFor ? (
+				<label htmlFor={htmlFor} className={labelClassName}>
+					{label}
+				</label>
+			) : (
+				<span className={labelClassName}>{label}</span>
+			)}
 			{children}
 			{hint && <span className={'block font-mono text-white/35 text-xxs leading-relaxed'}>{hint}</span>}
 		</div>
@@ -201,6 +219,13 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 		if (!file) {
 			return;
 		}
+		// `accept` only filters the native picker dialog, not drag-and-drop — so re-check the type here,
+		// matching the paste handler, to reject a non-SVG instead of setting garbage as the logo.
+		const isSvg = file.type === 'image/svg+xml' || file.name.toLowerCase().endsWith('.svg');
+		if (!isSvg) {
+			setSvgError('That is not an SVG — the logo must be a vector .svg file.');
+			return;
+		}
 		const text = await file.text();
 		setSvgText(text);
 		setSvgFileName(file.name);
@@ -219,6 +244,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 	}
 
 	async function handleSubmit(): Promise<void> {
+		if (existingToken) {
+			return;
+		}
 		const validationErrors = validateSubmission(currentInput());
 		setErrors(validationErrors);
 		if (validationErrors.length > 0) {
@@ -309,9 +337,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				className={
 					'min-w-0 space-y-4 rounded-sm border border-white/15 bg-white/[0.04] p-5 md:p-6 lg:col-span-6'
 				}>
-				<Field label={'Chain'}>
+				<Field label={'Chain'} htmlFor={'submit-chain'}>
 					<Select value={chainID} onValueChange={handleChainChange}>
-						<SelectTrigger className={cn('h-10 rounded-sm text-white', inputClassName)}>
+						<SelectTrigger id={'submit-chain'} className={cn('h-10 rounded-sm text-white', inputClassName)}>
 							<SelectValue>
 								<span className={'flex items-center gap-2'}>
 									<ChainLogo id={selectedChain.id} />
@@ -332,8 +360,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 					</Select>
 				</Field>
 
-				<Field label={'Contract address'}>
+				<Field label={'Contract address'} htmlFor={'submit-address'}>
 					<Input
+						id={'submit-address'}
 						value={address}
 						onChange={event => setAddress(event.target.value)}
 						placeholder={'0x…'}
@@ -373,7 +402,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 								type={'file'}
 								accept={'.svg,image/svg+xml'}
 								onChange={event => handleFile(event.target.files?.[0])}
-								className={'hidden'}
+								className={'sr-only'}
 							/>
 						</label>
 						{svgError && <p className={'font-mono text-error text-xs'}>{svgError}</p>}
@@ -382,8 +411,10 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 
 				<Field
 					label={'Project link'}
+					htmlFor={'submit-website'}
 					hint={'Link to the project site or docs that reference this token.'}>
 					<Input
+						id={'submit-website'}
 						value={website}
 						onChange={event => setWebsite(event.target.value)}
 						placeholder={'https://…'}
@@ -410,8 +441,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 
 					{showOptional && (
 						<div className={'space-y-5'}>
-							<Field label={'Description'}>
+							<Field label={'Description'} htmlFor={'submit-description'}>
 								<textarea
+									id={'submit-description'}
 									value={description}
 									onChange={event => setDescription(event.target.value)}
 									rows={3}
@@ -422,8 +454,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 									)}
 								/>
 							</Field>
-							<Field label={'Tags'} hint={'Comma-separated'}>
+							<Field label={'Tags'} htmlFor={'submit-tags'} hint={'Comma-separated'}>
 								<Input
+									id={'submit-tags'}
 									value={tagsRaw}
 									onChange={event => setTagsRaw(event.target.value)}
 									placeholder={'stablecoin, defi'}
