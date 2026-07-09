@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	/* biome-ignore lint/correctness/noUnknownProperty: experimental property */
+	interpolate-size: allow-keywords;
+}
+
+body {
+	@apply text-black;
+}
+h1 {
+	@apply text-xl font-bold text-black;
+}
+h4 {
+	@apply text-lg font-bold text-black/70;
+}
+h6 {
+	@apply text-base font-bold text-black/70;
+}
+small {
+	@apply text-xxs font-normal text-black/60 block;
+}
+#__next {
+	@apply w-full h-full;
+}
+
+/***************************************************************************
+ ** Overwritting the defaults to match our needs
+ **************************************************************************/
+* {
+	@apply scroll-smooth font-sans;
+}
+input::placeholder {
+	@apply text-white/40 not-italic;
+}
+textarea::placeholder {
+	@apply text-white/40 not-italic;
+}
+input[type="file"] /* FF, IE7+, chrome (except button) */,
+input[type="file"]::-webkit-file-upload-button {
+	/* chromes and blink button */
+	cursor: pointer;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	-webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+	transition: background-color 5000s ease-in-out 0s;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+label[aria-invalid='true'] {
+	@apply text-white/60 transition-colors;
+	& > form > div {
+		@apply border-[#FE0000] focus-within:border-[#FE0000] text-[#FE0000] focus-within:text-[#FE0000];
+	}
+	& > p {
+		@apply text-[#FF0000];
+	}
+}
+
+:focus {
+	outline: none;
+	outline-width: 0px;
+	outline-offset: 0px;
+	outline-color: transparent;
+}
+
+/***************************************************************************
+ ** Then, we import the tailwind class. They will be able to overwrite all
+ ** the previous classes, not the next ones directly.
+ **************************************************************************/
+@tailwind components;
+@tailwind utilities;
+
+/***************************************************************************
+ ** Some accessibilities fixes
+ **************************************************************************/
+.scrollbar-none::-webkit-scrollbar {
+	display: none;
+}
+.scrollbar-none {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.hover-fix::before {
+	display: block;
+	content: attr(title);
+	font-weight: bold;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+	outline-width: 0px;
+	box-shadow: none;
+}
+
+.input {
+	@apply w-full rounded-lg bg-transparent py-3 px-4 text-base;
+	@apply text-white placeholder:text-white/60 caret-white/70;
+	@apply focus:placeholder:text-white/30 placeholder:transition-colors;
+	@apply focus:border-white/60 disabled:bg-white/30 transition-colors;
+	@apply border-white/40 disabled:border-transparent;
+}
+
+@layer base {
+	:root {
+		--radius: 0.5rem;
+	}
+}
+
+.font-mono {
+	font-family: var(--geist-mono-font), monospace !important;
+}
+
+body {
+	background: #080707;
+}
+
+@layer base {
+	.max-w-4xl,
+	.max-w-5xl,
+	.max-w-6xl {
+		@apply px-0;
+	}
+}
+
+hr {
+	border-top-width: 0;
+}
+
+img.outlined {
+	filter: drop-shadow(1px 0 0 transparent) drop-shadow(0 1px 0 transparent) drop-shadow(-1px 0 0 transparent)
+		drop-shadow(0 -1px 0 transparent);
+
+	&:hover {
+		filter: drop-shadow(1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(-1px 0 0 white)
+			drop-shadow(0 -1px 0 white);
+	}
+}
+
+.group:hover .outlined {
+	filter: drop-shadow(1px 0 0 white) drop-shadow(0 1px 0 white) drop-shadow(-1px 0 0 white)
+		drop-shadow(0 -1px 0 white);
+}
+
+.text-justify-last {
+	text-align-last: justify;
+}

@@ -1,0 +1,51 @@
+{
+	"name": "tokenassets-ui",
+	"private": true,
+	"scripts": {
+		"generate": "node scripts/generateIndex.mjs",
+		"predev": "node scripts/generateIndex.mjs --if-missing",
+		"dev": "next dev",
+		"prebuild": "node scripts/generateIndex.mjs",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome check ."
+	},
+	"dependencies": {
+		"@octokit/core": "^7.0.6",
+		"@radix-ui/react-dialog": "^1.1.19",
+		"@radix-ui/react-select": "^2.1.6",
+		"@radix-ui/react-slot": "^1.1.2",
+		"@radix-ui/react-toast": "^1.2.6",
+		"@resvg/resvg-js": "^2.6.2",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"framer-motion": "^12.4.3",
+		"lucide-react": "^0.474.0",
+		"next": "15.2.8",
+		"next-auth": "^5.0.0-beta.31",
+		"octokit-plugin-create-pull-request": "^6.0.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"tailwind-merge": "^2.6.0",
+		"tailwindcss": "^3.4.17",
+		"tailwindcss-animate": "^1.0.7",
+		"usehooks-ts": "^3.1.1",
+		"vaul": "^1.1.2",
+		"viem": "^2.23.5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@svgr/webpack": "^8.1.0",
+		"@tailwindcss/forms": "^0.5.10",
+		"@tailwindcss/typography": "^0.5.16",
+		"@total-typescript/ts-reset": "^0.5.1",
+		"@types/node": "^20.12.12",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"autoprefixer": "^10.4.19",
+		"postcss": "^8.4.38",
+		"postcss-import": "^16.1.0",
+		"postcss-nesting": "^12.1.5",
+		"typescript": "^5.8.2"
+	}
+}

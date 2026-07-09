@@ -1,0 +1,53 @@
+name: 🔄 Refresh UI token index
+
+# The UI's token index (`_config/ui/public/data`) is a build artifact: recency comes from
+# git history and popularity (market cap) from DefiLlama at build time, so both go stale.
+# This weekly job regenerates it as a canary (catches API/pipeline breakage) and, if a
+# deploy hook is configured, triggers a production rebuild so the live site refreshes.
+
+on:
+    schedule:
+        # Every Monday at 06:00 UTC
+        - cron: '0 6 * * 1'
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+concurrency:
+    group: ui-refresh
+    cancel-in-progress: true
+
+jobs:
+    refresh:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo (full history for recency dates)
+              uses: actions/checkout@v4
+              with:
+                  persist-credentials: false
+                  # Required: addedAt is derived from git history; a shallow clone would
+                  # collapse every date to the last commit.
+                  fetch-depth: 0
+
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v2
+
+            - name: Install deps
+              working-directory: _config/ui
+              run: bun install --frozen-lockfile
+
+            - name: Regenerate token index (recency + market caps)
+              working-directory: _config/ui
+              run: bun run generate
+
+            - name: Trigger production redeploy (if configured)
+              env:
+                  DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+              run: |
+                  if [ -n "$DEPLOY_HOOK" ]; then
+                    curl -fsS -X POST "$DEPLOY_HOOK"
+                    echo "Triggered production redeploy."
+                  else
+                    echo "No VERCEL_DEPLOY_HOOK_URL secret set; regeneration validated but nothing deployed."
+                  fi
