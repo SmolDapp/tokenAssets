@@ -3,6 +3,37 @@
 
 const EVM_ADDRESS_RE = /^0x[0-9a-fA-F]{40}$/;
 const NON_EVM_CHAINS = new Set(['1151111081099710', 'btcm']);
+const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+// The address flows into the PR file path and body, so a loose check would allow "/" or backticks to
+// inject a path or markdown. Base58 (Solana) decodes to a 32-byte pubkey and its alphabet excludes
+// "/", whitespace, backticks and brackets, so validating it also closes those injection paths.
+function base58Decode(value: string): number[] | null {
+	const bytes: number[] = [];
+	for (const char of value) {
+		let carry = BASE58_ALPHABET.indexOf(char);
+		if (carry === -1) {
+			return null;
+		}
+		for (let j = 0; j < bytes.length; j++) {
+			carry += bytes[j] * 58;
+			bytes[j] = carry & 0xff;
+			carry >>= 8;
+		}
+		while (carry > 0) {
+			bytes.push(carry & 0xff);
+			carry >>= 8;
+		}
+	}
+	for (let i = 0; i < value.length && value[i] === '1'; i++) {
+		bytes.push(0);
+	}
+	return bytes;
+}
+
+function isValidSolanaAddress(value: string): boolean {
+	return base58Decode(value)?.length === 32;
+}
 
 export type TTokenInfo = {
 	name: string;
@@ -51,7 +82,7 @@ export function parseTags(raw: string): string[] {
 export function isValidAddress(chainID: string, address: string): boolean {
 	const trimmed = address.trim();
 	if (isNonEvmChain(chainID)) {
-		return trimmed.length >= 3;
+		return isValidSolanaAddress(trimmed);
 	}
 	return EVM_ADDRESS_RE.test(trimmed);
 }

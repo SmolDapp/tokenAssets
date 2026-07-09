@@ -57,7 +57,9 @@ export async function fetchOnchainToken(chainID: string, address: string): Promi
 	if (!rpcURL) {
 		throw new Error('On-chain fetch is not available for this chain — fill the fields manually');
 	}
-	const client = createPublicClient({transport: http(rpcURL)});
+	// Cap each RPC call so a hung/slow public endpoint surfaces as an error (→ metaStatus 'error')
+	// instead of leaving the submit flow spinning indefinitely.
+	const client = createPublicClient({transport: http(rpcURL, {timeout: 10_000})});
 	const contract = {address: getAddress(address), abi: erc20Abi} as const;
 
 	const decimals = await client.readContract({...contract, functionName: 'decimals'});
