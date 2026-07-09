@@ -117,8 +117,13 @@ export function TokenList(): ReactElement {
 						</div>
 					}
 					action={
-						<Link href={GITHUB_URI} target={'_blank'} rel={'noopener noreferrer'}>
-							<Button className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
+						<Link
+							href={GITHUB_URI}
+							target={'_blank'}
+							rel={'noopener noreferrer'}>
+							<Button
+								className={'bg-primary text-white hover:bg-primary-light'}
+								size={'lg'}>
 								{'ADD TOKEN LOGO'}
 							</Button>
 						</Link>

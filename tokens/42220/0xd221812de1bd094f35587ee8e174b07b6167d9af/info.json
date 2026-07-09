@@ -1,0 +1,5 @@
+{
+  "name": "Wrapped Ether (Celo native bridge)",
+  "symbol": "WETH",
+  "decimals": 18
+}

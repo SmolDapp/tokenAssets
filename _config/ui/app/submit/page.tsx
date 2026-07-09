@@ -1,3 +1,4 @@
+import {HeroPage} from '@components/HeroPage';
 import {SubmitForm} from '@components/Submit/SubmitForm';
 import {auth} from '@utils/auth';
 
@@ -16,5 +17,25 @@ export const metadata: Metadata = {
 
 export default async function SubmitPage(): Promise<ReactElement> {
 	const session = await auth();
-	return <SubmitForm signedIn={Boolean(session?.accessToken)} />;
+	return (
+		<HeroPage
+			tagline={'Open-source logo CDN'}
+			heading={
+				<>
+					{'Submit a'}
+					<br />
+					{'token'}
+				</>
+			}
+			description={
+				'Point it at a contract and we read the on-chain metadata for you. Add a logo, sign in with GitHub, and we open a pull request against the CDN for you to review.'
+			}
+			stats={[
+				{value: '1', label: 'Point to contract'},
+				{value: '2', label: 'Add a logo'},
+				{value: '3', label: 'Open a PR'}
+			]}>
+			<SubmitForm signedIn={Boolean(session?.accessToken)} />
+		</HeroPage>
+	);
 }

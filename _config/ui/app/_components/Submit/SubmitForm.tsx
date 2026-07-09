@@ -1,12 +1,12 @@
 'use client';
 
 import {ChainLogo} from '@components/ChainLogo';
-import {SubmitPreview} from '@components/Submit/SubmitPreview';
 import {SubmitResult} from '@components/Submit/SubmitResult';
 import {cn} from '@components/lib/utils';
 import {Button} from '@components/ui/button';
 import {Input} from '@components/ui/input';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@components/ui/select';
+import {useTokens} from '@hooks/useTokens';
 import ArrowDown from '@icons/arrow-down.svg';
 import {CHAINS, DEFAULT_CHAIN} from '@utils/constants';
 import {canFetchOnchain, fetchOnchainToken} from '@utils/onchainToken';
@@ -18,17 +18,17 @@ import type {ReactElement, ReactNode} from 'react';
 
 type TMetaStatus = 'idle' | 'loading' | 'ready' | 'error' | 'unsupported';
 
-const inputClassName = 'border border-separator bg-[#ffffff] focus:border-primary';
+const inputClassName = 'border border-white/15 bg-white/5 text-white placeholder:text-white/30 focus:border-white/40';
 const STASH_KEY = 'token-submit-stash';
 
 function Field({label, hint, children}: {label: string; hint?: string; children: ReactNode}): ReactElement {
 	return (
 		<div className={'space-y-1.5'}>
-			<span className={'block font-medium font-mono text-black/70 text-xs uppercase tracking-[0.1em]'}>
+			<span className={'block font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]'}>
 				{label}
 			</span>
 			{children}
-			{hint && <span className={'block font-mono text-black/45 text-xxs leading-relaxed'}>{hint}</span>}
+			{hint && <span className={'block font-mono text-white/35 text-xxs leading-relaxed'}>{hint}</span>}
 		</div>
 	);
 }
@@ -55,6 +55,16 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 	const selectedChain = useMemo(() => {
 		return CHAINS.find(chain => chain.id === chainID) || DEFAULT_CHAIN;
 	}, [chainID]);
+
+	// Cross-checked against the same per-chain token list the browse pages use, so a submission
+	// for an address already in the CDN is caught before the user fills out the rest of the form.
+	const {findToken} = useTokens(chainID);
+	const existingToken = useMemo(() => {
+		if (!isValidAddress(chainID, address)) {
+			return undefined;
+		}
+		return findToken(address.trim());
+	}, [findToken, chainID, address]);
 
 	const svgDataURL = useMemo(() => {
 		if (!svgText) {
@@ -271,7 +281,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 
 	// The submit button is the single status surface (fixed size → no layout shift):
 	// disabled until everything is present, a spinner while reading the chain or opening the PR.
-	const canSubmit = metaStatus === 'ready' && svgText.length > 0 && website.trim().length > 0;
+	const canSubmit = metaStatus === 'ready' && !existingToken && svgText.length > 0 && website.trim().length > 0;
 	const isBusy = isSubmitting || metaStatus === 'loading';
 
 	let submitContent: ReactNode = 'Open pull request →';
@@ -283,6 +293,8 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 		submitContent = 'Token not readable';
 	} else if (metaStatus === 'unsupported') {
 		submitContent = 'Chain not supported';
+	} else if (metaStatus === 'ready' && existingToken) {
+		submitContent = 'Token already exists';
 	} else if (metaStatus === 'ready' && !svgText) {
 		submitContent = 'Add a logo';
 	} else if (metaStatus === 'ready' && !website.trim()) {
@@ -292,177 +304,160 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 	}
 
 	return (
-		<div className={'mx-auto w-full max-w-6xl px-6 py-8 md:px-10 md:py-10'}>
-			<div className={'mb-8 space-y-2'}>
-				<h1 className={'font-medium font-mono text-2xl text-black uppercase tracking-[-0.01em] md:text-3xl'}>
-					{'Submit a token'}
-				</h1>
-				<p className={'max-w-2xl font-mono text-black/60 text-sm leading-relaxed'}>
-					{
-						'Point it at a contract and we read the on-chain metadata for you. Add a logo, and we open a pull request against the CDN for you to review — no account needed.'
-					}
-				</p>
-			</div>
-
-			<div className={'grid gap-8 lg:grid-cols-2'}>
-				<div className={'space-y-5 rounded-sm border border-separator bg-light-gray p-6 md:p-7'}>
-					<Field label={'Chain'}>
-						<Select value={chainID} onValueChange={handleChainChange}>
-							<SelectTrigger className={cn('h-10 rounded-sm text-black', inputClassName)}>
-								<SelectValue>
+		<>
+			<div
+				className={
+					'min-w-0 space-y-4 rounded-sm border border-white/15 bg-white/[0.04] p-5 md:p-6 lg:col-span-6'
+				}>
+				<Field label={'Chain'}>
+					<Select value={chainID} onValueChange={handleChainChange}>
+						<SelectTrigger className={cn('h-10 rounded-sm text-white', inputClassName)}>
+							<SelectValue>
+								<span className={'flex items-center gap-2'}>
+									<ChainLogo id={selectedChain.id} />
+									<span className={'font-mono text-sm'}>{selectedChain.name}</span>
+								</span>
+							</SelectValue>
+						</SelectTrigger>
+						<SelectContent>
+							{CHAINS.map(chain => (
+								<SelectItem key={chain.id} value={chain.id}>
 									<span className={'flex items-center gap-2'}>
-										<ChainLogo id={selectedChain.id} />
-										<span className={'font-mono text-sm'}>{selectedChain.name}</span>
+										<ChainLogo id={chain.id} />
+										{chain.name}
 									</span>
-								</SelectValue>
-							</SelectTrigger>
-							<SelectContent>
-								{CHAINS.map(chain => (
-									<SelectItem key={chain.id} value={chain.id}>
-										<span className={'flex items-center gap-2'}>
-											<ChainLogo id={chain.id} />
-											{chain.name}
-										</span>
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					</Field>
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+				</Field>
 
-					<Field label={'Contract address'}>
-						<Input
-							value={address}
-							onChange={event => setAddress(event.target.value)}
-							placeholder={'0x…'}
-							spellCheck={false}
-							className={inputClassName}
-						/>
-					</Field>
+				<Field label={'Contract address'}>
+					<Input
+						value={address}
+						onChange={event => setAddress(event.target.value)}
+						placeholder={'0x…'}
+						spellCheck={false}
+						className={inputClassName}
+					/>
+				</Field>
 
-					<Field label={'Logo (SVG)'}>
-						<div className={'space-y-2'}>
-							<label
-								onDragOver={event => event.preventDefault()}
-								onDrop={event => {
-									event.preventDefault();
-									handleFile(event.dataTransfer.files?.[0]);
-								}}
-								className={cn(
-									'flex h-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-sm',
-									'border border-subtle border-dashed bg-[#ffffff] transition-colors hover:border-primary'
-								)}>
-								<span className={'font-mono text-black text-xs'}>
+				<Field label={'Logo (SVG)'}>
+					<div className={'space-y-2'}>
+						<label
+							onDragOver={event => event.preventDefault()}
+							onDrop={event => {
+								event.preventDefault();
+								handleFile(event.dataTransfer.files?.[0]);
+							}}
+							className={cn(
+								'flex h-24 cursor-pointer items-center justify-center gap-3 rounded-sm',
+								'border border-white/20 border-dashed bg-white/5 transition-colors hover:border-white/40'
+							)}>
+							{svgDataURL && (
+								<img
+									src={svgDataURL}
+									alt={`${svgFileName} preview`}
+									className={'size-12 shrink-0 rounded-full bg-white object-contain p-1.5'}
+								/>
+							)}
+							<div className={'flex flex-col items-center gap-1'}>
+								<span className={'font-mono text-white text-xs'}>
 									{svgFileName || 'Drop, paste, or click to browse'}
 								</span>
-								<span className={'font-mono text-black/45 text-xxs uppercase tracking-[0.1em]'}>
-									{'SVG only'}
+								<span className={'font-mono text-white/40 text-xxs uppercase tracking-[0.1em]'}>
+									{svgDataURL ? 'Click to replace' : 'SVG only'}
 								</span>
-								<input
-									type={'file'}
-									accept={'.svg,image/svg+xml'}
-									onChange={event => handleFile(event.target.files?.[0])}
-									className={'hidden'}
-								/>
-							</label>
-							{svgError && <p className={'font-mono text-error text-xs'}>{svgError}</p>}
-						</div>
-					</Field>
-
-					<Field
-						label={'Project link'}
-						hint={
-							'Link to the project site or docs that reference this token — so maintainers can verify it.'
-						}>
-						<Input
-							value={website}
-							onChange={event => setWebsite(event.target.value)}
-							placeholder={'https://…'}
-							spellCheck={false}
-							className={inputClassName}
-						/>
-					</Field>
-
-					<div className={'space-y-4'}>
-						<button
-							type={'button'}
-							onClick={() => setShowOptional(value => !value)}
-							className={cn(
-								'flex w-full items-center justify-between rounded-sm px-4 py-3',
-								'border border-separator transition-colors hover:border-primary/40'
-							)}>
-							<span className={'font-medium font-mono text-black/70 text-xs uppercase tracking-[0.1em]'}>
-								{'Optional details'}
-							</span>
-							<ArrowDown
-								className={cn(
-									'size-4 text-black/50 transition-transform',
-									showOptional && 'rotate-180'
-								)}
-							/>
-						</button>
-
-						{showOptional && (
-							<div className={'space-y-5'}>
-								<Field label={'Description'}>
-									<textarea
-										value={description}
-										onChange={event => setDescription(event.target.value)}
-										rows={3}
-										placeholder={'A short description of the token.'}
-										className={cn(
-											'w-full rounded-sm px-3 py-2 font-mono text-black text-sm outline-none placeholder:text-subtle',
-											inputClassName
-										)}
-									/>
-								</Field>
-								<Field label={'Tags'} hint={'Comma-separated'}>
-									<Input
-										value={tagsRaw}
-										onChange={event => setTagsRaw(event.target.value)}
-										placeholder={'stablecoin, defi'}
-										className={inputClassName}
-									/>
-								</Field>
 							</div>
-						)}
+							<input
+								type={'file'}
+								accept={'.svg,image/svg+xml'}
+								onChange={event => handleFile(event.target.files?.[0])}
+								className={'hidden'}
+							/>
+						</label>
+						{svgError && <p className={'font-mono text-error text-xs'}>{svgError}</p>}
 					</div>
+				</Field>
 
-					{errors.length > 0 && (
-						<div className={'space-y-1 rounded-sm border border-error/40 bg-error-light/20 p-3'}>
-							{errors.map(error => (
-								<p key={`${error.field}-${error.message}`} className={'font-mono text-error text-xs'}>
-									{`• ${error.message}`}
-								</p>
-							))}
+				<Field
+					label={'Project link'}
+					hint={'Link to the project site or docs that reference this token.'}>
+					<Input
+						value={website}
+						onChange={event => setWebsite(event.target.value)}
+						placeholder={'https://…'}
+						spellCheck={false}
+						className={inputClassName}
+					/>
+				</Field>
+
+				<div className={'space-y-4'}>
+					<button
+						type={'button'}
+						onClick={() => setShowOptional(value => !value)}
+						className={cn(
+							'flex w-full items-center justify-between rounded-sm px-4 py-3',
+							'border border-white/15 transition-colors hover:border-white/30'
+						)}>
+						<span className={'font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]'}>
+							{'Optional details'}
+						</span>
+						<ArrowDown
+							className={cn('size-4 text-white/50 transition-transform', showOptional && 'rotate-180')}
+						/>
+					</button>
+
+					{showOptional && (
+						<div className={'space-y-5'}>
+							<Field label={'Description'}>
+								<textarea
+									value={description}
+									onChange={event => setDescription(event.target.value)}
+									rows={3}
+									placeholder={'A short description of the token.'}
+									className={cn(
+										'w-full rounded-sm px-3 py-2 font-mono text-sm outline-none placeholder:text-white/30',
+										inputClassName
+									)}
+								/>
+							</Field>
+							<Field label={'Tags'} hint={'Comma-separated'}>
+								<Input
+									value={tagsRaw}
+									onChange={event => setTagsRaw(event.target.value)}
+									placeholder={'stablecoin, defi'}
+									className={inputClassName}
+								/>
+							</Field>
 						</div>
 					)}
-
-					{submitError && <p className={'font-mono text-error text-xs'}>{submitError}</p>}
-
-					<Button
-						type={'button'}
-						variant={'default'}
-						size={'lg'}
-						disabled={!canSubmit || isBusy}
-						onClick={handleSubmit}
-						className={'w-full'}>
-						{submitContent}
-					</Button>
 				</div>
 
-				<div className={'space-y-6 lg:sticky lg:top-24 lg:self-start'}>
-					<SubmitPreview
-						chain={selectedChain}
-						address={address}
-						svgDataURL={svgDataURL}
-						name={name}
-						symbol={symbol}
-						decimals={decimals}
-					/>
-				</div>
+				{errors.length > 0 && (
+					<div className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
+						{errors.map(error => (
+							<p key={`${error.field}-${error.message}`} className={'font-mono text-error text-xs'}>
+								{`• ${error.message}`}
+							</p>
+						))}
+					</div>
+				)}
+
+				{submitError && <p className={'font-mono text-error text-xs'}>{submitError}</p>}
+
+				<Button
+					type={'button'}
+					variant={'primary'}
+					size={'lg'}
+					disabled={!canSubmit || isBusy}
+					onClick={handleSubmit}
+					className={'w-full'}>
+					{submitContent}
+				</Button>
 			</div>
 
 			<SubmitResult prURL={prURL} onClose={() => setPrURL(null)} />
-		</div>
+		</>
 	);
 }

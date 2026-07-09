@@ -1,0 +1,5 @@
+{
+  "name": "Curve stETH-WETH Pool yVault",
+  "symbol": "yvCurve-stETH-WETH",
+  "decimals": 18
+}

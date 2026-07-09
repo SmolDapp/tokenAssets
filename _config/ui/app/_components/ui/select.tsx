@@ -102,7 +102,7 @@ const SelectItem = forwardRef<
 			'relative flex h-12 w-full cursor-pointer select-none items-center px-3 py-4 outline-none',
 			'transition-all',
 			'bg-white hover:bg-primary',
-			'text-subtle hover:text-white data-[state=checked]:text-primary data-[state=checked]:hover:text-white',
+			'text-black/70 hover:text-white data-[state=checked]:text-primary data-[state=checked]:hover:text-white',
 			'font-medium text-xs',
 			className
 		)}

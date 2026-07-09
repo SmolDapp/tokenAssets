@@ -21,7 +21,7 @@ export const TOTAL_TOKENS: number = chainsData.totalTokens;
 export const DEFAULT_CHAIN: TChainInfo = CHAINS.find(chain => chain.slug === 'ethereum') || CHAINS[0];
 
 export const SITE_URI = 'https://assets.smold.app';
-export const ASSETS_BASE_URI = `${SITE_URI}/api`;
+export const ASSETS_BASE_URI = `${SITE_URI}`;
 export const GITHUB_URI = 'https://github.com/SmolDapp/tokenAssets';
 export const SMOLD_APP_URI = 'https://smold.app';
 export const BRAND_GREEN = '#123524';

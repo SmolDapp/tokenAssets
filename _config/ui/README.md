@@ -15,7 +15,7 @@ Token metadata (name, symbol, decimals) is resolved at generation time with the 
 2. Onchain multicall (`name()`, `symbol()`, `decimals()`) through the chain's public RPC, for EVM tokens missing from the lists
 3. Fallback to address-only display
 
-Token images are loaded from the production CDN (`https://assets.smold.app/api`).
+Token images are loaded from the production CDN (`https://assets.smold.app`).
 
 ## Default ordering (new first, then by market cap)
 
