@@ -4,19 +4,17 @@ import {Drawer, DrawerContent, DrawerDescription, DrawerTitle} from '@components
 import {useChain} from '@contexts/WithChain';
 import Cross from '@icons/cross.svg';
 import {CHAINS, GITHUB_URI} from '@utils/constants';
-import {replaceChainSlug} from '@utils/helpers';
 import Link from 'next/link';
-import {usePathname, useRouter} from 'next/navigation';
+import {useRouter} from 'next/navigation';
 
 import type {ReactElement} from 'react';
 
 export function MobileMenuDrawer({isOpen, onClose}: {isOpen: boolean; onClose: () => void}): ReactElement {
 	const {chain} = useChain();
 	const router = useRouter();
-	const pathname = usePathname();
 
 	const handleChainSelect = (slug: string): void => {
-		router.replace(replaceChainSlug(pathname, slug), {scroll: false});
+		router.replace(`/${slug}`, {scroll: false});
 		onClose();
 	};
 
@@ -38,11 +36,17 @@ export function MobileMenuDrawer({isOpen, onClose}: {isOpen: boolean; onClose: (
 				<div className={'flex w-full flex-col gap-2 p-6'}>
 					<div className={'relative flex items-center justify-between'}>
 						<p className={'font-bold font-mono text-2xl text-white uppercase'}>{'Token Assets'}</p>
-						<button type={'button'} onClick={onClose} className={'absolute top-0 right-0'}>
+						<button
+							type={'button'}
+							onClick={onClose}
+							className={'absolute top-0 right-0'}>
 							<Cross className={'size-4 text-white'} />
 						</button>
 					</div>
-					<Link href={GITHUB_URI} target={'_blank'} rel={'noopener noreferrer'}>
+					<Link
+						href={GITHUB_URI}
+						target={'_blank'}
+						rel={'noopener noreferrer'}>
 						<button
 							type={'button'}
 							className={cn(

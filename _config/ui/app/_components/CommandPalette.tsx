@@ -2,11 +2,12 @@
 
 import {ChainLogo} from '@components/ChainLogo';
 import {cn} from '@components/lib/utils';
+import {useChain} from '@contexts/WithChain';
 import {useGlobalSearch} from '@hooks/useGlobalSearch';
 import SearchIcon from '@icons/search.svg';
 import * as Dialog from '@radix-ui/react-dialog';
 import {CHAINS} from '@utils/constants';
-import {tokenLogoURI, truncateAddress} from '@utils/helpers';
+import {tokenLogoURI, tokenPageURI, truncateAddress, withSearch} from '@utils/helpers';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
 import {useCallback, useEffect, useRef, useState} from 'react';
@@ -79,6 +80,7 @@ function ResultRow({
 
 export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): ReactElement {
 	const router = useRouter();
+	const {chain: currentChain} = useChain();
 	const [query, setQuery] = useState('');
 	const [activeIndex, setActiveIndex] = useState(0);
 	const {results} = useGlobalSearch(query, open);
@@ -113,10 +115,16 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 			if (search) {
 				params.set('search', search);
 			}
-			params.set('token', entry.address);
-			router.push(`/${chain.slug}?${params.toString()}`);
+			const href = withSearch(tokenPageURI(chain.slug, entry.address), params.toString());
+			// A same-chain pick is intercepted into the drawer; a cross-chain pick changes the
+			// [chain] segment, which the interceptor can't handle, so hard-navigate to the full page.
+			if (chain.id === currentChain.id) {
+				router.push(href, {scroll: false});
+			} else {
+				window.location.assign(href);
+			}
 		},
-		[router, onOpenChange, query]
+		[router, onOpenChange, query, currentChain.id]
 	);
 
 	const handleInputKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>): void => {
@@ -139,7 +147,9 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 	const showEmpty = trimmed.length > 0 && results.length === 0;
 
 	return (
-		<Dialog.Root open={open} onOpenChange={onOpenChange}>
+		<Dialog.Root
+			open={open}
+			onOpenChange={onOpenChange}>
 			<Dialog.Portal>
 				<Dialog.Overlay className={'fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px]'} />
 				<Dialog.Content

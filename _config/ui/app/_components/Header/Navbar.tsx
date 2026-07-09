@@ -7,9 +7,9 @@ import Grid from '@icons/grid.svg';
 import List from '@icons/list.svg';
 import {Select} from '@radix-ui/react-select';
 import {CHAINS} from '@utils/constants';
-import {replaceChainSlug} from '@utils/helpers';
+import {withSearch} from '@utils/helpers';
 import {useSettings} from 'app/_contexts/WithSettings';
-import {usePathname, useRouter, useSearchParams} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {useIsMounted} from 'usehooks-ts';
 
 import type {ReactElement} from 'react';
@@ -19,10 +19,20 @@ function GridOrListIcon(): ReactElement {
 	const isMounted = useIsMounted();
 
 	if (!isMounted() || view === 'grid') {
-		return <Grid suppressHydrationWarning className={'size-6 min-h-6 min-w-6'} />;
+		return (
+			<Grid
+				suppressHydrationWarning
+				className={'size-6 min-h-6 min-w-6'}
+			/>
+		);
 	}
 
-	return <List suppressHydrationWarning className={'size-6 min-h-6 min-w-6'} />;
+	return (
+		<List
+			suppressHydrationWarning
+			className={'size-6 min-h-6 min-w-6'}
+		/>
+	);
 }
 
 export function NavBar(): ReactElement {
@@ -30,19 +40,16 @@ export function NavBar(): ReactElement {
 	const searchParams = useSearchParams();
 	const {handleViewChange} = useSettings();
 	const {chain} = useChain();
-	const pathname = usePathname();
 
+	// Switching chains always lands on the bare chain list (dropping any open token), keeping
+	// only the active search so the destination stays filtered.
 	const handleChainChange = (value: string): void => {
 		const network = CHAINS.find(c => c.id === value);
 		if (!network) {
 			return;
 		}
 
-		const currentSearchParams = new URLSearchParams(searchParams.toString());
-		currentSearchParams.delete('token');
-		const newPath = replaceChainSlug(pathname, network.slug);
-		const newSearch = currentSearchParams.toString();
-		router.replace(`${newPath}${newSearch ? `?${newSearch}` : ''}`, {scroll: false});
+		router.replace(withSearch(`/${network.slug}`, searchParams.toString()), {scroll: false});
 	};
 
 	return (
@@ -58,7 +65,9 @@ export function NavBar(): ReactElement {
 				<p className={'sr-only'}>{'Toggle view'}</p>
 				<GridOrListIcon />
 			</button>
-			<Select value={chain.id} onValueChange={handleChainChange}>
+			<Select
+				value={chain.id}
+				onValueChange={handleChainChange}>
 				<SelectTrigger
 					className={cn(
 						'h-10 w-[154px] rounded-sm bg-transparent text-white uppercase transition-colors',
@@ -75,7 +84,9 @@ export function NavBar(): ReactElement {
 				</SelectTrigger>
 				<SelectContent className={'uppercase'}>
 					{CHAINS.map(network => (
-						<SelectItem key={network.id} value={network.id}>
+						<SelectItem
+							key={network.id}
+							value={network.id}>
 							<span className={'flex items-center gap-2'}>
 								<ChainLogo id={network.id} />
 								{network.name}

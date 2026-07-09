@@ -1,4 +1,5 @@
 import {CHAINS, SITE_URI} from '@utils/constants';
+import {tokenPageURI} from '@utils/helpers';
 import {readChainTokens} from '@utils/tokens.server';
 
 import type {MetadataRoute} from 'next';
@@ -11,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 		for (const token of readChainTokens(chain.id)) {
 			const entry: MetadataRoute.Sitemap[number] = {
-				url: `${SITE_URI}/${chain.slug}?token=${token.address}`,
+				url: `${SITE_URI}${tokenPageURI(chain.slug, token.address)}`,
 				changeFrequency: 'monthly',
 				priority: 0.5
 			};

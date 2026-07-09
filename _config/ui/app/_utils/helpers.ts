@@ -26,9 +26,16 @@ export function explorerAddressURI(chain: TChainInfo, address: string): string |
 	return `${chain.explorer}/address/${address}`;
 }
 
-// Swap the first path segment (the chain slug) for another chain's slug.
-export function replaceChainSlug(pathname: string, slug: string): string {
-	return pathname.replace(/^\/[^/]+/, `/${slug}`);
+export function tokenPageURI(chainSlug: string, address: string): string {
+	return `/${chainSlug}/${address}`;
+}
+
+// Append a query string to a path, prefixing `?` only when the query is non-empty.
+export function withSearch(path: string, search: string): string {
+	if (!search) {
+		return path;
+	}
+	return `${path}?${search}`;
 }
 
 export function truncateAddress(address: string, chars = 6): string {

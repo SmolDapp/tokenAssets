@@ -2,16 +2,16 @@
 
 import {GridView} from '@components/GridView';
 import {ListView} from '@components/ListView';
-import {TokenDrawerWrapper} from '@components/TokenDrawer';
 import {TxResult} from '@components/TxResult';
 import {Button} from '@components/ui/button';
 import {useChain} from '@contexts/WithChain';
 import {useTokens} from '@hooks/useTokens';
 import {GITHUB_URI} from '@utils/constants';
+import {tokenPageURI, withSearch} from '@utils/helpers';
 import {useSettings} from 'app/_contexts/WithSettings';
 import Link from 'next/link';
 import {useRouter, useSearchParams} from 'next/navigation';
-import {Fragment, useCallback, useEffect, useMemo, useRef} from 'react';
+import {Fragment, useCallback, useRef} from 'react';
 
 import type {TToken} from '@utils/types';
 import type {ReactElement} from 'react';
@@ -27,7 +27,7 @@ function TokensDisplay({
 	view: 'grid' | 'list';
 	hasNextPage: boolean;
 	fetchNextPage: () => void;
-	handleTokenSelect: (address: string | null) => void;
+	handleTokenSelect: (address: string) => void;
 }): ReactElement {
 	if (view === 'grid') {
 		return (
@@ -68,40 +68,23 @@ export function TokenList(): ReactElement {
 	const {view} = useSettings();
 
 	const searchQuery = searchParams.get('search') || '';
-	const selectedTokenAddress = searchParams.get('token');
-
-	const {tokens, isLoading, hasNextPage, fetchNextPage, findToken} = useTokens(chain.id, searchQuery);
+	const {tokens, isLoading, hasNextPage, fetchNextPage} = useTokens(chain.id, searchQuery);
 
 	// Keep a live ref to searchParams so handleTokenSelect stays referentially stable
 	// and selecting a token does not re-render the whole grid (which reloads logos).
 	const searchParamsRef = useRef(searchParams);
 	searchParamsRef.current = searchParams;
 
+	// Selecting a token navigates to its own path. On soft navigation this is intercepted
+	// into the @drawer slot (drawer over the still-mounted list); any active search is kept
+	// in the query so the list behind the drawer stays filtered.
 	const handleTokenSelect = useCallback(
-		(address: string | null): void => {
-			const params = new URLSearchParams(searchParamsRef.current.toString());
-			if (address) {
-				params.set('token', address);
-			} else {
-				params.delete('token');
-			}
-			router.push(`?${params.toString()}`, {scroll: false});
+		(address: string): void => {
+			const href = withSearch(tokenPageURI(chain.slug, address), searchParamsRef.current.toString());
+			router.push(href, {scroll: false});
 		},
-		[router]
+		[router, chain.slug]
 	);
-
-	const selectedToken = useMemo(() => {
-		if (!selectedTokenAddress) {
-			return null;
-		}
-		return findToken(selectedTokenAddress) || null;
-	}, [findToken, selectedTokenAddress]);
-
-	useEffect(() => {
-		if (!!selectedTokenAddress && !isLoading && !selectedToken) {
-			handleTokenSelect(null);
-		}
-	}, [selectedToken, isLoading, selectedTokenAddress, handleTokenSelect]);
 
 	return (
 		<div className={'w-full'}>
@@ -117,13 +100,8 @@ export function TokenList(): ReactElement {
 						</div>
 					}
 					action={
-						<Link
-							href={GITHUB_URI}
-							target={'_blank'}
-							rel={'noopener noreferrer'}>
-							<Button
-								className={'bg-primary text-white hover:bg-primary-light'}
-								size={'lg'}>
+						<Link href={GITHUB_URI} target={'_blank'} rel={'noopener noreferrer'}>
+							<Button className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
 								{'ADD TOKEN LOGO'}
 							</Button>
 						</Link>
@@ -139,12 +117,6 @@ export function TokenList(): ReactElement {
 					handleTokenSelect={handleTokenSelect}
 				/>
 			)}
-
-			<TokenDrawerWrapper
-				token={selectedToken}
-				isOpen={!!selectedTokenAddress}
-				onClose={() => handleTokenSelect(null)}
-			/>
 		</div>
 	);
 }

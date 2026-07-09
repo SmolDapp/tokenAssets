@@ -1,7 +1,7 @@
 'use client';
 
 import {CHAINS} from '@utils/constants';
-import {tokenLogoURI, truncateAddress} from '@utils/helpers';
+import {tokenLogoURI, tokenPageURI, truncateAddress} from '@utils/helpers';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,7 +15,7 @@ export function LogoWall({logos}: {logos: {chainID: string; address: string}[]})
 			{logos.map(({chainID, address}) => (
 				<Link
 					key={`${chainID}-${address}`}
-					href={`/${SLUG_BY_ID.get(chainID) || chainID}?token=${address}`}
+					href={tokenPageURI(SLUG_BY_ID.get(chainID) || chainID, address)}
 					aria-label={`Open token ${truncateAddress(address, 4)}`}
 					className={'flex aspect-square items-center justify-center'}>
 					<Image

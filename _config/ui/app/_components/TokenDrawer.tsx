@@ -1,16 +1,16 @@
 'use client';
 
 import {CodeSnippets} from '@components/CodeSnippets';
-import {InfoField} from '@components/InfoField';
 import {Spinner} from '@components/Spinner';
+import {TokenInfoFields} from '@components/TokenInfoFields';
 import {cn} from '@components/lib/utils';
 import {Button} from '@components/ui/button';
-import {Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle} from '@components/ui/drawer';
+import {Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle} from '@components/ui/drawer';
 import {useChain} from '@contexts/WithChain';
 import Cross from '@icons/cross.svg';
 import {copyToClipboard} from '@utils/clipboard';
 import {LOGO_FORMATS} from '@utils/constants';
-import {explorerAddressURI, tokenGithubURI, tokenLogoURI} from '@utils/helpers';
+import {tokenGithubURI, tokenLogoURI} from '@utils/helpers';
 import Image from 'next/image';
 import Link from 'next/link';
 import {Fragment, useState} from 'react';
@@ -21,10 +21,11 @@ import type {ReactElement} from 'react';
 type TTokenDrawerProps = {
 	token: TToken | null;
 	onClose: () => void;
+	onClosed?: () => void;
 	isOpen: boolean;
 };
 
-function TokenDrawer({token, onClose}: {token: TToken; onClose: () => void}): ReactElement {
+function TokenDrawer({token}: {token: TToken}): ReactElement {
 	const {chain} = useChain();
 	const [selectedFile, setSelectedFile] = useState<TLogoFile>('logo-128.png');
 	const displayName = token.symbol || token.name || token.address;
@@ -53,9 +54,11 @@ function TokenDrawer({token, onClose}: {token: TToken; onClose: () => void}): Re
 					/>
 
 					<DrawerHeader className={'flex justify-end p-0'}>
-						<Button onClick={onClose} className={'text-black'} variant={'ghost'} size={'icon'}>
-							<Cross className={'size-4'} />
-						</Button>
+						<DrawerClose asChild>
+							<Button className={'text-black'} variant={'ghost'} size={'icon'}>
+								<Cross className={'size-4'} />
+							</Button>
+						</DrawerClose>
 					</DrawerHeader>
 
 					<div className={'flex flex-col gap-6'}>
@@ -103,19 +106,7 @@ function TokenDrawer({token, onClose}: {token: TToken; onClose: () => void}): Re
 							</Button>
 						</div>
 						<div className={'space-y-6'}>
-							<div className={'grid grid-cols-2 gap-x-4 gap-y-6'}>
-								{token.name && <InfoField label={'NAME'} value={token.name} />}
-								{token.symbol && <InfoField label={'SYMBOL'} value={token.symbol} />}
-								{token.decimals !== undefined && (
-									<InfoField label={'DECIMALS'} value={token.decimals.toString()} />
-								)}
-								<InfoField label={'NETWORK'} value={chain.name} />
-							</div>
-							<InfoField
-								label={'CONTRACT ADDRESS'}
-								value={token.address}
-								href={explorerAddressURI(chain, token.address)}
-							/>
+							<TokenInfoFields token={token} chain={chain} />
 
 							<div className={'space-y-2'}>
 								<p className={'font-mono text-subtle text-xs uppercase tracking-[0.1em]'}>{'Use it'}</p>
@@ -139,7 +130,7 @@ function TokenDrawer({token, onClose}: {token: TToken; onClose: () => void}): Re
 	);
 }
 
-export function TokenDrawerWrapper({token, onClose, isOpen}: TTokenDrawerProps): ReactElement | null {
+export function TokenDrawerWrapper({token, onClose, onClosed, isOpen}: TTokenDrawerProps): ReactElement | null {
 	return (
 		<Drawer
 			modal={true}
@@ -149,6 +140,11 @@ export function TokenDrawerWrapper({token, onClose, isOpen}: TTokenDrawerProps):
 				if (!open) {
 					onClose();
 				}
+			}}
+			onAnimationEnd={open => {
+				if (!open) {
+					onClosed?.();
+				}
 			}}>
 			<DrawerContent
 				side={'right'}
@@ -156,7 +152,7 @@ export function TokenDrawerWrapper({token, onClose, isOpen}: TTokenDrawerProps):
 					'inset-y-2 right-2 h-auto overflow-hidden rounded-[4px] border border-subtle bg-white p-0 max-md:left-2 md:w-[550px]'
 				}>
 				{token ? (
-					<TokenDrawer token={token} onClose={onClose} />
+					<TokenDrawer token={token} />
 				) : (
 					<div className={'flex h-[400px] w-full items-center justify-center'}>
 						<DrawerTitle className={'sr-only'}>{'Loading...'}</DrawerTitle>
