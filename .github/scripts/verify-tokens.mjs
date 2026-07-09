@@ -4,6 +4,15 @@ import {ForbiddenSVGPattern} from './forbidden-svg-pattern.mjs';
 
 const DataDirectory = './tokens';
 const IndexName = 'index.json';
+const AllowedTokenFiles = new Set([
+	'logo.svg',
+	'logo-32.png',
+	'logo-128.png',
+	'logo-alt.svg',
+	'logo-alt-32.png',
+	'logo-alt-128.png',
+	'info.json'
+]);
 
 function validate(directory) {
 	let allValid = true;
@@ -49,6 +58,15 @@ function validate(directory) {
 					// 	console.error(`Error: "${file}" logo.svg is larger than 0.15mb.`);
 					// 	allValid = false;
 					// }
+				}
+				// Reject stray files: a token folder may only hold the logo set and info.json.
+				for (const entry of fs.readdirSync(file, {withFileTypes: true})) {
+					if (entry.isFile() && !entry.name.startsWith('.') && !AllowedTokenFiles.has(entry.name)) {
+						console.error(
+							`Error: "${path.join(file, entry.name)}" is not an allowed file. Token folders may only contain: ${[...AllowedTokenFiles].join(', ')}.`
+						);
+						allValid = false;
+					}
 				}
 			}
 			allValid &= validate(file);

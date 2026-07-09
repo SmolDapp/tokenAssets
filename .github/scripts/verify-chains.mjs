@@ -4,6 +4,14 @@ import {ForbiddenSVGPattern} from './forbidden-svg-pattern.mjs';
 
 const DataDirectory = './chains';
 const IndexName = 'index.json';
+const AllowedChainFiles = new Set([
+	'logo.svg',
+	'logo-32.png',
+	'logo-128.png',
+	'logo-alt.svg',
+	'logo-alt-32.png',
+	'logo-alt-128.png'
+]);
 
 function validate(directory) {
 	let allValid = true;
@@ -31,6 +39,15 @@ function validate(directory) {
 					const svgValue = fs.readFileSync(path.join(file, 'logo.svg'), 'utf8');
 					if (ForbiddenSVGPattern.test(svgValue)) {
 						console.error(`Error: "${file}" logo.svg contains a base64 image, external link or script.`);
+						allValid = false;
+					}
+				}
+				// Reject stray files: a chain folder may only hold the logo set.
+				for (const entry of fs.readdirSync(file, {withFileTypes: true})) {
+					if (entry.isFile() && !entry.name.startsWith('.') && !AllowedChainFiles.has(entry.name)) {
+						console.error(
+							`Error: "${path.join(file, entry.name)}" is not an allowed file. Chain folders may only contain: ${[...AllowedChainFiles].join(', ')}.`
+						);
 						allValid = false;
 					}
 				}

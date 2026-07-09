@@ -140,3 +140,21 @@ jobs:
 
                   if [ $FAILED -eq 1 ]; then exit 1; fi
                   echo "Ok: all chain directories are valid!"
+
+            - name: Check allowed files
+              run: |
+                  FAILED=0
+                  while IFS= read -r -d '' f; do
+                    case "$(basename "$f")" in
+                      logo.svg|logo-32.png|logo-128.png|logo-alt.svg|logo-alt-32.png|logo-alt-128.png|info.json) ;;
+                      *) echo "Error: $f is not allowed (token folders: logo.svg, logo-32.png, logo-128.png, logo-alt.*, info.json)"; FAILED=1 ;;
+                    esac
+                  done < <(find ./tokens -mindepth 3 -type f -print0)
+                  while IFS= read -r -d '' f; do
+                    case "$(basename "$f")" in
+                      logo.svg|logo-32.png|logo-128.png|logo-alt.svg|logo-alt-32.png|logo-alt-128.png) ;;
+                      *) echo "Error: $f is not allowed (chain folders: logo.svg, logo-32.png, logo-128.png, logo-alt.*)"; FAILED=1 ;;
+                    esac
+                  done < <(find ./chains -mindepth 2 -type f -print0)
+                  if [ $FAILED -eq 1 ]; then exit 1; fi
+                  echo "Ok: only allowed files in token/chain folders"
