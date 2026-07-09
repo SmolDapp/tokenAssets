@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+    <circle cx="300" cy="300" r="300" fill="url(#gradient)"/>
+    <g transform="matrix(25,0,0,25,0,0)">
+        <path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" d="M9.0258 4.00031H6.35928V19.9994H11.6923V19.3594C12.4929 19.7692 13.4001 20.0003 14.3612 20.0003C17.6011 20.0003 20.2275 17.3739 20.2275 14.134C20.2275 10.8941 17.6011 8.26765 14.3612 8.26765C13.4001 8.26765 12.4929 8.49879 11.6923 8.90852V4.69516V4.00031H9.0258ZM11.6923 8.90852C9.79415 9.87994 8.49487 11.8552 8.49487 14.134C8.49487 16.4127 9.79415 18.388 11.6923 19.3594V8.90852Z" fill="#1C1D4F"/>    </g>
+    <defs>
+        <radialGradient id="gradient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.5) rotate(54.1675) scale(497.082)">
+            <stop stop-color="#72F790"/>
+            <stop offset="1" stop-color="#54B76A"/>
+        </radialGradient>
+    </defs>
+</svg>

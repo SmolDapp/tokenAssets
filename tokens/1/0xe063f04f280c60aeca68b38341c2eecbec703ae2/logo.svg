@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+    <defs>
+        <linearGradient id="linear-gradient" x1="3.35" y1="13.37" x2="37.74" y2="13.37" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#d81c5c"/>
+            <stop offset="1" stop-color="#ed4036"/>
+        </linearGradient>
+        <linearGradient id="linear-gradient-2" x1="6.28" y1="30.64" x2="40.64" y2="30.64" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#d81c5c"/>
+            <stop offset="1" stop-color="#ed4036"/>
+        </linearGradient>
+    </defs>
+    <g transform="matrix(13.64,0,0,13.64,0,0)">
+        <circle fill="white" cx="22" cy="22" r="22"/>
+        <path fill="url(#linear-gradient)" d="M34.65,22.13c-2.32,1.5-5,1.93-8.29.2a.29.29,0,0,1,0-.5l4.24-2.74a.37.37,0,0,0,.11-.51l-2-3.1a.37.37,0,0,0-.51-.11l-5.72,3.71a.71.71,0,0,1-.77,0C15.44,14.94,10.17,16.58,7.47,18A14.88,14.88,0,0,0,3.7,21a.21.21,0,0,1-.35-.15c.47-6,2.92-11,9.2-15C20,1,31.12,3.42,35.82,10.69,39.09,15.75,37.82,20.08,34.65,22.13Z"/>
+        <path fill="url(#linear-gradient-2)" d="M40.64,23.3c-.48,6-3,10.9-9.19,14.94C24.06,43,12.89,40.58,8.18,33.31c-3.27-5.06-2-9.35,1.2-11.4a7.6,7.6,0,0,1,8.26-.24.29.29,0,0,1,0,.5l-4.24,2.75a.37.37,0,0,0-.11.51l2,3.1a.36.36,0,0,0,.51.1l5.74-3.71a.7.7,0,0,1,.76,0c6.24,4.13,11.51,2.49,14.21,1.05a14.64,14.64,0,0,0,3.7-2.85A.24.24,0,0,1,40.64,23.3Z"/>
+    </g>
+</svg>

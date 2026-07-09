@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" fill="none">
+    <path d="M300 600C465.685 600 600 465.685 600 300C600 134.315 465.685 0 300 0C134.315 0 0 134.315 0 300C0 465.685 134.315 600 300 600Z" fill="url(#paint0_radial)"/>
+    <circle transform="translate(50,50)" cx="250" cy="250" r="250" fill="white"/>
+    <g transform="matrix(11,0,0,11,184.28,118.875)">
+        <path class="cls-2" d="m13.11,4.09l-2.59,1.5V.24c0-.12-.12-.16-.16-.16.12-.12.32-.12.45.08l2.31,3.92Z" />
+        <path class="cls-13" d="m10.76,32.78c-.16.2-.32.2-.45,0l-5.26-7.53,5.46,3.32v4.13c0,.12.16.12.24.08Z" />
+        <path class="cls-7" d="m10.52,11.41v6.35l-7.89-4.65,2.87-4.73,5.02,3.03Z" />
+        <path class="cls-8" d="m10.52,24.16v4.41l-5.46-3.32L.24,18.25c-.12-.16-.24-.36-.24-.49.04.16.12.24.24.32l10.28,6.07Z" />
+        <path class="cls-9" d="m10.52,17.73v6.43L.24,18.05c-.16-.08-.2-.2-.2-.36v-.04c0-.12.04-.16.08-.28l2.55-4.29,7.85,4.65Z" />
+        <path class="cls-1" d="m10.52,5.63v5.83l-5.02-2.99,2.55-4.33,2.47,1.5Z" />
+        <path class="cls-6" d="m10.52,5.63l-2.51-1.54L10.28.2l.04-.04.04-.04c.08-.08.16,0,.16.16,0-.04,0,5.34,0,5.34Z" />
+        <path class="cls-11" d="m16.06,25.25l-5.26,7.53-.04.04c-.08.08-.2,0-.2-.12v-4.13l5.5-3.32Z" />
+        <path class="cls-5" d="m15.62,8.38l2.83,4.73-7.89,4.65v-6.35l5.06-3.03Z" />
+        <path class="cls-10" d="m21.04,17.68c0,.16-.12.4-.2.57l-4.82,6.96-5.5,3.32v-4.37l10.32-6.15c.08-.12.2-.2.2-.32Z" />
+        <path class="cls-12" d="m21.04,17.6h0c0,.16-.12.32-.2.4l-10.32,6.15v-6.43l7.89-4.65,2.55,4.25c.08.16.08.24.08.28Z" />
+        <path class="cls-4" d="m13.11,4.09l2.51,4.29-5.06,2.99v-5.75l2.55-1.54Z" />
+    </g>
+    <defs>
+        <style>.cls-1{fill:#f86e30;}.cls-2{fill:#fc306b;}.cls-4{fill:#f78f31;}.cls-5{fill:#ffc866;}.cls-6{fill:#e91224;}.cls-7{fill:#feb92f;}.cls-8{fill:#1a78d7;}.cls-9{fill:#0bb875;}.cls-10{fill:#53aef9;}.cls-11{fill:#827ff4;}.cls-12{fill:#74ca38;}.cls-13{fill:#4f28dd;}</style>
+        <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.5) rotate(54.1675) scale(497.082)">
+            <stop stop-opacity="0.8" stop-color="#e91224"/>
+            <stop stop-opacity="0.8" offset="20%" stop-color="#f86e30"/>
+            <stop stop-opacity="0.8" offset="40%" stop-color="#feb92f"/>
+            <stop stop-opacity="0.8" offset="60%" stop-color="#0bb875"/>
+            <stop stop-opacity="0.8" offset="80%" stop-color="#1a78d7"/>
+            <stop stop-opacity="0.8" offset="100%" stop-color="#4f28dd"/>
+        </radialGradient>
+    </defs>
+</svg>

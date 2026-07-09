@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+    <circle fill="url(#background)" cx="300" cy="300" r="300"/>
+    <g>
+      <path fill="#211e1b" d="M301.66,135.32c139.68-2.3,222.01,173.35,120.39,273.69l-120.39-111.12v-162.58Z"/>
+      <path fill="#afa69b" d="M291.1,464.7l-133.22-132.94-20.91-27.52h154.13l160.54,147.74c5.67,3.79-2.31,12.73-4.3,12.73h-156.24Z"/>
+      <path fill="#706962" d="M293.21,135.32v160.46h-160.46c-1.99-87.83,73.54-160.49,160.46-160.46Z"/>
+      <path fill="#706962" d="M276.32,464.7h-139.35c-1.53-7.08,2.26-8.55,6.41-12.59,7.34-7.14,59.07-55.12,63.26-55.12,25.84,17.86,48.35,44.06,69.68,67.71Z"/>
+    </g>
+    <defs>
+        <radialGradient id="background" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.5) rotate(54.1675) scale(497.082)">
+            <stop stop-color="#fbeddd"/>
+            <stop offset="1" stop-color="#f3d7b8"/>
+        </radialGradient>
+  </defs>
+</svg>

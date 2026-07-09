@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+    <defs>
+        <radialGradient id="gradient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.5) rotate(54.1675) scale(497.082)">
+            <stop stop-color="white"/>
+            <stop stop-color="#02a6fa" offset="1"/>
+        </radialGradient>
+    </defs>
+    <circle fill="url(#gradient)" cx="300" cy="300" r="300"/>
+    <g>
+    <ellipse fill="white" cx="298.54" cy="300" rx="28" ry="28.5"/>
+    <ellipse fill="white" cx="299.7" cy="155" rx="28" ry="28.5"/>
+    <rect fill="white" x="290.04" y="195.5" width="17" height="64"/>
+    <ellipse fill="white" cx="172.8" cy="224" rx="28" ry="28.5" transform="translate(-107.59 261.65) rotate(-60)"/>
+    <rect fill="white" x="226.5" y="229.26" width="17" height="64" transform="translate(-108.76 334.15) rotate(-60)"/>
+    <ellipse fill="white" cx="427.2" cy="228.88" rx="28.5" ry="28" transform="translate(-57.21 244.27) rotate(-30)"/>
+    <rect fill="white" x="355.33" y="232.12" width="17" height="64" transform="translate(410.65 -183.03) rotate(60)"/>
+    <ellipse fill="white" cx="421.66" cy="373.49" rx="28" ry="28.5" transform="translate(-112.62 551.91) rotate(-60)"/>
+    <rect fill="white" x="350.96" y="304.23" width="17" height="64" transform="translate(830.37 193.05) rotate(120)"/>
+    <ellipse fill="white" cx="173.17" cy="371.61" rx="28.5" ry="28" transform="translate(-162.6 136.37) rotate(-30)"/>
+    <rect fill="white" x="228.04" y="304.37" width="17" height="64" transform="translate(63.51 709.41) rotate(-120)"/>
+    <ellipse fill="white" cx="297.7" cy="445" rx="28" ry="28.5"/>
+    <rect fill="white" x="289.7" y="340.5" width="17" height="64"/>
+    </g>
+</svg>

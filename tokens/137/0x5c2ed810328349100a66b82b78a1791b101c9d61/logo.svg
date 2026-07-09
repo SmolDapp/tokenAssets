@@ -1,0 +1,17 @@
+<svg fill="none" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <radialGradient id="a" cx="0" cy="0" gradientTransform="rotate(54.2 -42.3 263.4) scale(497.082)" gradientUnits="userSpaceOnUse" r="1">
+        <stop offset="0" stop-color="#ffefd8"/>
+        <stop offset="1" stop-color="#d99231"/>
+    </radialGradient>
+    <linearGradient id="stroke-gradient" x1="200" x2="400" y1="400" y2="200" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#2FB9C6"/>
+        <stop offset="1" stop-color="#B4519F"/>
+    </linearGradient>
+    <path d="M300 600a300 300 0 100-600 300 300 0 000 600z" fill="#fce1bc"/>
+    <path d="M300 600a300 300 0 100-600 300 300 0 000 600z" fill="url(#a)" fill-opacity=".3"/>
+    <g fill="#595563">
+        <path d="M479 135.1l-15.5 15.6c77 84.2 77 213.4 0 297.6L479 464a242.8 242.8 0 000-329.2zM151.3 136.5c84.3-77.1 213.4-77.1 297.7 0l15.5-15.6a242.8 242.8 0 00-329.2 0zM136.8 448.5c-77-84.2-77-213.3 0-297.6l-15.5-15.5a242.8 242.8 0 00-.1 329.2zM448.8 462.9c-84.2 77-213.4 77-297.6 0l-15.6 15.6a242.8 242.8 0 00329.2 0z"/>
+    </g>
+    <path d="M391.5 242.4c-3.1-32.5-31.2-43.4-66.6-46.7v-44.8h-27.4v44c-7.2 0-14.6 0-22 .2V151h-27.2v45.2h-55.6v29.3s20.3-.4 20 0c7.5-.9 14.4 4.5 15.5 12V361c-.2 2.6-1.4 5-3.3 6.7s-4.5 2.6-7 2.4c.3.3-20 0-20 0l-5.4 32.7h55.4v45.9h27.4v-45.2h21.9v45h27.5V403c46.3-2.8 78.6-14.2 82.6-57.6 3.3-34.9-13.1-50.4-39.4-56.7 16-8.2 26-22.5 23.6-46.3zM353.1 340c0 34-58.3 30.2-76.9 30.2v-60.4c18.6 0 77-5.3 77 30.2zm-12.7-85.2c0 31.2-48.7 27.4-64.1 27.4v-55c15.4.1 64.1-4.8 64.1 27.6z" fill="#e39552"/>
+    <circle stroke="url(#stroke-gradient)" stroke-width="20" fill="none" cx="300" cy="300" r="290" />
+</svg>

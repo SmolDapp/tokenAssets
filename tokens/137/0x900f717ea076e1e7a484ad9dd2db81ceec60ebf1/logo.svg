@@ -1,0 +1,36 @@
+<svg  viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_6170_39191)">
+        <path d="M300 600.014C465.684 600.014 600 465.698 600 300.014C600 134.328 465.684 0.0136719 300 0.0136719C134.315 0.0136719 0 134.328 0 300.014C0 465.698 134.315 600.014 300 600.014Z" fill="url(#paint0_radial_6170_39191)"/>
+        <path d="M113.38 313.533L130.962 353.942L215.678 436.363L204.81 400.803L113.38 313.533Z" fill="#FCFCFA"/>
+        <path d="M300.595 309.658L303.155 351.96L391.502 434.292L397.209 398.556L300.595 309.658Z" fill="#FCFCFA"/>
+        <path d="M112.535 311.601L299.766 141L488.438 307.323L397.209 398.556L300.596 309.659L204.811 400.803L112.535 311.601Z" fill="#FCFCFA"/>
+        <path d="M299.766 141L112.535 311.601" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M488.439 307.323L299.767 141" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M204.81 400.803L300.595 309.457" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M300.596 309.457L397.21 398.556" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M397.209 398.556L488.438 307.323" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M112.535 311.6L204.811 400.803" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M303.156 351.96L215.679 436.362" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M391.502 434.292L303.155 351.96" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M475.171 349.979L391.502 434.292" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M215.678 436.363L130.963 353.943" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M112.535 311.6L130.963 353.942" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M475.171 349.978L488.438 307.323" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M300.596 309.457L303.156 351.96" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M204.81 400.803L215.678 436.362" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M397.209 398.556L391.502 434.292" stroke="#27363B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M204.81 400.803L215.678 436.362L303.155 351.96L300.595 309.457L204.81 400.803Z" fill="#27363B" stroke="#27363B" stroke-miterlimit="10"/>
+        <path d="M397.209 398.556L391.502 434.292L475.171 349.978L486.296 309.457L397.209 398.556Z" fill="#27363B" stroke="#27363B" stroke-miterlimit="10"/>
+    </g>
+    <defs>
+        <radialGradient id="paint0_radial_6170_39191" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.514) rotate(54.1676) scale(497.082)">
+            <stop stop-color="#9AB999"/>
+            <stop offset="0.461458" stop-color="#F9D3B3"/>
+            <stop offset="0.779167" stop-color="#FA9E9A"/>
+            <stop offset="1" stop-color="#EB4F64"/>
+        </radialGradient>
+        <clipPath id="clip0_6170_39191">
+            <rect width="600" height="600" fill="white"/>
+        </clipPath>
+    </defs>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+    <circle fill="url(#radial2)" cx="300" cy="300" r="300"/>
+    <g transform="matrix(10,0,0,10,163.5,169.5)">
+        <path
+        fill="#2E2EFF"
+        d="M7.7,15.3c-4.2,0.2-7.8-3.1-7.9-7.4S2.9,0.2,7.1,0c0.2,0,0.4,0,0.6,0v4.4c-1.8,0-3.3,1.5-3.3,3.3     s1.5,3.3,3.3,3.3V15.3z"
+        />
+        <rect
+        x="-2.3"
+        y="11.1"
+        transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.4137 13.5564)"
+        fill="#2E2EFF"
+        width="31.9"
+        height="4.4"
+        />
+        <polygon fill="#2E2EFF" points="27.1,26 16.6,26 16.6,15.3 21,15.3 21,21.6 27.1,21.6" />  
+    </g>
+	<defs>
+		<radialGradient id="paint0_radial_7863_57676" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.514) rotate(54.1676) scale(497.082 497.082)">
+			<stop offset="0.230743" stop-color="white" />
+			<stop offset="1" stop-color="#DFDFDF" />
+		</radialGradient>
+        <radialGradient id="radial2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.514) rotate(54.1676) scale(497.082 497.082)">
+			<stop stop-color="white" />
+			<stop offset="1" stop-color="#8080FF"/>
+		</radialGradient>
+		<clipPath id="clip0_7863_57676">
+			<rect width="600" height="600" fill="white" />
+		</clipPath>
+	</defs>
+</svg>

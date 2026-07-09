@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+	<clipPath id="cut-border">
+		<circle cx="300" cy="300" r="300" x="27" />
+	</clipPath>
+	<g clip-path="url(#cut-border)">
+		<rect x="154" y="-300" width="135" height="600" transform="rotate(45)" fill="#1681fd" />
+		<rect x="289" y="-300" width="135" height="600" transform="rotate(45)" fill="#60d7a3" />
+		<rect x="424" y="-300" width="135" height="600" transform="rotate(45)" fill="#f3ba3b" />
+		<rect x="559" y="-300" width="135" height="600" transform="rotate(45)" fill="#fe5a5a" />
+		<path d="M 456 261.6 V 183.6336 H 416.8625 V 144.7867 H 338.8579 V 105.6682 H 260.8536 V 144.7867 H 182.849 V 183.905 H 143.7106 V 417.8033 H 182.849 V 456.9218 H 260.8536 V 496.0404 H 338.8579 V 456.9218 H 416.8625 V 417.8033 H 456 V 339.5652 H 377.9954 V 378.6838 H 338.8579 V 417.8033 H 260.8536 V 378.6838 H 221.9866 V 222.7531 H 261.125 V 183.6336 H 339.1296 V 222.7531 H 378.2671 V 261.8717 H 456 V 261.6 Z" fill="#3A3A3A" />
+		<g id="ring" fill="none" stroke-width="30">
+			<path d="M30,209 A285,285 0 0,1 570,209" stroke="blue" />
+			<path d="M570,209 A285,285 0 0,1 300,585" stroke="yellow" />
+			<path d="M300,585 A285,285 0 0,1 30,209" stroke="red" />
+		</g>
+	</g>
+	<path d="M300 600C465.685 600 600 465.685 600 300C600 134.315 465.685 0 300 0C134.315 0 0 134.315 0 300C0 465.685 134.315 600 300 600Z" fill="url(#paint0_radial_440_36)" opacity="0.15" />
+	<radialGradient id="paint0_radial_440_36" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(196 143.5) rotate(54.1675) scale(497.082)">
+		<stop stop-color="#CCCCCC" />
+		<stop offset="1" />
+	</radialGradient>
+</svg>

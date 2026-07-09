@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+	<circle cx="300" cy="300" r="300" fill="url(#paint0_radial)" />
+	<g transform="scale(0.83333) translate(60 60)">
+		<path d="M300 600c165.69 0 300-134.31 300-300S465.69 0 300 0 0 134.31 0 300s134.31 300 300 300z" fill="#c5cae9"/>
+		<path d="M300 600c165.69 0 300-134.31 300-300S465.69 0 300 0 0 134.31 0 300s134.31 300 300 300z" fill="url(#eth-gradient)" fill-opacity=".35"/>
+		<path fill="#5c6cc0" d="M185.42 297.21l114.14 67.52V107.87zm114.14-189.34v256.86l114.03-67.52zM185.42 318.93L299.56 479.7v-93.34zm114.14 67.42v93.34L413.7 318.93z"/>
+	</g>
+	<g fill="#FFFFFF" transform="scale(2) translate(140 275)">
+		<path d="M20 12C20 16.4183 16.412 20 11.986 20C7.78693 20 4.34212 16.7761 4 12.6725H14.5926V11.3275H4C4.34212 7.22393 7.78693 4 11.986 4C16.412 4 20 7.58171 20 12Z" />
+	</g>
+	<defs>
+		<radialGradient id="paint0_radial" cx="300" cy="600" r="600" gradientUnits="userSpaceOnUse">
+			<stop offset="10%" stop-color="#0052FF" />
+			<stop offset="50%" stop-color="#cdf850" />
+			<stop offset="100%" stop-color="#c9cd60" />
+		</radialGradient>
+		<radialGradient id="eth-gradient" cx="0" cy="0" gradientTransform="rotate(54.17 -42.31 263.4) scale(497.082)" gradientUnits="userSpaceOnUse" r="1">
+			<stop offset="0" stop-color="#e5e8ff"/>
+			<stop offset="1" stop-color="#7887d8"/>
+		</radialGradient>
+	</defs>
+</svg>
