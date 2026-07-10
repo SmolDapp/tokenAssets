@@ -182,11 +182,24 @@ export async function POST(request: Request): Promise<Response> {
 		);
 	}
 
+	// Diagnostic: does the token see push access on the base repo? With push access the plugin writes the
+	// branch directly to the base repo (no fork), which sidesteps the `repo`-scope escalation GitHub
+	// enforces on createRef against a fork of an org repo (the confusing 404 with acceptedScopes=repo).
+	try {
+		const baseRepo = await octokit.request('GET /repos/{owner}/{repo}', {owner, repo: repoName});
+		console.log('submit diag', {basePush: baseRepo.data.permissions?.push});
+	} catch {
+		// diagnostic only — never block the submit on it
+	}
+
 	try {
 		const pr = await octokit.createPullRequest({
 			owner,
 			repo: repoName,
-			forceFork: true,
+			// Not forceFork: contributors with push access (org members) get a branch on the base repo
+			// directly — no fork, so no createRef-on-fork `repo`-scope escalation. Contributors WITHOUT push
+			// are still auto-forked by the plugin, so their PR still comes from their own fork.
+			forceFork: false,
 			title: `Add ${label} on ${chain.name}`,
 			body: [
 				'Submitted via the Token Assets submit form.',
