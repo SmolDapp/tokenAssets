@@ -1,6 +1,6 @@
 'use client';
 
-import {getSearchScore} from '@utils/searchScore';
+import {rankBySearchScore} from '@utils/searchScore';
 import {useEffect, useMemo, useState} from 'react';
 
 import type {TSearchEntry} from '@utils/types';
@@ -37,8 +37,9 @@ function loadSearchIndex(): Promise<TSearchEntry[]> {
 	return indexPromise;
 }
 
-export function useGlobalSearch(query: string, enabled: boolean): {results: TSearchEntry[]} {
+export function useGlobalSearch(query: string, enabled: boolean): {results: TSearchEntry[]; hasError: boolean} {
 	const [entries, setEntries] = useState<TSearchEntry[]>(() => cachedIndex || []);
+	const [hasError, setHasError] = useState(false);
 
 	useEffect(() => {
 		if (!enabled) {
@@ -48,9 +49,11 @@ export function useGlobalSearch(query: string, enabled: boolean): {results: TSea
 		// instead of returning early — otherwise this instance stays stuck on its initial empty state.
 		if (cachedIndex) {
 			setEntries(cachedIndex);
+			setHasError(false);
 			return;
 		}
 		let isCancelled = false;
+		setHasError(false);
 		loadSearchIndex()
 			.then(loaded => {
 				if (!isCancelled) {
@@ -59,6 +62,12 @@ export function useGlobalSearch(query: string, enabled: boolean): {results: TSea
 			})
 			.catch(error => {
 				console.error(error);
+				// Surface the failure so the palette can offer a retry instead of showing a
+				// misleading "no results" state. loadSearchIndex already cleared its memo, so
+				// re-enabling (reopening the palette) retries the fetch.
+				if (!isCancelled) {
+					setHasError(true);
+				}
 			});
 		return () => {
 			isCancelled = true;
@@ -70,19 +79,8 @@ export function useGlobalSearch(query: string, enabled: boolean): {results: TSea
 		if (!normalized) {
 			return [];
 		}
-		return entries
-			.map(entry => ({entry, score: getSearchScore(entry, normalized)}))
-			.filter(item => item.score !== null)
-			.sort((first, second) => {
-				const scoreDiff = (first.score as number) - (second.score as number);
-				if (scoreDiff !== 0) {
-					return scoreDiff;
-				}
-				return (second.entry.mcap || 0) - (first.entry.mcap || 0);
-			})
-			.slice(0, MAX_RESULTS)
-			.map(item => item.entry);
+		return rankBySearchScore(entries, normalized).slice(0, MAX_RESULTS);
 	}, [entries, query]);
 
-	return {results};
+	return {results, hasError};
 }

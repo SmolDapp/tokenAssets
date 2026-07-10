@@ -1,6 +1,8 @@
 // Builds and validates a token submission. The on-disk info.json holds ONLY non-derivable data:
 // address / chainID / logoURI come from the folder path, so they are never stored here.
 
+import {isForbiddenSvg} from '@utils/svgSafety';
+
 const EVM_ADDRESS_RE = /^0x[0-9a-fA-F]{40}$/;
 const NON_EVM_CHAINS = new Set(['1151111081099710', 'btcm']);
 const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -90,6 +92,37 @@ export function isValidAddress(chainID: string, address: string): boolean {
 	return EVM_ADDRESS_RE.test(trimmed);
 }
 
+// The name/symbol/decimals checks alone — used both by the full validation and by the submit form
+// to decide whether RPC-fetched metadata is usable or the manual-entry fields must be shown.
+export function validateTokenMeta(name: string, symbol: string, decimals: string): TValidationError[] {
+	const errors: TValidationError[] = [];
+
+	const trimmedName = name.trim();
+	if (!trimmedName) {
+		errors.push({field: 'name', message: 'Name is required'});
+	} else if (trimmedName.length > 60) {
+		errors.push({field: 'name', message: 'Name must be 60 characters or fewer'});
+	}
+
+	const trimmedSymbol = symbol.trim();
+	if (!trimmedSymbol) {
+		errors.push({field: 'symbol', message: 'Symbol is required'});
+	} else if (trimmedSymbol.length > 20) {
+		errors.push({field: 'symbol', message: 'Symbol must be 20 characters or fewer'});
+	} else if (/\s/.test(trimmedSymbol)) {
+		errors.push({field: 'symbol', message: 'Symbol cannot contain spaces'});
+	}
+
+	// Validate the string form before coercing: Number('') and Number('  ') are 0, which would
+	// silently pass and publish `decimals: 0`.
+	const decimalsRaw = decimals.trim();
+	if (!/^\d{1,3}$/.test(decimalsRaw) || Number(decimalsRaw) > 255) {
+		errors.push({field: 'decimals', message: 'Decimals must be a whole number between 0 and 255'});
+	}
+
+	return errors;
+}
+
 export function validateSubmission(input: TSubmissionInput): TValidationError[] {
 	const errors: TValidationError[] = [];
 
@@ -98,37 +131,23 @@ export function validateSubmission(input: TSubmissionInput): TValidationError[] 
 	}
 	if (!input.svgText.includes('<svg')) {
 		errors.push({field: 'svg', message: 'Upload the token logo as an SVG file'});
-	} else if (input.svgText.length > 153_600) {
-		// Mirrors the repo CI's 150KB cap so an oversized logo is rejected here (with instant
-		// feedback client-side, and before rasterization server-side) instead of in a doomed PR.
+	} else if (isForbiddenSvg(input.svgText)) {
+		errors.push({
+			field: 'svg',
+			message: 'The SVG must be a pure vector — no scripts, event handlers, external links or embedded rasters.'
+		});
+	} else if (new TextEncoder().encode(input.svgText).length > 153_600) {
+		// Byte length (not UTF-16 code units) so client, server and the CI's `wc -c` cap agree:
+		// a multibyte SVG under 153,600 code units can still exceed 150KB on disk.
 		errors.push({field: 'svg', message: 'The SVG must be under 150KB'});
 	}
 
-	const name = input.name.trim();
-	if (!name) {
-		errors.push({field: 'name', message: 'Name is required'});
-	} else if (name.length > 60) {
-		errors.push({field: 'name', message: 'Name must be 60 characters or fewer'});
-	}
-
-	const symbol = input.symbol.trim();
-	if (!symbol) {
-		errors.push({field: 'symbol', message: 'Symbol is required'});
-	} else if (symbol.length > 20) {
-		errors.push({field: 'symbol', message: 'Symbol must be 20 characters or fewer'});
-	} else if (/\s/.test(symbol)) {
-		errors.push({field: 'symbol', message: 'Symbol cannot contain spaces'});
-	}
-
-	const decimals = Number(input.decimals);
-	if (!Number.isInteger(decimals) || decimals < 0 || decimals > 255) {
-		errors.push({field: 'decimals', message: 'Decimals must be a whole number between 0 and 255'});
-	}
+	errors.push(...validateTokenMeta(input.name, input.symbol, input.decimals));
 
 	const website = input.website.trim();
 	if (!website) {
 		errors.push({field: 'website', message: 'A project link is required.'});
-	} else if (!website.startsWith('http')) {
+	} else if (!/^https?:\/\//i.test(website)) {
 		errors.push({field: 'website', message: 'Project link must start with http:// or https://.'});
 	}
 

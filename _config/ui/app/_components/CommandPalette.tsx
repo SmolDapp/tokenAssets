@@ -3,6 +3,7 @@
 import {ChainLogo} from '@components/ChainLogo';
 import {cn} from '@components/lib/utils';
 import {useChain} from '@contexts/WithChain';
+import {useDrawerOpen} from '@hooks/useDrawerOpen';
 import {useGlobalSearch} from '@hooks/useGlobalSearch';
 import SearchIcon from '@icons/search.svg';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -88,9 +89,10 @@ function ResultRow({
 export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): ReactElement {
 	const router = useRouter();
 	const {chain: currentChain} = useChain();
+	const isDrawerOpen = useDrawerOpen();
 	const [query, setQuery] = useState('');
 	const [activeIndex, setActiveIndex] = useState(0);
-	const {results} = useGlobalSearch(query, open);
+	const {results, hasError} = useGlobalSearch(query, open);
 
 	useEffect(() => {
 		const onWindowKeyDown = (event: KeyboardEvent): void => {
@@ -123,22 +125,30 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 				params.set('search', search);
 			}
 			const href = withSearch(tokenPageURI(chain.slug, entry.address), params.toString());
-			// A same-chain pick is intercepted into the drawer; a cross-chain pick changes the
-			// [chain] segment, which the interceptor can't handle, so hard-navigate to the full page.
-			// When a drawer is already open (we are on a token URL), replace instead of push so the
-			// drawer flow only ever holds one history entry — one close returns to the list.
-			if (chain.id === currentChain.id) {
-				const onTokenPage = window.location.pathname.startsWith(`/${currentChain.slug}/`);
-				if (onTokenPage) {
-					router.replace(href, {scroll: false});
-				} else {
-					router.push(href, {scroll: false});
-				}
-			} else {
+			// Cross-chain picks change the [chain] segment, which the interceptor can't handle, so
+			// hard-navigate. For same-chain picks the choice depends on what is mounted:
+			//  - a soft-nav drawer is already open (list underneath) → replace, so the drawer flow
+			//    keeps a single history entry and one close returns to the list;
+			//  - on a hard-loaded token page there is NO drawer and the children slot still holds the
+			//    old token's full page, so intercepting a new one would show a stale page behind the
+			//    drawer — hard-navigate instead;
+			//  - on the list → push to open the drawer.
+			if (chain.id !== currentChain.id) {
 				window.location.assign(href);
+				return;
+			}
+			if (isDrawerOpen) {
+				router.replace(href, {scroll: false});
+				return;
+			}
+			const onTokenPage = window.location.pathname.startsWith(`/${currentChain.slug}/`);
+			if (onTokenPage) {
+				window.location.assign(href);
+			} else {
+				router.push(href, {scroll: false});
 			}
 		},
-		[router, onOpenChange, query, currentChain.id, currentChain.slug]
+		[router, onOpenChange, query, currentChain.id, currentChain.slug, isDrawerOpen]
 	);
 
 	const handleInputKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>): void => {
@@ -158,7 +168,7 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 	};
 
 	const trimmed = query.trim();
-	const showEmpty = trimmed.length > 0 && results.length === 0;
+	const showEmpty = trimmed.length > 0 && results.length === 0 && !hasError;
 
 	return (
 		<Dialog.Root
@@ -197,10 +207,10 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 						/>
 					</div>
 
+					{/* biome-ignore lint/a11y/useFocusableInteractive: focus stays on the combobox input by design; the listbox itself must not be a tab stop. */}
 					<div
 						id={'palette-results'}
 						// biome-ignore lint/a11y/useSemanticElements: ARIA combobox pattern — the listbox is driven via aria-activedescendant, which a native <select> cannot do.
-						// biome-ignore lint/a11y/useFocusableInteractive: focus stays on the combobox input by design; the listbox itself must not be a tab stop.
 						role={'listbox'}
 						aria-label={'Search results'}
 						className={'scrollbar-none max-h-[56vh] overflow-y-auto'}>
@@ -219,6 +229,13 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 								aria-live={'polite'}
 								className={'px-4 py-8 text-center font-mono text-sm text-subtle'}>
 								{`No token matches "${trimmed}"`}
+							</p>
+						)}
+						{hasError && (
+							<p
+								aria-live={'assertive'}
+								className={'px-4 py-8 text-center font-mono text-error text-sm'}>
+								{'Could not load the search index. Close and reopen to retry.'}
 							</p>
 						)}
 					</div>

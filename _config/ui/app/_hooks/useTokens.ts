@@ -2,13 +2,43 @@
 
 import {CHAINS} from '@utils/constants';
 import {isNewToken} from '@utils/helpers';
-import {getSearchScore} from '@utils/searchScore';
+import {rankBySearchScore} from '@utils/searchScore';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
 import type {TToken} from '@utils/types';
 
 const PAGE_SIZE = 60;
 const tokensCache = new Map<string, TToken[]>();
+// Dedup concurrent fetches of the same chain (e.g. the list + a drawer mounting together) so the
+// JSON is downloaded once; the shared promise resolves everyone and is dropped when it settles.
+const inflight = new Map<string, Promise<TToken[]>>();
+
+function loadChainTokens(chainID: string): Promise<TToken[]> {
+	const cached = tokensCache.get(chainID);
+	if (cached) {
+		return Promise.resolve(cached);
+	}
+	const existing = inflight.get(chainID);
+	if (existing) {
+		return existing;
+	}
+	const promise = fetch(`/data/tokens/${chainID}.json`)
+		.then(async response => {
+			if (!response.ok) {
+				throw new Error(`Failed to load tokens for chain ${chainID}`);
+			}
+			return (await response.json()) as TToken[];
+		})
+		.then(tokens => {
+			tokensCache.set(chainID, tokens);
+			return tokens;
+		})
+		.finally(() => {
+			inflight.delete(chainID);
+		});
+	inflight.set(chainID, promise);
+	return promise;
+}
 
 // Biggest market cap first; a missing market cap counts as 0.
 function byMcapDesc(first: TToken, second: TToken): number {
@@ -82,15 +112,8 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 		setHasError(false);
 		setAllTokens([]);
 
-		fetch(`/data/tokens/${knownChainID}.json`)
-			.then(async response => {
-				if (!response.ok) {
-					throw new Error(`Failed to load tokens for chain ${chainID}`);
-				}
-				return (await response.json()) as TToken[];
-			})
+		loadChainTokens(knownChainID)
 			.then(tokens => {
-				tokensCache.set(knownChainID, tokens);
 				if (!isCancelled) {
 					setAllTokens(tokens);
 					setIsLoading(false);
@@ -124,18 +147,7 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 		if (!query) {
 			return rankedTokens;
 		}
-		return allTokens
-			.map(token => ({token, score: getSearchScore(token, query)}))
-			.filter(entry => entry.score !== null)
-			.sort((first, second) => {
-				const scoreDiff = (first.score as number) - (second.score as number);
-				if (scoreDiff !== 0) {
-					return scoreDiff;
-				}
-				// Same relevance tier: surface the bigger market cap first.
-				return byMcapDesc(first.token, second.token);
-			})
-			.map(entry => entry.token);
+		return rankBySearchScore(allTokens, query);
 	}, [allTokens, rankedTokens, searchQuery]);
 
 	const visibleTokens = useMemo(() => filteredTokens.slice(0, visibleCount), [filteredTokens, visibleCount]);

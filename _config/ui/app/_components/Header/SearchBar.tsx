@@ -1,6 +1,7 @@
 import {cn} from '@components/lib/utils';
 import {Input} from '@components/ui/input';
 import {useChain} from '@contexts/WithChain';
+import {useDrawerOpen} from '@hooks/useDrawerOpen';
 import Cross from '@icons/cross.svg';
 import SearchIcon from '@icons/search.svg';
 import {withSearch} from '@utils/helpers';
@@ -14,6 +15,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const {chain} = useChain();
+	const isDrawerOpen = useDrawerOpen();
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const currentSearch = searchParams.get('search') || '';
@@ -25,7 +27,14 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	// cross-chain navigation) is preserved instead of clobbered. Always targets the chain LIST
 	// path: pushing the raw pathname from a token detail page would re-match the @drawer
 	// interceptor and pop a drawer of the current token instead of searching.
+	//
+	// Skipped entirely while an intercepted drawer is open: a debounce firing ~300ms after the
+	// user clicked a token card would push the bare chain URL on top of the drawer's URL,
+	// desyncing the @drawer slot into a drawer that router.back() can never close.
 	useEffect(() => {
+		if (isDrawerOpen) {
+			return;
+		}
 		const params = new URLSearchParams(window.location.search);
 		if ((params.get('search') || '') === debouncedValue) {
 			return;
@@ -36,7 +45,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 			params.delete('search');
 		}
 		router.push(withSearch(`/${chain.slug}`, params.toString()), {scroll: false});
-	}, [debouncedValue, router, chain.slug]);
+	}, [debouncedValue, router, chain.slug, isDrawerOpen]);
 
 	// Mirror an externally-set search (e.g. the command palette) into the field, unless the user is typing here.
 	useEffect(() => {

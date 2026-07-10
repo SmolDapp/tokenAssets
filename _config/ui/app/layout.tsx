@@ -2,7 +2,7 @@ import {WithFonts} from '@components/WithFonts';
 import {Toaster} from '@components/ui/toaster';
 import {WithSettings} from 'app/_contexts/WithSettings';
 import {cookies} from 'next/headers';
-import {type ReactElement, type ReactNode, Suspense} from 'react';
+import type {ReactElement, ReactNode} from 'react';
 
 import {ChainProvider} from '@contexts/WithChain';
 import {BRAND_GREEN, SITE_URI} from '@utils/constants';
@@ -48,11 +48,9 @@ export default async function RootLayout({children}: {children: ReactNode}): Pro
 					'bg-white [background-image:linear-gradient(to_right,#E6E6E6_1px,transparent_1px),linear-gradient(to_bottom,#E6E6E6_1px,transparent_1px)] [background-position:0_0] [background-size:12px_12px]'
 				}>
 				<WithFonts>
-					<Suspense>
-						<WithSettings cookieView={view?.value || 'grid'}>
-							<ChainProvider>{children}</ChainProvider>
-						</WithSettings>
-					</Suspense>
+					<WithSettings cookieView={view?.value || 'grid'}>
+						<ChainProvider>{children}</ChainProvider>
+					</WithSettings>
 					<Toaster />
 				</WithFonts>
 			</body>

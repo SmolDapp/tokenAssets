@@ -51,9 +51,12 @@ const setIPNSRecord = async (name, cid, retry) => {
 		console.error(`Error setting IPNS record: ${error}`)
 		if (retry < 10) {
 			await new Promise(resolve => setTimeout(resolve, 4000));
-			retry += 1
-			await setIPNSRecord(cid, retry)
+			// Recurse with the SAME name/cid (the previous call passed cid as name and dropped the
+			// record entirely, so every "retry" silently no-op'd on undefined).
+			return setIPNSRecord(name, cid, retry + 1)
 		}
+		// Exhausted: rethrow so the workflow fails instead of exiting 0 on an unpublished record.
+		throw error
 	}
 }
 

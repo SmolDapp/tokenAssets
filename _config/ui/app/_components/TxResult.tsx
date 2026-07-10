@@ -1,15 +1,15 @@
 import GrumpyIcon from '@icons/grumpy.svg';
-import HappyIcon from '@icons/happy.svg';
 
 import type {ReactElement} from 'react';
 
 type TProps = {
-	state: 'success' | 'error';
 	message: ReactElement;
 	action?: ReactElement;
 };
 
-export const TxResult = ({state, message, action}: TProps): ReactElement => {
+// Only ever renders an error/empty state (the 'success' variant was never used); kept the name for
+// its callers but dropped the dead state prop and the happy-icon branch.
+export const TxResult = ({message, action}: TProps): ReactElement => {
 	return (
 		<div
 			className={
@@ -17,7 +17,7 @@ export const TxResult = ({state, message, action}: TProps): ReactElement => {
 			}>
 			<div className={'flex flex-col gap-6'}>
 				<div>
-					{state === 'success' ? <HappyIcon className={'size-24'} /> : <GrumpyIcon className={'size-24'} />}
+					<GrumpyIcon className={'size-24'} />
 				</div>
 
 				<div className={'flex w-full max-w-[600px] flex-col items-start gap-4 sm:flex-row sm:gap-8'}>

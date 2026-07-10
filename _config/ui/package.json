@@ -20,7 +20,6 @@
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"gill": "^0.14.0",
-		"lucide-react": "^0.474.0",
 		"next": "15.2.8",
 		"next-auth": "^5.0.0-beta.31",
 		"octokit-plugin-create-pull-request": "^6.0.1",

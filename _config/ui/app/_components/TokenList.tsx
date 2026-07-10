@@ -2,6 +2,7 @@
 
 import {GridView} from '@components/GridView';
 import {ListView} from '@components/ListView';
+import {Spinner} from '@components/Spinner';
 import {TxResult} from '@components/TxResult';
 import {Button} from '@components/ui/button';
 import {useChain} from '@contexts/WithChain';
@@ -88,9 +89,13 @@ export function TokenList(): ReactElement {
 
 	return (
 		<div className={'w-full'}>
+			{isLoading && (
+				<div className={'my-16 flex w-full items-center justify-center'}>
+					<Spinner />
+				</div>
+			)}
 			{!isLoading && hasError && (
 				<TxResult
-					state={'error'}
 					message={
 						<div>
 							<p className={'font-semibold text-lg text-primary'}>{'COULD NOT LOAD TOKENS.'}</p>
@@ -103,7 +108,6 @@ export function TokenList(): ReactElement {
 			)}
 			{!isLoading && !hasError && tokens.length === 0 && (
 				<TxResult
-					state={'error'}
 					message={
 						<div>
 							<p className={'font-semibold text-lg text-primary'}>{'TOKENS NOT FOUND.'}</p>

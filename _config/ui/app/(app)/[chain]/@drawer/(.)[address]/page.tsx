@@ -2,9 +2,10 @@
 
 import {TokenDrawerWrapper} from '@components/TokenDrawer';
 import {useChain} from '@contexts/WithChain';
+import {setDrawerOpen} from '@hooks/useDrawerOpen';
 import {useTokens} from '@hooks/useTokens';
 import {useRouter} from 'next/navigation';
-import {type ReactElement, use, useState} from 'react';
+import {type ReactElement, use, useEffect, useState} from 'react';
 
 // Intercepts a soft navigation to /[chain]/[address] and renders the token as a drawer
 // above the still-mounted list. The token is read from the client cache the list already
@@ -16,6 +17,13 @@ export default function InterceptedTokenDrawer({params}: {params: Promise<{addre
 	const {chain} = useChain();
 	const {findToken, isLoading, hasError} = useTokens(chain.id);
 	const [isOpen, setIsOpen] = useState(true);
+
+	// Flag the drawer as mounted so the header search / palette treat this as a soft-nav drawer
+	// (list underneath) rather than a hard-loaded token page.
+	useEffect(() => {
+		setDrawerOpen(true);
+		return () => setDrawerOpen(false);
+	}, []);
 
 	// Once the chain list has loaded (or failed), a missing token must not leave the drawer
 	// spinning forever — show an honest state the user can dismiss.

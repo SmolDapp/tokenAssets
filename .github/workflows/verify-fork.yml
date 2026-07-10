@@ -11,7 +11,8 @@ jobs:
         name: Verify tokens (fork-safe)
         runs-on: ubuntu-latest
         env:
-            SVG_FORBIDDEN_PATTERN: 'data:[^,]*;[[:space:]]*base64|href[[:space:]]*=[[:space:]]*["'']?(https?:|//)|<script|javascript:|[^a-zA-Z0-9_-]on[a-z]+[[:space:]]*='
+            # Mirror of _config/ui/app/_utils/svgSafety.ts and .github/scripts/forbidden-svg-pattern.mjs — keep all three in sync.
+            SVG_FORBIDDEN_PATTERN: 'data:image/(png|jpe?g|gif|webp|bmp|avif)|data:[^,]{0,256};[[:space:]]*base64|href[[:space:]]*=[[:space:]]*["'']?(https?:|//)|<script|javascript:|[^a-zA-Z0-9_-]on[a-z]+[[:space:]]*='
 
         steps:
             # Safe by design: the token is contents:read only and no code

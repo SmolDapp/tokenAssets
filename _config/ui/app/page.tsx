@@ -7,8 +7,9 @@ import Link from 'next/link';
 import type {ReactElement} from 'react';
 import {preconnect} from 'react-dom';
 
-// Rendered per request so the featured logo wall is re-shuffled on each visit.
-export const dynamic = 'force-dynamic';
+// Statically rendered and revalidated every 5 minutes: the featured logo wall reshuffles on each
+// regeneration rather than on every request, so the landing page is cacheable instead of dynamic.
+export const revalidate = 300;
 
 export default function Home(): ReactElement {
 	// Warm the connections the logo CDN redirects through so the wall paints faster.

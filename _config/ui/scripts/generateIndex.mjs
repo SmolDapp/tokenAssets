@@ -136,6 +136,27 @@ function toDisplayAddress(address) {
 	}
 }
 
+// name/symbol from remote tokenlists or on-chain reads are untrusted: trim and clamp to the same
+// limits the submit form enforces so a hostile/malformed source can't bloat the shipped index.
+function clampString(value, max) {
+	if (typeof value !== 'string') {
+		return undefined;
+	}
+	const trimmed = value.trim();
+	if (!trimmed) {
+		return undefined;
+	}
+	return trimmed.slice(0, max);
+}
+
+function normalizeDecimals(value) {
+	const n = Number(value);
+	if (!Number.isInteger(n) || n < 0 || n > 255) {
+		return undefined;
+	}
+	return n;
+}
+
 // One pass over the whole git history to get each token's "added" date (epoch seconds).
 // Keyed by `${chainID}/${folderName}` so it matches the on-disk folder (Solana is
 // case-sensitive; EVM folders are already lowercase). Requires full history — CI must
@@ -152,7 +173,9 @@ function buildAddedAtMap() {
 			encoding: 'utf8'
 		}).trim();
 		if (isShallow === 'true') {
-			console.warn('⚠ shallow git clone detected, addedAt will be empty (checkout with fetch-depth: 0 for real dates)');
+			console.warn(
+				'⚠ shallow git clone detected, addedAt will be empty (checkout with fetch-depth: 0 for real dates)'
+			);
 			return map;
 		}
 		const output = execFileSync(
@@ -316,9 +339,11 @@ async function buildChainIndex(chainID, addedAtMap) {
 			readLocalInfo(chainID, address);
 		return {
 			address: toDisplayAddress(address),
-			name: metadata?.name,
-			symbol: metadata?.symbol,
-			decimals: metadata?.decimals,
+			// Clamp name/symbol coming from remote tokenlists / on-chain reads, mirroring the
+			// submit-form limits, so a hostile or malformed source can't bloat the shipped index.
+			name: clampString(metadata?.name, 60),
+			symbol: clampString(metadata?.symbol, 20),
+			decimals: normalizeDecimals(metadata?.decimals),
 			addedAt: addedAtMap.get(`${chainID}/${address}`),
 			mcap: marketCaps.get(address.toLowerCase())
 		};

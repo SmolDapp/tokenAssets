@@ -10,7 +10,13 @@ import {useTokens} from '@hooks/useTokens';
 import ArrowDown from '@icons/arrow-down.svg';
 import {CHAINS, DEFAULT_CHAIN} from '@utils/constants';
 import {canFetchOnchain, fetchOnchainToken} from '@utils/onchainToken';
-import {type TSubmissionInput, type TValidationError, isValidAddress, validateSubmission} from '@utils/tokenSubmission';
+import {
+	type TSubmissionInput,
+	type TValidationError,
+	isValidAddress,
+	validateSubmission,
+	validateTokenMeta
+} from '@utils/tokenSubmission';
 import {signIn} from 'next-auth/react';
 import {useEffect, useMemo, useState} from 'react';
 
@@ -39,7 +45,9 @@ function Field({
 	return (
 		<div className={'space-y-1.5'}>
 			{htmlFor ? (
-				<label htmlFor={htmlFor} className={labelClassName}>
+				<label
+					htmlFor={htmlFor}
+					className={labelClassName}>
 					{label}
 				</label>
 			) : (
@@ -64,6 +72,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 	const [website, setWebsite] = useState('');
 	const [tagsRaw, setTagsRaw] = useState('');
 	const [metaStatus, setMetaStatus] = useState<TMetaStatus>('idle');
+	const [retryNonce, setRetryNonce] = useState(0);
 	const [showOptional, setShowOptional] = useState(false);
 	const [errors, setErrors] = useState<TValidationError[]>([]);
 	const [submitError, setSubmitError] = useState('');
@@ -93,6 +102,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 
 	// Auto-read name/symbol/decimals whenever the address or chain changes. Debounced and race-safe:
 	// a newer address/chain cancels the in-flight result so stale metadata never lands.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: retryNonce is an intentional re-run trigger for the Retry button, not read inside the effect.
 	useEffect(() => {
 		if (!isValidAddress(chainID, address)) {
 			setName('');
@@ -134,7 +144,8 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 			cancelled = true;
 			clearTimeout(timer);
 		};
-	}, [address, chainID]);
+		// retryNonce lets the Retry button re-run the fetch without changing the address/chain.
+	}, [address, chainID, retryNonce]);
 
 	// Paste a logo anywhere on the page (⌘/Ctrl+V): an SVG file or SVG markup text is accepted; a raster
 	// image (e.g. from "Copy Image") is rejected with a hint, since the logo must be a vector SVG.
@@ -179,6 +190,12 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				return;
 			}
 
+			// Only treat a raster paste as a rejected logo drop when the user is NOT typing in a
+			// field — otherwise pasting text into an input while the clipboard also carries an
+			// image (common) would be swallowed and mislabelled as a bad logo.
+			if (inField) {
+				return;
+			}
 			const hasRaster =
 				items.some(item => item.kind === 'file' && item.type.startsWith('image/')) ||
 				files.some(file => file.type.startsWith('image/'));
@@ -328,11 +345,14 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 		setSubmitError('');
 	}
 
-	// Chains without a browser-reachable RPC fall back to manual metadata entry: the same
-	// name/symbol/decimals state, but typed by the user instead of read from the contract.
-	const isManualMeta = metaStatus === 'unsupported';
-	const hasManualMeta = name.trim().length > 0 && symbol.trim().length > 0 && decimals.trim().length > 0;
-	const metaReady = metaStatus === 'ready' || (isManualMeta && hasManualMeta);
+	// name/symbol/decimals must pass the same checks the submission does, whether they were typed
+	// (RPC-less chains) or read on-chain — a contract can return a name >60 chars or a symbol with
+	// spaces, which would otherwise fail validation against fields that were never shown.
+	const metaFieldsValid = validateTokenMeta(name, symbol, decimals).length === 0;
+	// Show the editable metadata fields when the chain has no RPC, OR when an on-chain read
+	// succeeded but returned values that don't pass validation (pre-filled, so the user can fix).
+	const showManualFields = metaStatus === 'unsupported' || (metaStatus === 'ready' && !metaFieldsValid);
+	const metaReady = (metaStatus === 'ready' || metaStatus === 'unsupported') && metaFieldsValid;
 
 	// The submit button is the single status surface (fixed size → no layout shift):
 	// disabled until everything is present, a spinner while reading the chain or opening the PR.
@@ -348,9 +368,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 		);
 	} else if (metaStatus === 'error') {
 		submitContent = 'Token not readable';
-	} else if ((metaStatus === 'ready' || isManualMeta) && existingToken) {
+	} else if ((metaStatus === 'ready' || metaStatus === 'unsupported') && existingToken) {
 		submitContent = 'Token already exists';
-	} else if (isManualMeta && !hasManualMeta) {
+	} else if (showManualFields && !metaFieldsValid) {
 		submitContent = 'Fill in the token details';
 	} else if (metaReady && !svgText) {
 		submitContent = 'Add a logo';
@@ -366,9 +386,15 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				className={
 					'min-w-0 space-y-4 rounded-sm border border-white/15 bg-white/[0.04] p-5 md:p-6 lg:col-span-6'
 				}>
-				<Field label={'Chain'} htmlFor={'submit-chain'}>
-					<Select value={chainID} onValueChange={handleChainChange}>
-						<SelectTrigger id={'submit-chain'} className={cn('h-10 rounded-sm text-white', inputClassName)}>
+				<Field
+					label={'Chain'}
+					htmlFor={'submit-chain'}>
+					<Select
+						value={chainID}
+						onValueChange={handleChainChange}>
+						<SelectTrigger
+							id={'submit-chain'}
+							className={cn('h-10 rounded-sm text-white', inputClassName)}>
 							<SelectValue>
 								<span className={'flex items-center gap-2'}>
 									<ChainLogo id={selectedChain.id} />
@@ -378,7 +404,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 						</SelectTrigger>
 						<SelectContent>
 							{CHAINS.map(chain => (
-								<SelectItem key={chain.id} value={chain.id}>
+								<SelectItem
+									key={chain.id}
+									value={chain.id}>
 									<span className={'flex items-center gap-2'}>
 										<ChainLogo id={chain.id} />
 										{chain.name}
@@ -389,7 +417,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 					</Select>
 				</Field>
 
-				<Field label={'Contract address'} htmlFor={'submit-address'}>
+				<Field
+					label={'Contract address'}
+					htmlFor={'submit-address'}>
 					<Input
 						id={'submit-address'}
 						value={address}
@@ -400,13 +430,36 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 					/>
 				</Field>
 
-				{isManualMeta && (
+				{metaStatus === 'error' && (
+					<div
+						className={
+							'flex items-center justify-between gap-2 rounded-sm border border-error/40 bg-error/10 p-3'
+						}>
+						<p className={'font-mono text-error text-xs'}>
+							{'Could not read this token on-chain (the RPC may be busy).'}
+						</p>
+						<button
+							type={'button'}
+							onClick={() => setRetryNonce(nonce => nonce + 1)}
+							className={
+								'shrink-0 rounded-sm border border-white/25 px-2 py-1 font-mono text-white text-xxs uppercase tracking-[0.1em] transition-colors hover:bg-white/10'
+							}>
+							{'Retry'}
+						</button>
+					</div>
+				)}
+
+				{showManualFields && (
 					<div className={'space-y-4'}>
 						<p className={'font-mono text-white/50 text-xxs leading-relaxed'}>
-							{'This chain has no public RPC we can read from — fill in the token metadata manually.'}
+							{metaStatus === 'unsupported'
+								? 'This chain has no public RPC we can read from — fill in the token metadata manually.'
+								: 'The on-chain metadata needs a fix — adjust the token details below.'}
 						</p>
 						<div className={'grid grid-cols-2 gap-4'}>
-							<Field label={'Name'} htmlFor={'submit-name'}>
+							<Field
+								label={'Name'}
+								htmlFor={'submit-name'}>
 								<Input
 									id={'submit-name'}
 									value={name}
@@ -415,7 +468,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 									className={inputClassName}
 								/>
 							</Field>
-							<Field label={'Symbol'} htmlFor={'submit-symbol'}>
+							<Field
+								label={'Symbol'}
+								htmlFor={'submit-symbol'}>
 								<Input
 									id={'submit-symbol'}
 									value={symbol}
@@ -425,7 +480,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 								/>
 							</Field>
 						</div>
-						<Field label={'Decimals'} htmlFor={'submit-decimals'}>
+						<Field
+							label={'Decimals'}
+							htmlFor={'submit-decimals'}>
 							<Input
 								id={'submit-decimals'}
 								value={decimals}
@@ -508,7 +565,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 
 					{showOptional && (
 						<div className={'space-y-5'}>
-							<Field label={'Description'} htmlFor={'submit-description'}>
+							<Field
+								label={'Description'}
+								htmlFor={'submit-description'}>
 								<textarea
 									id={'submit-description'}
 									value={description}
@@ -521,7 +580,10 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 									)}
 								/>
 							</Field>
-							<Field label={'Tags'} htmlFor={'submit-tags'} hint={'Comma-separated'}>
+							<Field
+								label={'Tags'}
+								htmlFor={'submit-tags'}
+								hint={'Comma-separated'}>
 								<Input
 									id={'submit-tags'}
 									value={tagsRaw}
@@ -535,9 +597,13 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				</div>
 
 				{errors.length > 0 && (
-					<div role={'alert'} className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
+					<div
+						role={'alert'}
+						className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
 						{errors.map(error => (
-							<p key={`${error.field}-${error.message}`} className={'font-mono text-error text-xs'}>
+							<p
+								key={`${error.field}-${error.message}`}
+								className={'font-mono text-error text-xs'}>
 								{`• ${error.message}`}
 							</p>
 						))}
@@ -545,7 +611,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				)}
 
 				{submitError && (
-					<p role={'alert'} className={'font-mono text-error text-xs'}>
+					<p
+						role={'alert'}
+						className={'font-mono text-error text-xs'}>
 						{submitError}
 					</p>
 				)}
@@ -561,7 +629,10 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				</Button>
 			</div>
 
-			<SubmitResult prURL={prURL} onClose={() => setPrURL(null)} />
+			<SubmitResult
+				prURL={prURL}
+				onClose={() => setPrURL(null)}
+			/>
 		</>
 	);
 }

@@ -1,7 +1,6 @@
 import {Octokit} from '@octokit/core';
 import {Resvg} from '@resvg/resvg-js';
 import {CHAINS} from '@utils/constants';
-import {isForbiddenSvg} from '@utils/svgSafety';
 import {
 	type TSubmissionInput,
 	buildInfoJson,
@@ -48,6 +47,18 @@ function isRateLimited(ip: string): boolean {
 function renderPngBase64(svg: string, size: number): string {
 	const resvg = new Resvg(svg, {fitTo: {mode: 'width', value: size}});
 	return Buffer.from(resvg.render().asPng()).toString('base64');
+}
+
+// A logo must be roughly square. Rejecting extreme aspect ratios also bounds the rasterized
+// height: fitTo width caps width, and a bounded ratio then caps height — so no crafted SVG can
+// request a giant pixmap that OOMs the function, and we never ship a wrong-shaped CDN artifact.
+function isSquareEnough(svg: string): boolean {
+	const {width, height} = new Resvg(svg);
+	if (!width || !height) {
+		return false;
+	}
+	const ratio = width / height;
+	return ratio >= 0.5 && ratio <= 2;
 }
 
 type TSubmitBody = {
@@ -112,12 +123,6 @@ export async function POST(request: Request): Promise<Response> {
 	if (validationErrors.length > 0) {
 		return NextResponse.json({error: validationErrors[0].message}, {status: 400});
 	}
-	if (isForbiddenSvg(input.svgText)) {
-		return NextResponse.json(
-			{error: 'The logo SVG contains a script, event handler, external link or embedded raster — vector only.'},
-			{status: 400}
-		);
-	}
 
 	const svg = `${input.svgText.trim()}\n`;
 	const folderAddress = toFolderAddress(input.address);
@@ -139,6 +144,9 @@ export async function POST(request: Request): Promise<Response> {
 	let png32 = '';
 	let png128 = '';
 	try {
+		if (!isSquareEnough(svg)) {
+			return NextResponse.json({error: 'The logo must be roughly square.'}, {status: 400});
+		}
 		png32 = renderPngBase64(svg, 32);
 		png128 = renderPngBase64(svg, 128);
 	} catch {
@@ -182,10 +190,24 @@ export async function POST(request: Request): Promise<Response> {
 		return NextResponse.json({prUrl: url});
 	} catch (error) {
 		console.error('createPullRequest failed', error);
-		// An expired/revoked OAuth token surfaces as 401 (or an OAuth-restricted 403) from GitHub:
-		// tell the user to re-authenticate instead of blaming the server.
 		const status = (error as {status?: number}).status;
-		if (status === 401 || status === 403) {
+		const message = (error as {message?: string}).message || '';
+		// An expired/revoked OAuth token surfaces as 401 — tell the user to re-authenticate.
+		if (status === 401) {
+			return NextResponse.json(
+				{error: 'Your GitHub authorization is no longer valid — sign in with GitHub again.'},
+				{status: 401}
+			);
+		}
+		// 403 covers two very different cases: a secondary/abuse rate limit (retryable) vs a genuine
+		// permission/OAuth-scope block. Route rate limits to 429 so the client says "wait and retry".
+		if (status === 403) {
+			if (/rate limit|abuse|secondary/i.test(message)) {
+				return NextResponse.json(
+					{error: 'GitHub is rate-limiting submissions — wait a minute and try again.'},
+					{status: 429}
+				);
+			}
 			return NextResponse.json(
 				{error: 'Your GitHub authorization is no longer valid — sign in with GitHub again.'},
 				{status: 401}

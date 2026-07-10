@@ -1,9 +1,9 @@
 'use client';
 
 import {cn} from '@components/lib/utils';
+import Cross from '@icons/cross.svg';
 import * as ToastPrimitives from '@radix-ui/react-toast';
 import {type VariantProps, cva} from 'class-variance-authority';
-import {X} from 'lucide-react';
 import {type ComponentPropsWithoutRef, type ElementRef, type ReactElement, forwardRef} from 'react';
 
 const ToastProvider = ToastPrimitives.Provider;
@@ -74,7 +74,7 @@ const ToastClose = forwardRef<
 		)}
 		toast-close={''}
 		{...props}>
-		<X className={'size-4'} />
+		<Cross className={'size-4'} />
 	</ToastPrimitives.Close>
 ));
 ToastClose.displayName = ToastPrimitives.Close.displayName;
