@@ -16,20 +16,14 @@ func resolveNotFound(c *gin.Context) {
 		return
 	}
 
-	if fallback != "" {
-		resp, err := http.Get(fallback)
-		if err != nil {
-			c.String(http.StatusNotFound, "Not found")
-			return
-		}
-		defer resp.Body.Close()
-
-		contentType := resp.Header.Get("Content-Type")
-		if contentType != "" && strings.HasPrefix(contentType, "image/") {
-			fmt.Printf("Using fallback image for gas token: %s\n", fallback)
-			c.DataFromReader(http.StatusOK, resp.ContentLength, contentType, resp.Body, nil)
-			return
-		}
+	// A caller may point fallback at their own image URL. Redirect the browser to it instead of
+	// fetching it server-side: the daemon makes no arbitrary outbound request (no SSRF), and the
+	// image renders on its own origin, never ours. http(s) only, so the Location cannot carry a
+	// javascript: or data: scheme.
+	if strings.HasPrefix(fallback, "https://") || strings.HasPrefix(fallback, "http://") {
+		c.Redirect(http.StatusTemporaryRedirect, fallback)
+		c.Abort()
+		return
 	}
 
 	c.String(http.StatusNotFound, "Not found")
@@ -43,20 +37,14 @@ func resolveGasToken(c *gin.Context) {
 		return
 	}
 
-	if fallback != "" {
-		resp, err := http.Get(fallback)
-		if err != nil {
-			c.String(http.StatusNotFound, "Not found")
-			return
-		}
-		defer resp.Body.Close()
-
-		contentType := resp.Header.Get("Content-Type")
-		if contentType != "" && strings.HasPrefix(contentType, "image/") {
-			fmt.Printf("Using fallback image for gas token: %s\n", fallback)
-			c.DataFromReader(http.StatusOK, resp.ContentLength, contentType, resp.Body, nil)
-			return
-		}
+	// A caller may point fallback at their own image URL. Redirect the browser to it instead of
+	// fetching it server-side: the daemon makes no arbitrary outbound request (no SSRF), and the
+	// image renders on its own origin, never ours. http(s) only, so the Location cannot carry a
+	// javascript: or data: scheme.
+	if strings.HasPrefix(fallback, "https://") || strings.HasPrefix(fallback, "http://") {
+		c.Redirect(http.StatusTemporaryRedirect, fallback)
+		c.Abort()
+		return
 	}
 
 	c.String(http.StatusNotFound, "Not found")
