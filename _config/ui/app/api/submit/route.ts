@@ -182,16 +182,6 @@ export async function POST(request: Request): Promise<Response> {
 		);
 	}
 
-	// Diagnostic: does the token see push access on the base repo? With push access the plugin writes the
-	// branch directly to the base repo (no fork), which sidesteps the `repo`-scope escalation GitHub
-	// enforces on createRef against a fork of an org repo (the confusing 404 with acceptedScopes=repo).
-	try {
-		const baseRepo = await octokit.request('GET /repos/{owner}/{repo}', {owner, repo: repoName});
-		console.log('submit diag', {basePush: baseRepo.data.permissions?.push});
-	} catch {
-		// diagnostic only — never block the submit on it
-	}
-
 	try {
 		const pr = await octokit.createPullRequest({
 			owner,
