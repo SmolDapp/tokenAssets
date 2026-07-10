@@ -8,12 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const BASE_TOKENS_URI = `https://raw.githubusercontent.com/SmolDapp/tokenAssets/main`
-
 func resolveNotFound(c *gin.Context) {
 	fallback := c.Query("fallback")
 	if fallback == "true" {
-		c.Redirect(http.StatusTemporaryRedirect, BASE_TOKENS_URI+`/_config/nodeAPI/public/not-found.png`)
+		c.Redirect(http.StatusTemporaryRedirect, RedirectBaseURI()+`/_config/nodeAPI/public/not-found.png`)
 		c.Abort()
 		return
 	}
@@ -40,7 +38,7 @@ func resolveNotFound(c *gin.Context) {
 func resolveGasToken(c *gin.Context) {
 	fallback := c.Query("fallback")
 	if fallback == "true" {
-		c.Redirect(http.StatusTemporaryRedirect, BASE_TOKENS_URI+`/_config/nodeAPI/public/gas-token.png`)
+		c.Redirect(http.StatusTemporaryRedirect, RedirectBaseURI()+`/_config/nodeAPI/public/gas-token.png`)
 		c.Abort()
 		return
 	}
@@ -82,7 +80,8 @@ func ServeToken(c *gin.Context) {
 		return
 	}
 
-	targetURL := fmt.Sprintf("%s/tokens/%s/%s/%s", BASE_TOKENS_URI, chainIDStr, tokenAddress, fileName)
-	c.Redirect(http.StatusPermanentRedirect, targetURL)
+	targetURL := fmt.Sprintf("%s/tokens/%s/%s/%s", RedirectBaseURI(), chainIDStr, tokenAddress, fileName)
+	c.Header(`Cache-Control`, REDIRECT_CACHE_CONTROL)
+	c.Redirect(http.StatusTemporaryRedirect, targetURL)
 	c.Abort()
 }

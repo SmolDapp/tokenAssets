@@ -1,0 +1,30 @@
+name: Purge jsDelivr cache
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'tokens/**'
+      - 'chains/**'
+
+permissions:
+  contents: read
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      # jsDelivr refreshes @main mappings on its own within ~12h; purging the changed files makes
+      # freshly merged logos available immediately instead. A failed purge is non-fatal by design.
+      - name: Purge changed asset files
+        run: |
+          git diff --name-only --diff-filter=ACMR HEAD^ HEAD -- tokens chains | while IFS= read -r file; do
+            curl -fsS --max-time 10 "https://purge.jsdelivr.net/gh/SmolDapp/tokenAssets@main/${file}" > /dev/null \
+              || echo "purge failed for ${file} (self-heals within 12h)"
+            sleep 0.2
+          done
