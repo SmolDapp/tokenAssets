@@ -220,15 +220,21 @@ export async function POST(request: Request): Promise<Response> {
 			status?: number;
 			message?: string;
 			request?: {method?: string; url?: string};
-			response?: {data?: unknown};
+			response?: {data?: unknown; headers?: Record<string, string | undefined>};
 		};
 		// Expand the octokit HttpError: default logging collapses request/response to "[Object]", hiding
 		// exactly which GitHub call 404'd (fork? createRef? on which owner/repo?) and GitHub's own message.
+		// The response headers disambiguate a write 404: SAML SSO (x-github-sso), an OAuth scope mismatch
+		// (x-accepted-oauth-scopes vs x-oauth-scopes), or a plain permission block.
+		const responseHeaders = httpError.response?.headers || {};
 		console.error('createPullRequest failed', {
 			status: httpError.status,
 			request: `${httpError.request?.method} ${httpError.request?.url}`,
 			message: httpError.message,
-			ghError: JSON.stringify(httpError.response?.data)
+			ghError: JSON.stringify(httpError.response?.data),
+			sso: responseHeaders['x-github-sso'],
+			oauthScopes: responseHeaders['x-oauth-scopes'],
+			acceptedOauthScopes: responseHeaders['x-accepted-oauth-scopes']
 		});
 		const status = httpError.status;
 		const message = httpError.message || '';
