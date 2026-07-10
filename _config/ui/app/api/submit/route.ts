@@ -155,6 +155,33 @@ export async function POST(request: Request): Promise<Response> {
 
 	const [owner, repoName] = repo.split('/');
 	const octokit = new SubmitOctokit({auth: token});
+
+	// Pre-flight scope check. Opening the PR forks the repo and writes a branch (createRef); when the
+	// OAuth token lacks the public_repo write scope, GitHub answers those writes with a confusing 404
+	// (it hides existence rather than returning 403). Surface a clear "re-authenticate" message instead.
+	// The usual cause is a stale authorization that predates the public_repo scope — GitHub keeps reusing
+	// the old grant until the user revokes the app and signs in again.
+	try {
+		const probe = await octokit.request('GET /user');
+		const scopeHeader = probe.headers['x-oauth-scopes'];
+		if (typeof scopeHeader === 'string') {
+			const grantedScopes = scopeHeader.split(',').map(scope => scope.trim());
+			if (!grantedScopes.includes('public_repo') && !grantedScopes.includes('repo')) {
+				return NextResponse.json(
+					{
+						error: 'Your GitHub authorization is missing the public_repo permission — sign out, revoke the app on GitHub, then sign in again.'
+					},
+					{status: 401}
+				);
+			}
+		}
+	} catch {
+		return NextResponse.json(
+			{error: 'Your GitHub authorization is no longer valid — sign in with GitHub again.'},
+			{status: 401}
+		);
+	}
+
 	try {
 		const pr = await octokit.createPullRequest({
 			owner,
