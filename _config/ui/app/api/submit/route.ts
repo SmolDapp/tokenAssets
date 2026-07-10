@@ -216,9 +216,22 @@ export async function POST(request: Request): Promise<Response> {
 		}
 		return NextResponse.json({prUrl: url});
 	} catch (error) {
-		console.error('createPullRequest failed', error);
-		const status = (error as {status?: number}).status;
-		const message = (error as {message?: string}).message || '';
+		const httpError = error as {
+			status?: number;
+			message?: string;
+			request?: {method?: string; url?: string};
+			response?: {data?: unknown};
+		};
+		// Expand the octokit HttpError: default logging collapses request/response to "[Object]", hiding
+		// exactly which GitHub call 404'd (fork? createRef? on which owner/repo?) and GitHub's own message.
+		console.error('createPullRequest failed', {
+			status: httpError.status,
+			request: `${httpError.request?.method} ${httpError.request?.url}`,
+			message: httpError.message,
+			ghError: JSON.stringify(httpError.response?.data)
+		});
+		const status = httpError.status;
+		const message = httpError.message || '';
 		// An expired/revoked OAuth token surfaces as 401 — tell the user to re-authenticate.
 		if (status === 401) {
 			return NextResponse.json(
