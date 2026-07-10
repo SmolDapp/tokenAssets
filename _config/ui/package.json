@@ -5,7 +5,7 @@
 		"generate": "node scripts/generateIndex.mjs",
 		"predev": "node scripts/generateIndex.mjs --if-missing",
 		"dev": "next dev",
-		"prebuild": "node scripts/generateIndex.mjs",
+		"prebuild": "node scripts/generateIndex.mjs --if-missing",
 		"build": "next build",
 		"start": "next start",
 		"lint": "biome check ."

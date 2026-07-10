@@ -36,6 +36,3 @@ tsconfig.tsbuildinfo
 
 */sw.js
 **/sw.js
-
-# Generated token index
-public/data

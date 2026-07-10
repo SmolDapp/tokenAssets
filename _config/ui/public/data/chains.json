@@ -1,0 +1,268 @@
+{
+	"totalTokens": 4253,
+	"chains": [
+		{
+			"id": "1",
+			"name": "Ethereum",
+			"slug": "ethereum",
+			"count": 1775,
+			"explorer": "https://etherscan.io"
+		},
+		{
+			"id": "43114",
+			"name": "Avalanche",
+			"slug": "avalanche",
+			"count": 45,
+			"explorer": "https://snowtrace.io"
+		},
+		{
+			"id": "8453",
+			"name": "Base",
+			"slug": "base",
+			"count": 912,
+			"explorer": "https://basescan.org"
+		},
+		{
+			"id": "10",
+			"name": "Optimism",
+			"slug": "optimism",
+			"count": 462,
+			"explorer": "https://optimistic.etherscan.io"
+		},
+		{
+			"id": "42161",
+			"name": "Arbitrum",
+			"slug": "arbitrum",
+			"count": 137,
+			"explorer": "https://arbiscan.io"
+		},
+		{
+			"id": "57073",
+			"name": "Ink",
+			"slug": "ink",
+			"count": 33,
+			"explorer": "https://explorer.inkonchain.com"
+		},
+		{
+			"id": "42220",
+			"name": "Celo",
+			"slug": "celo",
+			"count": 28,
+			"explorer": "https://celoscan.io"
+		},
+		{
+			"id": "1101",
+			"name": "Polygon zkEVM",
+			"slug": "polygon-zkevm",
+			"count": 2,
+			"explorer": "https://zkevm.polygonscan.com"
+		},
+		{
+			"id": "56",
+			"name": "BSC",
+			"slug": "bsc",
+			"count": 218,
+			"explorer": "https://bscscan.com"
+		},
+		{
+			"id": "137",
+			"name": "Polygon",
+			"slug": "polygon",
+			"count": 113,
+			"explorer": "https://polygonscan.com"
+		},
+		{
+			"id": "130",
+			"name": "Unichain",
+			"slug": "unichain",
+			"count": 13,
+			"explorer": "https://uniscan.xyz"
+		},
+		{
+			"id": "146",
+			"name": "Sonic",
+			"slug": "sonic",
+			"count": 36,
+			"explorer": "https://sonicscan.org"
+		},
+		{
+			"id": "1151111081099710",
+			"name": "Solana",
+			"slug": "solana",
+			"count": 38
+		},
+		{
+			"id": "5000",
+			"name": "Mantle",
+			"slug": "mantle",
+			"count": 32,
+			"explorer": "https://mantlescan.xyz/"
+		},
+		{
+			"id": "252",
+			"name": "Fraxtal",
+			"slug": "fraxtal",
+			"count": 34,
+			"explorer": "https://fraxscan.com"
+		},
+		{
+			"id": "747474",
+			"name": "Katana",
+			"slug": "katana",
+			"count": 15,
+			"explorer": "https://katanascan.com"
+		},
+		{
+			"id": "60808",
+			"name": "BOB",
+			"slug": "bob",
+			"count": 34,
+			"explorer": "https://explorer.gobob.xyz"
+		},
+		{
+			"id": "34443",
+			"name": "Mode",
+			"slug": "mode",
+			"count": 32,
+			"explorer": "https://modescan.io"
+		},
+		{
+			"id": "250",
+			"name": "Fantom",
+			"slug": "fantom",
+			"count": 82,
+			"explorer": "https://ftmscan.com"
+		},
+		{
+			"id": "1868",
+			"name": "Soneium",
+			"slug": "soneium",
+			"count": 24,
+			"explorer": "https://soneium.blockscout.com"
+		},
+		{
+			"id": "80094",
+			"name": "Berachain",
+			"slug": "berachain",
+			"count": 9,
+			"explorer": "https://berascan.com"
+		},
+		{
+			"id": "100",
+			"name": "Gnosis",
+			"slug": "gnosis",
+			"count": 26,
+			"explorer": "https://gnosisscan.io"
+		},
+		{
+			"id": "1135",
+			"name": "Lisk",
+			"slug": "lisk",
+			"count": 18,
+			"explorer": "https://blockscout.lisk.com"
+		},
+		{
+			"id": "59144",
+			"name": "Linea",
+			"slug": "linea",
+			"count": 14,
+			"explorer": "https://lineascan.build"
+		},
+		{
+			"id": "324",
+			"name": "ZkSync Era",
+			"slug": "zksync-era",
+			"count": 7,
+			"explorer": "https://explorer.zksync.io/"
+		},
+		{
+			"id": "81457",
+			"name": "Blast",
+			"slug": "blast",
+			"count": 10,
+			"explorer": "https://blastscan.io"
+		},
+		{
+			"id": "534352",
+			"name": "Scroll",
+			"slug": "scroll",
+			"count": 5,
+			"explorer": "https://scrollscan.com"
+		},
+		{
+			"id": "957",
+			"name": "Derive",
+			"slug": "derive",
+			"count": 1,
+			"explorer": "https://explorer.lyra.finance"
+		},
+		{
+			"id": "964",
+			"name": "Subtensor EVM",
+			"slug": "subtensor-evm",
+			"count": 1,
+			"explorer": "https://evm.taostats.io"
+		},
+		{
+			"id": "1750",
+			"name": "Metal L2",
+			"slug": "metal-l2",
+			"count": 6,
+			"explorer": "https://explorer.metall2.com"
+		},
+		{
+			"id": "1923",
+			"name": "Swellchain",
+			"slug": "swellchain",
+			"count": 19,
+			"explorer": "https://explorer.swellnetwork.io"
+		},
+		{
+			"id": "3338",
+			"name": "Peaq",
+			"slug": "peaq",
+			"count": 1,
+			"explorer": "https://peaq.subscan.io"
+		},
+		{
+			"id": "4326",
+			"name": "Chain 4326",
+			"slug": "chain-4326",
+			"count": 1,
+			"explorer": "https://mega.etherscan.io"
+		},
+		{
+			"id": "4663",
+			"name": "Robinhood",
+			"slug": "robinhood",
+			"count": 26
+		},
+		{
+			"id": "5330",
+			"name": "Superseed",
+			"slug": "superseed",
+			"count": 7,
+			"explorer": "https://explorer.superseed.xyz"
+		},
+		{
+			"id": "50104",
+			"name": "Sophon",
+			"slug": "sophon",
+			"count": 15,
+			"explorer": "https://explorer.sophon.xyz"
+		},
+		{
+			"id": "98866",
+			"name": "Plume",
+			"slug": "plume",
+			"count": 18,
+			"explorer": "https://explorer.plume.org"
+		},
+		{
+			"id": "1380012617",
+			"name": "Rari",
+			"slug": "rari",
+			"count": 4
+		}
+	]
+}
