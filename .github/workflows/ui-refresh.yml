@@ -1,18 +1,27 @@
 name: 🔄 Refresh UI token index
 
-# The UI's token index (`_config/ui/public/data`) is a build artifact: recency comes from
-# git history and popularity (market cap) from DefiLlama at build time, so both go stale.
-# This weekly job regenerates it as a canary (catches API/pipeline breakage) and, if a
-# deploy hook is configured, triggers a production rebuild so the live site refreshes.
+# The UI's token index (`_config/ui/public/data`) is committed so the Vercel build reads it
+# instead of regenerating it — regeneration hit public RPCs + DefiLlama on every deploy and took
+# ~16 min. This job regenerates the index (recency from git history, popularity from DefiLlama,
+# metadata from on-chain) and commits it back, which triggers a normal, now-fast redeploy. It runs
+# when a token/chain logo lands on main, plus weekly to refresh market caps.
 
 on:
+    push:
+        branches:
+            - main
+        # Only real logo additions/removals — NOT the frequent bot `list.json`/`_info.json` churn,
+        # which does not change the generated index.
+        paths:
+            - 'tokens/**/logo.svg'
+            - 'chains/**/logo.svg'
     schedule:
-        # Every Monday at 06:00 UTC
+        # Every Monday at 06:00 UTC — refresh popularity (market caps) even without token changes.
         - cron: '0 6 * * 1'
     workflow_dispatch:
 
 permissions:
-    contents: read
+    contents: write
 
 concurrency:
     group: ui-refresh
@@ -25,9 +34,8 @@ jobs:
             - name: Checkout repo (full history for recency dates)
               uses: actions/checkout@v4
               with:
-                  persist-credentials: false
-                  # Required: addedAt is derived from git history; a shallow clone would
-                  # collapse every date to the last commit.
+                  # addedAt is derived from git history; a shallow clone would collapse every date
+                  # to the last commit. Credentials persist (default) so the index can be pushed back.
                   fetch-depth: 0
 
             - name: Setup Bun
@@ -37,17 +45,46 @@ jobs:
               working-directory: _config/ui
               run: bun install --frozen-lockfile
 
-            - name: Regenerate token index (recency + market caps)
+            - name: Record current token count
+              id: before
+              working-directory: _config/ui
+              run: |
+                  COUNT=$(node -e 'try{process.stdout.write(String(require("./public/data/chains.json").totalTokens||0))}catch{process.stdout.write("0")}')
+                  echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+            - name: Regenerate token index (recency + market caps + on-chain metadata)
               working-directory: _config/ui
               run: bun run generate
 
-            - name: Trigger production redeploy (if configured)
+            - name: Guard against a broken regeneration
+              working-directory: _config/ui
+              # Pass the baseline through env, not inline ${{ }} interpolation, to keep untrusted-looking
+              # values out of the shell (GitHub Actions script-injection hardening).
               env:
-                  DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+                  OLD: ${{ steps.before.outputs.count }}
               run: |
-                  if [ -n "$DEPLOY_HOOK" ]; then
-                    curl -fsS -X POST "$DEPLOY_HOOK"
-                    echo "Triggered production redeploy."
+                  NEW=$(node -e 'try{process.stdout.write(String(require("./public/data/chains.json").totalTokens||0))}catch{process.stdout.write("0")}')
+                  echo "token count: old=$OLD new=$NEW"
+                  if [ "$NEW" -lt 1000 ]; then
+                    echo "::error::Regenerated index has only $NEW tokens; refusing to commit a broken index."
+                    exit 1
+                  fi
+                  if [ "$OLD" -gt 0 ] && [ "$NEW" -lt $((OLD * 80 / 100)) ]; then
+                    echo "::error::Token count collapsed ($OLD -> $NEW); refusing to commit."
+                    exit 1
+                  fi
+
+            - name: Commit the refreshed index (triggers a fast redeploy)
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add _config/ui/public/data
+                  if git diff --cached --quiet; then
+                    echo "Index unchanged; nothing to commit."
                   else
-                    echo "No VERCEL_DEPLOY_HOOK_URL secret set; regeneration validated but nothing deployed."
+                    git commit -m "chore: refresh UI token index"
+                    # main can advance during the multi-minute regeneration (bot list updates, merges);
+                    # rebase our data commit on top before pushing so a concurrent push isn't rejected.
+                    git pull --rebase origin main
+                    git push origin HEAD:main
                   fi
