@@ -8,30 +8,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const BASE_TOKENS_URI = `https://raw.githubusercontent.com/SmolDapp/tokenAssets/main`
-
 func resolveNotFound(c *gin.Context) {
 	fallback := c.Query("fallback")
 	if fallback == "true" {
-		c.Redirect(http.StatusTemporaryRedirect, BASE_TOKENS_URI+`/_config/nodeAPI/public/not-found.png`)
+		c.Redirect(http.StatusTemporaryRedirect, RedirectBaseURI()+`/_config/nodeAPI/public/not-found.png`)
 		c.Abort()
 		return
 	}
 
-	if fallback != "" {
-		resp, err := http.Get(fallback)
-		if err != nil {
-			c.String(http.StatusNotFound, "Not found")
-			return
-		}
-		defer resp.Body.Close()
-
-		contentType := resp.Header.Get("Content-Type")
-		if contentType != "" && strings.HasPrefix(contentType, "image/") {
-			fmt.Printf("Using fallback image for gas token: %s\n", fallback)
-			c.DataFromReader(http.StatusOK, resp.ContentLength, contentType, resp.Body, nil)
-			return
-		}
+	// A caller may point fallback at their own image URL. Redirect the browser to it instead of
+	// fetching it server-side: the daemon makes no arbitrary outbound request (no SSRF), and the
+	// image renders on its own origin, never ours. http(s) only, so the Location cannot carry a
+	// javascript: or data: scheme.
+	if strings.HasPrefix(fallback, "https://") || strings.HasPrefix(fallback, "http://") {
+		c.Redirect(http.StatusTemporaryRedirect, fallback)
+		c.Abort()
+		return
 	}
 
 	c.String(http.StatusNotFound, "Not found")
@@ -40,25 +32,19 @@ func resolveNotFound(c *gin.Context) {
 func resolveGasToken(c *gin.Context) {
 	fallback := c.Query("fallback")
 	if fallback == "true" {
-		c.Redirect(http.StatusTemporaryRedirect, BASE_TOKENS_URI+`/_config/nodeAPI/public/gas-token.png`)
+		c.Redirect(http.StatusTemporaryRedirect, RedirectBaseURI()+`/_config/nodeAPI/public/gas-token.png`)
 		c.Abort()
 		return
 	}
 
-	if fallback != "" {
-		resp, err := http.Get(fallback)
-		if err != nil {
-			c.String(http.StatusNotFound, "Not found")
-			return
-		}
-		defer resp.Body.Close()
-
-		contentType := resp.Header.Get("Content-Type")
-		if contentType != "" && strings.HasPrefix(contentType, "image/") {
-			fmt.Printf("Using fallback image for gas token: %s\n", fallback)
-			c.DataFromReader(http.StatusOK, resp.ContentLength, contentType, resp.Body, nil)
-			return
-		}
+	// A caller may point fallback at their own image URL. Redirect the browser to it instead of
+	// fetching it server-side: the daemon makes no arbitrary outbound request (no SSRF), and the
+	// image renders on its own origin, never ours. http(s) only, so the Location cannot carry a
+	// javascript: or data: scheme.
+	if strings.HasPrefix(fallback, "https://") || strings.HasPrefix(fallback, "http://") {
+		c.Redirect(http.StatusTemporaryRedirect, fallback)
+		c.Abort()
+		return
 	}
 
 	c.String(http.StatusNotFound, "Not found")
@@ -82,7 +68,8 @@ func ServeToken(c *gin.Context) {
 		return
 	}
 
-	targetURL := fmt.Sprintf("%s/tokens/%s/%s/%s", BASE_TOKENS_URI, chainIDStr, tokenAddress, fileName)
-	c.Redirect(http.StatusPermanentRedirect, targetURL)
+	targetURL := fmt.Sprintf("%s/tokens/%s/%s/%s", RedirectBaseURI(), chainIDStr, tokenAddress, fileName)
+	c.Header(`Cache-Control`, REDIRECT_CACHE_CONTROL)
+	c.Redirect(http.StatusTemporaryRedirect, targetURL)
 	c.Abort()
 }

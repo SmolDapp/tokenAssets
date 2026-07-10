@@ -7,8 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const BASE_CHAIN_URI = `https://raw.githubusercontent.com/SmolDapp/tokenAssets/main`
-
 func ServeChain(c *gin.Context) {
 	chainIDStr := c.Param("chainID")
 	fileName := c.Param("filename")
@@ -18,7 +16,8 @@ func ServeChain(c *gin.Context) {
 		return
 	}
 
-	targetURL := fmt.Sprintf("%s/chains/%s/%s", BASE_CHAIN_URI, chainIDStr, fileName)
-	c.Redirect(http.StatusPermanentRedirect, targetURL)
+	targetURL := fmt.Sprintf("%s/chains/%s/%s", RedirectBaseURI(), chainIDStr, fileName)
+	c.Header(`Cache-Control`, REDIRECT_CACHE_CONTROL)
+	c.Redirect(http.StatusTemporaryRedirect, targetURL)
 	c.Abort()
 }
