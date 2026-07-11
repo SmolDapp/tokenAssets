@@ -12,7 +12,7 @@ func ServeChain(c *gin.Context) {
 	fileName := c.Param("filename")
 
 	if !ContainsSubString([]string{"logo.svg", "logo-32.png", "logo-128.png"}, fileName) {
-		resolveNotFound(c)
+		resolveFallback(c, `/_config/nodeAPI/public/not-found.png`)
 		return
 	}
 
