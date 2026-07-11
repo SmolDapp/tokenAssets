@@ -7,7 +7,6 @@ import {TxResult} from '@components/TxResult';
 import {Button} from '@components/ui/button';
 import {useChain} from '@contexts/WithChain';
 import {useTokens} from '@hooks/useTokens';
-import {GITHUB_URI} from '@utils/constants';
 import {tokenPageURI, withSearch} from '@utils/helpers';
 import {useSettings} from 'app/_contexts/WithSettings';
 import Link from 'next/link';
@@ -112,15 +111,13 @@ export function TokenList(): ReactElement {
 						<div>
 							<p className={'font-semibold text-lg text-primary'}>{'TOKENS NOT FOUND.'}</p>
 							<p className={'text-sm text-subtle'}>
-								{'Contribute to Token Assets. Submit the missing logo on GitHub.'}
+								{'Contribute to Token Assets. Submit the missing logo.'}
 							</p>
 						</div>
 					}
 					action={
 						<Button asChild className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
-							<Link href={GITHUB_URI} target={'_blank'} rel={'noopener noreferrer'}>
-								{'ADD TOKEN LOGO'}
-							</Link>
+							<Link href={'/submit'}>{'ADD TOKEN LOGO'}</Link>
 						</Button>
 					}
 				/>

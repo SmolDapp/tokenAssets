@@ -149,6 +149,8 @@ export function validateSubmission(input: TSubmissionInput): TValidationError[] 
 		errors.push({field: 'website', message: 'A project link is required.'});
 	} else if (!/^https?:\/\//i.test(website)) {
 		errors.push({field: 'website', message: 'Project link must start with http:// or https://.'});
+	} else if (/\s/.test(website)) {
+		errors.push({field: 'website', message: 'Project link cannot contain spaces.'});
 	}
 
 	return errors;

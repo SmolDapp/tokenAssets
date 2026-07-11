@@ -197,6 +197,7 @@ export async function POST(request: Request): Promise<Response> {
 				`- **Chain:** ${chain.name} (\`${input.chainID}\`)`,
 				`- **Address:** \`${input.address}\``,
 				`- **Symbol:** ${input.symbol} · **Decimals:** ${input.decimals}`,
+				`- **Project:** <${input.website.trim()}>`,
 				explorerLine
 			].join('\n'),
 			base,

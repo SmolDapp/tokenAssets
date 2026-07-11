@@ -3,7 +3,7 @@ import {cn} from '@components/lib/utils';
 import {Drawer, DrawerContent, DrawerDescription, DrawerTitle} from '@components/ui/drawer';
 import {useChain} from '@contexts/WithChain';
 import Cross from '@icons/cross.svg';
-import {CHAINS, GITHUB_URI} from '@utils/constants';
+import {CHAINS} from '@utils/constants';
 import {withSearch} from '@utils/helpers';
 import Link from 'next/link';
 import {useRouter, useSearchParams} from 'next/navigation';
@@ -49,16 +49,15 @@ export function MobileMenuDrawer({isOpen, onClose}: {isOpen: boolean; onClose: (
 						</button>
 					</div>
 					<Link
-						href={GITHUB_URI}
-						target={'_blank'}
-						rel={'noopener noreferrer'}
+						href={'/submit'}
+						onClick={onClose}
 						className={cn(
 							'flex h-10 w-full items-center justify-center rounded-sm p-3',
 							'text-primary text-xs uppercase',
 							'bg-white transition-colors hover:bg-border-gray',
 							'border border-transparent'
 						)}>
-						<p className={'truncate text-sm'}>{'CONTRIBUTE ON GITHUB'}</p>
+						<p className={'truncate text-sm'}>{'Add a token'}</p>
 					</Link>
 					<div className={'max-h-[40vh] overflow-y-auto'}>
 						<div className={'flex flex-col gap-1'}>
