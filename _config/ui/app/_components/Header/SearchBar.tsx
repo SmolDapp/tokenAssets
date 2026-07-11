@@ -15,6 +15,11 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	const searchParams = useSearchParams();
 	const {chain} = useChain();
 	const isDrawerOpen = useDrawerOpen();
+	// Read via a ref (not a dependency) below: otherwise the drawer closing re-runs the push effect
+	// while the debounced value is still the token's search, re-applying it right after router.back()
+	// cleared it — the filter flash.
+	const isDrawerOpenRef = useRef(isDrawerOpen);
+	isDrawerOpenRef.current = isDrawerOpen;
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const currentSearch = searchParams.get('search') || '';
@@ -31,7 +36,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	// user clicked a token card would push the bare chain URL on top of the drawer's URL,
 	// desyncing the @drawer slot into a drawer that router.back() can never close.
 	useEffect(() => {
-		if (isDrawerOpen) {
+		if (isDrawerOpenRef.current) {
 			return;
 		}
 		const params = new URLSearchParams(window.location.search);
@@ -44,7 +49,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 			params.delete('search');
 		}
 		router.push(withSearch(`/${chain.slug}`, params.toString()), {scroll: false});
-	}, [debouncedValue, router, chain.slug, isDrawerOpen]);
+	}, [debouncedValue, router, chain.slug]);
 
 	// Mirror an externally-set search (e.g. the command palette) into the field, unless the user is typing here.
 	useEffect(() => {
