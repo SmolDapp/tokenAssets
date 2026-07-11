@@ -1,9 +1,8 @@
 'use client';
 
 import {rankBySearchScore} from '@utils/searchScore';
-import {useEffect, useMemo, useState} from 'react';
-
 import type {TSearchEntry} from '@utils/types';
+import {useEffect, useMemo, useState} from 'react';
 
 const MAX_RESULTS = 40;
 

@@ -1,6 +1,5 @@
-import {ASSETS_BASE_URI, GITHUB_URI} from '@utils/constants';
-
 import type {TChainInfo} from '@utils/constants';
+import {ASSETS_BASE_URI, GITHUB_URI} from '@utils/constants';
 import type {TLogoFile} from '@utils/types';
 
 export function tokenLogoURI(chainID: string, address: string, file: TLogoFile = 'logo-128.png'): string {

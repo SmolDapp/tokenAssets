@@ -1,6 +1,5 @@
-import chainsData from '../../public/data/chains.json';
-
 import type {TLogoFile} from '@utils/types';
+import chainsData from '../../public/data/chains.json';
 
 export type TChainInfo = {
 	id: string;

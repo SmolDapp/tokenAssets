@@ -1,8 +1,8 @@
 'use client';
 
 import {ChainLogo} from '@components/ChainLogo';
-import {SubmitResult} from '@components/Submit/SubmitResult';
 import {cn} from '@components/lib/utils';
+import {SubmitResult} from '@components/Submit/SubmitResult';
 import {Button} from '@components/ui/button';
 import {Input} from '@components/ui/input';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@components/ui/select';
@@ -11,16 +11,15 @@ import ArrowDown from '@icons/arrow-down.svg';
 import {CHAINS, DEFAULT_CHAIN} from '@utils/constants';
 import {canFetchOnchain, fetchOnchainToken} from '@utils/onchainToken';
 import {
+	isValidAddress,
 	type TSubmissionInput,
 	type TValidationError,
-	isValidAddress,
 	validateSubmission,
 	validateTokenMeta
 } from '@utils/tokenSubmission';
 import {signIn} from 'next-auth/react';
-import {useEffect, useMemo, useState} from 'react';
-
 import type {ReactElement, ReactNode} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 
 type TMetaStatus = 'idle' | 'loading' | 'ready' | 'error' | 'unsupported';
 
@@ -45,9 +44,7 @@ function Field({
 	return (
 		<div className={'space-y-1.5'}>
 			{htmlFor ? (
-				<label
-					htmlFor={htmlFor}
-					className={labelClassName}>
+				<label htmlFor={htmlFor} className={labelClassName}>
 					{label}
 				</label>
 			) : (
@@ -386,15 +383,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				className={
 					'min-w-0 space-y-4 rounded-sm border border-white/15 bg-white/[0.04] p-5 md:p-6 lg:col-span-6'
 				}>
-				<Field
-					label={'Chain'}
-					htmlFor={'submit-chain'}>
-					<Select
-						value={chainID}
-						onValueChange={handleChainChange}>
-						<SelectTrigger
-							id={'submit-chain'}
-							className={cn('h-10 rounded-sm text-white', inputClassName)}>
+				<Field label={'Chain'} htmlFor={'submit-chain'}>
+					<Select value={chainID} onValueChange={handleChainChange}>
+						<SelectTrigger id={'submit-chain'} className={cn('h-10 rounded-sm text-white', inputClassName)}>
 							<SelectValue>
 								<span className={'flex items-center gap-2'}>
 									<ChainLogo id={selectedChain.id} />
@@ -404,9 +395,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 						</SelectTrigger>
 						<SelectContent>
 							{CHAINS.map(chain => (
-								<SelectItem
-									key={chain.id}
-									value={chain.id}>
+								<SelectItem key={chain.id} value={chain.id}>
 									<span className={'flex items-center gap-2'}>
 										<ChainLogo id={chain.id} />
 										{chain.name}
@@ -417,9 +406,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 					</Select>
 				</Field>
 
-				<Field
-					label={'Contract address'}
-					htmlFor={'submit-address'}>
+				<Field label={'Contract address'} htmlFor={'submit-address'}>
 					<Input
 						id={'submit-address'}
 						value={address}
@@ -457,9 +444,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 								: 'The on-chain metadata needs a fix — adjust the token details below.'}
 						</p>
 						<div className={'grid grid-cols-2 gap-4'}>
-							<Field
-								label={'Name'}
-								htmlFor={'submit-name'}>
+							<Field label={'Name'} htmlFor={'submit-name'}>
 								<Input
 									id={'submit-name'}
 									value={name}
@@ -468,9 +453,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 									className={inputClassName}
 								/>
 							</Field>
-							<Field
-								label={'Symbol'}
-								htmlFor={'submit-symbol'}>
+							<Field label={'Symbol'} htmlFor={'submit-symbol'}>
 								<Input
 									id={'submit-symbol'}
 									value={symbol}
@@ -480,9 +463,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 								/>
 							</Field>
 						</div>
-						<Field
-							label={'Decimals'}
-							htmlFor={'submit-decimals'}>
+						<Field label={'Decimals'} htmlFor={'submit-decimals'}>
 							<Input
 								id={'submit-decimals'}
 								value={decimals}
@@ -508,6 +489,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 								'border border-white/20 border-dashed bg-white/5 transition-colors hover:border-white/40'
 							)}>
 							{svgDataURL && (
+								// biome-ignore lint/performance/noImgElement: local data-URI preview of the uploaded SVG; next/image can't optimize a data URL.
 								<img
 									src={svgDataURL}
 									alt={`${svgFileName} preview`}
@@ -565,9 +547,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 
 					{showOptional && (
 						<div className={'space-y-5'}>
-							<Field
-								label={'Description'}
-								htmlFor={'submit-description'}>
+							<Field label={'Description'} htmlFor={'submit-description'}>
 								<textarea
 									id={'submit-description'}
 									value={description}
@@ -580,10 +560,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 									)}
 								/>
 							</Field>
-							<Field
-								label={'Tags'}
-								htmlFor={'submit-tags'}
-								hint={'Comma-separated'}>
+							<Field label={'Tags'} htmlFor={'submit-tags'} hint={'Comma-separated'}>
 								<Input
 									id={'submit-tags'}
 									value={tagsRaw}
@@ -597,13 +574,9 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				</div>
 
 				{errors.length > 0 && (
-					<div
-						role={'alert'}
-						className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
+					<div role={'alert'} className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
 						{errors.map(error => (
-							<p
-								key={`${error.field}-${error.message}`}
-								className={'font-mono text-error text-xs'}>
+							<p key={`${error.field}-${error.message}`} className={'font-mono text-error text-xs'}>
 								{`• ${error.message}`}
 							</p>
 						))}
@@ -611,9 +584,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				)}
 
 				{submitError && (
-					<p
-						role={'alert'}
-						className={'font-mono text-error text-xs'}>
+					<p role={'alert'} className={'font-mono text-error text-xs'}>
 						{submitError}
 					</p>
 				)}
@@ -629,10 +600,7 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 				</Button>
 			</div>
 
-			<SubmitResult
-				prURL={prURL}
-				onClose={() => setPrURL(null)}
-			/>
+			<SubmitResult prURL={prURL} onClose={() => setPrURL(null)} />
 		</>
 	);
 }

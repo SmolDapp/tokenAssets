@@ -6,10 +6,9 @@ import Cross from '@icons/cross.svg';
 import SearchIcon from '@icons/search.svg';
 import {withSearch} from '@utils/helpers';
 import {useRouter, useSearchParams} from 'next/navigation';
+import type {ReactElement} from 'react';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {useDebounceValue} from 'usehooks-ts';
-
-import type {ReactElement} from 'react';
 
 export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactElement {
 	const router = useRouter();
@@ -61,7 +60,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	return (
 		<div className={'flex flex-1 justify-center max-md:w-full'}>
 			<div className={'relative max-md:w-full'}>
-				<div className={'-translate-y-1/2 absolute top-1/2 left-4'}>
+				<div className={'absolute top-1/2 left-4 -translate-y-1/2'}>
 					<SearchIcon
 						className={cn(
 							'size-4 transition-colors duration-75',
@@ -93,7 +92,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 					aria-hidden={!inputValue}
 					tabIndex={inputValue ? 0 : -1}
 					className={cn(
-						'-translate-y-1/2 absolute top-1/2 right-3 text-white md:right-[80px]',
+						'absolute top-1/2 right-3 -translate-y-1/2 text-white md:right-[80px]',
 						'transition-opacity',
 						inputValue ? 'opacity-100' : 'pointer-events-none opacity-0'
 					)}>
@@ -104,7 +103,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 					onClick={onOpenPalette}
 					aria-label={'Search all chains'}
 					className={
-						'-translate-y-1/2 absolute top-1/2 right-3 hidden items-center gap-1 rounded-[2px] border border-disabled px-2 py-1 font-mono font-semibold text-white text-xs uppercase transition-colors hover:bg-primary-light md:flex'
+						'absolute top-1/2 right-3 hidden -translate-y-1/2 items-center gap-1 rounded-[2px] border border-disabled px-2 py-1 font-mono font-semibold text-white text-xs uppercase transition-colors hover:bg-primary-light md:flex'
 					}>
 					<span>{'ctrl'}</span>
 					<span>{'k'}</span>

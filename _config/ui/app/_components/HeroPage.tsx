@@ -1,10 +1,9 @@
 import {BrandMark} from '@components/BrandMark';
+import {cn} from '@components/lib/utils';
 import {SiteFooter} from '@components/SiteFooter';
 import {Stat} from '@components/Stat';
-import {cn} from '@components/lib/utils';
-import {Fragment} from 'react';
-
 import type {ReactElement, ReactNode} from 'react';
+import {Fragment} from 'react';
 
 const dotGridClassName = cn(
 	'pointer-events-none absolute inset-0',

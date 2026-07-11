@@ -23,7 +23,7 @@ export function HttpLink({value, href}: {value: string; href?: string}): ReactEl
 			{value}
 			<LinkOutIcon
 				className={
-					'group-hover:-translate-y-0.5 ml-2 inline-block size-3 text-primary transition-transform group-hover:translate-x-0.5'
+					'ml-2 inline-block size-3 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
 				}
 			/>
 		</Link>

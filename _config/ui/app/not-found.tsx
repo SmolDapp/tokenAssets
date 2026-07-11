@@ -4,9 +4,8 @@ import {Button} from '@components/ui/button';
 import {useChain} from '@contexts/WithChain';
 import GrumpyIcon from '@icons/grumpy.svg';
 import Link from 'next/link';
-import {Suspense} from 'react';
-
 import type {ReactElement} from 'react';
+import {Suspense} from 'react';
 
 function NotFoundContent(): ReactElement {
 	const {chain} = useChain();

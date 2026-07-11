@@ -3,8 +3,8 @@
 import {cn} from '@components/lib/utils';
 import Cross from '@icons/cross.svg';
 import * as ToastPrimitives from '@radix-ui/react-toast';
-import {type VariantProps, cva} from 'class-variance-authority';
-import {type ComponentPropsWithoutRef, type ElementRef, type ReactElement, forwardRef} from 'react';
+import {cva, type VariantProps} from 'class-variance-authority';
+import {type ComponentPropsWithoutRef, type ElementRef, forwardRef, type ReactElement} from 'react';
 
 const ToastProvider = ToastPrimitives.Provider;
 

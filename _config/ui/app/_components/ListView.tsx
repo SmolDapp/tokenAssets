@@ -1,9 +1,9 @@
 'use client';
 
+import {cn} from '@components/lib/utils';
 import {NewBadge} from '@components/NewBadge';
 import {Spinner} from '@components/Spinner';
 import {TokenLogo} from '@components/TokenLogo';
-import {cn} from '@components/lib/utils';
 import {useChain} from '@contexts/WithChain';
 import {useIntersectionObserver} from '@hooks/useIntersectionObserver';
 import DownloadIcon from '@icons/download.svg';
@@ -11,10 +11,9 @@ import {copyToClipboard} from '@utils/clipboard';
 import {LOGO_FORMATS} from '@utils/constants';
 import {downloadLogo} from '@utils/download';
 import {isNewToken, tokenLogoURI} from '@utils/helpers';
-import {useCallback} from 'react';
-
 import type {TToken} from '@utils/types';
 import type {ReactElement, ReactNode} from 'react';
+import {useCallback} from 'react';
 
 type TProps = {
 	tokens: TToken[];

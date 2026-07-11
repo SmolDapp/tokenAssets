@@ -5,9 +5,8 @@ import {useChain} from '@contexts/WithChain';
 import Grid from '@icons/grid.svg';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
-import {useState} from 'react';
-
 import type {ReactElement} from 'react';
+import {useState} from 'react';
 
 export function MenuButtons(): ReactElement {
 	const [isOpen, setIsOpen] = useState(false);

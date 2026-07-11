@@ -43,6 +43,7 @@ export async function GET(
 						background: '#ffffff'
 					}}>
 					{/* biome-ignore lint/a11y/useAltText: decorative OG image */}
+					{/* biome-ignore lint/performance/noImgElement: next/og renders via Satori, which only supports raw <img>. */}
 					<img src={tokenLogoURI(logoChainID, address)} width={200} height={200} />
 				</div>
 				<div style={{display: 'flex', flexDirection: 'column'}}>

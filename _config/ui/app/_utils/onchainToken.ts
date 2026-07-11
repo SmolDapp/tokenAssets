@@ -1,4 +1,4 @@
-import {http, createPublicClient, erc20Abi, getAddress, hexToString} from 'viem';
+import {createPublicClient, erc20Abi, getAddress, hexToString, http} from 'viem';
 
 // bytes32 variant for legacy tokens (MKR and friends) that return name/symbol as bytes32
 // instead of string. viem throws decoding those with the standard ABI, so we retry with this.

@@ -1,9 +1,8 @@
 import {TokenList} from '@components/TokenList';
 import {DEFAULT_CHAIN, findChainBySlug} from '@utils/constants';
+import type {Metadata} from 'next';
 import {redirect} from 'next/navigation';
 import {type ReactElement, Suspense} from 'react';
-
-import type {Metadata} from 'next';
 
 type TChainPageProps = {
 	params: Promise<{chain?: string}>;

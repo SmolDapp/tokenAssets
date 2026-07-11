@@ -6,15 +6,14 @@ import {Spinner} from '@components/Spinner';
 import {TxResult} from '@components/TxResult';
 import {Button} from '@components/ui/button';
 import {useChain} from '@contexts/WithChain';
+import {useSettings} from '@contexts/WithSettings';
 import {useTokens} from '@hooks/useTokens';
 import {tokenPageURI, withSearch} from '@utils/helpers';
-import {useSettings} from 'app/_contexts/WithSettings';
+import type {TToken} from '@utils/types';
 import Link from 'next/link';
 import {useRouter, useSearchParams} from 'next/navigation';
-import {Fragment, useCallback, useRef} from 'react';
-
-import type {TToken} from '@utils/types';
 import type {ReactElement} from 'react';
+import {Fragment, useCallback, useRef} from 'react';
 
 function TokensDisplay({
 	tokens,

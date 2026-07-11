@@ -2,9 +2,8 @@
 
 import {cn} from '@components/lib/utils';
 import {tokenLogoURI} from '@utils/helpers';
-import Image from 'next/image';
-
 import type {TLogoFile, TToken} from '@utils/types';
+import Image from 'next/image';
 import type {ReactElement} from 'react';
 
 // The first tokens on screen load eagerly with high priority; the rest lazily.

@@ -17,6 +17,7 @@ export default function AppleIcon(): ImageResponse {
 				background: BRAND_GREEN
 			}}>
 			{/* biome-ignore lint/a11y/useAltText: decorative icon */}
+			{/* biome-ignore lint/performance/noImgElement: next/og renders via Satori, which only supports raw <img>. */}
 			<img src={BRAND_EYES_DATA_URI} width={120} height={51} />
 		</div>,
 		size

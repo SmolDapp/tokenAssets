@@ -1,13 +1,11 @@
-import {WithFonts} from '@components/WithFonts';
 import {Toaster} from '@components/ui/toaster';
-import {WithSettings} from 'app/_contexts/WithSettings';
+import {WithFonts} from '@components/WithFonts';
+import {ChainProvider} from '@contexts/WithChain';
+import {WithSettings} from '@contexts/WithSettings';
+import {BRAND_GREEN, SITE_URI} from '@utils/constants';
+import type {Metadata, Viewport} from 'next';
 import {cookies} from 'next/headers';
 import type {ReactElement, ReactNode} from 'react';
-
-import {ChainProvider} from '@contexts/WithChain';
-import {BRAND_GREEN, SITE_URI} from '@utils/constants';
-
-import type {Metadata, Viewport} from 'next';
 
 import '@styles/style.css';
 
