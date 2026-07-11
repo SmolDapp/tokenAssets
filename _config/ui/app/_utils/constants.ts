@@ -19,8 +19,9 @@ export const CHAINS: TChainInfo[] = chainsData.chains;
 export const TOTAL_TOKENS: number = chainsData.totalTokens;
 export const DEFAULT_CHAIN: TChainInfo = CHAINS.find(chain => chain.slug === 'ethereum') || CHAINS[0];
 
-export const SITE_URI = 'https://assets.smold.app';
-export const ASSETS_BASE_URI = `${SITE_URI}`;
+// The app is served from tokens.smold.app; the logo CDN is a separate host (assets.smold.app).
+export const SITE_URI = 'https://tokens.smold.app';
+export const ASSETS_BASE_URI = 'https://assets.smold.app';
 export const GITHUB_URI = 'https://github.com/SmolDapp/tokenAssets';
 export const SMOLD_APP_URI = 'https://smold.app';
 export const BRAND_GREEN = '#123524';

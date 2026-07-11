@@ -12,7 +12,13 @@ export const metadata: Metadata = {
 	title: 'Submit a token | Token Assets',
 	description: DESCRIPTION,
 	alternates: {canonical: '/submit'},
-	openGraph: {title: 'Submit a token | Token Assets', description: DESCRIPTION, url: '/submit', type: 'website'}
+	openGraph: {
+		title: 'Submit a token | Token Assets',
+		description: DESCRIPTION,
+		url: '/submit',
+		type: 'website',
+		images: ['/opengraph-image']
+	}
 };
 
 export default async function SubmitPage(): Promise<ReactElement> {
