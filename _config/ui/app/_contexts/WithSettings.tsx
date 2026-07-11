@@ -1,8 +1,7 @@
 'use client';
 
-import {createContext, useCallback, useContext, useMemo, useState} from 'react';
-
 import type {ReactElement, ReactNode} from 'react';
+import {createContext, useCallback, useContext, useMemo, useState} from 'react';
 
 type TWithSettings = {
 	view: 'grid' | 'list';
@@ -28,6 +27,7 @@ export const WithSettings = ({children, cookieView}: TSettingsProps): ReactEleme
 	const handleViewChange = useCallback((): void => {
 		setView(current => {
 			const next = current === 'grid' ? 'list' : 'grid';
+			// biome-ignore lint/suspicious/noDocumentCookie: a plain view-preference cookie; the async Cookie Store API adds nothing here.
 			document.cookie = `view=${next}; path=/; max-age=31536000; samesite=lax`;
 			return next;
 		});

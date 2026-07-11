@@ -1,17 +1,16 @@
 'use client';
 
+import {cn} from '@components/lib/utils';
 import {NewBadge} from '@components/NewBadge';
 import {Spinner} from '@components/Spinner';
 import {TokenLogo} from '@components/TokenLogo';
-import {cn} from '@components/lib/utils';
 import {useChain} from '@contexts/WithChain';
 import {useIntersectionObserver} from '@hooks/useIntersectionObserver';
 import {isNewToken, truncateAddress} from '@utils/helpers';
+import type {TToken} from '@utils/types';
+import type {ReactElement, ReactNode, RefObject} from 'react';
 import {memo, useCallback, useMemo, useRef} from 'react';
 import {useResizeObserver} from 'usehooks-ts';
-
-import type {TToken} from '@utils/types';
-import type {ReactElement, ReactNode} from 'react';
 
 type TProps = {
 	tokens: TToken[];
@@ -93,7 +92,7 @@ function TokenGrid({tokens, onClick}: TProps): ReactNode {
 
 export const GridView = ({tokens, onClick, hasNextPage, onLoadMore}: TProps): ReactElement => {
 	const gridRef = useRef<HTMLDivElement>(null);
-	const {width = 0} = useResizeObserver({ref: gridRef, box: 'border-box'});
+	const {width = 0} = useResizeObserver({ref: gridRef as RefObject<HTMLDivElement>, box: 'border-box'});
 	const tokensPerLine = Math.floor(width / 200) || 1;
 	const missingElements = (tokensPerLine - (tokens.length % tokensPerLine)) % tokensPerLine;
 	const newElements = useMemo(() => {

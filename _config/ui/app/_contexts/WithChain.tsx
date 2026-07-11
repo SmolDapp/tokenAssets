@@ -1,10 +1,9 @@
 'use client';
 
+import type {TChainInfo} from '@utils/constants';
 import {DEFAULT_CHAIN, findChainBySlug} from '@utils/constants';
 import {useParams} from 'next/navigation';
-import {type ReactElement, type ReactNode, createContext, useContext, useMemo} from 'react';
-
-import type {TChainInfo} from '@utils/constants';
+import {createContext, type ReactElement, type ReactNode, useContext, useMemo} from 'react';
 
 type TChainContext = {
 	chain: TChainInfo;

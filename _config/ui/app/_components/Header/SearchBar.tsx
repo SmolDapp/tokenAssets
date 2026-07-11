@@ -6,16 +6,20 @@ import Cross from '@icons/cross.svg';
 import SearchIcon from '@icons/search.svg';
 import {withSearch} from '@utils/helpers';
 import {useRouter, useSearchParams} from 'next/navigation';
+import type {ReactElement} from 'react';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {useDebounceValue} from 'usehooks-ts';
-
-import type {ReactElement} from 'react';
 
 export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactElement {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const {chain} = useChain();
 	const isDrawerOpen = useDrawerOpen();
+	// Read via a ref (not a dependency) below: otherwise the drawer closing re-runs the push effect
+	// while the debounced value is still the token's search, re-applying it right after router.back()
+	// cleared it — the filter flash.
+	const isDrawerOpenRef = useRef(isDrawerOpen);
+	isDrawerOpenRef.current = isDrawerOpen;
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const currentSearch = searchParams.get('search') || '';
@@ -32,7 +36,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	// user clicked a token card would push the bare chain URL on top of the drawer's URL,
 	// desyncing the @drawer slot into a drawer that router.back() can never close.
 	useEffect(() => {
-		if (isDrawerOpen) {
+		if (isDrawerOpenRef.current) {
 			return;
 		}
 		const params = new URLSearchParams(window.location.search);
@@ -45,7 +49,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 			params.delete('search');
 		}
 		router.push(withSearch(`/${chain.slug}`, params.toString()), {scroll: false});
-	}, [debouncedValue, router, chain.slug, isDrawerOpen]);
+	}, [debouncedValue, router, chain.slug]);
 
 	// Mirror an externally-set search (e.g. the command palette) into the field, unless the user is typing here.
 	useEffect(() => {
@@ -61,7 +65,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	return (
 		<div className={'flex flex-1 justify-center max-md:w-full'}>
 			<div className={'relative max-md:w-full'}>
-				<div className={'-translate-y-1/2 absolute top-1/2 left-4'}>
+				<div className={'absolute top-1/2 left-4 -translate-y-1/2'}>
 					<SearchIcon
 						className={cn(
 							'size-4 transition-colors duration-75',
@@ -93,7 +97,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 					aria-hidden={!inputValue}
 					tabIndex={inputValue ? 0 : -1}
 					className={cn(
-						'-translate-y-1/2 absolute top-1/2 right-3 text-white md:right-[80px]',
+						'absolute top-1/2 right-3 -translate-y-1/2 text-white md:right-[80px]',
 						'transition-opacity',
 						inputValue ? 'opacity-100' : 'pointer-events-none opacity-0'
 					)}>
@@ -104,7 +108,7 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 					onClick={onOpenPalette}
 					aria-label={'Search all chains'}
 					className={
-						'-translate-y-1/2 absolute top-1/2 right-3 hidden items-center gap-1 rounded-[2px] border border-disabled px-2 py-1 font-mono font-semibold text-white text-xs uppercase transition-colors hover:bg-primary-light md:flex'
+						'absolute top-1/2 right-3 hidden -translate-y-1/2 items-center gap-1 rounded-[2px] border border-disabled px-2 py-1 font-mono font-semibold text-white text-xs uppercase transition-colors hover:bg-primary-light md:flex'
 					}>
 					<span>{'ctrl'}</span>
 					<span>{'k'}</span>

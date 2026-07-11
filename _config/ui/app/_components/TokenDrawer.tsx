@@ -1,9 +1,9 @@
 'use client';
 
 import {CodeSnippets} from '@components/CodeSnippets';
+import {cn} from '@components/lib/utils';
 import {Spinner} from '@components/Spinner';
 import {TokenInfoFields} from '@components/TokenInfoFields';
-import {cn} from '@components/lib/utils';
 import {Button} from '@components/ui/button';
 import {Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle} from '@components/ui/drawer';
 import {useChain} from '@contexts/WithChain';
@@ -11,12 +11,11 @@ import Cross from '@icons/cross.svg';
 import {copyToClipboard} from '@utils/clipboard';
 import {LOGO_FORMATS} from '@utils/constants';
 import {tokenGithubURI, tokenLogoURI} from '@utils/helpers';
+import type {TLogoFile, TToken} from '@utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import {Fragment, useState} from 'react';
-
-import type {TLogoFile, TToken} from '@utils/types';
 import type {ReactElement} from 'react';
+import {Fragment, useState} from 'react';
 
 type TTokenDrawerProps = {
 	token: TToken | null;

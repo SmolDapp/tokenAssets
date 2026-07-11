@@ -9,12 +9,11 @@ import SearchIcon from '@icons/search.svg';
 import * as Dialog from '@radix-ui/react-dialog';
 import {CHAINS} from '@utils/constants';
 import {tokenLogoURI, tokenPageURI, truncateAddress, withSearch} from '@utils/helpers';
+import type {TSearchEntry} from '@utils/types';
 import Image from 'next/image';
 import {useRouter} from 'next/navigation';
-import {useCallback, useEffect, useRef, useState} from 'react';
-
-import type {TSearchEntry} from '@utils/types';
 import type {ReactElement, KeyboardEvent as ReactKeyboardEvent} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 
 const CHAIN_BY_ID = new Map(CHAINS.map(chain => [chain.id, chain]));
 
@@ -50,7 +49,6 @@ function ResultRow({
 			ref={ref}
 			type={'button'}
 			id={optionID}
-			// biome-ignore lint/a11y/useSemanticElements: WAI-ARIA combobox options live outside a <select>; a native <option> cannot render this row.
 			role={'option'}
 			aria-selected={isActive}
 			tabIndex={-1}
@@ -171,14 +169,12 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 	const showEmpty = trimmed.length > 0 && results.length === 0 && !hasError;
 
 	return (
-		<Dialog.Root
-			open={open}
-			onOpenChange={onOpenChange}>
+		<Dialog.Root open={open} onOpenChange={onOpenChange}>
 			<Dialog.Portal>
 				<Dialog.Overlay className={'fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px]'} />
 				<Dialog.Content
 					className={cn(
-						'-translate-x-1/2 fixed top-[12vh] left-1/2 z-50 w-[calc(100%-2rem)] max-w-xl',
+						'fixed top-[12vh] left-1/2 z-50 w-[calc(100%-2rem)] max-w-xl -translate-x-1/2',
 						'overflow-hidden rounded-lg border border-subtle bg-white shadow-2xl'
 					)}>
 					<Dialog.Title className={'sr-only'}>{'Search tokens'}</Dialog.Title>
@@ -207,10 +203,8 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 						/>
 					</div>
 
-					{/* biome-ignore lint/a11y/useFocusableInteractive: focus stays on the combobox input by design; the listbox itself must not be a tab stop. */}
 					<div
 						id={'palette-results'}
-						// biome-ignore lint/a11y/useSemanticElements: ARIA combobox pattern — the listbox is driven via aria-activedescendant, which a native <select> cannot do.
 						role={'listbox'}
 						aria-label={'Search results'}
 						className={'scrollbar-none max-h-[56vh] overflow-y-auto'}>
@@ -225,16 +219,12 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 							/>
 						))}
 						{showEmpty && (
-							<p
-								aria-live={'polite'}
-								className={'px-4 py-8 text-center font-mono text-sm text-subtle'}>
+							<p aria-live={'polite'} className={'px-4 py-8 text-center font-mono text-sm text-subtle'}>
 								{`No token matches "${trimmed}"`}
 							</p>
 						)}
 						{hasError && (
-							<p
-								aria-live={'assertive'}
-								className={'px-4 py-8 text-center font-mono text-error text-sm'}>
+							<p aria-live={'assertive'} className={'px-4 py-8 text-center font-mono text-error text-sm'}>
 								{'Could not load the search index. Close and reopen to retry.'}
 							</p>
 						)}

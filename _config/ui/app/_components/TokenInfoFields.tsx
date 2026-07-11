@@ -1,8 +1,7 @@
 import {InfoField} from '@components/InfoField';
 import {cn} from '@components/lib/utils';
-import {explorerAddressURI} from '@utils/helpers';
-
 import type {TChainInfo} from '@utils/constants';
+import {explorerAddressURI} from '@utils/helpers';
 import type {TToken} from '@utils/types';
 import type {ReactElement} from 'react';
 

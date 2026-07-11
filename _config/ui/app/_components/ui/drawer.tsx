@@ -1,16 +1,16 @@
 'use client';
 
 import {cn} from '@components/lib/utils';
-import {Drawer as DrawerPrimitive} from 'vaul';
-
 import {
 	type ComponentProps,
 	type ComponentPropsWithoutRef,
 	type ElementRef,
+	forwardRef,
 	type HTMLAttributes,
-	type ReactElement,
-	forwardRef
+	type ReactElement
 } from 'react';
+import {Drawer as DrawerPrimitive} from 'vaul';
+
 const Drawer = ({
 	shouldScaleBackground = true,
 	direction,

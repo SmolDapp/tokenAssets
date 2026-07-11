@@ -21,7 +21,7 @@ export function SubmitResult({prURL, onClose}: {prURL: string | null; onClose: (
 				<Dialog.Overlay className={'fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px]'} />
 				<Dialog.Content
 					className={cn(
-						'-translate-x-1/2 -translate-y-1/2 fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md',
+						'fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2',
 						'space-y-5 rounded-sm border border-separator bg-[#ffffff] p-6 shadow-2xl',
 						'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=open]:animate-in'
 					)}>

@@ -3,9 +3,8 @@
 import {CHAINS} from '@utils/constants';
 import {isNewToken} from '@utils/helpers';
 import {rankBySearchScore} from '@utils/searchScore';
-import {useCallback, useEffect, useMemo, useState} from 'react';
-
 import type {TToken} from '@utils/types';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 
 const PAGE_SIZE = 60;
 const tokensCache = new Map<string, TToken[]>();

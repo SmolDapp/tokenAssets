@@ -1,14 +1,13 @@
 import {CodeSnippets} from '@components/CodeSnippets';
 import {InfoField} from '@components/InfoField';
 import {TokenInfoFields} from '@components/TokenInfoFields';
-import {LOGO_FORMATS, findChainBySlug} from '@utils/constants';
+import {findChainBySlug, LOGO_FORMATS} from '@utils/constants';
 import {tokenGithubURI, tokenLogoURI, tokenPageURI, truncateAddress} from '@utils/helpers';
 import {findToken} from '@utils/tokens.server';
+import type {Metadata} from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
-
-import type {Metadata} from 'next';
 import type {ReactElement} from 'react';
 
 type TTokenPageProps = {

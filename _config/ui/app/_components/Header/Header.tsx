@@ -4,9 +4,8 @@ import {CommandPalette} from '@components/CommandPalette';
 import {MenuButtons} from '@components/Header/MenuButtons';
 import {NavBar} from '@components/Header/Navbar';
 import {SearchBar} from '@components/Header/SearchBar';
-import {useState} from 'react';
-
 import type {ReactElement} from 'react';
+import {useState} from 'react';
 
 export function Header(): ReactElement {
 	const [isPaletteOpen, setIsPaletteOpen] = useState(false);

@@ -3,12 +3,12 @@ import {ChainLogo} from '@components/ChainLogo';
 import {cn} from '@components/lib/utils';
 import {SelectContent, SelectItem, SelectTrigger, SelectValue} from '@components/ui/select';
 import {useChain} from '@contexts/WithChain';
+import {useSettings} from '@contexts/WithSettings';
 import Grid from '@icons/grid.svg';
 import List from '@icons/list.svg';
 import {Select} from '@radix-ui/react-select';
 import {CHAINS} from '@utils/constants';
 import {withSearch} from '@utils/helpers';
-import {useSettings} from 'app/_contexts/WithSettings';
 import {useRouter, useSearchParams} from 'next/navigation';
 
 import type {ReactElement} from 'react';

@@ -8,45 +8,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func resolveNotFound(c *gin.Context) {
+// resolveFallback answers a request for a non-canonical asset. `?fallback=true` redirects to the
+// bundled placeholder; `?fallback=<http(s) url>` redirects the browser to that URL — we never fetch
+// it (no SSRF) and it renders on its own origin, http(s) only so the Location cannot carry a
+// javascript: or data: scheme. Anything else is a plain 404.
+func resolveFallback(c *gin.Context, placeholder string) {
 	fallback := c.Query("fallback")
 	if fallback == "true" {
-		c.Redirect(http.StatusTemporaryRedirect, RedirectBaseURI()+`/_config/nodeAPI/public/not-found.png`)
+		c.Redirect(http.StatusTemporaryRedirect, RedirectBaseURI()+placeholder)
 		c.Abort()
 		return
 	}
-
-	// A caller may point fallback at their own image URL. Redirect the browser to it instead of
-	// fetching it server-side: the daemon makes no arbitrary outbound request (no SSRF), and the
-	// image renders on its own origin, never ours. http(s) only, so the Location cannot carry a
-	// javascript: or data: scheme.
 	if strings.HasPrefix(fallback, "https://") || strings.HasPrefix(fallback, "http://") {
 		c.Redirect(http.StatusTemporaryRedirect, fallback)
 		c.Abort()
 		return
 	}
-
-	c.String(http.StatusNotFound, "Not found")
-}
-
-func resolveGasToken(c *gin.Context) {
-	fallback := c.Query("fallback")
-	if fallback == "true" {
-		c.Redirect(http.StatusTemporaryRedirect, RedirectBaseURI()+`/_config/nodeAPI/public/gas-token.png`)
-		c.Abort()
-		return
-	}
-
-	// A caller may point fallback at their own image URL. Redirect the browser to it instead of
-	// fetching it server-side: the daemon makes no arbitrary outbound request (no SSRF), and the
-	// image renders on its own origin, never ours. http(s) only, so the Location cannot carry a
-	// javascript: or data: scheme.
-	if strings.HasPrefix(fallback, "https://") || strings.HasPrefix(fallback, "http://") {
-		c.Redirect(http.StatusTemporaryRedirect, fallback)
-		c.Abort()
-		return
-	}
-
 	c.String(http.StatusNotFound, "Not found")
 }
 
@@ -61,10 +38,10 @@ func ServeToken(c *gin.Context) {
 
 	if !ContainsSubString([]string{"logo.svg", "logo-32.png", "logo-128.png"}, fileName) {
 		if tokenAddress == "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" {
-			resolveGasToken(c)
+			resolveFallback(c, `/_config/nodeAPI/public/gas-token.png`)
 			return
 		}
-		resolveNotFound(c)
+		resolveFallback(c, `/_config/nodeAPI/public/not-found.png`)
 		return
 	}
 
