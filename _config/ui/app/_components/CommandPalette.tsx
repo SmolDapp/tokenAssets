@@ -143,6 +143,11 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 			if (onTokenPage) {
 				window.location.assign(href);
 			} else {
+				// Filter the list underneath first, so closing the drawer (router.back) returns to the
+				// searched list instead of the bare chain URL — the palette's search then persists.
+				if (search) {
+					router.replace(withSearch(`/${chain.slug}`, params.toString()), {scroll: false});
+				}
 				router.push(href, {scroll: false});
 			}
 		},
