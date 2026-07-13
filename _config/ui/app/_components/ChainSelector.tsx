@@ -257,7 +257,6 @@ export function ChainSelector({
 
 			{open && (
 				<div
-					role={'listbox'}
 					className={cn(
 						'absolute top-[calc(100%+6px)] z-50 overflow-hidden rounded-md',
 						'border border-white/15 bg-primary-170 shadow-[0_16px_38px_rgba(0,0,0,0.45)]',
