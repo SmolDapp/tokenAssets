@@ -58,7 +58,7 @@ function LogoWell({
 					<img
 						src={dataURL}
 						alt={`${svgFileName} preview`}
-						className={'size-12 shrink-0 rounded-full bg-white object-contain p-1.5'}
+						className={'size-12 shrink-0 rounded-full bg-white object-contain p-0.5'}
 					/>
 				) : (
 					<span className={'font-mono text-2xl text-white/35'}>{'+'}</span>
