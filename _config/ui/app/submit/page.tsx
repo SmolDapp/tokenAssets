@@ -1,6 +1,7 @@
 import {HeroPage} from '@components/HeroPage';
 import {SubmitForm} from '@components/Submit/SubmitForm';
 import {auth} from '@utils/auth';
+import {findChainBySlug} from '@utils/constants';
 
 import type {Metadata} from 'next';
 import type {ReactElement} from 'react';
@@ -21,8 +22,14 @@ export const metadata: Metadata = {
 	}
 };
 
-export default async function SubmitPage(): Promise<ReactElement> {
+type TSubmitPageProps = {
+	searchParams: Promise<{chain?: string; address?: string}>;
+};
+
+export default async function SubmitPage({searchParams}: TSubmitPageProps): Promise<ReactElement> {
 	const session = await auth();
+	const {chain: chainSlug, address} = await searchParams;
+	const initialChain = findChainBySlug(chainSlug);
 	return (
 		<HeroPage
 			tagline={'Open-source logo CDN'}
@@ -41,7 +48,7 @@ export default async function SubmitPage(): Promise<ReactElement> {
 				{value: '2', label: 'Add a logo'},
 				{value: '3', label: 'Open a PR'}
 			]}>
-			<SubmitForm signedIn={Boolean(session?.user)} />
+			<SubmitForm signedIn={Boolean(session?.user)} initialChainID={initialChain?.id} initialAddress={address} />
 		</HeroPage>
 	);
 }

@@ -9,11 +9,12 @@ import {useChain} from '@contexts/WithChain';
 import {useSettings} from '@contexts/WithSettings';
 import {useTokens} from '@hooks/useTokens';
 import {tokenPageURI, withSearch} from '@utils/helpers';
+import {isValidAddress} from '@utils/tokenSubmission';
 import type {TToken} from '@utils/types';
 import Link from 'next/link';
 import {useRouter, useSearchParams} from 'next/navigation';
 import type {ReactElement} from 'react';
-import {Fragment, useCallback, useRef} from 'react';
+import {Fragment, useCallback, useMemo, useRef} from 'react';
 
 function TokensDisplay({
 	tokens,
@@ -85,6 +86,17 @@ export function TokenList(): ReactElement {
 		[router, chain.slug]
 	);
 
+	// Carry the browsed chain (and the search term when it is itself an address) into the submit
+	// form so it opens pre-scoped to what the user was looking at instead of defaulting to Ethereum.
+	const submitHref = useMemo(() => {
+		const params = new URLSearchParams({chain: chain.slug});
+		const trimmedSearch = searchQuery.trim();
+		if (trimmedSearch && isValidAddress(chain.id, trimmedSearch)) {
+			params.set('address', trimmedSearch);
+		}
+		return `/submit?${params.toString()}`;
+	}, [chain.slug, chain.id, searchQuery]);
+
 	return (
 		<div className={'w-full'}>
 			{isLoading && (
@@ -116,7 +128,7 @@ export function TokenList(): ReactElement {
 					}
 					action={
 						<Button asChild className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
-							<Link href={'/submit'}>{'ADD TOKEN LOGO'}</Link>
+							<Link href={submitHref}>{'ADD TOKEN LOGO'}</Link>
 						</Button>
 					}
 				/>

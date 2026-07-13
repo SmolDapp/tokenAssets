@@ -1,12 +1,10 @@
 'use client';
-import {ChainLogo} from '@components/ChainLogo';
+import {ChainSelector} from '@components/ChainSelector';
 import {cn} from '@components/lib/utils';
-import {SelectContent, SelectItem, SelectTrigger, SelectValue} from '@components/ui/select';
 import {useChain} from '@contexts/WithChain';
 import {useSettings} from '@contexts/WithSettings';
 import Grid from '@icons/grid.svg';
 import List from '@icons/list.svg';
-import {Select} from '@radix-ui/react-select';
 import {CHAINS} from '@utils/constants';
 import {withSearch} from '@utils/helpers';
 import {useRouter, useSearchParams} from 'next/navigation';
@@ -42,6 +40,10 @@ export function NavBar(): ReactElement {
 		router.replace(withSearch(`/${network.slug}`, searchParams.toString()), {scroll: false});
 	};
 
+	const handleAddNetwork = (chainID: string): void => {
+		router.push(`/submit/network/${chainID}`);
+	};
+
 	return (
 		<div className={'flex items-center justify-end gap-2 max-md:hidden'}>
 			<button
@@ -54,32 +56,12 @@ export function NavBar(): ReactElement {
 				onClick={handleViewChange}>
 				<GridOrListIcon />
 			</button>
-			<Select value={chain.id} onValueChange={handleChainChange}>
-				<SelectTrigger
-					className={cn(
-						'h-10 w-[154px] rounded-sm bg-transparent text-white uppercase transition-colors',
-						'hover:bg-primary-light',
-						'data-[state=open]:bg-primary-light'
-					)}>
-					<p className={'sr-only'}>{'Select network'}</p>
-					<SelectValue>
-						<span className={'flex items-center gap-2'}>
-							<ChainLogo id={chain.id} />
-							<span className={'font-medium text-xs tracking-normal'}>{chain.name}</span>
-						</span>
-					</SelectValue>
-				</SelectTrigger>
-				<SelectContent className={'uppercase'}>
-					{CHAINS.map(network => (
-						<SelectItem key={network.id} value={network.id}>
-							<span className={'flex items-center gap-2'}>
-								<ChainLogo id={network.id} />
-								{network.name}
-							</span>
-						</SelectItem>
-					))}
-				</SelectContent>
-			</Select>
+			<ChainSelector
+				value={chain.id}
+				onChange={handleChainChange}
+				onAddNetwork={handleAddNetwork}
+				align={'end'}
+			/>
 		</div>
 	);
 }

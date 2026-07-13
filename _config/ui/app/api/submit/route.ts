@@ -1,6 +1,6 @@
 import {Octokit} from '@octokit/core';
-import {Resvg} from '@resvg/resvg-js';
 import {CHAINS} from '@utils/constants';
+import {isSquareEnough, renderPngBase64} from '@utils/svgRaster.server';
 import {
 	buildInfoJson,
 	parseTags,
@@ -42,23 +42,6 @@ function isRateLimited(ip: string): boolean {
 	}
 
 	return recent.length > RATE_MAX;
-}
-
-function renderPngBase64(svg: string, size: number): string {
-	const resvg = new Resvg(svg, {fitTo: {mode: 'width', value: size}});
-	return Buffer.from(resvg.render().asPng()).toString('base64');
-}
-
-// A logo must be roughly square. Rejecting extreme aspect ratios also bounds the rasterized
-// height: fitTo width caps width, and a bounded ratio then caps height — so no crafted SVG can
-// request a giant pixmap that OOMs the function, and we never ship a wrong-shaped CDN artifact.
-function isSquareEnough(svg: string): boolean {
-	const {width, height} = new Resvg(svg);
-	if (!width || !height) {
-		return false;
-	}
-	const ratio = width / height;
-	return ratio >= 0.5 && ratio <= 2;
 }
 
 type TSubmitBody = {

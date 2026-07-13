@@ -1,14 +1,13 @@
 'use client';
 
-import {ChainLogo} from '@components/ChainLogo';
+import {ChainSelector} from '@components/ChainSelector';
 import {cn} from '@components/lib/utils';
 import {SubmitResult} from '@components/Submit/SubmitResult';
 import {Button} from '@components/ui/button';
 import {Input} from '@components/ui/input';
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@components/ui/select';
 import {useTokens} from '@hooks/useTokens';
 import ArrowDown from '@icons/arrow-down.svg';
-import {CHAINS, DEFAULT_CHAIN} from '@utils/constants';
+import {DEFAULT_CHAIN} from '@utils/constants';
 import {canFetchOnchain, fetchOnchainToken} from '@utils/onchainToken';
 import {
 	isValidAddress,
@@ -17,6 +16,7 @@ import {
 	validateSubmission,
 	validateTokenMeta
 } from '@utils/tokenSubmission';
+import {useRouter} from 'next/navigation';
 import {signIn} from 'next-auth/react';
 import type {ReactElement, ReactNode} from 'react';
 import {useEffect, useMemo, useState} from 'react';
@@ -56,9 +56,18 @@ function Field({
 	);
 }
 
-export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
-	const [chainID, setChainID] = useState(DEFAULT_CHAIN.id);
-	const [address, setAddress] = useState('');
+export function SubmitForm({
+	signedIn,
+	initialChainID,
+	initialAddress
+}: {
+	signedIn: boolean;
+	initialChainID?: string;
+	initialAddress?: string;
+}): ReactElement {
+	const router = useRouter();
+	const [chainID, setChainID] = useState(initialChainID || DEFAULT_CHAIN.id);
+	const [address, setAddress] = useState(initialAddress || '');
 	const [svgText, setSvgText] = useState('');
 	const [svgFileName, setSvgFileName] = useState('');
 	const [svgError, setSvgError] = useState('');
@@ -75,10 +84,6 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 	const [submitError, setSubmitError] = useState('');
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [prURL, setPrURL] = useState<string | null>(null);
-
-	const selectedChain = useMemo(() => {
-		return CHAINS.find(chain => chain.id === chainID) || DEFAULT_CHAIN;
-	}, [chainID]);
 
 	// Cross-checked against the same per-chain token list the browse pages use, so a submission
 	// for an address already in the CDN is caught before the user fills out the rest of the form.
@@ -233,10 +238,6 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 		}
 	}, []);
 
-	function handleChainChange(value: string): void {
-		setChainID(value);
-	}
-
 	async function handleFile(file: File | undefined): Promise<void> {
 		if (!file) {
 			return;
@@ -384,26 +385,13 @@ export function SubmitForm({signedIn}: {signedIn: boolean}): ReactElement {
 					'min-w-0 space-y-4 rounded-sm border border-white/15 bg-white/[0.04] p-5 md:p-6 lg:col-span-6'
 				}>
 				<Field label={'Chain'} htmlFor={'submit-chain'}>
-					<Select value={chainID} onValueChange={handleChainChange}>
-						<SelectTrigger id={'submit-chain'} className={cn('h-10 rounded-sm text-white', inputClassName)}>
-							<SelectValue>
-								<span className={'flex items-center gap-2'}>
-									<ChainLogo id={selectedChain.id} />
-									<span className={'font-mono text-sm'}>{selectedChain.name}</span>
-								</span>
-							</SelectValue>
-						</SelectTrigger>
-						<SelectContent>
-							{CHAINS.map(chain => (
-								<SelectItem key={chain.id} value={chain.id}>
-									<span className={'flex items-center gap-2'}>
-										<ChainLogo id={chain.id} />
-										{chain.name}
-									</span>
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
+					<ChainSelector
+						id={'submit-chain'}
+						value={chainID}
+						onChange={setChainID}
+						onAddNetwork={networkID => router.push(`/submit/network/${networkID}`)}
+						fullWidth
+					/>
 				</Field>
 
 				<Field label={'Contract address'} htmlFor={'submit-address'}>

@@ -2,7 +2,7 @@ import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {http, createPublicClient, erc20Abi, getAddress} from 'viem';
+import {createPublicClient, erc20Abi, getAddress, http} from 'viem';
 import * as viemChains from 'viem/chains';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -243,7 +243,7 @@ async function fetchOnchainMetadata(chainID, addresses) {
 		return metadata;
 	}
 	const chain = getViemChain(chainID);
-	if (!chain || !chain.contracts?.multicall3) {
+	if (!chain?.contracts?.multicall3) {
 		return metadata;
 	}
 
@@ -367,7 +367,11 @@ async function buildChainIndex(chainID, addedAtMap) {
 }
 
 async function main() {
-	if (process.argv.includes('--if-missing') && fs.existsSync(path.join(OUT_DIR, 'chains.json'))) {
+	if (
+		process.argv.includes('--if-missing') &&
+		fs.existsSync(path.join(OUT_DIR, 'chains.json')) &&
+		fs.existsSync(path.join(OUT_DIR, 'allChains.json'))
+	) {
 		console.log('✔ index already generated, skipping (remove public/data to regenerate)');
 		return;
 	}
@@ -387,7 +391,7 @@ async function main() {
 		if (tokens.length === 0) {
 			continue;
 		}
-		const name = CHAIN_NAMES[chainID] || `Chain ${chainID}`;
+		const name = CHAIN_NAMES[chainID] || getViemChain(chainID)?.name || `Chain ${chainID}`;
 		const explorer = getViemChain(chainID)?.blockExplorers?.default?.url;
 		chains.push({id: chainID, name, slug: toSlug(name), count: tokens.length, explorer});
 		popularityByID.set(
@@ -418,6 +422,39 @@ async function main() {
 	fs.writeFileSync(path.join(OUT_DIR, 'chains.json'), JSON.stringify({totalTokens, chains}, null, '\t'));
 	fs.writeFileSync(path.join(OUT_DIR, 'search.json'), JSON.stringify(searchIndex));
 	console.log(`✔ ${chains.length} chains, ${totalTokens} tokens, search index → public/data`);
+
+	writeAllChains(new Set(chains.map(chain => chain.id)));
+}
+
+// The superset of EVM mainnets, so the "add a network" flow can surface chains not yet on the CDN.
+// Each entry carries the native-currency metadata used to pre-fill the native-token folder. Testnets
+// are excluded (noise), and the `onCDN` flag lets the picker split "on the CDN" from "not yet".
+function writeAllChains(onCDNChainIDs) {
+	const seen = new Set();
+	const allChains = [];
+	for (const chain of Object.values(viemChains)) {
+		if (!chain?.id || !chain.name || !chain.nativeCurrency || chain.testnet) {
+			continue;
+		}
+		const id = String(chain.id);
+		if (seen.has(id)) {
+			continue;
+		}
+		seen.add(id);
+		allChains.push({
+			id,
+			name: chain.name,
+			nativeName: chain.nativeCurrency.name,
+			nativeSymbol: chain.nativeCurrency.symbol,
+			nativeDecimals: chain.nativeCurrency.decimals,
+			onCDN: onCDNChainIDs.has(id)
+		});
+	}
+	allChains.sort((first, second) => first.name.localeCompare(second.name));
+	fs.writeFileSync(path.join(OUT_DIR, 'allChains.json'), JSON.stringify(allChains));
+	console.log(
+		`✔ ${allChains.length} mainnet chains (${allChains.filter(c => !c.onCDN).length} off-CDN) → allChains.json`
+	);
 }
 
 await main();
