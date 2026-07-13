@@ -9,6 +9,19 @@ export type TChainInfo = {
 	explorer?: string;
 };
 
+// Every EVM mainnet (superset of the CDN chains), used by the "add a network" flow to surface
+// chains not yet on the CDN and to pre-fill their native-token metadata. The data lives in
+// `allChains.server.ts` / `/data/allChains.json` — kept out of the client bundle since only the
+// server routes and the (lazily-fetching) picker need it.
+export type TAllChainInfo = {
+	id: string;
+	name: string;
+	nativeName: string;
+	nativeSymbol: string;
+	nativeDecimals: number;
+	onCDN: boolean;
+};
+
 export const LOGO_FORMATS: {label: string; file: TLogoFile}[] = [
 	{label: 'SVG', file: 'logo.svg'},
 	{label: 'PNG 32', file: 'logo-32.png'},
