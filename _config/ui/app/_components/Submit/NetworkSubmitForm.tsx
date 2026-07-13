@@ -265,7 +265,7 @@ export function NetworkSubmitForm({chain, signedIn}: {chain: TAllChainInfo; sign
 				</Button>
 			</div>
 
-			<SubmitResult prURL={prURL} onClose={() => setPrURL(null)} />
+			<SubmitResult prURL={prURL} onClose={() => setPrURL(null)} showSubmitAnother={false} />
 		</>
 	);
 }

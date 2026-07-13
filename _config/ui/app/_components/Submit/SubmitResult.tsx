@@ -8,7 +8,15 @@ import Link from 'next/link';
 
 import type {ReactElement} from 'react';
 
-export function SubmitResult({prURL, onClose}: {prURL: string | null; onClose: () => void}): ReactElement {
+export function SubmitResult({
+	prURL,
+	onClose,
+	showSubmitAnother = true
+}: {
+	prURL: string | null;
+	onClose: () => void;
+	showSubmitAnother?: boolean;
+}): ReactElement {
 	return (
 		<Dialog.Root
 			open={Boolean(prURL)}
@@ -40,9 +48,11 @@ export function SubmitResult({prURL, onClose}: {prURL: string | null; onClose: (
 						<Link href={prURL || '#'} target={'_blank'} rel={'noopener noreferrer'}>
 							<Button variant={'default'}>{'View pull request →'}</Button>
 						</Link>
-						<Button variant={'outline'} onClick={onClose}>
-							{'Submit another'}
-						</Button>
+						{showSubmitAnother && (
+							<Button variant={'outline'} onClick={onClose}>
+								{'Submit another'}
+							</Button>
+						)}
 					</div>
 				</Dialog.Content>
 			</Dialog.Portal>
