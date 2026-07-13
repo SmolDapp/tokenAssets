@@ -134,6 +134,9 @@ export async function POST(request: Request): Promise<Response> {
 	const tokenFolder = `tokens/${chain.id}/${NATIVE_TOKEN_ADDRESS}`;
 
 	const [owner, repoName] = repo.split('/');
+	if (!owner || !repoName) {
+		return NextResponse.json({error: 'Server misconfiguration: invalid GITHUB_SUBMIT_REPO.'}, {status: 500});
+	}
 	const octokit = new SubmitOctokit({auth: token});
 
 	// Pre-flight scope check — opening the PR forks + writes a branch; a token missing public_repo
