@@ -5,9 +5,13 @@ import {cn} from '@components/lib/utils';
 import ArrowDown from '@icons/arrow-down.svg';
 import Check from '@icons/check.svg';
 import Search from '@icons/search.svg';
-import {CHAINS, OFF_CDN_CHAINS, type TAllChainInfo, type TChainInfo} from '@utils/constants';
+import {CHAINS, type TAllChainInfo, type TChainInfo} from '@utils/constants';
 import type {KeyboardEventHandler, ReactElement} from 'react';
 import {useEffect, useMemo, useRef, useState} from 'react';
+
+// The off-CDN chain list (~40KB) is fetched on demand and cached for the session, keeping it out
+// of the main bundle since only the add-a-network search needs it.
+let offCDNCache: TAllChainInfo[] | null = null;
 
 // App-curated "Popular" networks, pinned to the top of the selector. Order is intentional.
 const POPULAR_CHAIN_SLUGS = ['ethereum', 'base', 'optimism', 'arbitrum', 'polygon', 'bsc'];
@@ -50,6 +54,7 @@ export function ChainSelector({
 	const [open, setOpen] = useState(false);
 	const [query, setQuery] = useState('');
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [offCDNChains, setOffCDNChains] = useState<TAllChainInfo[]>(offCDNCache || []);
 	const rootRef = useRef<HTMLDivElement>(null);
 	const searchRef = useRef<HTMLInputElement>(null);
 	const listRef = useRef<HTMLDivElement>(null);
@@ -78,7 +83,7 @@ export function ChainSelector({
 	// default would bury the CDN chains) and only when the add-a-network flow is wired up.
 	const offCDNMatches =
 		onAddNetwork && trimmedQuery
-			? OFF_CDN_CHAINS.filter(
+			? offCDNChains.filter(
 					chain => chain.name.toLowerCase().includes(trimmedQuery) || chain.id.includes(trimmedQuery)
 				)
 			: [];
@@ -113,6 +118,29 @@ export function ChainSelector({
 		}
 	}, [open]);
 
+	// Lazy-load the off-CDN chain list the first time the picker opens with the add-network flow
+	// enabled — keeps the ~40KB payload out of the initial bundle. Cached for the whole session.
+	useEffect(() => {
+		if (!open || !onAddNetwork || offCDNCache) {
+			return;
+		}
+		let cancelled = false;
+		fetch('/data/allChains.json')
+			.then(response => response.json() as Promise<TAllChainInfo[]>)
+			.then(all => {
+				offCDNCache = all.filter(chain => !chain.onCDN);
+				if (!cancelled) {
+					setOffCDNChains(offCDNCache);
+				}
+			})
+			.catch(() => {
+				// A failed fetch just leaves the off-CDN group empty — CDN chains still work.
+			});
+		return () => {
+			cancelled = true;
+		};
+	}, [open, onAddNetwork]);
+
 	// Scroll the keyboard-active row into view.
 	useEffect(() => {
 		if (!open || !listRef.current) {
@@ -139,7 +167,8 @@ export function ChainSelector({
 		}
 		if (event.key === 'ArrowDown') {
 			event.preventDefault();
-			setActiveIndex(index => Math.min(index + 1, flat.length - 1));
+			// max(0, …) so an empty filtered list never lands on -1 (flat.length - 1).
+			setActiveIndex(index => Math.max(0, Math.min(index + 1, flat.length - 1)));
 			return;
 		}
 		if (event.key === 'ArrowUp') {

@@ -1,5 +1,5 @@
 import {Octokit} from '@octokit/core';
-import {findAddableChain} from '@utils/constants';
+import {findAddableChain} from '@utils/allChains.server';
 import {isSquareEnough, renderPngBase64} from '@utils/svgRaster.server';
 import {isForbiddenSvg} from '@utils/svgSafety';
 import {NextResponse} from 'next/server';
@@ -17,6 +17,7 @@ const NATIVE_TOKEN_ADDRESS = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
 
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 5;
+const RATE_MAX_IPS = 10_000;
 const rateHits = new Map<string, number[]>();
 
 function isRateLimited(ip: string): boolean {
@@ -24,6 +25,17 @@ function isRateLimited(ip: string): boolean {
 	const recent = (rateHits.get(ip) || []).filter(time => now - time < RATE_WINDOW_MS);
 	recent.push(now);
 	rateHits.set(ip, recent);
+
+	// Drop buckets whose newest hit has aged out so a long-lived warm instance doesn't accumulate
+	// one array per distinct IP forever. Only sweeps once the map grows past a cap.
+	if (rateHits.size > RATE_MAX_IPS) {
+		for (const [key, times] of rateHits) {
+			if (times.length === 0 || now - times[times.length - 1] >= RATE_WINDOW_MS) {
+				rateHits.delete(key);
+			}
+		}
+	}
+
 	return recent.length > RATE_MAX;
 }
 
@@ -184,7 +196,24 @@ export async function POST(request: Request): Promise<Response> {
 		}
 		return NextResponse.json({prUrl: url});
 	} catch (error) {
-		const httpError = error as {status?: number; message?: string};
+		const httpError = error as {
+			status?: number;
+			message?: string;
+			request?: {method?: string; url?: string};
+			response?: {data?: unknown; headers?: Record<string, string | undefined>};
+		};
+		// Expand the octokit HttpError so a write 404 (fork? createRef? scope mismatch?) is debuggable
+		// in production instead of collapsing to "[Object]" — this flow is new and unproven live.
+		const responseHeaders = httpError.response?.headers || {};
+		console.error('createPullRequest (network) failed', {
+			status: httpError.status,
+			request: `${httpError.request?.method} ${httpError.request?.url}`,
+			message: httpError.message,
+			ghError: JSON.stringify(httpError.response?.data),
+			sso: responseHeaders['x-github-sso'],
+			oauthScopes: responseHeaders['x-oauth-scopes'],
+			acceptedOauthScopes: responseHeaders['x-accepted-oauth-scopes']
+		});
 		const status = httpError.status;
 		const message = httpError.message || '';
 		if (status === 401) {

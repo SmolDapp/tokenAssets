@@ -1,7 +1,7 @@
 import {HeroPage} from '@components/HeroPage';
 import {NetworkSubmitForm} from '@components/Submit/NetworkSubmitForm';
+import {findAddableChain} from '@utils/allChains.server';
 import {auth} from '@utils/auth';
-import {findAddableChain} from '@utils/constants';
 
 import type {Metadata} from 'next';
 import {redirect} from 'next/navigation';

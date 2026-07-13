@@ -428,12 +428,18 @@ async function main() {
 
 // The superset of EVM mainnets, so the "add a network" flow can surface chains not yet on the CDN.
 // Each entry carries the native-currency metadata used to pre-fill the native-token folder. Testnets
-// are excluded (noise), and the `onCDN` flag lets the picker split "on the CDN" from "not yet".
+// and local/dev chains (Anvil, Hardhat, …) are excluded as noise, and the `onCDN` flag lets the
+// picker split "on the CDN" from "not yet".
+function isLocalChain(chain) {
+	const rpc = chain.rpcUrls?.default?.http?.[0] || '';
+	return /localhost|127\.0\.0\.1/.test(rpc);
+}
+
 function writeAllChains(onCDNChainIDs) {
 	const seen = new Set();
 	const allChains = [];
 	for (const chain of Object.values(viemChains)) {
-		if (!chain?.id || !chain.name || !chain.nativeCurrency || chain.testnet) {
+		if (!chain?.id || !chain.name || !chain.nativeCurrency || chain.testnet || isLocalChain(chain)) {
 			continue;
 		}
 		const id = String(chain.id);
