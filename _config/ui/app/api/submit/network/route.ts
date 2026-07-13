@@ -42,7 +42,7 @@ function isRateLimited(ip: string): boolean {
 // Mirrors the token route + CI checks so we never open a PR verify-tokens.mjs would reject:
 // a real vector, no scripts/rasters/external links, under 150KB, roughly square.
 function validateLogoSvg(svg: string, which: string): string | null {
-	if (!svg.includes('<svg')) {
+	if (!/<svg\b/i.test(svg)) {
 		return `Upload the ${which} logo as an SVG file.`;
 	}
 	if (isForbiddenSvg(svg)) {
