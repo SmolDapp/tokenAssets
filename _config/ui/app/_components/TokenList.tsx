@@ -1,71 +1,22 @@
 'use client';
 
 import {GridView} from '@components/GridView';
-import {ListView} from '@components/ListView';
 import {Spinner} from '@components/Spinner';
 import {TxResult} from '@components/TxResult';
 import {Button} from '@components/ui/button';
 import {useChain} from '@contexts/WithChain';
-import {useSettings} from '@contexts/WithSettings';
 import {useTokens} from '@hooks/useTokens';
 import {tokenPageURI, withSearch} from '@utils/helpers';
 import {isValidAddress} from '@utils/tokenSubmission';
-import type {TToken} from '@utils/types';
 import Link from 'next/link';
 import {useRouter, useSearchParams} from 'next/navigation';
 import type {ReactElement} from 'react';
-import {Fragment, useCallback, useMemo, useRef} from 'react';
-
-function TokensDisplay({
-	tokens,
-	view,
-	hasNextPage,
-	fetchNextPage,
-	handleTokenSelect
-}: {
-	tokens: TToken[];
-	view: 'grid' | 'list';
-	hasNextPage: boolean;
-	fetchNextPage: () => void;
-	handleTokenSelect: (address: string) => void;
-}): ReactElement {
-	if (view === 'grid') {
-		return (
-			<GridView
-				tokens={tokens}
-				onClick={handleTokenSelect}
-				hasNextPage={hasNextPage}
-				onLoadMore={fetchNextPage}
-			/>
-		);
-	}
-	return (
-		<Fragment>
-			<div className={'hidden md:block'}>
-				<ListView
-					tokens={tokens}
-					onClick={handleTokenSelect}
-					hasNextPage={hasNextPage}
-					onLoadMore={fetchNextPage}
-				/>
-			</div>
-			<div className={'md:hidden'}>
-				<GridView
-					tokens={tokens}
-					onClick={handleTokenSelect}
-					hasNextPage={hasNextPage}
-					onLoadMore={fetchNextPage}
-				/>
-			</div>
-		</Fragment>
-	);
-}
+import {useCallback, useMemo, useRef} from 'react';
 
 export function TokenList(): ReactElement {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const {chain} = useChain();
-	const {view} = useSettings();
 
 	const searchQuery = searchParams.get('search') || '';
 	const {tokens, isLoading, hasError, hasNextPage, fetchNextPage} = useTokens(chain.id, searchQuery);
@@ -134,12 +85,11 @@ export function TokenList(): ReactElement {
 				/>
 			)}
 			{tokens.length > 0 && (
-				<TokensDisplay
+				<GridView
 					tokens={tokens}
-					view={view}
+					onClick={handleTokenSelect}
 					hasNextPage={hasNextPage}
-					fetchNextPage={fetchNextPage}
-					handleTokenSelect={handleTokenSelect}
+					onLoadMore={fetchNextPage}
 				/>
 			)}
 		</div>

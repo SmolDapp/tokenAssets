@@ -1,7 +1,7 @@
 import {HeroPage} from '@components/HeroPage';
 import {LogoWall} from '@components/LogoWall';
 import {cn} from '@components/lib/utils';
-import {ASSETS_BASE_URI, CHAINS, DEFAULT_CHAIN, TOTAL_TOKENS} from '@utils/constants';
+import {ASSETS_BASE_URI, CHAINS, DEFAULT_CHAIN, GITHUB_URI, TOTAL_TOKENS} from '@utils/constants';
 import {getFeaturedTokens} from '@utils/tokens.server';
 import Link from 'next/link';
 import type {ReactElement} from 'react';
@@ -19,6 +19,18 @@ export default function Home(): ReactElement {
 
 	return (
 		<HeroPage
+			headerRight={
+				<Link
+					href={GITHUB_URI}
+					target={'_blank'}
+					rel={'noopener noreferrer'}
+					className={
+						'flex items-center gap-1 font-medium font-mono text-[11px] text-white/70 uppercase tracking-[0.08em] transition-colors hover:text-white'
+					}>
+					{'GitHub'}
+					<span aria-hidden={'true'}>{'↗'}</span>
+				</Link>
+			}
 			tagline={'Open-source logo CDN'}
 			heading={
 				<>

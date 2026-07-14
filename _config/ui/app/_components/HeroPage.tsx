@@ -1,6 +1,5 @@
 import {BrandMark} from '@components/BrandMark';
 import {cn} from '@components/lib/utils';
-import {SiteFooter} from '@components/SiteFooter';
 import {Stat} from '@components/Stat';
 import type {ReactElement, ReactNode} from 'react';
 import {Fragment} from 'react';
@@ -21,18 +20,30 @@ type THeroPageProps = {
 	description: string;
 	stats: {value: string; label: string}[];
 	leftExtra?: ReactNode;
+	headerRight?: ReactNode;
 	children: ReactNode;
 };
 
-// Shared by the home page and the submit page: same dark shell, brand mark, hero
-// grid (tagline/heading/description/stat-row), and footer — only the left column's
-// trailing content and the right column differ per page.
-export function HeroPage({tagline, heading, description, stats, leftExtra, children}: THeroPageProps): ReactElement {
+// Shared by the home page and the submit page: same dark shell, brand mark, and hero grid
+// (tagline/heading/description/stat-row) — only the left column's trailing content, the right
+// column, and the optional top-right header slot differ per page.
+export function HeroPage({
+	tagline,
+	heading,
+	description,
+	stats,
+	leftExtra,
+	headerRight,
+	children
+}: THeroPageProps): ReactElement {
 	return (
 		<main className={'relative flex min-h-screen w-full flex-col overflow-hidden bg-primary'}>
 			<div aria-hidden={'true'} className={dotGridClassName} />
 			<div className={'relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 py-8 md:px-10 md:py-10'}>
-				<BrandMark />
+				<div className={'flex items-center justify-between gap-4'}>
+					<BrandMark />
+					{headerRight}
+				</div>
 
 				<div className={'mt-20 grid flex-1 items-start gap-12 py-10 max-md:mt-10 lg:grid-cols-12 lg:gap-20'}>
 					<div className={'flex min-w-0 flex-col gap-7 lg:col-span-6'}>
@@ -59,8 +70,6 @@ export function HeroPage({tagline, heading, description, stats, leftExtra, child
 					{children}
 				</div>
 			</div>
-
-			<SiteFooter />
 		</main>
 	);
 }

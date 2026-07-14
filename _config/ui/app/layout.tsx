@@ -1,10 +1,8 @@
 import {Toaster} from '@components/ui/toaster';
 import {WithFonts} from '@components/WithFonts';
 import {ChainProvider} from '@contexts/WithChain';
-import {WithSettings} from '@contexts/WithSettings';
 import {BRAND_GREEN, SITE_URI} from '@utils/constants';
 import type {Metadata, Viewport} from 'next';
-import {cookies} from 'next/headers';
 import type {ReactElement, ReactNode} from 'react';
 
 import '@styles/style.css';
@@ -35,10 +33,7 @@ export const viewport: Viewport = {
 	themeColor: BRAND_GREEN
 };
 
-export default async function RootLayout({children}: {children: ReactNode}): Promise<ReactElement> {
-	const cookieStore = await cookies();
-	const view = cookieStore.get('view');
-
+export default function RootLayout({children}: {children: ReactNode}): ReactElement {
 	return (
 		<html lang={'en'}>
 			<body
@@ -46,9 +41,7 @@ export default async function RootLayout({children}: {children: ReactNode}): Pro
 					'bg-white [background-image:linear-gradient(to_right,#E6E6E6_1px,transparent_1px),linear-gradient(to_bottom,#E6E6E6_1px,transparent_1px)] [background-position:0_0] [background-size:12px_12px]'
 				}>
 				<WithFonts>
-					<WithSettings cookieView={view?.value || 'grid'}>
-						<ChainProvider>{children}</ChainProvider>
-					</WithSettings>
+					<ChainProvider>{children}</ChainProvider>
 					<Toaster />
 				</WithFonts>
 			</body>
