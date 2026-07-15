@@ -1,9 +1,1 @@
-[
-	{
-		"address": "0x2EE0fd70756EDC663AcC9676658A1497C247693A",
-		"name": "Derive",
-		"symbol": "DRV",
-		"decimals": 18,
-		"addedAt": 1736729295
-	}
-]
+[{"address":"0x2EE0fd70756EDC663AcC9676658A1497C247693A","name":"Derive","symbol":"DRV","decimals":18,"addedAt":1736729295}]
