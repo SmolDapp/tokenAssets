@@ -21,10 +21,28 @@ export function TokenInfoFields({
 	return (
 		<div className={cn('space-y-6', className)}>
 			<div className={cn('grid grid-cols-2 gap-x-4 gap-y-6', gridClassName)}>
-				{token.name && <InfoField label={'NAME'} value={token.name} />}
-				{token.symbol && <InfoField label={'SYMBOL'} value={token.symbol} />}
-				{token.decimals !== undefined && <InfoField label={'DECIMALS'} value={token.decimals.toString()} />}
-				<InfoField label={'NETWORK'} value={chain.name} />
+				{token.name && (
+					<InfoField
+						label={'NAME'}
+						value={token.name}
+					/>
+				)}
+				{token.symbol && (
+					<InfoField
+						label={'SYMBOL'}
+						value={token.symbol}
+					/>
+				)}
+				{token.decimals !== undefined && (
+					<InfoField
+						label={'DECIMALS'}
+						value={token.decimals.toString()}
+					/>
+				)}
+				<InfoField
+					label={'NETWORK'}
+					value={chain.name}
+				/>
 			</div>
 			<InfoField
 				label={'CONTRACT ADDRESS'}

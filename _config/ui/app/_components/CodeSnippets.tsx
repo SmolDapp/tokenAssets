@@ -18,7 +18,9 @@ export function CodeSnippets({url, alt}: {url: string; alt: string}): ReactEleme
 	return (
 		<div className={'flex flex-col gap-2'}>
 			{buildSnippets(url, alt).map(({label, code}) => (
-				<div key={label} className={'flex items-stretch overflow-hidden rounded-sm border border-separator'}>
+				<div
+					key={label}
+					className={'flex items-stretch overflow-hidden rounded-sm border border-separator'}>
 					<span
 						className={
 							'flex w-[84px] shrink-0 items-center bg-separator px-3 font-mono text-subtle text-xxs uppercase tracking-[0.08em]'

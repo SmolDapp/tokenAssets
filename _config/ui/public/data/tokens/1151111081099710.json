@@ -1,1 +1,293 @@
-[{"address":"HonyeYAaTPgKUgQpayL914P6VAqbQZPrbkGMETZvW4iN","name":"Honey","symbol":"$HONEY","decimals":6,"addedAt":1783611729},{"address":"a11bdAAuV8iB2fu7X6AxAvDTo1QZ8FXB3kk5eecdasp","name":"Allbridge","symbol":"ABR","decimals":9,"addedAt":1783611729,"mcap":1064922},{"address":"bioJ9JTqW62MLz7UKHU69gtKhPpGi1BQhccj2kmSvUJ","name":"BIO","symbol":"BIO","decimals":9,"addedAt":1742498393,"mcap":61339406},{"address":"AWGrr6HmmhJwnMdDLoxxDMpKo2KN99Bx47Rbhfo3NM3V","name":"BT Wlkn","symbol":"BTWLKN","decimals":9,"addedAt":1783611729},{"address":"C98A4nkJXhpVZNAZdHUA95RpTF3T4whtQubL3YobiUX9","name":"Coin98","symbol":"C98","decimals":6,"addedAt":1783611729,"mcap":12922600},{"address":"CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH","name":"CASH","symbol":"CASH","decimals":6,"addedAt":1783611729,"mcap":125361694},{"address":"CAW777xcHVTQZ4CRwVQGB8CV1BVKPm5bNVxFJHWFKiH8","name":"crow with knife","symbol":"CAW","decimals":2,"addedAt":1774479214,"mcap":4807052},{"address":"6dKCoWjpj5MFU5gWDEFdpUUeBasBLK3wLEwhUzQPAa1e","name":"CHEX","symbol":"CHEX","decimals":8,"addedAt":1783611729,"mcap":14712713},{"address":"DBRiDgJAMsM95moTzJs7M9LnkGErpbv9v6CUR1DXnUu5","name":"deBridge","symbol":"DBR","decimals":6,"addedAt":1783611729,"mcap":87168775},{"address":"7JoGUTeaXkjcMGa6xJP2idYNYiLreto1WnsACHnpw3Gd","name":"XMAQUINA","symbol":"DEUS","decimals":9,"addedAt":1779826342,"mcap":12639366},{"address":"Dso1bDeDjCQxTrWHqUUi63oBvV7Mdm6WaobLbQ7gnPQ","name":"Drift Staked Sol","symbol":"dSOL","decimals":9,"addedAt":1783611729,"mcap":221650677},{"address":"DUAL6T9pATmQUFPYmrWq2BkkGdRxLtERySGScYmbHMER","name":"Dual SOL","symbol":"dualSOL","decimals":9,"addedAt":1783611729},{"address":"7JA5eZdCzztSfQbJvS8aVVxMFfd81Rs9VvwnocV1mKHu","name":"Geodnet Token","symbol":"GEOD","decimals":9,"addedAt":1783611729,"mcap":91334972},{"address":"gSvP9zBJ33pX7W2finzAYJZp6Q9ipNAQ19xU9PrCirz","name":"Guardian Staked SOL","symbol":"gS","decimals":9,"addedAt":1783611729},{"address":"J3umBWqhSjd13sag1E1aUojViWvPYA5dFNyqpKuX3WXj","name":"Home","symbol":"HOME","decimals":9,"addedAt":1749499106,"mcap":61171677},{"address":"7Q2afV64in6N6SeZsAAB81TJzwDoD6zpqmHkzi9Dcavn","name":"JPool Staked SOL","symbol":"JSOL","decimals":9,"addedAt":1783611729,"mcap":109547419},{"address":"2nnrviYJRLcf2bXAxpKTRXzccoDbwaP4vzuGUG75Jo45","name":"Kendu Inu (Wormhole)","symbol":"Kendu","decimals":8,"addedAt":1742052067,"mcap":3492260},{"address":"KMNo3nJsBXfcpJTVhZcXLW7RmTwTt4GVFE7suUBo9sS","name":"Kamino","symbol":"KMNO","decimals":6,"addedAt":1783611729,"mcap":97326277},{"address":"myrcAs6bpP2g5oGHZ3qpgrfZQAFkbo9KUHdqYDXMjGv","name":"MYRC","symbol":"MYRC","decimals":6,"addedAt":1765425533,"mcap":1299059},{"address":"ABt79MkRXUsoHuV2CVQT32YMXQhTparKFjmidQxgiQ6E","name":"Orderly Network","symbol":"ORDER","decimals":10,"addedAt":1756929740,"mcap":13494668},{"address":"DV3845GEAVXfwpyVGGgWbqBVCtzHdCXNCGfcdboSEuZz","name":"OX Coin (Wormhole)","symbol":"OX","decimals":8,"mcap":39761},{"address":"Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS","name":"PAI (Parrot USD)","symbol":"PAI","decimals":6,"addedAt":1783611729},{"address":"DYDWu4hE4MN3aH897xQ3sRTs5EAjJDmQsKLNhbpUiKun","name":"pBTC (Parrot BTC)","symbol":"pBTC","decimals":8,"addedAt":1783611729},{"address":"9EaLkQrbjmbbuZG9Wdpo8qfNUEjHATJFSycEmw6f1rGX","name":"pSOL (Parrot SOL)","symbol":"pSOL","decimals":9,"addedAt":1783611729,"mcap":45113750428},{"address":"HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3","name":"Pyth Network","symbol":"PYTH","decimals":6,"addedAt":1783611729,"mcap":346073927},{"address":"3DK98MXPz8TRuim7rfQnebSLpA7VSoc79Bgiee1m4Zw5","name":"Renzo","symbol":"REZ","decimals":9,"mcap":23453005},{"address":"93bVs9o8Nq88zxnLWwUAVfN5PXBhCcnV5sfs6AFLno8q","name":"Rivalz token","symbol":"RIZ","decimals":8,"mcap":279137},{"address":"DBAzBUXaLj1qANCseUPZz4sp9F8d2sc78C4vKjhbTGMA","name":"Stable Coin","symbol":"SBC","decimals":9,"addedAt":1783611729,"mcap":9373058},{"address":"Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1","name":"Saber Protocol Token","symbol":"SBR","decimals":6,"addedAt":1783611729,"mcap":858994},{"address":"9dzSzFvPsKDoY2gdWErsuz2H1o4tbzvgBhrNZ9cvkD2j","name":"SmarDex Token (Wormhole)","symbol":"SDEX","decimals":8,"addedAt":1751034950,"mcap":5889864},{"address":"11111111111111111111111111111111","name":"Solana","symbol":"SOL","decimals":9,"addedAt":1730371063},{"address":"So11111111111111111111111111111111111111112","name":"Wrapped SOL","symbol":"SOL","decimals":9,"addedAt":1730712797,"mcap":1718408173},{"address":"wzAyQTorWyoVXuJKj2x8EqKEGJpS13z6EWE9z5Aondo","name":"SpaceX (Ondo Tokenized)","symbol":"SPCXon","decimals":9,"addedAt":1783611729},{"address":"StPsoHokZryePePFV8N7iXvfEmgUoJ87rivABX7gaW6","name":"stepSOL","symbol":"stepSOL","decimals":9,"addedAt":1783611729},{"address":"SUNNYWgPQmFxe9wTZzNK7iPnJ3vYDrkgnxJRJm1s3ag","name":"Sunny Governance Token","symbol":"SUNNY","decimals":6,"addedAt":1783611729},{"address":"2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH","name":"Global Dollar","symbol":"USDG","decimals":6,"addedAt":1783611729,"mcap":3114315322},{"address":"WCTk5xWdn5SYg56twGj32sUF3W4WFQ48ogezLBuYTBY","name":"WalletConnect Token","symbol":"WCT","decimals":9,"addedAt":1783611729,"mcap":8314616},{"address":"WMTXyYKUMTG3VuZA5beXuHVRLpyTwwaoP7h2i8YpuRH","name":"World Mobile Token","symbol":"WMTX","decimals":6,"addedAt":1783611729,"mcap":26480111}]
+[
+	{
+		"address": "HonyeYAaTPgKUgQpayL914P6VAqbQZPrbkGMETZvW4iN",
+		"name": "Honey",
+		"symbol": "$HONEY",
+		"decimals": 6,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "a11bdAAuV8iB2fu7X6AxAvDTo1QZ8FXB3kk5eecdasp",
+		"name": "Allbridge",
+		"symbol": "ABR",
+		"decimals": 9,
+		"addedAt": 1783611729,
+		"mcap": 1064922
+	},
+	{
+		"address": "bioJ9JTqW62MLz7UKHU69gtKhPpGi1BQhccj2kmSvUJ",
+		"name": "BIO",
+		"symbol": "BIO",
+		"decimals": 9,
+		"addedAt": 1742498393,
+		"mcap": 61339406
+	},
+	{
+		"address": "AWGrr6HmmhJwnMdDLoxxDMpKo2KN99Bx47Rbhfo3NM3V",
+		"name": "BT Wlkn",
+		"symbol": "BTWLKN",
+		"decimals": 9,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "C98A4nkJXhpVZNAZdHUA95RpTF3T4whtQubL3YobiUX9",
+		"name": "Coin98",
+		"symbol": "C98",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 12922600
+	},
+	{
+		"address": "CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH",
+		"name": "CASH",
+		"symbol": "CASH",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 125361694
+	},
+	{
+		"address": "CAW777xcHVTQZ4CRwVQGB8CV1BVKPm5bNVxFJHWFKiH8",
+		"name": "crow with knife",
+		"symbol": "CAW",
+		"decimals": 2,
+		"addedAt": 1774479214,
+		"mcap": 4807052
+	},
+	{
+		"address": "6dKCoWjpj5MFU5gWDEFdpUUeBasBLK3wLEwhUzQPAa1e",
+		"name": "CHEX",
+		"symbol": "CHEX",
+		"decimals": 8,
+		"addedAt": 1783611729,
+		"mcap": 14712713
+	},
+	{
+		"address": "DBRiDgJAMsM95moTzJs7M9LnkGErpbv9v6CUR1DXnUu5",
+		"name": "deBridge",
+		"symbol": "DBR",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 87168775
+	},
+	{
+		"address": "7JoGUTeaXkjcMGa6xJP2idYNYiLreto1WnsACHnpw3Gd",
+		"name": "XMAQUINA",
+		"symbol": "DEUS",
+		"decimals": 9,
+		"addedAt": 1779826342,
+		"mcap": 12639366
+	},
+	{
+		"address": "Dso1bDeDjCQxTrWHqUUi63oBvV7Mdm6WaobLbQ7gnPQ",
+		"name": "Drift Staked Sol",
+		"symbol": "dSOL",
+		"decimals": 9,
+		"addedAt": 1783611729,
+		"mcap": 221650677
+	},
+	{
+		"address": "DUAL6T9pATmQUFPYmrWq2BkkGdRxLtERySGScYmbHMER",
+		"name": "Dual SOL",
+		"symbol": "dualSOL",
+		"decimals": 9,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "7JA5eZdCzztSfQbJvS8aVVxMFfd81Rs9VvwnocV1mKHu",
+		"name": "Geodnet Token",
+		"symbol": "GEOD",
+		"decimals": 9,
+		"addedAt": 1783611729,
+		"mcap": 91334972
+	},
+	{
+		"address": "gSvP9zBJ33pX7W2finzAYJZp6Q9ipNAQ19xU9PrCirz",
+		"name": "Guardian Staked SOL",
+		"symbol": "gS",
+		"decimals": 9,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "J3umBWqhSjd13sag1E1aUojViWvPYA5dFNyqpKuX3WXj",
+		"name": "Home",
+		"symbol": "HOME",
+		"decimals": 9,
+		"addedAt": 1749499106,
+		"mcap": 61171677
+	},
+	{
+		"address": "7Q2afV64in6N6SeZsAAB81TJzwDoD6zpqmHkzi9Dcavn",
+		"name": "JPool Staked SOL",
+		"symbol": "JSOL",
+		"decimals": 9,
+		"addedAt": 1783611729,
+		"mcap": 109547419
+	},
+	{
+		"address": "2nnrviYJRLcf2bXAxpKTRXzccoDbwaP4vzuGUG75Jo45",
+		"name": "Kendu Inu (Wormhole)",
+		"symbol": "Kendu",
+		"decimals": 8,
+		"addedAt": 1742052067,
+		"mcap": 3492260
+	},
+	{
+		"address": "KMNo3nJsBXfcpJTVhZcXLW7RmTwTt4GVFE7suUBo9sS",
+		"name": "Kamino",
+		"symbol": "KMNO",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 97326277
+	},
+	{
+		"address": "myrcAs6bpP2g5oGHZ3qpgrfZQAFkbo9KUHdqYDXMjGv",
+		"name": "MYRC",
+		"symbol": "MYRC",
+		"decimals": 6,
+		"addedAt": 1765425533,
+		"mcap": 1299059
+	},
+	{
+		"address": "ABt79MkRXUsoHuV2CVQT32YMXQhTparKFjmidQxgiQ6E",
+		"name": "Orderly Network",
+		"symbol": "ORDER",
+		"decimals": 10,
+		"addedAt": 1756929740,
+		"mcap": 13494668
+	},
+	{
+		"address": "DV3845GEAVXfwpyVGGgWbqBVCtzHdCXNCGfcdboSEuZz",
+		"name": "OX Coin (Wormhole)",
+		"symbol": "OX",
+		"decimals": 8,
+		"mcap": 39761
+	},
+	{
+		"address": "Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS",
+		"name": "PAI (Parrot USD)",
+		"symbol": "PAI",
+		"decimals": 6,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "DYDWu4hE4MN3aH897xQ3sRTs5EAjJDmQsKLNhbpUiKun",
+		"name": "pBTC (Parrot BTC)",
+		"symbol": "pBTC",
+		"decimals": 8,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "9EaLkQrbjmbbuZG9Wdpo8qfNUEjHATJFSycEmw6f1rGX",
+		"name": "pSOL (Parrot SOL)",
+		"symbol": "pSOL",
+		"decimals": 9,
+		"addedAt": 1783611729,
+		"mcap": 45113750428
+	},
+	{
+		"address": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+		"name": "Pyth Network",
+		"symbol": "PYTH",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 346073927
+	},
+	{
+		"address": "3DK98MXPz8TRuim7rfQnebSLpA7VSoc79Bgiee1m4Zw5",
+		"name": "Renzo",
+		"symbol": "REZ",
+		"decimals": 9,
+		"mcap": 23453005
+	},
+	{
+		"address": "93bVs9o8Nq88zxnLWwUAVfN5PXBhCcnV5sfs6AFLno8q",
+		"name": "Rivalz token",
+		"symbol": "RIZ",
+		"decimals": 8,
+		"mcap": 279137
+	},
+	{
+		"address": "DBAzBUXaLj1qANCseUPZz4sp9F8d2sc78C4vKjhbTGMA",
+		"name": "Stable Coin",
+		"symbol": "SBC",
+		"decimals": 9,
+		"addedAt": 1783611729,
+		"mcap": 9373058
+	},
+	{
+		"address": "Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1",
+		"name": "Saber Protocol Token",
+		"symbol": "SBR",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 858994
+	},
+	{
+		"address": "9dzSzFvPsKDoY2gdWErsuz2H1o4tbzvgBhrNZ9cvkD2j",
+		"name": "SmarDex Token (Wormhole)",
+		"symbol": "SDEX",
+		"decimals": 8,
+		"addedAt": 1751034950,
+		"mcap": 5889864
+	},
+	{
+		"address": "11111111111111111111111111111111",
+		"name": "Solana",
+		"symbol": "SOL",
+		"decimals": 9,
+		"addedAt": 1730371063
+	},
+	{
+		"address": "So11111111111111111111111111111111111111112",
+		"name": "Wrapped SOL",
+		"symbol": "SOL",
+		"decimals": 9,
+		"addedAt": 1730712797,
+		"mcap": 1718408173
+	},
+	{
+		"address": "wzAyQTorWyoVXuJKj2x8EqKEGJpS13z6EWE9z5Aondo",
+		"name": "SpaceX (Ondo Tokenized)",
+		"symbol": "SPCXon",
+		"decimals": 9,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "StPsoHokZryePePFV8N7iXvfEmgUoJ87rivABX7gaW6",
+		"name": "stepSOL",
+		"symbol": "stepSOL",
+		"decimals": 9,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "SUNNYWgPQmFxe9wTZzNK7iPnJ3vYDrkgnxJRJm1s3ag",
+		"name": "Sunny Governance Token",
+		"symbol": "SUNNY",
+		"decimals": 6,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH",
+		"name": "Global Dollar",
+		"symbol": "USDG",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 3114315322
+	},
+	{
+		"address": "WCTk5xWdn5SYg56twGj32sUF3W4WFQ48ogezLBuYTBY",
+		"name": "WalletConnect Token",
+		"symbol": "WCT",
+		"decimals": 9,
+		"addedAt": 1783611729,
+		"mcap": 8314616
+	},
+	{
+		"address": "WMTXyYKUMTG3VuZA5beXuHVRLpyTwwaoP7h2i8YpuRH",
+		"name": "World Mobile Token",
+		"symbol": "WMTX",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 26480111
+	}
+]

@@ -47,3 +47,4 @@ ds-bundle/
 .design-sync/learnings/
 .design-sync/node_modules
 _config/ui/.ds-css/
+.design-sync

@@ -214,7 +214,9 @@ export function NetworkSubmitForm({chain, signedIn}: {chain: TAllChainInfo; sign
 						{label: 'Native token', value: chain.nativeSymbol},
 						{label: 'Decimals', value: String(chain.nativeDecimals)}
 					].map(detail => (
-						<div key={detail.label} className={'min-w-0 px-3 py-2.5'}>
+						<div
+							key={detail.label}
+							className={'min-w-0 px-3 py-2.5'}>
 							<span className={'block font-mono text-[10px] text-white/40 uppercase tracking-[0.1em]'}>
 								{detail.label}
 							</span>
@@ -242,7 +244,9 @@ export function NetworkSubmitForm({chain, signedIn}: {chain: TAllChainInfo; sign
 
 				{svgError && <p className={'font-mono text-error text-xs'}>{svgError}</p>}
 				{submitError && (
-					<p role={'alert'} className={'font-mono text-error text-xs'}>
+					<p
+						role={'alert'}
+						className={'font-mono text-error text-xs'}>
 						{submitError}
 					</p>
 				)}
@@ -265,7 +269,11 @@ export function NetworkSubmitForm({chain, signedIn}: {chain: TAllChainInfo; sign
 				</Button>
 			</div>
 
-			<SubmitResult prURL={prURL} onClose={() => setPrURL(null)} showSubmitAnother={false} />
+			<SubmitResult
+				prURL={prURL}
+				onClose={() => setPrURL(null)}
+				showSubmitAnother={false}
+			/>
 		</>
 	);
 }

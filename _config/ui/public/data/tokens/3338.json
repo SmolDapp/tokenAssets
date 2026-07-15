@@ -1,1 +1,9 @@
-[{"address":"0x940A319B75861014A220D9c6c144d108552B089B","name":"DEUS Token","symbol":"DEUS","decimals":18,"addedAt":1779826342}]
+[
+	{
+		"address": "0x940A319B75861014A220D9c6c144d108552B089B",
+		"name": "DEUS Token",
+		"symbol": "DEUS",
+		"decimals": 18,
+		"addedAt": 1779826342
+	}
+]

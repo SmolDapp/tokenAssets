@@ -57,7 +57,10 @@ export default async function TokenPage({params}: TTokenPageProps): Promise<Reac
 	return (
 		<>
 			<TokenList />
-			<TokenDrawerRoute address={address} direct />
+			<TokenDrawerRoute
+				address={address}
+				direct
+			/>
 		</>
 	);
 }

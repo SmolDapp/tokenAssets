@@ -57,8 +57,15 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 
 					<DrawerHeader className={'flex justify-end p-0'}>
 						<DrawerClose asChild>
-							<Button aria-label={'Close'} className={'text-black'} variant={'ghost'} size={'icon'}>
-								<Cross aria-hidden={'true'} className={'size-4'} />
+							<Button
+								aria-label={'Close'}
+								className={'text-black'}
+								variant={'ghost'}
+								size={'icon'}>
+								<Cross
+									aria-hidden={'true'}
+									className={'size-4'}
+								/>
 							</Button>
 						</DrawerClose>
 					</DrawerHeader>
@@ -101,19 +108,31 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 							</div>
 						</div>
 						<div className={'flex gap-2 font-mono'}>
-							<Button className={'w-full uppercase'} variant={'outline'} onClick={handleCopyAddress}>
+							<Button
+								className={'w-full uppercase'}
+								variant={'outline'}
+								onClick={handleCopyAddress}>
 								{'Copy Address'}
 							</Button>
-							<Button className={'w-full uppercase'} variant={'outline'} onClick={handleCopyLogo}>
+							<Button
+								className={'w-full uppercase'}
+								variant={'outline'}
+								onClick={handleCopyLogo}>
 								{'Copy Logo URL'}
 							</Button>
 						</div>
 						<div className={'space-y-6'}>
-							<TokenInfoFields token={token} chain={chain} />
+							<TokenInfoFields
+								token={token}
+								chain={chain}
+							/>
 
 							<div className={'space-y-2'}>
 								<p className={'font-mono text-subtle text-xs uppercase tracking-[0.1em]'}>{'Use it'}</p>
-								<CodeSnippets url={selectedURL} alt={`${displayName} logo`} />
+								<CodeSnippets
+									url={selectedURL}
+									alt={`${displayName} logo`}
+								/>
 							</div>
 
 							<Link
@@ -121,7 +140,9 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 								href={tokenGithubURI(chain.id, token.address)}
 								target={'_blank'}
 								rel={'noopener noreferrer'}>
-								<Button className={'w-full'} variant={'default'}>
+								<Button
+									className={'w-full'}
+									variant={'default'}>
 									{'VIEW ON GITHUB'}
 								</Button>
 							</Link>

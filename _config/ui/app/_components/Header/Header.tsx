@@ -22,7 +22,10 @@ export function Header(): ReactElement {
 
 				<NavBar />
 			</div>
-			<CommandPalette open={isPaletteOpen} onOpenChange={setIsPaletteOpen} />
+			<CommandPalette
+				open={isPaletteOpen}
+				onOpenChange={setIsPaletteOpen}
+			/>
 		</header>
 	);
 }

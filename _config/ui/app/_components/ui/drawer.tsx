@@ -18,7 +18,11 @@ const Drawer = ({
 }: ComponentProps<typeof DrawerPrimitive.Root> & {
 	direction?: 'left' | 'right' | 'bottom' | 'top';
 }): ReactElement => (
-	<DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} direction={direction} {...props} />
+	<DrawerPrimitive.Root
+		shouldScaleBackground={shouldScaleBackground}
+		direction={direction}
+		{...props}
+	/>
 );
 Drawer.displayName = 'Drawer';
 
@@ -82,7 +86,9 @@ const DrawerContent = forwardRef<
 					className
 				)}
 				{...props}>
-				<div style={{userSelect: 'text', WebkitUserSelect: 'text'}} className={'size-full'}>
+				<div
+					style={{userSelect: 'text', WebkitUserSelect: 'text'}}
+					className={'size-full'}>
 					{children}
 				</div>
 			</DrawerPrimitive.Content>

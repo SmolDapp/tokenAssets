@@ -38,7 +38,10 @@ function LinkOutIcon({className}: {className?: string}): ReactElement {
 			fill={'none'}
 			xmlns={'http://www.w3.org/2000/svg'}
 			aria-hidden={'true'}>
-			<path d={'M3 1h8v8h-2V4.41L3.71 9.7 2.3 8.29 7.59 3H3V1z'} fill={'currentColor'} />
+			<path
+				d={'M3 1h8v8h-2V4.41L3.71 9.7 2.3 8.29 7.59 3H3V1z'}
+				fill={'currentColor'}
+			/>
 		</svg>
 	);
 }
@@ -50,7 +53,10 @@ export function InfoField({label, value, href}: TProps): ReactElement {
 		<div className={'space-y-1'}>
 			<p className={'font-mono text-subtle text-xs uppercase md:text-sm'}>{label}</p>
 			{isHttpLink || href ? (
-				<HttpLink value={value} href={href} />
+				<HttpLink
+					value={value}
+					href={href}
+				/>
 			) : (
 				<p className={'break-all font-mono text-xs md:text-base'}>{value}</p>
 			)}

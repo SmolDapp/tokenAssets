@@ -1,1 +1,601 @@
-[{"address":"0x2dd7C9371965472E5A5fD28fbE165007c61439E1","name":"Curve.fi Factory Plain Pool: 3poolV2","symbol":"3poolV2-f","decimals":18,"addedAt":1696849317},{"address":"0x6a07A792ab2965C72a5B8088d3a069A7aC3a993B","name":"Aave","symbol":"AAVE","decimals":18,"addedAt":1696849317,"mcap":1435548416},{"address":"0x1B6382DBDEa11d97f24495C9A90b7c88469134a4","name":"Axelar Wrapped USDC","symbol":"axlUSDC","decimals":6,"addedAt":1783611729,"mcap":0},{"address":"0x46E7628E8b4350b2716ab470eE0bA1fa9e76c6C5","name":"Band","symbol":"BAND","decimals":18,"addedAt":1696849317,"mcap":29557560},{"address":"0x8D7d3409881b51466B483B11Ea1B8A03cdEd89ae","name":"BASED","symbol":"BASED","decimals":18,"addedAt":1696849317},{"address":"0x44e314190D9E4cE6d4C0903459204F8E21ff940A","name":"binSPIRIT","symbol":"binSPIRIT","decimals":18,"addedAt":1696849317},{"address":"0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE","name":"SpookyToken","symbol":"BOO","decimals":18,"addedAt":1696849317,"mcap":0},{"address":"0x321162Cd933E2Be498Cd2267a90534A804051b11","name":"Bitcoin","symbol":"BTC","decimals":8,"addedAt":1696849317},{"address":"0x2aD402655243203fcfa7dCB62F8A08cc2BA88ae0","name":"CRE8R DAO","symbol":"CRE8R","decimals":18,"addedAt":1696849317},{"address":"0x657A1861c15A3deD9AF0B6799a195a249ebdCbc6","name":"Cream","symbol":"CREAM","decimals":18,"addedAt":1696849317,"mcap":1089371},{"address":"0x1E4F97b9f9F913c46F1632781732927B9019C68b","name":"Curve DAO","symbol":"CRV","decimals":18,"addedAt":1696849317,"mcap":320735255},{"address":"0x58e57cA18B7A47112b877E31929798Cd3D703b0f","name":"Curve.fi USD-BTC-ETH","symbol":"crv3crypto","decimals":18,"addedAt":1696849317},{"address":"0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E","name":"Dai Stablecoin","symbol":"DAI","decimals":18,"addedAt":1696849317},{"address":"0x27E611FD27b276ACbd5Ffd632E5eAEBEC9761E40","name":"Curve.fi DAI/USDC","symbol":"DAI+USDC","decimals":18,"addedAt":1783611729},{"address":"0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c","name":"Dola USD Stablecoin","symbol":"DOLA","decimals":18,"addedAt":1696849317,"mcap":44235810},{"address":"0x74b23882a30290451A17c44f4F05243b6b58C76d","name":"Ethereum","symbol":"ETH","decimals":18,"addedAt":1696849317},{"address":"0xC0d9784FDba39746919Bbf236eB73bc015fD351D","name":"FTML","symbol":"Fantom-L","decimals":18,"addedAt":1783611729,"mcap":0},{"address":"0xfcef8a994209d6916EB2C86cDD2AFD60Aa6F54b1","name":"FreshBeets","symbol":"fBEETS","decimals":18,"addedAt":1696849317},{"address":"0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355","name":"Frax","symbol":"FRAX","decimals":18,"addedAt":1696849317,"mcap":237461058},{"address":"0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE","name":"Fantom","symbol":"FTM","decimals":18,"addedAt":1696849317,"mcap":0},{"address":"0x049d68029688eAbF473097a2fC38ef61633A3C7A","name":"Frapped USDT","symbol":"fUSDT","decimals":6,"addedAt":1696849317},{"address":"0xD02a30d33153877BC20e5721ee53DeDEE0422B2F","name":"Curve.fi gDAI/gUSDC/gUSDT","symbol":"g3CRV","decimals":18,"addedAt":1696849317},{"address":"0x07E6332dD090D287d3489245038daF987955DCFB","name":"Geist DAI","symbol":"gDAI","decimals":18,"addedAt":1783611729,"mcap":0},{"address":"0xd8321AA83Fb0a4ECd6348D4577431310A6E0814d","name":"Geist.Finance Protocol Token","symbol":"GEIST","decimals":18,"addedAt":1696849317},{"address":"0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5","name":"Geist fUSDT","symbol":"gfUSDT","decimals":6,"addedAt":1783611729,"mcap":0},{"address":"0xe578C856933D8e1082740bf7661e379Aa2A30b26","name":"Geist USDC","symbol":"gUSDC","decimals":6,"addedAt":1783611729,"mcap":0},{"address":"0x44B26E839eB3572c5E959F994804A5De66600349","name":"Hegic","symbol":"HEGIC","decimals":18,"addedAt":1696849317,"mcap":13859992},{"address":"0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8","name":"ChainLink","symbol":"LINK","decimals":18,"addedAt":1696849317,"mcap":5907870084},{"address":"0x82f0B8B456c1A451378467398982d4834b6829c1","name":"Magic Internet Money","symbol":"MIM","decimals":18,"addedAt":1696849317,"mcap":233337},{"address":"0xfB98B335551a418cD0737375a2ea0ded62Ea213b","name":"miMATIC","symbol":"miMATIC","decimals":18,"addedAt":1783611729},{"address":"0x66E535e8D2ebf13F49F3D49e5c50395a97C137b1","name":"Molten","symbol":"MOLTEN","decimals":18,"addedAt":1737974667,"mcap":0},{"address":"0xB40C1882fA3cDf3c0D26Ae688a7bA306845f07b0","name":"0xDAO","symbol":"OXD","decimals":18,"addedAt":1696849317},{"address":"0x79360aF49edd44F3000303ae212671ac94bB8ba7","name":"Radial","symbol":"RDL","decimals":18,"addedAt":1696849317},{"address":"0xDBf31dF14B66535aF65AaC99C32e9eA844e14501","name":"renBTC","symbol":"renBTC","decimals":8,"addedAt":1696849317},{"address":"0x2902257bA817E1436b93F9F959ed50b95560B7d5","name":"s2CRV_ar","symbol":"s2CRV_ar","decimals":18,"addedAt":1783611729},{"address":"0x14F8E5851879A18E0FEA77b5A17F15523262a99E","name":"s3CRV_e","symbol":"s3CRV_e","decimals":18,"addedAt":1783611729},{"address":"0x740568006C07888216649632aace6620288C7078","name":"s3CRV_o","symbol":"s3CRV_o","decimals":18,"addedAt":1783611729},{"address":"0x4636a4eFba1C02917d0584505e47BB2D22AFe359","name":"sam3CRV_p","symbol":"sam3CRV_p","decimals":18,"addedAt":1783611729},{"address":"0x9be1Ae6175b106f26439CebAf2217D7815F684af","name":"sav3CRV_av","symbol":"sav3CRV_av","decimals":18,"addedAt":1783611729},{"address":"0x56ee926bD8c72B2d5fa1aF4d9E4Cbb515a1E3Adc","name":"Synthetix Network","symbol":"SNX","decimals":18,"addedAt":1696849317,"mcap":133849346},{"address":"0x888EF71766ca594DED1F0FA3AE64eD2941740A20","name":"Solidly","symbol":"SOLID","decimals":18,"addedAt":1696849317},{"address":"0x468003B688943977e6130F4F68F23aad939a1040","name":"Spell Token","symbol":"SPELL","decimals":18,"addedAt":1696849317,"mcap":15527243},{"address":"0x5Cc61A78F164885776AA610fb0FE1257df78E59B","name":"SpiritSwap Token","symbol":"SPIRIT","decimals":18,"addedAt":1696849317},{"address":"0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC","name":"Sushi","symbol":"SUSHI","decimals":18,"addedAt":1696849317,"mcap":45242667},{"address":"0x77E1886Bf34D7dc0Dcf8d5407ED6A239B66Ae2ee","name":"sWETH_ar","symbol":"sWETH_ar","decimals":18,"addedAt":1783611729},{"address":"0xC6cD50E6085a5f037B638813483dD244E3E4bCaA","name":"sWETH_ba","symbol":"sWETH_ba","decimals":18,"addedAt":1783611729},{"address":"0x0c935328A69155dd43AA57f23288D868bAE440FE","name":"sWETH_e","symbol":"sWETH_e","decimals":18,"addedAt":1783611729},{"address":"0x66917b3B128760295bF48A5382951bC63bb1768E","name":"sWETH_o","symbol":"sWETH_o","decimals":18,"addedAt":1783611729},{"address":"0x9879aBDea01a879644185341F7aF7d8343556B7a","name":"TrueUSD","symbol":"TUSD","decimals":18,"addedAt":1696849317,"mcap":2027331},{"address":"0x04068DA6C83AFCFA0e13ba15A6696662335D5B75","name":"USD Coin","symbol":"USDC","decimals":6,"addedAt":1696849317},{"address":"0x4A89338A2079A01eDBF5027330EAC10B615024E5","name":"USDL","symbol":"USDL Stablecoin","decimals":18,"addedAt":1783611729},{"address":"0x846e4D51d7E2043C1a87E0Ab7490B93FB940357b","name":"UST","symbol":"UST","decimals":6,"addedAt":1783611729,"mcap":0},{"address":"0xe2D27f06F63d98b8e11b38b5b08A75D0c8dD62B9","name":"TerraUSD","symbol":"UST","decimals":6,"addedAt":1696849317},{"address":"0x911da02C1232A3c3E1418B834A311921143B04d7","name":"veDAO Token","symbol":"WeVE","decimals":18,"addedAt":1696849317,"mcap":13620},{"address":"0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83","name":"Wrapped Fantom","symbol":"WFTM","decimals":18,"addedAt":1696849317,"mcap":0},{"address":"0xD0660cD418a64a1d44E9214ad8e459324D8157f1","name":"Woofy","symbol":"WOOFY","decimals":12,"addedAt":1696849317},{"address":"0x29b0Da86e484E1C0029B56e817912d778aC0EC69","name":"yearn.finance","symbol":"YFI","decimals":18,"addedAt":1696849317,"mcap":77720461},{"address":"0x03B82e4070cA32FF63A03F2EcfC16c0165689a9d","name":"Curve AVAX yVault","symbol":"yvAVAX","decimals":18,"addedAt":1696849317},{"address":"0x0fBbf9848D969776a5Eb842EdAfAf29ef4467698","name":"BOO yVault","symbol":"yvBOO","decimals":18,"addedAt":1696849317},{"address":"0x79330397e161C67703e9bce2cA2Db73937D5fc7e","name":"BOO yVault","symbol":"yvBOO","decimals":18,"addedAt":1696849317},{"address":"0x0FCDAeDFb8A7DfDa2e9838564c5A1665d856AFDF","name":"btcCRV yVault","symbol":"yvbtcCRV","decimals":18,"addedAt":1696849317},{"address":"0x0446acaB3e0242fCf33Aa526f1c95a88068d5042","name":"CRV yVault","symbol":"yvCRV","decimals":18,"addedAt":1696849317},{"address":"0xA6A0cA45c2ceF0c5C0E0B58A8Ddd59209378B76A","name":"Curve 2pool yVault","symbol":"yvCurve-2pool","decimals":18,"addedAt":1696849317},{"address":"0xF137D22d7B23eeB1950B3e19d1f578c053ed9715","name":"Curve Geist Pool yVault","symbol":"yvCurve-Geist","decimals":18,"addedAt":1696849317},{"address":"0xA97E7dA01C7047D6a65f894c99bE8c832227a8BC","name":"Curve MIM Pool Vault","symbol":"yvCurve-MIM","decimals":18,"addedAt":1696849317},{"address":"0xCbCaF8cB8cbeAFA927ECEE0c5C56560F83E9B7D9","name":"Curve Tricrypto Pool yVault","symbol":"yvCurve-Tricrypto","decimals":18,"addedAt":1696849317},{"address":"0x637eC617c86D24E421328e6CAEa1d92114892439","name":"DAI yVault","symbol":"yvDAI","decimals":18,"addedAt":1696849317},{"address":"0x1b48641D8251c3E84ecbe3f2bD76B3701401906D","name":"DOLA yVault","symbol":"yvDOLA","decimals":18,"addedAt":1696849317},{"address":"0x1e2fe8074a5ce1Bb7394856B0C618E75D823B93b","name":"fBEETS yVault","symbol":"yvfBEETS","decimals":18,"addedAt":1696849317},{"address":"0x357ca46da26E1EefC195287ce9D838A6D5023ef3","name":"FRAX yVault","symbol":"yvFRAX","decimals":18,"addedAt":1696849317},{"address":"0xE95416c54f3e313E49306486b0ea9c2C6D623157","name":"fUSDT+DAI+USDC yVault","symbol":"yvfUSDT+DAI+USDC","decimals":18,"addedAt":1696849317},{"address":"0xf2d323621785A066E64282d2B407eAc79cC04966","name":"LINK yVault","symbol":"yvLINK","decimals":18,"addedAt":1696849317},{"address":"0x0A0b23D9786963DE69CB2447dC125c49929419d8","name":"MIM yVault","symbol":"yvMIM","decimals":18,"addedAt":1696849317},{"address":"0xD3c19eB022CAC706c898D60d756bf1535d605e1d","name":"SPELL yVault","symbol":"yvSPELL","decimals":18,"addedAt":1696849317},{"address":"0xEF0210eB96c7EB36AF8ed1c20306462764935607","name":"USDC yVault","symbol":"yvUSDC","decimals":6,"addedAt":1696849317},{"address":"0x148c05caf1Bb09B5670f00D511718f733C54bC4c","name":"USDT yVault","symbol":"yvUSDT","decimals":6,"addedAt":1696849317},{"address":"0xd817A100AB8A29fE3DBd925c2EB489D67F758DA9","name":"WBTC yVault","symbol":"yvWBTC","decimals":8,"addedAt":1696849317},{"address":"0xCe2Fc0bDc18BD6a4d9A725791A3DEe33F3a23BB7","name":"WETH yVault","symbol":"yvWETH","decimals":18,"addedAt":1696849317},{"address":"0x0DEC85e74A92c52b7F708c4B10207D9560CEFaf0","name":"WFTM yVault","symbol":"yvWFTM","decimals":18,"addedAt":1696849317},{"address":"0x1DF3f4985Ac2103B96ed75f9d76F33696D2b1d66","name":"WFTM yVault","symbol":"yvWFTM","decimals":18,"addedAt":1696849317},{"address":"0x6864355183462A0ECA10b5Ca90BC89BB1361d3CB","name":"WOOFY yVault","symbol":"yvWOOFY","decimals":12,"addedAt":1696849317},{"address":"0x2C850cceD00ce2b14AA9D658b7Cad5dF659493Db","name":"YFI yVault","symbol":"yvYFI","decimals":18,"addedAt":1696849317}]
+[
+	{
+		"address": "0x2dd7C9371965472E5A5fD28fbE165007c61439E1",
+		"name": "Curve.fi Factory Plain Pool: 3poolV2",
+		"symbol": "3poolV2-f",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x6a07A792ab2965C72a5B8088d3a069A7aC3a993B",
+		"name": "Aave",
+		"symbol": "AAVE",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 1435548416
+	},
+	{
+		"address": "0x1B6382DBDEa11d97f24495C9A90b7c88469134a4",
+		"name": "Axelar Wrapped USDC",
+		"symbol": "axlUSDC",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 0
+	},
+	{
+		"address": "0x46E7628E8b4350b2716ab470eE0bA1fa9e76c6C5",
+		"name": "Band",
+		"symbol": "BAND",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 29557560
+	},
+	{
+		"address": "0x8D7d3409881b51466B483B11Ea1B8A03cdEd89ae",
+		"name": "BASED",
+		"symbol": "BASED",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x44e314190D9E4cE6d4C0903459204F8E21ff940A",
+		"name": "binSPIRIT",
+		"symbol": "binSPIRIT",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE",
+		"name": "SpookyToken",
+		"symbol": "BOO",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 0
+	},
+	{
+		"address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+		"name": "Bitcoin",
+		"symbol": "BTC",
+		"decimals": 8,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x2aD402655243203fcfa7dCB62F8A08cc2BA88ae0",
+		"name": "CRE8R DAO",
+		"symbol": "CRE8R",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x657A1861c15A3deD9AF0B6799a195a249ebdCbc6",
+		"name": "Cream",
+		"symbol": "CREAM",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 1089371
+	},
+	{
+		"address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
+		"name": "Curve DAO",
+		"symbol": "CRV",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 320735255
+	},
+	{
+		"address": "0x58e57cA18B7A47112b877E31929798Cd3D703b0f",
+		"name": "Curve.fi USD-BTC-ETH",
+		"symbol": "crv3crypto",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
+		"name": "Dai Stablecoin",
+		"symbol": "DAI",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x27E611FD27b276ACbd5Ffd632E5eAEBEC9761E40",
+		"name": "Curve.fi DAI/USDC",
+		"symbol": "DAI+USDC",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c",
+		"name": "Dola USD Stablecoin",
+		"symbol": "DOLA",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 44235810
+	},
+	{
+		"address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
+		"name": "Ethereum",
+		"symbol": "ETH",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xC0d9784FDba39746919Bbf236eB73bc015fD351D",
+		"name": "FTML",
+		"symbol": "Fantom-L",
+		"decimals": 18,
+		"addedAt": 1783611729,
+		"mcap": 0
+	},
+	{
+		"address": "0xfcef8a994209d6916EB2C86cDD2AFD60Aa6F54b1",
+		"name": "FreshBeets",
+		"symbol": "fBEETS",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355",
+		"name": "Frax",
+		"symbol": "FRAX",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 237461058
+	},
+	{
+		"address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+		"name": "Fantom",
+		"symbol": "FTM",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 0
+	},
+	{
+		"address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
+		"name": "Frapped USDT",
+		"symbol": "fUSDT",
+		"decimals": 6,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xD02a30d33153877BC20e5721ee53DeDEE0422B2F",
+		"name": "Curve.fi gDAI/gUSDC/gUSDT",
+		"symbol": "g3CRV",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x07E6332dD090D287d3489245038daF987955DCFB",
+		"name": "Geist DAI",
+		"symbol": "gDAI",
+		"decimals": 18,
+		"addedAt": 1783611729,
+		"mcap": 0
+	},
+	{
+		"address": "0xd8321AA83Fb0a4ECd6348D4577431310A6E0814d",
+		"name": "Geist.Finance Protocol Token",
+		"symbol": "GEIST",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5",
+		"name": "Geist fUSDT",
+		"symbol": "gfUSDT",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 0
+	},
+	{
+		"address": "0xe578C856933D8e1082740bf7661e379Aa2A30b26",
+		"name": "Geist USDC",
+		"symbol": "gUSDC",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 0
+	},
+	{
+		"address": "0x44B26E839eB3572c5E959F994804A5De66600349",
+		"name": "Hegic",
+		"symbol": "HEGIC",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 13859992
+	},
+	{
+		"address": "0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8",
+		"name": "ChainLink",
+		"symbol": "LINK",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 5907870084
+	},
+	{
+		"address": "0x82f0B8B456c1A451378467398982d4834b6829c1",
+		"name": "Magic Internet Money",
+		"symbol": "MIM",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 233337
+	},
+	{
+		"address": "0xfB98B335551a418cD0737375a2ea0ded62Ea213b",
+		"name": "miMATIC",
+		"symbol": "miMATIC",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x66E535e8D2ebf13F49F3D49e5c50395a97C137b1",
+		"name": "Molten",
+		"symbol": "MOLTEN",
+		"decimals": 18,
+		"addedAt": 1737974667,
+		"mcap": 0
+	},
+	{
+		"address": "0xB40C1882fA3cDf3c0D26Ae688a7bA306845f07b0",
+		"name": "0xDAO",
+		"symbol": "OXD",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x79360aF49edd44F3000303ae212671ac94bB8ba7",
+		"name": "Radial",
+		"symbol": "RDL",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xDBf31dF14B66535aF65AaC99C32e9eA844e14501",
+		"name": "renBTC",
+		"symbol": "renBTC",
+		"decimals": 8,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x2902257bA817E1436b93F9F959ed50b95560B7d5",
+		"name": "s2CRV_ar",
+		"symbol": "s2CRV_ar",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x14F8E5851879A18E0FEA77b5A17F15523262a99E",
+		"name": "s3CRV_e",
+		"symbol": "s3CRV_e",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x740568006C07888216649632aace6620288C7078",
+		"name": "s3CRV_o",
+		"symbol": "s3CRV_o",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x4636a4eFba1C02917d0584505e47BB2D22AFe359",
+		"name": "sam3CRV_p",
+		"symbol": "sam3CRV_p",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x9be1Ae6175b106f26439CebAf2217D7815F684af",
+		"name": "sav3CRV_av",
+		"symbol": "sav3CRV_av",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x56ee926bD8c72B2d5fa1aF4d9E4Cbb515a1E3Adc",
+		"name": "Synthetix Network",
+		"symbol": "SNX",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 133849346
+	},
+	{
+		"address": "0x888EF71766ca594DED1F0FA3AE64eD2941740A20",
+		"name": "Solidly",
+		"symbol": "SOLID",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x468003B688943977e6130F4F68F23aad939a1040",
+		"name": "Spell Token",
+		"symbol": "SPELL",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 15527243
+	},
+	{
+		"address": "0x5Cc61A78F164885776AA610fb0FE1257df78E59B",
+		"name": "SpiritSwap Token",
+		"symbol": "SPIRIT",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC",
+		"name": "Sushi",
+		"symbol": "SUSHI",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 45242667
+	},
+	{
+		"address": "0x77E1886Bf34D7dc0Dcf8d5407ED6A239B66Ae2ee",
+		"name": "sWETH_ar",
+		"symbol": "sWETH_ar",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0xC6cD50E6085a5f037B638813483dD244E3E4bCaA",
+		"name": "sWETH_ba",
+		"symbol": "sWETH_ba",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x0c935328A69155dd43AA57f23288D868bAE440FE",
+		"name": "sWETH_e",
+		"symbol": "sWETH_e",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x66917b3B128760295bF48A5382951bC63bb1768E",
+		"name": "sWETH_o",
+		"symbol": "sWETH_o",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x9879aBDea01a879644185341F7aF7d8343556B7a",
+		"name": "TrueUSD",
+		"symbol": "TUSD",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 2027331
+	},
+	{
+		"address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+		"name": "USD Coin",
+		"symbol": "USDC",
+		"decimals": 6,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x4A89338A2079A01eDBF5027330EAC10B615024E5",
+		"name": "USDL",
+		"symbol": "USDL Stablecoin",
+		"decimals": 18,
+		"addedAt": 1783611729
+	},
+	{
+		"address": "0x846e4D51d7E2043C1a87E0Ab7490B93FB940357b",
+		"name": "UST",
+		"symbol": "UST",
+		"decimals": 6,
+		"addedAt": 1783611729,
+		"mcap": 0
+	},
+	{
+		"address": "0xe2D27f06F63d98b8e11b38b5b08A75D0c8dD62B9",
+		"name": "TerraUSD",
+		"symbol": "UST",
+		"decimals": 6,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x911da02C1232A3c3E1418B834A311921143B04d7",
+		"name": "veDAO Token",
+		"symbol": "WeVE",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 13620
+	},
+	{
+		"address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+		"name": "Wrapped Fantom",
+		"symbol": "WFTM",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 0
+	},
+	{
+		"address": "0xD0660cD418a64a1d44E9214ad8e459324D8157f1",
+		"name": "Woofy",
+		"symbol": "WOOFY",
+		"decimals": 12,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x29b0Da86e484E1C0029B56e817912d778aC0EC69",
+		"name": "yearn.finance",
+		"symbol": "YFI",
+		"decimals": 18,
+		"addedAt": 1696849317,
+		"mcap": 77720461
+	},
+	{
+		"address": "0x03B82e4070cA32FF63A03F2EcfC16c0165689a9d",
+		"name": "Curve AVAX yVault",
+		"symbol": "yvAVAX",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x0fBbf9848D969776a5Eb842EdAfAf29ef4467698",
+		"name": "BOO yVault",
+		"symbol": "yvBOO",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x79330397e161C67703e9bce2cA2Db73937D5fc7e",
+		"name": "BOO yVault",
+		"symbol": "yvBOO",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x0FCDAeDFb8A7DfDa2e9838564c5A1665d856AFDF",
+		"name": "btcCRV yVault",
+		"symbol": "yvbtcCRV",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x0446acaB3e0242fCf33Aa526f1c95a88068d5042",
+		"name": "CRV yVault",
+		"symbol": "yvCRV",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xA6A0cA45c2ceF0c5C0E0B58A8Ddd59209378B76A",
+		"name": "Curve 2pool yVault",
+		"symbol": "yvCurve-2pool",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xF137D22d7B23eeB1950B3e19d1f578c053ed9715",
+		"name": "Curve Geist Pool yVault",
+		"symbol": "yvCurve-Geist",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xA97E7dA01C7047D6a65f894c99bE8c832227a8BC",
+		"name": "Curve MIM Pool Vault",
+		"symbol": "yvCurve-MIM",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xCbCaF8cB8cbeAFA927ECEE0c5C56560F83E9B7D9",
+		"name": "Curve Tricrypto Pool yVault",
+		"symbol": "yvCurve-Tricrypto",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x637eC617c86D24E421328e6CAEa1d92114892439",
+		"name": "DAI yVault",
+		"symbol": "yvDAI",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x1b48641D8251c3E84ecbe3f2bD76B3701401906D",
+		"name": "DOLA yVault",
+		"symbol": "yvDOLA",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x1e2fe8074a5ce1Bb7394856B0C618E75D823B93b",
+		"name": "fBEETS yVault",
+		"symbol": "yvfBEETS",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x357ca46da26E1EefC195287ce9D838A6D5023ef3",
+		"name": "FRAX yVault",
+		"symbol": "yvFRAX",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xE95416c54f3e313E49306486b0ea9c2C6D623157",
+		"name": "fUSDT+DAI+USDC yVault",
+		"symbol": "yvfUSDT+DAI+USDC",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xf2d323621785A066E64282d2B407eAc79cC04966",
+		"name": "LINK yVault",
+		"symbol": "yvLINK",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x0A0b23D9786963DE69CB2447dC125c49929419d8",
+		"name": "MIM yVault",
+		"symbol": "yvMIM",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xD3c19eB022CAC706c898D60d756bf1535d605e1d",
+		"name": "SPELL yVault",
+		"symbol": "yvSPELL",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xEF0210eB96c7EB36AF8ed1c20306462764935607",
+		"name": "USDC yVault",
+		"symbol": "yvUSDC",
+		"decimals": 6,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x148c05caf1Bb09B5670f00D511718f733C54bC4c",
+		"name": "USDT yVault",
+		"symbol": "yvUSDT",
+		"decimals": 6,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xd817A100AB8A29fE3DBd925c2EB489D67F758DA9",
+		"name": "WBTC yVault",
+		"symbol": "yvWBTC",
+		"decimals": 8,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0xCe2Fc0bDc18BD6a4d9A725791A3DEe33F3a23BB7",
+		"name": "WETH yVault",
+		"symbol": "yvWETH",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x0DEC85e74A92c52b7F708c4B10207D9560CEFaf0",
+		"name": "WFTM yVault",
+		"symbol": "yvWFTM",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x1DF3f4985Ac2103B96ed75f9d76F33696D2b1d66",
+		"name": "WFTM yVault",
+		"symbol": "yvWFTM",
+		"decimals": 18,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x6864355183462A0ECA10b5Ca90BC89BB1361d3CB",
+		"name": "WOOFY yVault",
+		"symbol": "yvWOOFY",
+		"decimals": 12,
+		"addedAt": 1696849317
+	},
+	{
+		"address": "0x2C850cceD00ce2b14AA9D658b7Cad5dF659493Db",
+		"name": "YFI yVault",
+		"symbol": "yvYFI",
+		"decimals": 18,
+		"addedAt": 1696849317
+	}
+]

@@ -233,7 +233,9 @@ export function ChainSelector({
 	}
 
 	return (
-		<div ref={rootRef} className={cn('relative', fullWidth && 'w-full', !fullWidth && 'inline-block')}>
+		<div
+			ref={rootRef}
+			className={cn('relative', fullWidth && 'w-full', !fullWidth && 'inline-block')}>
 			<button
 				type={'button'}
 				id={id}
@@ -284,7 +286,10 @@ export function ChainSelector({
 						/>
 					</div>
 
-					<div ref={listRef} role={'listbox'} className={'max-h-[280px] overflow-auto py-1'}>
+					<div
+						ref={listRef}
+						role={'listbox'}
+						className={'max-h-[280px] overflow-auto py-1'}>
 						{popularMatches.length > 0 && (
 							<>
 								<div className={groupHeaderClassName}>{'Popular'}</div>

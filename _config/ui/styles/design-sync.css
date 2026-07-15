@@ -1,0 +1,19 @@
+/* design-sync entry: the app stylesheet plus the body treatment that
+ * layout.tsx applies as utility classes on <body> — ported here so designs
+ * built outside the Next app get the same canvas. */
+@import './style.css';
+
+/* In the app this variable is injected at runtime by WithFonts (next/font).
+ * Without it, var(--geist-mono-font) is invalid at computed-value time and
+ * the whole font-family falls back to the browser default. */
+:root {
+	--geist-mono-font: 'Geist Mono';
+}
+
+body {
+	background-color: #ebebeb;
+	background-image: linear-gradient(to right, #e6e6e6 1px, transparent 1px),
+		linear-gradient(to bottom, #e6e6e6 1px, transparent 1px);
+	background-position: 0 0;
+	background-size: 12px 12px;
+}

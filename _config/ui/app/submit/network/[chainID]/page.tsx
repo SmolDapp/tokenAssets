@@ -54,7 +54,10 @@ export default async function AddNetworkPage({params}: TAddNetworkPageProps): Pr
 				{value: '2', label: 'Add logos'},
 				{value: '3', label: 'Open a PR'}
 			]}>
-			<NetworkSubmitForm chain={chain} signedIn={Boolean(session?.user)} />
+			<NetworkSubmitForm
+				chain={chain}
+				signedIn={Boolean(session?.user)}
+			/>
 		</HeroPage>
 	);
 }

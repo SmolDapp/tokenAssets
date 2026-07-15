@@ -114,11 +114,18 @@ export const GridView = ({tokens, onClick, hasNextPage, onLoadMore}: TProps): Re
 	);
 
 	return (
-		<div ref={gridRef} className={'flex grid-cols-2 flex-row flex-wrap gap-0 px-0.5 max-md:grid'}>
-			<TokenGrid tokens={tokens} onClick={onClick} />
+		<div
+			ref={gridRef}
+			className={'flex grid-cols-2 flex-row flex-wrap gap-0 px-0.5 max-md:grid'}>
+			<TokenGrid
+				tokens={tokens}
+				onClick={onClick}
+			/>
 			{newElements}
 			{hasNextPage && (
-				<div className={'my-16 flex w-full items-center justify-center'} ref={loadMoreRef}>
+				<div
+					className={'my-16 flex w-full items-center justify-center'}
+					ref={loadMoreRef}>
 					<Spinner />
 				</div>
 			)}

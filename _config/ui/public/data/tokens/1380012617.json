@@ -1,1 +1,30 @@
-[{"address":"0x98BE1b64fD73Ac168F9b588bFeCDe8471999Efbc","name":"Ajna","symbol":"AJNA","decimals":18,"addedAt":1772737303},{"address":"0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6","name":"Bridged USDC (Stargate)","symbol":"USDC.e","decimals":6,"addedAt":1721838775},{"address":"0x362FAE9A75B27BBc550aAc28a7c1F96C8D483120","name":"Tether USD","symbol":"USDT","decimals":6,"addedAt":1721838775},{"address":"0xf037540e51D71b2D2B1120e8432bA49F29EDFBD0","name":"WETH","symbol":"WETH","decimals":18,"addedAt":1721838775}]
+[
+	{
+		"address": "0x98BE1b64fD73Ac168F9b588bFeCDe8471999Efbc",
+		"name": "Ajna",
+		"symbol": "AJNA",
+		"decimals": 18,
+		"addedAt": 1772737303
+	},
+	{
+		"address": "0xFbDa5F676cB37624f28265A144A48B0d6e87d3b6",
+		"name": "Bridged USDC (Stargate)",
+		"symbol": "USDC.e",
+		"decimals": 6,
+		"addedAt": 1721838775
+	},
+	{
+		"address": "0x362FAE9A75B27BBc550aAc28a7c1F96C8D483120",
+		"name": "Tether USD",
+		"symbol": "USDT",
+		"decimals": 6,
+		"addedAt": 1721838775
+	},
+	{
+		"address": "0xf037540e51D71b2D2B1120e8432bA49F29EDFBD0",
+		"name": "WETH",
+		"symbol": "WETH",
+		"decimals": 18,
+		"addedAt": 1721838775
+	}
+]

@@ -17,7 +17,9 @@ function NotFoundContent(): ReactElement {
 				<p className={'text-sm text-subtle'}>{'The page you are looking for does not exist.'}</p>
 			</div>
 			<Link href={`/${chain.slug}`}>
-				<Button className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
+				<Button
+					className={'bg-primary text-white hover:bg-primary-light'}
+					size={'lg'}>
 					{'GO TO HOME'}
 				</Button>
 			</Link>

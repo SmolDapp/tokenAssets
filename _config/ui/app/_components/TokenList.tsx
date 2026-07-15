@@ -78,7 +78,10 @@ export function TokenList(): ReactElement {
 						</div>
 					}
 					action={
-						<Button asChild className={'bg-primary text-white hover:bg-primary-light'} size={'lg'}>
+						<Button
+							asChild
+							className={'bg-primary text-white hover:bg-primary-light'}
+							size={'lg'}>
 							<Link href={submitHref}>{'ADD TOKEN LOGO'}</Link>
 						</Button>
 					}

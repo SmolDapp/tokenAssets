@@ -45,7 +45,10 @@ export function MobileMenuDrawer({isOpen, onClose}: {isOpen: boolean; onClose: (
 							onClick={onClose}
 							aria-label={'Close menu'}
 							className={'absolute top-0 right-0'}>
-							<Cross aria-hidden={'true'} className={'size-4 text-white'} />
+							<Cross
+								aria-hidden={'true'}
+								className={'size-4 text-white'}
+							/>
 						</button>
 					</div>
 					<Link

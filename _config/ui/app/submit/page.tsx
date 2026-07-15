@@ -48,7 +48,11 @@ export default async function SubmitPage({searchParams}: TSubmitPageProps): Prom
 				{value: '2', label: 'Add a logo'},
 				{value: '3', label: 'Open a PR'}
 			]}>
-			<SubmitForm signedIn={Boolean(session?.user)} initialChainID={initialChain?.id} initialAddress={address} />
+			<SubmitForm
+				signedIn={Boolean(session?.user)}
+				initialChainID={initialChain?.id}
+				initialAddress={address}
+			/>
 		</HeroPage>
 	);
 }

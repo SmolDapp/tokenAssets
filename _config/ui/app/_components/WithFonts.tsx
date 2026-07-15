@@ -13,7 +13,9 @@ const geistMono = Geist_Mono({
 export function WithFonts({children}: {children: ReactNode}): ReactElement {
 	return (
 		<div style={{fontFamily: `${geistMono.style.fontFamily}`}}>
-			<style jsx global>
+			<style
+				jsx
+				global>
 				{`
 					:root {
 						--geist-mono-font: ${geistMono.style.fontFamily};

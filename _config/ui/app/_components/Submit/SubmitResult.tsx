@@ -45,11 +45,16 @@ export function SubmitResult({
 						}
 					</Dialog.Description>
 					<div className={'flex flex-wrap gap-3'}>
-						<Link href={prURL || '#'} target={'_blank'} rel={'noopener noreferrer'}>
+						<Link
+							href={prURL || '#'}
+							target={'_blank'}
+							rel={'noopener noreferrer'}>
 							<Button variant={'default'}>{'View pull request →'}</Button>
 						</Link>
 						{showSubmitAnother && (
-							<Button variant={'outline'} onClick={onClose}>
+							<Button
+								variant={'outline'}
+								onClick={onClose}>
 								{'Submit another'}
 							</Button>
 						)}

@@ -101,7 +101,10 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 						'transition-opacity',
 						inputValue ? 'opacity-100' : 'pointer-events-none opacity-0'
 					)}>
-					<Cross aria-hidden={'true'} className={'size-4'} />
+					<Cross
+						aria-hidden={'true'}
+						className={'size-4'}
+					/>
 				</button>
 				<button
 					type={'button'}

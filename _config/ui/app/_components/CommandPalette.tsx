@@ -174,7 +174,9 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 	const showEmpty = trimmed.length > 0 && results.length === 0 && !hasError;
 
 	return (
-		<Dialog.Root open={open} onOpenChange={onOpenChange}>
+		<Dialog.Root
+			open={open}
+			onOpenChange={onOpenChange}>
 			<Dialog.Portal>
 				<Dialog.Overlay className={'fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px]'} />
 				<Dialog.Content
@@ -224,12 +226,16 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 							/>
 						))}
 						{showEmpty && (
-							<p aria-live={'polite'} className={'px-4 py-8 text-center font-mono text-sm text-subtle'}>
+							<p
+								aria-live={'polite'}
+								className={'px-4 py-8 text-center font-mono text-sm text-subtle'}>
 								{`No token matches "${trimmed}"`}
 							</p>
 						)}
 						{hasError && (
-							<p aria-live={'assertive'} className={'px-4 py-8 text-center font-mono text-error text-sm'}>
+							<p
+								aria-live={'assertive'}
+								className={'px-4 py-8 text-center font-mono text-error text-sm'}>
 								{'Could not load the search index. Close and reopen to retry.'}
 							</p>
 						)}

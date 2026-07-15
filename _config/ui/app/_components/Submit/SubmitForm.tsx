@@ -44,7 +44,9 @@ function Field({
 	return (
 		<div className={'space-y-1.5'}>
 			{htmlFor ? (
-				<label htmlFor={htmlFor} className={labelClassName}>
+				<label
+					htmlFor={htmlFor}
+					className={labelClassName}>
 					{label}
 				</label>
 			) : (
@@ -384,7 +386,9 @@ export function SubmitForm({
 				className={
 					'min-w-0 space-y-4 rounded-sm border border-white/15 bg-white/[0.04] p-5 md:p-6 lg:col-span-6'
 				}>
-				<Field label={'Chain'} htmlFor={'submit-chain'}>
+				<Field
+					label={'Chain'}
+					htmlFor={'submit-chain'}>
 					<ChainSelector
 						id={'submit-chain'}
 						value={chainID}
@@ -394,7 +398,9 @@ export function SubmitForm({
 					/>
 				</Field>
 
-				<Field label={'Contract address'} htmlFor={'submit-address'}>
+				<Field
+					label={'Contract address'}
+					htmlFor={'submit-address'}>
 					<Input
 						id={'submit-address'}
 						value={address}
@@ -432,7 +438,9 @@ export function SubmitForm({
 								: 'The on-chain metadata needs a fix — adjust the token details below.'}
 						</p>
 						<div className={'grid grid-cols-2 gap-4'}>
-							<Field label={'Name'} htmlFor={'submit-name'}>
+							<Field
+								label={'Name'}
+								htmlFor={'submit-name'}>
 								<Input
 									id={'submit-name'}
 									value={name}
@@ -441,7 +449,9 @@ export function SubmitForm({
 									className={inputClassName}
 								/>
 							</Field>
-							<Field label={'Symbol'} htmlFor={'submit-symbol'}>
+							<Field
+								label={'Symbol'}
+								htmlFor={'submit-symbol'}>
 								<Input
 									id={'submit-symbol'}
 									value={symbol}
@@ -451,7 +461,9 @@ export function SubmitForm({
 								/>
 							</Field>
 						</div>
-						<Field label={'Decimals'} htmlFor={'submit-decimals'}>
+						<Field
+							label={'Decimals'}
+							htmlFor={'submit-decimals'}>
 							<Input
 								id={'submit-decimals'}
 								value={decimals}
@@ -535,7 +547,9 @@ export function SubmitForm({
 
 					{showOptional && (
 						<div className={'space-y-5'}>
-							<Field label={'Description'} htmlFor={'submit-description'}>
+							<Field
+								label={'Description'}
+								htmlFor={'submit-description'}>
 								<textarea
 									id={'submit-description'}
 									value={description}
@@ -548,7 +562,10 @@ export function SubmitForm({
 									)}
 								/>
 							</Field>
-							<Field label={'Tags'} htmlFor={'submit-tags'} hint={'Comma-separated'}>
+							<Field
+								label={'Tags'}
+								htmlFor={'submit-tags'}
+								hint={'Comma-separated'}>
 								<Input
 									id={'submit-tags'}
 									value={tagsRaw}
@@ -562,9 +579,13 @@ export function SubmitForm({
 				</div>
 
 				{errors.length > 0 && (
-					<div role={'alert'} className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
+					<div
+						role={'alert'}
+						className={'space-y-1 rounded-sm border border-error/40 bg-error/10 p-3'}>
 						{errors.map(error => (
-							<p key={`${error.field}-${error.message}`} className={'font-mono text-error text-xs'}>
+							<p
+								key={`${error.field}-${error.message}`}
+								className={'font-mono text-error text-xs'}>
 								{`• ${error.message}`}
 							</p>
 						))}
@@ -572,7 +593,9 @@ export function SubmitForm({
 				)}
 
 				{submitError && (
-					<p role={'alert'} className={'font-mono text-error text-xs'}>
+					<p
+						role={'alert'}
+						className={'font-mono text-error text-xs'}>
 						{submitError}
 					</p>
 				)}
@@ -588,7 +611,10 @@ export function SubmitForm({
 				</Button>
 			</div>
 
-			<SubmitResult prURL={prURL} onClose={() => setPrURL(null)} />
+			<SubmitResult
+				prURL={prURL}
+				onClose={() => setPrURL(null)}
+			/>
 		</>
 	);
 }

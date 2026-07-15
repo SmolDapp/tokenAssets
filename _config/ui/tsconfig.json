@@ -18,7 +18,7 @@
 		"allowImportingTsExtensions": true,
 		"moduleDetection": "force",
 		"allowJs": true,
-		"jsx": "preserve",
+		"jsx": "react-jsx",
 		"removeComments": false,
 		"strict": true,
 		"noImplicitAny": true,
@@ -31,7 +31,7 @@
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"inlineSourceMap": true,
@@ -44,7 +44,11 @@
 		"isolatedModules": true,
 		"composite": true,
 		"downlevelIteration": true,
-		"plugins": [{"name": "next"}]
+		"plugins": [
+			{
+				"name": "next"
+			}
+		]
 	},
 	"exclude": ["node_modules", "_app"],
 	"include": [
@@ -55,7 +59,6 @@
 		"packages",
 		"public",
 		"public/manifest.json",
-
 		"packages/*/postcss.config.js",
 		"packages/*/tailwind.config.js",
 		"packages/*/next.config.js",
@@ -63,6 +66,7 @@
 		"jest.config.js",
 		"vitest.config.ts",
 		"worker/index.js",
-		"utils/*/*.json"
+		"utils/*/*.json",
+		".next/dev/types/**/*.ts"
 	]
 }
