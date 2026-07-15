@@ -2,6 +2,7 @@ import {Toaster} from '@components/ui/toaster';
 import {WithFonts} from '@components/WithFonts';
 import {ChainProvider} from '@contexts/WithChain';
 import {BRAND_GREEN, SITE_URI} from '@utils/constants';
+import {Analytics} from '@vercel/analytics/next';
 import type {Metadata, Viewport} from 'next';
 import type {ReactElement, ReactNode} from 'react';
 
@@ -44,6 +45,7 @@ export default function RootLayout({children}: {children: ReactNode}): ReactElem
 					<ChainProvider>{children}</ChainProvider>
 					<Toaster />
 				</WithFonts>
+				<Analytics />
 			</body>
 		</html>
 	);
