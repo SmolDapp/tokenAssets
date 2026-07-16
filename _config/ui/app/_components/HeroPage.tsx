@@ -42,12 +42,20 @@ export function HeroPage({
 				aria-hidden={'true'}
 				className={dotGridClassName}
 			/>
-			<div className={'relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 py-8 md:px-10 md:py-10'}>
-				<div className={'flex items-center justify-between gap-4'}>
+			<header className={'relative z-40 w-full shrink-0 border-b border-white/10'}>
+				<div
+					className={
+						'mx-auto flex h-[72px] w-full max-w-[1440px] items-center justify-between gap-4 px-6 md:px-10'
+					}>
 					<BrandMark />
 					{headerRight}
 				</div>
+			</header>
 
+			<div
+				className={
+					'relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-6 py-8 md:px-10 md:py-10'
+				}>
 				<div className={'mt-20 grid flex-1 items-start gap-12 py-10 max-md:mt-10 lg:grid-cols-12 lg:gap-20'}>
 					<div className={'flex min-w-0 flex-col gap-7 lg:col-span-6'}>
 						<span className={'font-mono text-[11px] text-white/45 uppercase tracking-[0.22em]'}>
