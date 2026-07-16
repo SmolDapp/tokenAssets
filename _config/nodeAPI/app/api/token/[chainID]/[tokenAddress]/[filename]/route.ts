@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 type TContext = {
-	params: {
+	params: Promise<{
 		chainID: string;
 		tokenAddress: string;
 		filename: string;
-	};
+	}>;
 };
 async function resolveNotFound(request: Request): Promise<Response> {
 	const fallback = new URL(request.url).searchParams.get('fallback');
@@ -65,9 +65,10 @@ async function resolveGasToken(request: Request): Promise<Response> {
 }
 
 export async function GET(request: Request, context: TContext): Promise<Response> {
-	const chainIDStr = (context?.params?.chainID || 1).toString();
-	const fileName = (context?.params?.filename || '').toLowerCase();
-	let tokenAddress = (context?.params?.tokenAddress || '');
+	const params = await context.params;
+	const chainIDStr = (params?.chainID || 1).toString();
+	const fileName = (params?.filename || '').toLowerCase();
+	let tokenAddress = params?.tokenAddress || '';
 	if (tokenAddress.startsWith('0x')) {
 		tokenAddress = tokenAddress.toLowerCase();
 	}
@@ -80,7 +81,7 @@ export async function GET(request: Request, context: TContext): Promise<Response
 	}
 
 	const baseURI = 'https://raw.githubusercontent.com/SmolDapp/tokenAssets/main';
-	const finalURI = (`${baseURI}/tokens/${chainIDStr}/${tokenAddress}/${fileName}`);
+	const finalURI = `${baseURI}/tokens/${chainIDStr}/${tokenAddress}/${fileName}`;
 	const result = await fetch(finalURI);
 	if (result.ok) {
 		if (fileName.endsWith('.svg')) {
