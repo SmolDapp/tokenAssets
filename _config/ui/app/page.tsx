@@ -15,7 +15,7 @@ export default function Home(): ReactElement {
 	// Warm the connections the logo CDN redirects through so the wall paints faster.
 	preconnect('https://assets.smold.app');
 	preconnect('https://raw.githubusercontent.com');
-	const logos = getFeaturedTokens(25);
+	const logos = getFeaturedTokens(30);
 
 	return (
 		<HeroPage

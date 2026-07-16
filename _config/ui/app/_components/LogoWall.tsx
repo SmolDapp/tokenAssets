@@ -11,7 +11,7 @@ const SLUG_BY_ID = new Map(CHAINS.map(chain => [chain.id, chain.slug]));
 
 export function LogoWall({logos}: {logos: {chainID: string; address: string}[]}): ReactElement {
 	return (
-		<div className={'grid grid-cols-6 gap-3 sm:gap-4 lg:grid-cols-5'}>
+		<div className={'grid grid-cols-6 gap-3 sm:gap-4 lg:grid-cols-6'}>
 			{logos.map(({chainID, address}) => (
 				<Link
 					key={`${chainID}-${address}`}

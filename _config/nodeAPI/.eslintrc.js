@@ -1,4 +1,5 @@
 module.exports = {
+	ignorePatterns: ['.eslintrc.js', 'next.config.js', 'next-env.d.ts', '.next/', 'node_modules/'],
 	env: {
 		node: true,
 		browser: true,
