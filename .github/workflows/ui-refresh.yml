@@ -37,6 +37,9 @@ jobs:
                   # addedAt is derived from git history; a shallow clone would collapse every date
                   # to the last commit. Credentials persist (default) so the index can be pushed back.
                   fetch-depth: 0
+                  # PAT from a bypass-listed account: the default GITHUB_TOKEN cannot push to the
+                  # ruleset-protected main branch, so the persisted push credential must be this token.
+                  token: ${{ secrets.REFRESH_TOKEN }}
 
             - name: Setup Bun
               uses: oven-sh/setup-bun@v2
