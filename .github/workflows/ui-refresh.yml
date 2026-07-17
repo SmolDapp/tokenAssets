@@ -4,7 +4,7 @@ name: 🔄 Refresh UI token index
 # instead of regenerating it — regeneration hit public RPCs + DefiLlama on every deploy and took
 # ~16 min. This job regenerates the index (recency from git history, popularity from DefiLlama,
 # metadata from on-chain) and commits it back, which triggers a normal, now-fast redeploy. It runs
-# when a token/chain logo lands on main, plus weekly to refresh market caps.
+# when a token/chain logo lands on main, plus daily to refresh market caps.
 
 on:
     push:
@@ -16,8 +16,8 @@ on:
             - 'tokens/**/logo.svg'
             - 'chains/**/logo.svg'
     schedule:
-        # Every Monday at 06:00 UTC — refresh popularity (market caps) even without token changes.
-        - cron: '0 6 * * 1'
+        # Every day at 06:00 UTC — refresh popularity (market caps) even without token changes.
+        - cron: '0 6 * * *'
     workflow_dispatch:
 
 permissions:
