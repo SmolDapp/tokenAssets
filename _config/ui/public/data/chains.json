@@ -1,11 +1,11 @@
 {
-	"totalTokens": 4253,
+	"totalTokens": 4262,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1775,
+			"count": 1777,
 			"explorer": "https://etherscan.io"
 		},
 		{
@@ -19,7 +19,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 912,
+			"count": 917,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -40,7 +40,7 @@
 			"id": "57073",
 			"name": "Ink",
 			"slug": "ink",
-			"count": 33,
+			"count": 34,
 			"explorer": "https://explorer.inkonchain.com"
 		},
 		{
@@ -226,8 +226,8 @@
 		},
 		{
 			"id": "4326",
-			"name": "Chain 4326",
-			"slug": "chain-4326",
+			"name": "MegaETH",
+			"slug": "megaeth",
 			"count": 1,
 			"explorer": "https://mega.etherscan.io"
 		},
@@ -235,7 +235,8 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 26
+			"count": 26,
+			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
 			"id": "5330",
@@ -257,6 +258,13 @@
 			"slug": "plume",
 			"count": 18,
 			"explorer": "https://explorer.plume.org"
+		},
+		{
+			"id": "728126428",
+			"name": "Tron",
+			"slug": "tron",
+			"count": 1,
+			"explorer": "https://tronscan.org"
 		},
 		{
 			"id": "1380012617",

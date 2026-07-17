@@ -1,9 +1,1 @@
-[
-	{
-		"address": "0x543b44aCf892e190b574780ea5f228f59d26B23c",
-		"name": "Wren Staked tGBP",
-		"symbol": "wstGBP",
-		"decimals": 18,
-		"addedAt": 1782870144
-	}
-]
+[{"address":"0x543b44aCf892e190b574780ea5f228f59d26B23c","name":"Wren Staked tGBP","symbol":"wstGBP","decimals":18,"addedAt":1782870144}]
