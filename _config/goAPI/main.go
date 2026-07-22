@@ -112,10 +112,8 @@ func NewRouter() *gin.Engine {
 		c.AbortWithStatus(http.StatusTooManyRequests)
 	}))
 
-	// Standard basic route for hello
-	router.GET(`/`, func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"message": "Welcome to SmolAssets"})
-	})
+	// Crawlable HTML landing page describing the service.
+	router.GET(`/`, ServeIndex)
 
 	// Machine-readable catalog of every servable token/chain asset URL, plus a robots.txt
 	// that advertises it.
