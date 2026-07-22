@@ -117,8 +117,10 @@ func NewRouter() *gin.Engine {
 		ctx.JSON(http.StatusOK, gin.H{"message": "Welcome to SmolAssets"})
 	})
 
-	// Machine-readable catalog of every servable token/chain asset URL.
+	// Machine-readable catalog of every servable token/chain asset URL, plus a robots.txt
+	// that advertises it.
 	router.GET(`/sitemap.xml`, ServeSitemap)
+	router.GET(`/robots.txt`, ServeRobots)
 
 	// Starting with API for node conf copy
 	router.GET(`api/token/:chainID/:tokenAddress/:filename`, ServeToken)

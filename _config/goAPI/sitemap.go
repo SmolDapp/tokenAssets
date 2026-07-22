@@ -124,3 +124,15 @@ func ServeSitemap(c *gin.Context) {
 	c.Header(`Cache-Control`, `public, max-age=3600`)
 	c.Data(http.StatusOK, `application/xml; charset=utf-8`, value.([]byte))
 }
+
+// robotsTxt allows crawling and advertises the asset catalog so crawlers can discover it.
+const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: ` + PUBLIC_BASE_URI + `/sitemap.xml
+`
+
+func ServeRobots(c *gin.Context) {
+	c.Header(`Cache-Control`, `public, max-age=86400`)
+	c.Data(http.StatusOK, `text/plain; charset=utf-8`, []byte(robotsTxt))
+}
