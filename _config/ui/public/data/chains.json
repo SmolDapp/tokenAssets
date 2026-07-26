@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4265,
+	"totalTokens": 4266,
 	"chains": [
 		{
 			"id": "1",
@@ -235,7 +235,7 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 27,
+			"count": 28,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
