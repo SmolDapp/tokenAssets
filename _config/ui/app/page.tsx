@@ -1,7 +1,15 @@
 import {HeroPage} from '@components/HeroPage';
 import {LogoWall} from '@components/LogoWall';
 import {cn} from '@components/lib/utils';
-import {ASSETS_BASE_URI, CHAINS, DEFAULT_CHAIN, GITHUB_URI, SITE_URI, TOTAL_TOKENS} from '@utils/constants';
+import {
+	ASSETS_BASE_URI,
+	CHAINS,
+	DEFAULT_CHAIN,
+	GITHUB_URI,
+	SITE_URI,
+	SMOLD_APP_URI,
+	TOTAL_TOKENS
+} from '@utils/constants';
 import {getFeaturedTokens} from '@utils/tokens.server';
 import type {Metadata} from 'next';
 import Link from 'next/link';
@@ -18,11 +26,25 @@ export const metadata: Metadata = {
 
 const jsonLd = {
 	'@context': 'https://schema.org',
-	'@type': 'WebSite',
-	name: 'Token Assets',
-	url: SITE_URI,
-	description:
-		'A unified CDN for cryptocurrency token assets. Browse token logos across multiple chains, served as SVG and PNG with pragmatic access.'
+	'@graph': [
+		{
+			'@type': 'Organization',
+			'@id': `${SITE_URI}/#organization`,
+			name: 'SmolDapp',
+			url: SMOLD_APP_URI,
+			logo: `${SITE_URI}/icon.svg`,
+			sameAs: [GITHUB_URI]
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${SITE_URI}/#website`,
+			name: 'Token Assets',
+			url: SITE_URI,
+			description:
+				'A unified CDN for cryptocurrency token assets. Browse token logos across multiple chains, served as SVG and PNG with pragmatic access.',
+			publisher: {'@id': `${SITE_URI}/#organization`}
+		}
+	]
 };
 
 export default function Home(): ReactElement {
