@@ -25,7 +25,7 @@ const indexHTML = `<!DOCTYPE html>
 <meta property="og:title" content="Smol Token Assets — Open-source token &amp; chain logo CDN">
 <meta property="og:description" content="Every cryptocurrency token logo, unified under one endpoint. SVG and PNG, addressed by chain ID and contract — free, with no API key.">
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Smol Token Assets","url":"https://assets.smold.app/","description":"Every cryptocurrency token logo, unified under one endpoint. SVG and PNG, addressed by chain ID and contract — free, with no API key.","publisher":{"@type":"Organization","name":"SmolDapp","url":"https://smold.app"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://assets.smold.app/#organization","name":"SmolDapp","url":"https://smold.app","logo":"https://tokens.smold.app/icon.svg","sameAs":["https://github.com/SmolDapp/tokenAssets"]},{"@type":"WebSite","@id":"https://assets.smold.app/#website","name":"Smol Token Assets","url":"https://assets.smold.app/","description":"Every cryptocurrency token logo, unified under one endpoint. SVG and PNG, addressed by chain ID and contract — free, with no API key.","publisher":{"@id":"https://assets.smold.app/#organization"}}]}</script>
 </head>
 <body>
 <h1>Smol Token Assets</h1>
