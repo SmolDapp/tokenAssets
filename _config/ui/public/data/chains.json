@@ -9,18 +9,18 @@
 			"explorer": "https://etherscan.io"
 		},
 		{
-			"id": "8453",
-			"name": "Base",
-			"slug": "base",
-			"count": 919,
-			"explorer": "https://basescan.org"
-		},
-		{
 			"id": "43114",
 			"name": "Avalanche",
 			"slug": "avalanche",
 			"count": 45,
 			"explorer": "https://snowtrace.io"
+		},
+		{
+			"id": "8453",
+			"name": "Base",
+			"slug": "base",
+			"count": 919,
+			"explorer": "https://basescan.org"
 		},
 		{
 			"id": "10",
