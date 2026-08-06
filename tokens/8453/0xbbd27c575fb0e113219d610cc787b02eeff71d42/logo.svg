@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>HALO token mark</title>
+
+  <defs><clipPath id="halo-clip"><circle cx="256.0" cy="256.0" r="256.0"/></clipPath></defs>
+  <circle cx="256.0" cy="256.0" r="256.0" fill="#08090F"/>
+  <g clip-path="url(#halo-clip)" shape-rendering="crispEdges">
+    <rect x="0.00" y="227.84" width="102.40" height="25.60" fill="#FFFFFF"/>
+    <rect x="0.00" y="253.44" width="102.40" height="15.36" fill="#FFE878"/>
+    <rect x="0.00" y="268.80" width="102.40" height="36.86" fill="#FFC800"/>
+    <rect x="0.00" y="305.66" width="102.40" height="36.86" fill="#FF8400"/>
+    <rect x="0.00" y="342.53" width="102.40" height="36.86" fill="#F03428"/>
+    <rect x="0.00" y="379.39" width="102.40" height="36.86" fill="#D61F8A"/>
+    <rect x="0.00" y="416.26" width="102.40" height="36.86" fill="#962CCD"/>
+    <rect x="0.00" y="453.12" width="102.40" height="36.86" fill="#3C40E1"/>
+    <rect x="0.00" y="489.98" width="102.40" height="36.86" fill="#1C82F2"/>
+    <rect x="0.00" y="526.85" width="102.40" height="36.86" fill="#00B4E6"/>
+    <rect x="102.40" y="198.66" width="102.40" height="25.60" fill="#FFFFFF"/>
+    <rect x="102.40" y="224.26" width="102.40" height="15.36" fill="#FFE878"/>
+    <rect x="102.40" y="239.62" width="102.40" height="36.86" fill="#FFC800"/>
+    <rect x="102.40" y="276.48" width="102.40" height="36.86" fill="#FF8400"/>
+    <rect x="102.40" y="313.34" width="102.40" height="36.86" fill="#F03428"/>
+    <rect x="102.40" y="350.21" width="102.40" height="36.86" fill="#D61F8A"/>
+    <rect x="102.40" y="387.07" width="102.40" height="36.86" fill="#962CCD"/>
+    <rect x="102.40" y="423.94" width="102.40" height="36.86" fill="#3C40E1"/>
+    <rect x="102.40" y="460.80" width="102.40" height="36.86" fill="#1C82F2"/>
+    <rect x="102.40" y="497.66" width="102.40" height="36.86" fill="#00B4E6"/>
+    <rect x="204.80" y="174.08" width="102.40" height="25.60" fill="#FFFFFF"/>
+    <rect x="204.80" y="199.68" width="102.40" height="15.36" fill="#FFE878"/>
+    <rect x="204.80" y="215.04" width="102.40" height="36.86" fill="#FFC800"/>
+    <rect x="204.80" y="251.90" width="102.40" height="36.86" fill="#FF8400"/>
+    <rect x="204.80" y="288.77" width="102.40" height="36.86" fill="#F03428"/>
+    <rect x="204.80" y="325.63" width="102.40" height="36.86" fill="#D61F8A"/>
+    <rect x="204.80" y="362.50" width="102.40" height="36.86" fill="#962CCD"/>
+    <rect x="204.80" y="399.36" width="102.40" height="36.86" fill="#3C40E1"/>
+    <rect x="204.80" y="436.22" width="102.40" height="36.86" fill="#1C82F2"/>
+    <rect x="204.80" y="473.09" width="102.40" height="36.86" fill="#00B4E6"/>
+    <rect x="307.20" y="198.66" width="102.40" height="25.60" fill="#FFFFFF"/>
+    <rect x="307.20" y="224.26" width="102.40" height="15.36" fill="#FFE878"/>
+    <rect x="307.20" y="239.62" width="102.40" height="36.86" fill="#FFC800"/>
+    <rect x="307.20" y="276.48" width="102.40" height="36.86" fill="#FF8400"/>
+    <rect x="307.20" y="313.34" width="102.40" height="36.86" fill="#F03428"/>
+    <rect x="307.20" y="350.21" width="102.40" height="36.86" fill="#D61F8A"/>
+    <rect x="307.20" y="387.07" width="102.40" height="36.86" fill="#962CCD"/>
+    <rect x="307.20" y="423.94" width="102.40" height="36.86" fill="#3C40E1"/>
+    <rect x="307.20" y="460.80" width="102.40" height="36.86" fill="#1C82F2"/>
+    <rect x="307.20" y="497.66" width="102.40" height="36.86" fill="#00B4E6"/>
+    <rect x="409.60" y="227.84" width="102.40" height="25.60" fill="#FFFFFF"/>
+    <rect x="409.60" y="253.44" width="102.40" height="15.36" fill="#FFE878"/>
+    <rect x="409.60" y="268.80" width="102.40" height="36.86" fill="#FFC800"/>
+    <rect x="409.60" y="305.66" width="102.40" height="36.86" fill="#FF8400"/>
+    <rect x="409.60" y="342.53" width="102.40" height="36.86" fill="#F03428"/>
+    <rect x="409.60" y="379.39" width="102.40" height="36.86" fill="#D61F8A"/>
+    <rect x="409.60" y="416.26" width="102.40" height="36.86" fill="#962CCD"/>
+    <rect x="409.60" y="453.12" width="102.40" height="36.86" fill="#3C40E1"/>
+    <rect x="409.60" y="489.98" width="102.40" height="36.86" fill="#1C82F2"/>
+    <rect x="409.60" y="526.85" width="102.40" height="36.86" fill="#00B4E6"/>
+  </g>
+  <circle cx="256.0" cy="256.0" r="240.13" fill="none" stroke="#00B4E6" stroke-width="31.74"/>
+</svg>
