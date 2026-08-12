@@ -24,6 +24,7 @@ func main() {
 	fmt.Println("Starting SmolAssets API")
 	go accessLogger()
 	go cdnHealthLoop()
+	go sitemapLoop()
 	NewRouter().Run(`:8081`)
 }
 
@@ -111,10 +112,13 @@ func NewRouter() *gin.Engine {
 		c.AbortWithStatus(http.StatusTooManyRequests)
 	}))
 
-	// Standard basic route for hello
-	router.GET(`/`, func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"message": "Welcome to SmolAssets"})
-	})
+	// Crawlable HTML landing page describing the service.
+	router.GET(`/`, ServeIndex)
+
+	// Machine-readable catalog of every servable token/chain asset URL, plus a robots.txt
+	// that advertises it.
+	router.GET(`/sitemap.xml`, ServeSitemap)
+	router.GET(`/robots.txt`, ServeRobots)
 
 	// Starting with API for node conf copy
 	router.GET(`api/token/:chainID/:tokenAddress/:filename`, ServeToken)
