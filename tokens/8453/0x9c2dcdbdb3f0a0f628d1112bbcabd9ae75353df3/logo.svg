@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="200" height="200">
+  <circle cx="18" cy="18" r="18" fill="#E1705D"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-linecap="butt">
+    <!-- left glyph -->
+    <path d="M 8 9.5 H 15.5 V 15.5 H 9.5 V 26.5 H 17"/>
+    <!-- right glyph (mirror) -->
+    <path d="M 28 9.5 H 20.5 V 15.5 H 26.5 V 26.5 H 19"/>
+    <!-- center element -->
+    <path d="M 15.5 26.5 V 20.5 H 20.5 V 26.5"/>
+  </g>
+</svg>
