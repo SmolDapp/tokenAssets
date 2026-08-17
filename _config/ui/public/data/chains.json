@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4296,
+	"totalTokens": 4297,
 	"chains": [
 		{
 			"id": "1",
@@ -82,7 +82,7 @@
 			"id": "146",
 			"name": "Sonic",
 			"slug": "sonic",
-			"count": 57,
+			"count": 58,
 			"explorer": "https://sonicscan.org"
 		},
 		{
