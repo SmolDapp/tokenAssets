@@ -1,0 +1,9 @@
+{
+  "name": "Ember Hilbert BTC",
+  "symbol": "hBTC",
+  "decimals": 8,
+  "website": "https://syntetika.io/",
+  "tags": [
+    "defi"
+  ]
+}
