@@ -1,11 +1,8 @@
-import {TokenDrawerRoute} from '@components/TokenDrawerRoute';
-import {TokenList} from '@components/TokenList';
 import {findChainBySlug} from '@utils/constants';
 import {tokenPageURI, truncateAddress} from '@utils/helpers';
 import {findToken} from '@utils/tokens.server';
 import type {Metadata} from 'next';
 import {notFound} from 'next/navigation';
-import type {ReactElement} from 'react';
 
 type TTokenPageProps = {
 	params: Promise<{chain: string; address: string}>;
@@ -40,27 +37,14 @@ export async function generateMetadata({params}: TTokenPageProps): Promise<Metad
 	};
 }
 
-// A token has no standalone page — it only ever renders as a drawer over the chain list. On a soft
-// navigation the `@drawer` slot intercepts and keeps the list mounted; on a direct hit (shared link,
-// search result) we render the list here and open the drawer for this address. The SEO metadata
-// above is preserved either way.
-export default async function TokenPage({params}: TTokenPageProps): Promise<ReactElement> {
+// A token has no standalone page — it only ever renders as a drawer over the chain list, both of
+// which the parent layout keeps mounted. This page owns the token's SEO metadata above and rejects
+// an address the CDN does not carry.
+export default async function TokenPage({params}: TTokenPageProps): Promise<null> {
 	const {chain: chainSlug, address} = await params;
 	const chain = findChainBySlug(chainSlug);
-	if (!chain) {
+	if (!chain || !findToken(chain.id, address)) {
 		notFound();
 	}
-	if (!findToken(chain.id, address)) {
-		notFound();
-	}
-
-	return (
-		<>
-			<TokenList />
-			<TokenDrawerRoute
-				address={address}
-				direct
-			/>
-		</>
-	);
+	return null;
 }

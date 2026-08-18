@@ -1,6 +1,7 @@
 'use client';
 
 import {CodeSnippets} from '@components/CodeSnippets';
+import {toast} from '@components/hooks/use-toast';
 import {cn} from '@components/lib/utils';
 import {Spinner} from '@components/Spinner';
 import {TokenInfoFields} from '@components/TokenInfoFields';
@@ -20,7 +21,6 @@ import {Fragment, useState} from 'react';
 type TTokenDrawerProps = {
 	token: TToken | null;
 	onClose: () => void;
-	onClosed?: () => void;
 	isOpen: boolean;
 	// Rendered instead of the loading spinner when the token list has finished loading but the
 	// requested token is not in it — without this a bad address would spin forever.
@@ -29,7 +29,7 @@ type TTokenDrawerProps = {
 
 function TokenDrawer({token}: {token: TToken}): ReactElement {
 	const {chain} = useChain();
-	const [selectedFile, setSelectedFile] = useState<TLogoFile>('logo-128.png');
+	const [selectedFile, setSelectedFile] = useState<TLogoFile>('logo.svg');
 	const displayName = token.symbol || token.name || token.address;
 	const selectedURL = tokenLogoURI(chain.id, token.address, selectedFile);
 
@@ -37,8 +37,28 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 		await copyToClipboard(token.address, 'Contract address copied to clipboard');
 	};
 
-	const handleCopyLogo = async (): Promise<void> => {
+	const handleCopyURL = async (): Promise<void> => {
 		await copyToClipboard(selectedURL, 'Logo URL copied to clipboard');
+	};
+
+	// Copies the SVG markup itself, not its URL — the shape a design tool or a component file wants.
+	// Always the vector, whichever format the preview is on. The CDN answers with a wildcard CORS
+	// header (including across its redirect), so the file is readable from the browser.
+	//
+	// `reload` skips the HTTP cache on purpose. The preview <img> above requests this very URL in
+	// no-cors mode, and the entry it leaves behind hides the CORS headers from a later cors-mode
+	// fetch — which fails the copy with a bogus "no Access-Control-Allow-Origin" once the image
+	// wins the race. Going to the network sidesteps that entry and overwrites it with a clean one.
+	const handleCopySVG = async (): Promise<void> => {
+		try {
+			const response = await fetch(tokenLogoURI(chain.id, token.address, 'logo.svg'), {cache: 'reload'});
+			if (!response.ok) {
+				throw new Error(`Unexpected status ${response.status}`);
+			}
+			await copyToClipboard(await response.text(), 'SVG copied to clipboard');
+		} catch {
+			toast({title: 'Could not fetch the SVG', variant: 'destructive'});
+		}
 	};
 
 	return (
@@ -78,14 +98,17 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 								'relative'
 							)}>
 							<div className={'size-28 rounded-full'}>
+								{/* The drawer only ever renders opened, so this preview is always above the fold —
+								    and on a direct hit to a token URL it is the LCP element. Lazy by default,
+								    which delays it; priority makes it eager and high-fetchPriority. */}
 								<Image
 									unoptimized
+									priority
 									src={selectedURL}
 									alt={displayName}
 									className={'size-28 object-contain'}
 									width={112}
 									height={112}
-									quality={100}
 									onError={e => {
 										e.currentTarget.src = '/token-placeholder.svg';
 									}}
@@ -107,7 +130,9 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 								))}
 							</div>
 						</div>
-						<div className={'flex gap-2 font-mono'}>
+						{/* Three nowrap buttons do not fit side by side on a phone, so the third wraps to its
+						    own full-width row below the narrow breakpoint. */}
+						<div className={'grid grid-cols-2 gap-2 font-mono md:grid-cols-3'}>
 							<Button
 								className={'w-full uppercase'}
 								variant={'outline'}
@@ -117,8 +142,14 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 							<Button
 								className={'w-full uppercase'}
 								variant={'outline'}
-								onClick={handleCopyLogo}>
-								{'Copy Logo URL'}
+								onClick={handleCopyURL}>
+								{'Copy URL'}
+							</Button>
+							<Button
+								className={'w-full uppercase max-md:col-span-2'}
+								variant={'outline'}
+								onClick={handleCopySVG}>
+								{'Copy as SVG'}
 							</Button>
 						</div>
 						<div className={'space-y-6'}>
@@ -154,13 +185,7 @@ function TokenDrawer({token}: {token: TToken}): ReactElement {
 	);
 }
 
-export function TokenDrawerWrapper({
-	token,
-	onClose,
-	onClosed,
-	isOpen,
-	emptyState
-}: TTokenDrawerProps): ReactElement | null {
+export function TokenDrawerWrapper({token, onClose, isOpen, emptyState}: TTokenDrawerProps): ReactElement | null {
 	return (
 		<Drawer
 			modal={true}
@@ -169,11 +194,6 @@ export function TokenDrawerWrapper({
 			onOpenChange={open => {
 				if (!open) {
 					onClose();
-				}
-			}}
-			onAnimationEnd={open => {
-				if (!open) {
-					onClosed?.();
 				}
 			}}>
 			<DrawerContent
@@ -184,12 +204,12 @@ export function TokenDrawerWrapper({
 				{token ? (
 					<TokenDrawer token={token} />
 				) : (
-					(emptyState ?? (
+					emptyState ?? (
 						<div className={'flex h-[400px] w-full items-center justify-center'}>
 							<DrawerTitle className={'sr-only'}>{'Loading...'}</DrawerTitle>
 							<Spinner />
 						</div>
-					))
+					)
 				)}
 			</DrawerContent>
 		</Drawer>

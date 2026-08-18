@@ -6,15 +6,17 @@ import {Spinner} from '@components/Spinner';
 import {TokenLogo} from '@components/TokenLogo';
 import {useChain} from '@contexts/WithChain';
 import {useIntersectionObserver} from '@hooks/useIntersectionObserver';
+import {markOpenedFromList} from '@utils/drawerOrigin';
 import {isNewToken, truncateAddress} from '@utils/helpers';
 import type {TToken} from '@utils/types';
+import Link from 'next/link';
 import type {ReactElement, ReactNode, RefObject} from 'react';
 import {memo, useCallback, useMemo, useRef} from 'react';
 import {useResizeObserver} from 'usehooks-ts';
 
 type TProps = {
 	tokens: TToken[];
-	onClick: (address: string) => void;
+	buildHref: (address: string) => string;
 	hasNextPage?: boolean;
 	onLoadMore?: () => void;
 };
@@ -23,23 +25,28 @@ const BASE_CARD_CLASSES =
 	'group relative flex flex-col items-center justify-around p-3 transition-all h-[200px] w-fit flex-1';
 const CARD_SIZING = 'max-md:w-full md:min-w-[200px]';
 
+// A real link, not a button: the card navigates, so it must support ⌘/middle-click into a new tab,
+// "copy link address", and carry a crawlable href. Next routes it through the same client-side
+// navigation a router.push would, which the drawer host turns into an overlay over the list the
+// layout keeps mounted. `scroll={false}` keeps the list where it is while the drawer opens over it.
 const TokenCard = memo(function TokenCard({
 	token,
 	chainID,
 	index,
 	isNew,
-	onClick
+	href
 }: {
 	token: TToken;
 	chainID: string;
 	index: number;
 	isNew: boolean;
-	onClick: (address: string) => void;
+	href: string;
 }): ReactElement {
 	return (
-		<button
-			type={'button'}
-			onClick={() => onClick(token.address)}
+		<Link
+			href={href}
+			scroll={false}
+			onClick={markOpenedFromList}
 			className={cn(
 				BASE_CARD_CLASSES,
 				CARD_SIZING,
@@ -65,11 +72,11 @@ const TokenCard = memo(function TokenCard({
 					{token.name || truncateAddress(token.address)}
 				</span>
 			</div>
-		</button>
+		</Link>
 	);
 });
 
-function TokenGrid({tokens, onClick}: TProps): ReactNode {
+function TokenGrid({tokens, buildHref}: TProps): ReactNode {
 	const {chain} = useChain();
 
 	// Memoized so the frequent resize-observer re-renders of GridView do not re-map every
@@ -83,14 +90,14 @@ function TokenGrid({tokens, onClick}: TProps): ReactNode {
 					chainID={chain.id}
 					index={index}
 					isNew={isNewToken(token.addedAt)}
-					onClick={onClick}
+					href={buildHref(token.address)}
 				/>
 			)),
-		[tokens, chain.id, onClick]
+		[tokens, chain.id, buildHref]
 	);
 }
 
-export const GridView = ({tokens, onClick, hasNextPage, onLoadMore}: TProps): ReactElement => {
+export const GridView = ({tokens, buildHref, hasNextPage, onLoadMore}: TProps): ReactElement => {
 	const gridRef = useRef<HTMLDivElement>(null);
 	const {width = 0} = useResizeObserver({ref: gridRef as RefObject<HTMLDivElement>, box: 'border-box'});
 	const tokensPerLine = Math.floor(width / 200) || 1;
@@ -119,7 +126,7 @@ export const GridView = ({tokens, onClick, hasNextPage, onLoadMore}: TProps): Re
 			className={'flex grid-cols-2 flex-row flex-wrap gap-0 px-0.5 max-md:grid'}>
 			<TokenGrid
 				tokens={tokens}
-				onClick={onClick}
+				buildHref={buildHref}
 			/>
 			{newElements}
 			{hasNextPage && (
