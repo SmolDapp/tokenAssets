@@ -1,11 +1,10 @@
 import {cn} from '@components/lib/utils';
 import {Input} from '@components/ui/input';
 import {useChain} from '@contexts/WithChain';
-import {useDrawerOpen} from '@hooks/useDrawerOpen';
 import Cross from '@icons/cross.svg';
 import SearchIcon from '@icons/search.svg';
 import {withSearch} from '@utils/helpers';
-import {useRouter, useSearchParams} from 'next/navigation';
+import {useParams, useRouter, useSearchParams} from 'next/navigation';
 import type {ReactElement} from 'react';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {useDebounceValue} from 'usehooks-ts';
@@ -14,7 +13,10 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const {chain} = useChain();
-	const isDrawerOpen = useDrawerOpen();
+	// A token is open exactly when the URL carries an address segment — the drawer is derived from
+	// the same source, so the two can never disagree.
+	const params = useParams<{address?: string}>();
+	const isDrawerOpen = Boolean(params?.address);
 	// Read via a ref (not a dependency) below: otherwise the drawer closing re-runs the push effect
 	// while the debounced value is still the token's search, re-applying it right after router.back()
 	// cleared it — the filter flash.
@@ -29,12 +31,10 @@ export function SearchBar({onOpenPalette}: {onOpenPalette: () => void}): ReactEl
 	// Push the debounced query to the URL. Fires only on the user's own input (not on route
 	// changes), and reads the live URL, so a search set elsewhere (the command palette, or a
 	// cross-chain navigation) is preserved instead of clobbered. Always targets the chain LIST
-	// path: pushing the raw pathname from a token detail page would re-match the @drawer
-	// interceptor and pop a drawer of the current token instead of searching.
+	// path, never the raw pathname, which on a token URL would just re-open the same token.
 	//
-	// Skipped entirely while an intercepted drawer is open: a debounce firing ~300ms after the
-	// user clicked a token card would push the bare chain URL on top of the drawer's URL,
-	// desyncing the @drawer slot into a drawer that router.back() can never close.
+	// Skipped entirely while a token is open: a debounce firing ~300ms after the user clicked a
+	// card would push the bare chain URL over the drawer's, closing what they just opened.
 	useEffect(() => {
 		if (isDrawerOpenRef.current) {
 			return;

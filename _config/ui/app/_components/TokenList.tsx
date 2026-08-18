@@ -9,32 +9,30 @@ import {useTokens} from '@hooks/useTokens';
 import {tokenPageURI, withSearch} from '@utils/helpers';
 import {isValidAddress} from '@utils/tokenSubmission';
 import Link from 'next/link';
-import {useRouter, useSearchParams} from 'next/navigation';
+import {useSearchParams} from 'next/navigation';
 import type {ReactElement} from 'react';
-import {useCallback, useMemo, useRef} from 'react';
+import {useCallback, useMemo} from 'react';
 
 export function TokenList(): ReactElement {
-	const router = useRouter();
 	const searchParams = useSearchParams();
 	const {chain} = useChain();
 
 	const searchQuery = searchParams.get('search') || '';
 	const {tokens, isLoading, hasError, hasNextPage, fetchNextPage} = useTokens(chain.id, searchQuery);
 
-	// Keep a live ref to searchParams so handleTokenSelect stays referentially stable
-	// and selecting a token does not re-render the whole grid (which reloads logos).
-	const searchParamsRef = useRef(searchParams);
-	searchParamsRef.current = searchParams;
-
-	// Selecting a token navigates to its own path. On soft navigation this is intercepted
-	// into the @drawer slot (drawer over the still-mounted list); any active search is kept
-	// in the query so the list behind the drawer stays filtered.
-	const handleTokenSelect = useCallback(
-		(address: string): void => {
-			const href = withSearch(tokenPageURI(chain.slug, address), searchParamsRef.current.toString());
-			router.push(href, {scroll: false});
+	// Each card is a real link to the token path, which the drawer host mounted alongside this list
+	// turns into an overlay; any active search is kept in the query so the list behind the drawer
+	// stays filtered.
+	//
+	// Keyed off the serialized query rather than the searchParams object, whose identity changes on
+	// every navigation: this keeps the callback stable, so the grid does not re-render (and reload
+	// every logo) when only the route around it moved.
+	const searchString = searchParams.toString();
+	const buildTokenHref = useCallback(
+		(address: string): string => {
+			return withSearch(tokenPageURI(chain.slug, address), searchString);
 		},
-		[router, chain.slug]
+		[chain.slug, searchString]
 	);
 
 	// Carry the browsed chain (and the search term when it is itself an address) into the submit
@@ -90,7 +88,7 @@ export function TokenList(): ReactElement {
 			{tokens.length > 0 && (
 				<GridView
 					tokens={tokens}
-					onClick={handleTokenSelect}
+					buildHref={buildTokenHref}
 					hasNextPage={hasNextPage}
 					onLoadMore={fetchNextPage}
 				/>

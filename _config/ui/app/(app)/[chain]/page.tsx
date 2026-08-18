@@ -1,8 +1,5 @@
-import {TokenList} from '@components/TokenList';
-import {DEFAULT_CHAIN, findChainBySlug} from '@utils/constants';
+import {findChainBySlug} from '@utils/constants';
 import type {Metadata} from 'next';
-import {redirect} from 'next/navigation';
-import {type ReactElement, Suspense} from 'react';
 
 type TChainPageProps = {
 	params: Promise<{chain?: string}>;
@@ -27,17 +24,9 @@ export async function generateMetadata({params}: TChainPageProps): Promise<Metad
 	};
 }
 
-export default async function ChainPage({params}: TChainPageProps): Promise<ReactElement> {
-	const {chain: chainSlug} = await params;
-	const isChainSupported = findChainBySlug(chainSlug);
-
-	if (!isChainSupported) {
-		redirect(`/${DEFAULT_CHAIN.slug}`);
-	}
-
-	return (
-		<Suspense>
-			<TokenList />
-		</Suspense>
-	);
+// The list itself is rendered by `layout.tsx`, which keeps it mounted while a token opens over it.
+// This page exists to own the chain list's metadata; the unknown-chain redirect moved to the layout
+// so it covers the token routes below too.
+export default function ChainPage(): null {
+	return null;
 }

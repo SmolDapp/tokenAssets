@@ -2,8 +2,6 @@
 
 import {ChainLogo} from '@components/ChainLogo';
 import {cn} from '@components/lib/utils';
-import {useChain} from '@contexts/WithChain';
-import {useDrawerOpen} from '@hooks/useDrawerOpen';
 import {useGlobalSearch} from '@hooks/useGlobalSearch';
 import SearchIcon from '@icons/search.svg';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -86,8 +84,6 @@ function ResultRow({
 
 export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): ReactElement {
 	const router = useRouter();
-	const {chain: currentChain} = useChain();
-	const isDrawerOpen = useDrawerOpen();
 	const [query, setQuery] = useState('');
 	const [activeIndex, setActiveIndex] = useState(0);
 	const {results, hasError} = useGlobalSearch(query, open);
@@ -123,35 +119,13 @@ export function CommandPalette({open, onOpenChange}: TCommandPaletteProps): Reac
 				params.set('search', search);
 			}
 			const href = withSearch(tokenPageURI(chain.slug, entry.address), params.toString());
-			// Cross-chain picks change the [chain] segment, which the interceptor can't handle, so
-			// hard-navigate. For same-chain picks the choice depends on what is mounted:
-			//  - a soft-nav drawer is already open (list underneath) → replace, so the drawer flow
-			//    keeps a single history entry and one close returns to the list;
-			//  - on a hard-loaded token page there is NO drawer and the children slot still holds the
-			//    old token's full page, so intercepting a new one would show a stale page behind the
-			//    drawer — hard-navigate instead;
-			//  - on the list → push to open the drawer.
-			if (chain.id !== currentChain.id) {
-				window.location.assign(href);
-				return;
-			}
-			if (isDrawerOpen) {
-				router.replace(href, {scroll: false});
-				return;
-			}
-			const onTokenPage = window.location.pathname.startsWith(`/${currentChain.slug}/`);
-			if (onTokenPage) {
-				window.location.assign(href);
-			} else {
-				// Filter the list underneath first, so closing the drawer (router.back) returns to the
-				// searched list instead of the bare chain URL — the palette's search then persists.
-				if (search) {
-					router.replace(withSearch(`/${chain.slug}`, params.toString()), {scroll: false});
-				}
-				router.push(href, {scroll: false});
-			}
+			// One soft navigation, whatever the starting point. `[chain]/layout.tsx` mounts both the
+			// list and the drawer host, and the host reads the token straight off the URL, so a push
+			// is enough: a cross-chain pick re-renders the layout for the new chain, and a pick made
+			// while another token is open just swaps the address the single drawer shows.
+			router.push(href, {scroll: false});
 		},
-		[router, onOpenChange, query, currentChain.id, currentChain.slug, isDrawerOpen]
+		[router, onOpenChange, query]
 	);
 
 	const handleInputKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>): void => {
