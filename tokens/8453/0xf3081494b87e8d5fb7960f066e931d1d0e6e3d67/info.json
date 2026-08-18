@@ -1,0 +1,7 @@
+{
+  "name": "Bittensor",
+  "symbol": "TAO",
+  "decimals": 18,
+  "description": "TAO on Base - trade native TAO on Base, bridged via Chainlink CCIP.",
+  "website": "https://forevermoney.ai/?type=bridge&from=finney&to=base"
+}
