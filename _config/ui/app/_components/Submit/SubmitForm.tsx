@@ -327,8 +327,9 @@ export function SubmitForm({
 		}
 	}
 
+	// chainID is intentionally kept: submitting several tokens on the same chain in a row is the
+	// common case, so the selector stays on whatever was picked for the previous submission.
 	function resetForm(): void {
-		setChainID(DEFAULT_CHAIN.id);
 		setAddress('');
 		setSvgText('');
 		setSvgFileName('');
