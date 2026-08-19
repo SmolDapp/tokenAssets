@@ -3,6 +3,7 @@
 	"private": true,
 	"scripts": {
 		"generate": "node scripts/generateIndex.mjs",
+		"audit": "node scripts/auditTokens.mjs",
 		"predev": "node scripts/generateIndex.mjs --if-missing",
 		"dev": "next dev --webpack",
 		"prebuild": "node scripts/generateIndex.mjs --if-missing",

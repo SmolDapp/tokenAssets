@@ -1,5 +1,11 @@
 # Ignore scripts folder
 scripts/
+# …except the audit tool, which has to ship with the repo to be runnable at all. Git cannot
+# re-include a file whose parent directory is excluded, so the directory is re-included and its
+# contents excluded again — that keeps the thousands of scratch files under candidateSvgs/ out.
+!_config/ui/scripts/
+_config/ui/scripts/*
+!_config/ui/scripts/audit*.mjs
 .DS_Store
 node_modules
 .vscode
