@@ -1,10 +1,15 @@
 import {ChainLogo} from '@components/ChainLogo';
 import {cn} from '@components/lib/utils';
-import {tokenLogoURI, truncateAddress} from '@utils/helpers';
+import {CHAINS} from '@utils/constants';
+import {tokenLogoURI, tokenPageURI, truncateAddress} from '@utils/helpers';
 import type {TAuditFinding, TAuditSeverity, TSearchEntry} from '@utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import type {ReactElement} from 'react';
+
+// The token route matches its first segment on a chain slug, not the numeric ID the report carries.
+// Same map and same fallback as LogoWall, so an unknown chain degrades identically.
+const SLUG_BY_ID = new Map(CHAINS.map(chain => [chain.id, chain.slug]));
 
 const SEVERITY_CLASSES: Record<TAuditSeverity, string> = {
 	high: 'border-error/40 bg-error/10 text-error',
@@ -22,7 +27,7 @@ const TILE_SIZE = 56;
 function EntryTile({entry}: {entry: TSearchEntry}): ReactElement {
 	return (
 		<Link
-			href={`/${entry.chainID}/${entry.address}`}
+			href={tokenPageURI(SLUG_BY_ID.get(entry.chainID) || entry.chainID, entry.address)}
 			className={cn(
 				'flex w-[104px] shrink-0 flex-col items-center gap-1.5 rounded-sm border p-2 transition-colors',
 				'border-white/10 bg-white/[0.03] hover:border-white/30 hover:bg-white/[0.07]'

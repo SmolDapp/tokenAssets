@@ -30,12 +30,28 @@ const SEARCH_FILE = path.join(DATA_DIR, 'search.json');
 // The native-token placeholders. Every chain points its own coin at one of these, so ETH, BNB, POL
 // and TRX legitimately share an address and legitimately differ in logo. Measured: excluding these
 // removes exactly one false finding, but it is the loudest one.
-const SENTINEL_PATTERNS = [/^0x0+$/, /^0xe{4,}/i, /^0x0{10,}/];
+//
+// Deliberately narrow. An earlier draft also matched any address opening with ten or more zeros,
+// which is not a sentinel but a gas-golfed vanity address — TUSD lives at
+// 0x0000000000085d4780b73119b644ae5ecd22b376. None of the four in the corpus is on more than one
+// chain today, so nothing was being hidden, but such a token is exactly the kind deployed to the
+// same address everywhere, and the check would have skipped it in silence.
+const SENTINEL_PATTERNS = [/^0x0+$/, /^0xe{4,}/i];
 
 const SEVERITY_RANK = {high: 0, medium: 1, low: 2};
 
 function isSentinelAddress(address) {
 	return SENTINEL_PATTERNS.some(pattern => pattern.test(address));
+}
+
+// EVM addresses are hex and compare case-insensitively; Solana mints are base58 and do not. Folding
+// case on a mint could merge two distinct tokens, which verify-tokens.mjs guards against for the
+// same reason. No pair in the corpus collides today — this keeps it that way.
+function addressKey(address) {
+	if (address.startsWith('0x')) {
+		return address.toLowerCase();
+	}
+	return address;
 }
 
 function readJSON(file) {
@@ -53,7 +69,7 @@ function loadMarketCaps() {
 		return byKey;
 	}
 	for (const entry of entries) {
-		byKey.set(`${entry.chainID}/${entry.address.toLowerCase()}`, entry.mcap || 0);
+		byKey.set(`${entry.chainID}/${addressKey(entry.address)}`, entry.mcap || 0);
 	}
 	return byKey;
 }
@@ -87,7 +103,7 @@ function collectTokens() {
 					address,
 					symbol: info?.symbol || null,
 					name: info?.name || null,
-					mcap: marketCaps.get(`${chainID}/${address.toLowerCase()}`) || 0
+					mcap: marketCaps.get(`${chainID}/${addressKey(address)}`) || 0
 				}
 			});
 		}
@@ -176,7 +192,7 @@ function auditSharedLogos(tokens, genericSymbols) {
 function auditDivergentLogos(tokens, genericSymbols) {
 	const findings = [];
 
-	for (const [address, group] of groupBy(tokens, token => token.entry.address.toLowerCase())) {
+	for (const [address, group] of groupBy(tokens, token => addressKey(token.entry.address))) {
 		if (group.length < 2 || isSentinelAddress(address)) {
 			continue;
 		}
