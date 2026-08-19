@@ -7,6 +7,7 @@ import {Button} from '@components/ui/button';
 import {Input} from '@components/ui/input';
 import {useTokens} from '@hooks/useTokens';
 import ArrowDown from '@icons/arrow-down.svg';
+import {consumeBuilderHandoff} from '@utils/builderHandoff';
 import {DEFAULT_CHAIN} from '@utils/constants';
 import {canFetchOnchain, fetchOnchainToken} from '@utils/onchainToken';
 import {
@@ -16,6 +17,7 @@ import {
 	validateSubmission,
 	validateTokenMeta
 } from '@utils/tokenSubmission';
+import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {signIn} from 'next-auth/react';
 import type {ReactElement, ReactNode} from 'react';
@@ -238,6 +240,19 @@ export function SubmitForm({
 		} catch {
 			// ignore a corrupt stash
 		}
+	}, []);
+
+	// Pick up a logo composed on /builder. Declared after the stash restore on purpose: effects run in
+	// declaration order, so on the (unlikely) occasion both are present, the logo the user just built
+	// wins over the one they had stashed before signing in.
+	useEffect(() => {
+		const handoff = consumeBuilderHandoff();
+		if (!handoff) {
+			return;
+		}
+		setSvgText(handoff.svgText);
+		setSvgFileName(handoff.svgFileName);
+		setSvgError('');
 	}, []);
 
 	async function handleFile(file: File | undefined): Promise<void> {
@@ -513,6 +528,13 @@ export function SubmitForm({
 							/>
 						</label>
 						{svgError && <p className={'font-mono text-error text-xs'}>{svgError}</p>}
+						<Link
+							href={'/builder'}
+							className={
+								'block font-mono text-white/40 text-xxs uppercase tracking-[0.1em] underline-offset-2 transition-colors hover:text-white/70 hover:underline'
+							}>
+							{'or build one from a template →'}
+						</Link>
 					</div>
 				</Field>
 
