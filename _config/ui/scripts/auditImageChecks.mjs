@@ -23,10 +23,19 @@ import sharp from 'sharp';
 
 // Both images are composited onto white before comparing: most logos are transparent outside their
 // disc, and letting alpha into the difference would swamp the colours that actually matter.
-const COMPARE_SIZE = 32;
-// Mean absolute difference per colour channel, 0-255. Calibrated on a 200-token sample: the bulk of
-// honest pairs sit under 6, which is antialiasing between two rasterizers. 25 is where the two files
-// stop showing the same thing — LBTC measures 102.
+//
+// The comparison runs at 128 against logo-128.png, not at 32 against logo-32.png. At 32 a direct
+// render is visibly stepped while the stored PNG is smooth, because it was produced large and
+// downsampled. That difference in antialiasing alone, on a high-contrast edge, is worth tens of
+// points and has nothing to do with what the two files depict. Replaying every finding at 128
+// measured the damage: of 167 flagged as showing different things, 9 collapsed into noise and 24
+// were only drifting; of 473 flagged as drifting, 270 — well over half — were noise outright.
+// The genuine cases are indifferent to the size, which is what makes 128 the right place to look:
+// AAVE reads 114.8 at 32 and 115.1 at 128.
+const COMPARE_SIZE = 128;
+const COMPARE_PNG = 'logo-128.png';
+// Mean absolute difference per colour channel, 0-255. Under 6 the two agree; 25 is where they stop
+// showing the same thing — LBTC measures 102, AAVE 115.
 const DRIFT_THRESHOLD = 6;
 const MISMATCH_THRESHOLD = 25;
 
@@ -79,7 +88,7 @@ async function checkDimensions(token) {
 async function checkFidelity(token) {
 	const svg = readFileSync(path.join(token.directory, 'logo.svg'), 'utf8');
 	const rendered = new Resvg(svg, {fitTo: {mode: 'width', value: COMPARE_SIZE}}).render().asPng();
-	const stored = readFileSync(path.join(token.directory, 'logo-32.png'));
+	const stored = readFileSync(path.join(token.directory, COMPARE_PNG));
 	const difference = meanAbsoluteDifference(await toComparableRaw(rendered), await toComparableRaw(stored));
 
 	if (difference >= MISMATCH_THRESHOLD) {
@@ -87,7 +96,7 @@ async function checkFidelity(token) {
 			{
 				check: 'png-svg-mismatch',
 				severity: 'high',
-				title: 'logo.svg and logo-32.png do not show the same thing',
+				title: `logo.svg and ${COMPARE_PNG} do not show the same thing`,
 				detail: `Mean channel difference ${difference.toFixed(
 					1
 				)} of 255. Which file is right needs a human: a strict renderer and a browser can disagree on the same SVG.`,
@@ -100,7 +109,7 @@ async function checkFidelity(token) {
 			{
 				check: 'png-svg-drift',
 				severity: 'low',
-				title: 'logo.svg and logo-32.png differ more than antialiasing explains',
+				title: `logo.svg and ${COMPARE_PNG} differ more than antialiasing explains`,
 				detail: `Mean channel difference ${difference.toFixed(
 					1
 				)} of 255. Usually a PNG that was not regenerated after the SVG changed.`,
