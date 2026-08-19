@@ -81,21 +81,19 @@ export function LogoBuilder(): ReactElement {
 			}
 		}
 
-		const badges: (TSvgFragment | null)[] = [];
-		const badgeErrors: string[] = [];
-		badgeSources.forEach((source, index) => {
+		const badges = badgeSources.map((source, index) => {
 			if (!source) {
-				badges.push(null);
-				badgeErrors.push('');
-				return;
+				return null;
 			}
-			const badge = parseSvgFragment(source.svgText, `badge${index}-`);
-			badges.push(badge);
-			if (badge) {
-				badgeErrors.push('');
-			} else {
-				badgeErrors.push(PARSE_MESSAGE);
+			return parseSvgFragment(source.svgText, `badge${index}-`);
+		});
+		// A null badge means either an empty slot or a source that failed to parse; only the second is
+		// an error, which is why this reads both arrays.
+		const badgeErrors = badges.map((badge, index) => {
+			if (badgeSources[index] && !badge) {
+				return PARSE_MESSAGE;
 			}
+			return '';
 		});
 
 		return {base, badges, baseError, badgeErrors};
@@ -127,7 +125,8 @@ export function LogoBuilder(): ReactElement {
 	// actions need a complete, accepted build.
 	const hasBuild = build.svg.length > 0;
 	const hasEveryBadge = template.badgeSlots.every((_, index) => Boolean(badgeSources[index]));
-	const isUsable = baseSource !== null && hasEveryBadge && hasBuild && !build.svgError;
+	// hasBuild already implies a base source: the build returns an empty SVG until one parses.
+	const isUsable = hasEveryBadge && hasBuild && !build.svgError;
 
 	function setBadgeSource(index: number, source: TLogoSource): void {
 		setBadgeSources(current => {

@@ -120,6 +120,8 @@ function namespaceElements(elements: Element[], prefix: string): void {
 		return;
 	}
 
+	// One rewrite pass, now that every name is known. Attributes and stylesheet text are disjoint, so
+	// both are handled per element rather than in two walks.
 	for (const element of elements) {
 		// Attr.value is assigned directly: setAttribute() with a qualified name like `xlink:href`
 		// creates a namespace-less attribute in an XML document, which drops the reference.
@@ -142,9 +144,6 @@ function namespaceElements(elements: Element[], prefix: string): void {
 			}
 			attribute.value = next;
 		}
-	}
-
-	for (const element of elements) {
 		if (element.localName === 'style') {
 			element.textContent = rewriteStyleSheet(element.textContent || '', elementIDs, classes, prefix);
 		}

@@ -37,7 +37,7 @@ export function TemplateGallery({
 	hasBackground
 }: {
 	value: TLogoTemplateID;
-	onChange: (id: TLogoTemplateID) => void;
+	onChange: (templateID: TLogoTemplateID) => void;
 	base: TSvgFragment | null;
 	badges: (TSvgFragment | null)[];
 	hasBackground: boolean;

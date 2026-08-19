@@ -165,6 +165,19 @@ export function LogoSourceField({
 	const shownError = error || localError;
 	const trimmed = query.trim();
 
+	// The list shows at most one message, so it is resolved once here instead of three mutually
+	// exclusive branches in the markup that each had to re-test the ones before them.
+	let listMessage = '';
+	let listMessageTone = 'text-white/40';
+	if (hasError) {
+		listMessage = 'Could not load the token index';
+		listMessageTone = 'text-error';
+	} else if (trimmed.length === 0) {
+		listMessage = 'Type to search every chain';
+	} else if (results.length === 0) {
+		listMessage = 'No token found';
+	}
+
 	return (
 		<div className={'space-y-1.5'}>
 			<span className={'block font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]'}>
@@ -279,19 +292,9 @@ export function LogoSourceField({
 										</span>
 									</button>
 								))}
-								{hasError && (
-									<div className={'px-3 py-6 text-center font-mono text-error text-xs'}>
-										{'Could not load the token index'}
-									</div>
-								)}
-								{!hasError && trimmed.length === 0 && (
-									<div className={'px-3 py-6 text-center font-mono text-white/40 text-xs'}>
-										{'Type to search every chain'}
-									</div>
-								)}
-								{!hasError && trimmed.length > 0 && results.length === 0 && (
-									<div className={'px-3 py-6 text-center font-mono text-white/40 text-xs'}>
-										{'No token found'}
+								{listMessage && (
+									<div className={cn('px-3 py-6 text-center font-mono text-xs', listMessageTone)}>
+										{listMessage}
 									</div>
 								)}
 							</div>
