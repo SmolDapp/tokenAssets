@@ -5,6 +5,7 @@ import {cn} from '@components/lib/utils';
 import {Spinner} from '@components/Spinner';
 import {useGlobalSearch} from '@hooks/useGlobalSearch';
 import ArrowDown from '@icons/arrow-down.svg';
+import Cross from '@icons/cross.svg';
 import Search from '@icons/search.svg';
 import Upload from '@icons/upload.svg';
 import {tokenLogoURI, truncateAddress} from '@utils/helpers';
@@ -61,7 +62,8 @@ export function LogoSourceField({
 }: {
 	label: string;
 	value: TLogoSource | null;
-	onChange: (source: TLogoSource) => void;
+	// Null clears the slot.
+	onChange: (source: TLogoSource | null) => void;
 	error?: string;
 }): ReactElement {
 	const [open, setOpen] = useState(false);
@@ -134,7 +136,11 @@ export function LogoSourceField({
 			return;
 		}
 		setLocalError('');
-		onChange(await toSource(await file.text(), file.name));
+		try {
+			onChange(await toSource(await file.text(), file.name));
+		} catch {
+			setLocalError('Could not read that file.');
+		}
 	}
 
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = event => {
@@ -311,20 +317,6 @@ export function LogoSourceField({
 						event.preventDefault();
 						acceptFile(event.dataTransfer.files?.[0]);
 					}}
-					onPaste={event => {
-						const text = event.clipboardData.getData('text/plain');
-						if (text.includes('<svg')) {
-							event.preventDefault();
-							setLocalError('');
-							toSource(text, 'pasted.svg').then(onChange);
-							return;
-						}
-						const file = Array.from(event.clipboardData.files)[0];
-						if (file) {
-							event.preventDefault();
-							acceptFile(file);
-						}
-					}}
 					className={cn(
 						'flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-sm',
 						'border border-white/15 bg-white/5 text-white/50 transition-colors',
@@ -339,6 +331,27 @@ export function LogoSourceField({
 						className={'sr-only'}
 					/>
 				</label>
+
+				{/* Held in the layout even with nothing to clear, so picking a token does not shrink the
+				    trigger beside it. Clearing empties the slot: a template that still needs it stops
+				    building, which is what re-disables the actions. */}
+				<button
+					type={'button'}
+					title={'Clear'}
+					disabled={!value}
+					onClick={() => {
+						setLocalError('');
+						onChange(null);
+					}}
+					className={cn(
+						'flex size-10 shrink-0 items-center justify-center rounded-sm',
+						'border border-white/15 bg-white/5 text-white/50 transition-colors',
+						'hover:bg-white/10 hover:text-white',
+						!value && 'invisible'
+					)}>
+					<Cross className={'size-4'} />
+					<span className={'sr-only'}>{'Clear this icon'}</span>
+				</button>
 			</div>
 
 			{shownError && <p className={'font-mono text-error text-xs'}>{shownError}</p>}

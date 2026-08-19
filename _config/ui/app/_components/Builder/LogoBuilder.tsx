@@ -128,7 +128,7 @@ export function LogoBuilder(): ReactElement {
 	// hasBuild already implies a base source: the build returns an empty SVG until one parses.
 	const isUsable = hasEveryBadge && hasBuild && !build.svgError;
 
-	function setBadgeSource(index: number, source: TLogoSource): void {
+	function setBadgeSource(index: number, source: TLogoSource | null): void {
 		setBadgeSources(current => {
 			const next = [...current];
 			next[index] = source;
