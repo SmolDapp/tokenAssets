@@ -31,7 +31,7 @@ export default function BuilderPage(): ReactElement {
 					'pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:22px_22px]'
 				}
 			/>
-			<header className={'relative z-40 w-full shrink-0 border-b border-white/10'}>
+			<header className={'relative z-40 w-full shrink-0 border-white/10 border-b'}>
 				<div
 					className={
 						'mx-auto flex h-[72px] w-full max-w-[1440px] items-center justify-between gap-4 px-6 md:px-10'

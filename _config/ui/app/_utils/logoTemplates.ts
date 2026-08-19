@@ -12,8 +12,8 @@
 //    artwork leaves. Those holes were measured by rendering each decoration without its white
 //    backing: Aave 13.95, Yearn 8.06, Compound 14.05, and Iron Bank's own backing disc is 12.
 //
-//    That backing is no longer part of the artwork — the builder paints it, so it can take the
-//    token's own colour instead of always being white.
+//    The builder paints that backing, not the artwork, so it can take the token's own colour
+//    instead of always being white.
 //
 //    The boxes are cross-checked against the CDN's own wrapped logos rather than the reference
 //    exports, because the references draw MONOCHROME GLYPHS while the builder places FULL LOGOS, and
@@ -53,9 +53,8 @@ export type TBuildOptions = {
 };
 
 export type TLogoTemplate = {
-	id: TLogoTemplateID;
+	ID: TLogoTemplateID;
 	label: string;
-	description: string;
 	baseLabel: string;
 	// In paint order — a later slot overlaps the one before it.
 	badgeSlots: TLogoSlot[];
@@ -188,64 +187,53 @@ function fitRadially(box: TPlacementBox, maxInkRadius: number, inkRatio?: number
 	// rasterizes at ~1.004 rather than 1.000, so a budget set exactly to the box radius would bump
 	// every ordinary token down a step for nothing. Far below the 1.1 a non-circular logo reaches.
 	const budget = (maxInkRadius / (box.size / 2)) * INK_TOLERANCE;
-	let step = RADIAL_STEPS[RADIAL_STEPS.length - 1];
-	const fitting = RADIAL_STEPS.find(candidate => inkRatio * candidate <= budget);
-	if (fitting !== undefined) {
-		step = fitting;
-	}
+	const step =
+		RADIAL_STEPS.find(candidate => inkRatio * candidate <= budget) ?? RADIAL_STEPS[RADIAL_STEPS.length - 1];
 	return shrinkBox(box, step);
 }
 
-// A single token sandwiched in fixed artwork. `over` exists because the decoration is not always
-// behind the token: Aave's rings sit on top, and Iron Bank's cyan mark crosses in front of it.
-//
-// Positional arguments ran out of road at six, so the frame is described rather than ordered.
+// A single token sandwiched in fixed artwork. Everything is centred on the box, which is where the
+// artwork's own opening is: Iron Bank's disc sits at 17,17 because its box does.
 type TFramedConfig = {
 	box: TPlacementBox;
 	// Painted between the backing and the token; `over` goes in front of it — Aave's rings sit on top,
 	// and Iron Bank's cyan mark crosses in front.
 	under?: string;
 	over?: string;
-	// The radius the token's ink must stay within: the artwork's tightest approach. Only templates
-	// whose clearance has actually been measured declare one; the rest place at full size.
-	maxInkRadius?: number;
-	// The white disc a protocol's own mark is drawn on. Zero means the template has none.
+	// The radius the token's ink must stay within: the artwork's tightest approach.
+	maxInkRadius: number;
+	// The white disc a protocol's own mark is drawn on. Absent means the template has none.
 	backingRadius?: number;
-	backingCentre?: number;
 	// The area filled with the token's colour AT FULL SIZE. Defaults to maxInkRadius, which is right
 	// when the artwork's tightest point IS its opening. Yearn needs them apart: its arrowhead dips to 8
 	// so the token is held to 9, but the ring it should fill up to is at 11 — at 9 a white crescent
-	// stayed between the token and the arrow.
+	// stays between the token and the arrow.
 	holeRadius?: number;
 };
 
 function buildFramed(config: TFramedConfig): TLogoTemplate['build'] {
-	const {box, under = '', over = '', maxInkRadius = 0, backingRadius = 0, backingCentre = CANVAS_CENTRE} = config;
+	const {box, under = '', over = '', maxInkRadius, backingRadius = 0} = config;
 	const holeRadius = config.holeRadius ?? maxInkRadius;
+	const centreX = box.x + box.size / 2;
+	const centreY = box.y + box.size / 2;
 	return (base, _badges, options) => {
-		let placement = box;
-		if (maxInkRadius > 0) {
-			placement = fitRadially(box, maxInkRadius, base.inkRatio);
-		}
-		placement = shrinkBox(placement, options.scale);
-		const boxCentreX = box.x + box.size / 2;
-		const boxCentreY = box.y + box.size / 2;
+		const placement = shrinkBox(fitRadially(box, maxInkRadius, base.inkRatio), options.scale);
 		// Only a template that owns a coin gets its hole filled: the rest have no frame to fill up to,
 		// and Aave deliberately leaves that sliver transparent.
 		//
 		// The fill follows the size slider, because a token's background is part of the token: pulling
-		// the size in has to shrink the logo AND the ground it sits on, leaving the coin showing around
-		// it. Holding the fill steady instead shrank the mark inside a disc that stayed put.
+		// the size in shrinks the logo and the ground it sits on together, and the coin shows around
+		// them.
 		let holeFill: string[] = [];
 		if (backingRadius > 0) {
 			const filled = Math.min(holeRadius + HOLE_OVERLAP, backingRadius) * options.scale;
-			holeFill = backing(filled, boxCentreX, boxCentreY, base.edgeColor);
+			holeFill = backing(filled, centreX, centreY, base.edgeColor);
 		}
 		return composeRoot([
-			...backing(backingRadius, backingCentre, backingCentre),
+			...backing(backingRadius, centreX, centreY),
 			...holeFill,
 			under,
-			...optionalBacking(options, maxInkRadius, boxCentreX, boxCentreY),
+			...optionalBacking(options, maxInkRadius, centreX, centreY),
 			placeFragment(base, placement),
 			over
 		]);
@@ -269,46 +257,41 @@ const IRONBANK_DISC_RADIUS = 12;
 
 export const LOGO_TEMPLATES: TLogoTemplate[] = [
 	{
-		id: 'project',
+		ID: 'project',
 		supportsBackground: true,
 		label: 'Project badge',
-		description: 'The token at full size with a project icon badged into the bottom-right corner.',
 		baseLabel: 'Base token',
 		badgeSlots: ONE_BADGE,
 		build: buildBadged(ONE_BADGE)
 	},
 	{
-		id: 'project-2',
+		ID: 'project-2',
 		supportsBackground: true,
 		label: 'Two projects',
-		description: 'Two project icons overlapping in the bottom-right corner.',
 		baseLabel: 'Base token',
 		badgeSlots: TWO_BADGES,
 		build: buildBadged(TWO_BADGES)
 	},
 	{
-		id: 'project-3',
+		ID: 'project-3',
 		supportsBackground: true,
 		label: 'Three projects',
-		description: 'Three project icons clustered in the bottom-right corner.',
 		baseLabel: 'Base token',
 		badgeSlots: THREE_BADGES,
 		build: buildBadged(THREE_BADGES)
 	},
 	{
-		id: 'project-stack',
+		ID: 'project-stack',
 		supportsBackground: true,
 		label: 'Project stack',
-		description: 'The project at full size, with a related project stacked above the token on the right edge.',
 		baseLabel: 'Project',
 		badgeSlots: STACKED_SLOTS,
 		build: buildBadged(STACKED_SLOTS)
 	},
 	{
-		id: 'aave-wrapped',
+		ID: 'aave-wrapped',
 		supportsBackground: true,
 		label: 'Aave wrapped',
-		description: 'The token inset inside Aave’s dotted ring.',
 		baseLabel: 'Base token',
 		badgeSlots: [],
 		// 26, not the 28 the reference disc measures: at 28 the token butts straight against the
@@ -317,19 +300,17 @@ export const LOGO_TEMPLATES: TLogoTemplate[] = [
 		build: buildFramed({box: {x: 3, y: 3, size: 26}, over: AAVE_DOTTED_RING, maxInkRadius: AAVE_RING_INNER_RADIUS})
 	},
 	{
-		id: 'aave-interest-bearing',
+		ID: 'aave-interest-bearing',
 		supportsBackground: true,
 		label: 'Aave interest bearing',
-		description: 'The token inside Aave’s solid gradient ring, for an aToken.',
 		baseLabel: 'Base token',
 		badgeSlots: [],
 		build: buildFramed({box: {x: 3, y: 3, size: 26}, over: AAVE_SOLID_RING, maxInkRadius: AAVE_RING_INNER_RADIUS})
 	},
 	{
-		id: 'yearn',
+		ID: 'yearn',
 		supportsBackground: false,
 		label: 'Yearn vault',
-		description: 'The token centred inside Yearn’s blue circular arrow.',
 		baseLabel: 'Base token',
 		badgeSlots: [],
 		build: buildFramed({
@@ -341,10 +322,9 @@ export const LOGO_TEMPLATES: TLogoTemplate[] = [
 		})
 	},
 	{
-		id: 'compound',
+		ID: 'compound',
 		supportsBackground: false,
 		label: 'Compound',
-		description: 'The token centred inside Compound’s split gradient arc.',
 		baseLabel: 'Base token',
 		badgeSlots: [],
 		build: buildFramed({
@@ -355,24 +335,22 @@ export const LOGO_TEMPLATES: TLogoTemplate[] = [
 		})
 	},
 	{
-		id: 'iron-bank',
+		ID: 'iron-bank',
 		supportsBackground: false,
 		label: 'Iron Bank',
-		description: 'The token on a white disc, with Iron Bank’s cyan mark crossing in front.',
 		baseLabel: 'Base token',
 		badgeSlots: [],
 		build: buildFramed({
 			box: {x: 5, y: 5, size: 24},
 			over: IRONBANK_MARK,
 			maxInkRadius: IRONBANK_DISC_RADIUS,
-			backingRadius: IRONBANK_DISC_RADIUS,
-			backingCentre: 17
+			backingRadius: IRONBANK_DISC_RADIUS
 		})
 	}
 ];
 
-export function findLogoTemplate(id: TLogoTemplateID): TLogoTemplate {
-	const template = LOGO_TEMPLATES.find(entry => entry.id === id);
+export function findLogoTemplate(ID: TLogoTemplateID): TLogoTemplate {
+	const template = LOGO_TEMPLATES.find(entry => entry.ID === ID);
 	if (!template) {
 		return LOGO_TEMPLATES[0];
 	}

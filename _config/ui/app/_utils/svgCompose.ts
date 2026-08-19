@@ -79,9 +79,9 @@ function readViewBox(root: Element): TSvgViewBox | null {
 	return null;
 }
 
-function rewriteURLReferences(value: string, ids: Set<string>, prefix: string): string {
+function rewriteURLReferences(value: string, elementIDs: Set<string>, prefix: string): string {
 	return value.replace(/url\(\s*(['"]?)#([^)'"\s]+)\1\s*\)/g, (match, quote: string, name: string) => {
-		if (!ids.has(name)) {
+		if (!elementIDs.has(name)) {
 			return match;
 		}
 		return `url(${quote}#${prefix}${name}${quote})`;
@@ -90,24 +90,24 @@ function rewriteURLReferences(value: string, ids: Set<string>, prefix: string): 
 
 // `<style>` holds selectors, which the attribute pass cannot see. Only names actually declared in
 // this fragment are rewritten, so an unrelated `#fff` in a colour stop is left alone.
-function rewriteStyleSheet(css: string, ids: Set<string>, classes: Set<string>, prefix: string): string {
-	let next = rewriteURLReferences(css, ids, prefix);
+function rewriteStyleSheet(css: string, elementIDs: Set<string>, classes: Set<string>, prefix: string): string {
+	let next = rewriteURLReferences(css, elementIDs, prefix);
 	for (const name of classes) {
 		next = next.replace(selectorPattern(`.${name}`), `.${prefix}${name}`);
 	}
-	for (const name of ids) {
+	for (const name of elementIDs) {
 		next = next.replace(selectorPattern(`#${name}`), `#${prefix}${name}`);
 	}
 	return next;
 }
 
 function namespaceElements(elements: Element[], prefix: string): void {
-	const ids = new Set<string>();
+	const elementIDs = new Set<string>();
 	const classes = new Set<string>();
 	for (const element of elements) {
-		const id = element.getAttribute('id');
-		if (id) {
-			ids.add(id);
+		const elementID = element.getAttribute('id');
+		if (elementID) {
+			elementIDs.add(elementID);
 		}
 		const className = element.getAttribute('class');
 		if (className) {
@@ -116,7 +116,7 @@ function namespaceElements(elements: Element[], prefix: string): void {
 			}
 		}
 	}
-	if (ids.size === 0 && classes.size === 0) {
+	if (elementIDs.size === 0 && classes.size === 0) {
 		return;
 	}
 
@@ -136,8 +136,8 @@ function namespaceElements(elements: Element[], prefix: string): void {
 					.join(' ');
 				continue;
 			}
-			let next = rewriteURLReferences(attribute.value, ids, prefix);
-			if (HREF_ATTRIBUTES.has(attribute.name) && next.startsWith('#') && ids.has(next.slice(1))) {
+			let next = rewriteURLReferences(attribute.value, elementIDs, prefix);
+			if (HREF_ATTRIBUTES.has(attribute.name) && next.startsWith('#') && elementIDs.has(next.slice(1))) {
 				next = `#${prefix}${next.slice(1)}`;
 			}
 			attribute.value = next;
@@ -146,7 +146,7 @@ function namespaceElements(elements: Element[], prefix: string): void {
 
 	for (const element of elements) {
 		if (element.localName === 'style') {
-			element.textContent = rewriteStyleSheet(element.textContent || '', ids, classes, prefix);
+			element.textContent = rewriteStyleSheet(element.textContent || '', elementIDs, classes, prefix);
 		}
 	}
 }

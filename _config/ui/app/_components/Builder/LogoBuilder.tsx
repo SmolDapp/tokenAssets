@@ -19,6 +19,8 @@ const PARSE_MESSAGE = 'That file is not a usable SVG — it needs a valid <svg> 
 const SECONDARY_BUTTON_CLASSES =
 	'w-full border-white/25 bg-transparent text-white uppercase hover:bg-white/10 hover:text-white';
 
+const FIELD_LABEL_CLASSES = 'font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]';
+
 type TParsedSources = {
 	base: TSvgFragment | null;
 	badges: (TSvgFragment | null)[];
@@ -126,7 +128,6 @@ export function LogoBuilder(): ReactElement {
 	const hasBuild = build.svg.length > 0;
 	const hasEveryBadge = template.badgeSlots.every((_, index) => Boolean(badgeSources[index]));
 	const isUsable = baseSource !== null && hasEveryBadge && hasBuild && !build.svgError;
-	const previewURL = `data:image/svg+xml,${encodeURIComponent(build.svg)}`;
 
 	function setBadgeSource(index: number, source: TLogoSource): void {
 		setBadgeSources(current => {
@@ -137,7 +138,7 @@ export function LogoBuilder(): ReactElement {
 	}
 
 	function handleSubmit(): void {
-		writeBuilderHandoff({svgText: build.svg, svgFileName: `${template.id}.svg`});
+		writeBuilderHandoff({svgText: build.svg, svgFileName: `${template.ID}.svg`});
 		router.push('/submit');
 	}
 
@@ -148,9 +149,7 @@ export function LogoBuilder(): ReactElement {
 			}>
 			<div className={'min-w-0 space-y-5'}>
 				<div className={'space-y-1.5'}>
-					<span className={'block font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]'}>
-						{'Template'}
-					</span>
+					<span className={cn('block', FIELD_LABEL_CLASSES)}>{'Template'}</span>
 					<TemplateGallery
 						value={templateID}
 						onChange={setTemplateID}
@@ -195,9 +194,7 @@ export function LogoBuilder(): ReactElement {
 
 				<div className={'space-y-1.5'}>
 					<div className={'flex items-baseline justify-between'}>
-						<span className={'font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]'}>
-							{'Logo size'}
-						</span>
+						<span className={FIELD_LABEL_CLASSES}>{'Logo size'}</span>
 						<span className={'font-mono text-white/45 text-xxs'}>{`${Math.round(scale * 100)}%`}</span>
 					</div>
 					<input
@@ -232,11 +229,9 @@ export function LogoBuilder(): ReactElement {
 
 			<div className={'flex min-w-0 flex-col gap-5'}>
 				<div className={'flex flex-col gap-1.5'}>
-					<span className={'block font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]'}>
-						{'Result'}
-					</span>
-					{/* Fixed height, not flex-1: the grid stretches this cell to the tallest column, so
-					    growing the left side (a second source field, an error) used to resize the preview. */}
+					<span className={cn('block', FIELD_LABEL_CLASSES)}>{'Result'}</span>
+					{/* Fixed height, not flex-1: the grid stretches this cell to the tallest column, so a
+					    taller left side (a second source field, an error) would otherwise resize the preview. */}
 					<div
 						className={cn(
 							'flex h-[280px] items-center justify-center rounded-sm bg-white/20',
@@ -254,7 +249,7 @@ export function LogoBuilder(): ReactElement {
 						{hasBuild && (
 							// biome-ignore lint/performance/noImgElement: local data-URI preview; next/image cannot optimize a data URL.
 							<img
-								src={previewURL}
+								src={`data:image/svg+xml,${encodeURIComponent(build.svg)}`}
 								alt={'Composed logo preview'}
 								className={'size-32 object-contain'}
 							/>

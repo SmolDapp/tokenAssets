@@ -26,9 +26,9 @@ const PLACEHOLDER_BADGE: TSvgFragment = {
 	inkRatio: 1
 };
 
-// Each cell is the template's real output, built through the same pipeline as the result. Choosing a
-// convention from "two project icons overlapping in the bottom-right corner" was a reading task; this
-// makes it a comparison, and a badge that has gone illegible shows up here rather than after a PR.
+// Each cell is the template's real output, built through the same pipeline as the result, so picking
+// a convention is a comparison rather than a reading task, and a badge that has gone illegible shows
+// up here rather than after a PR.
 export function TemplateGallery({
 	value,
 	onChange,
@@ -46,21 +46,23 @@ export function TemplateGallery({
 	// on every drag of the size slider would flicker for no information gained.
 	const previews = useMemo(() => {
 		const source = base || PLACEHOLDER_BASE;
-		const options: TBuildOptions = {hasBackground, scale: 1};
 		return LOGO_TEMPLATES.map(template => {
 			// Every slot the template declares gets filled, standing in for whatever is still unpicked.
 			// Only the gallery does this — the real build leaves empty slots empty, so nothing invented
 			// here can reach the submitted logo.
 			const slots = template.badgeSlots.map((_, index) => badges[index] || PLACEHOLDER_BADGE);
+			// Gated on supportsBackground exactly as the real build gates it. Without the gate, a
+			// template that paints its own backing shows a white disc here that the result never has.
+			const options: TBuildOptions = {hasBackground: hasBackground && template.supportsBackground, scale: 1};
 			return {
-				id: template.id,
+				ID: template.ID,
 				label: template.label,
 				uri: `data:image/svg+xml,${encodeURIComponent(template.build(source, slots, options))}`
 			};
 		});
 	}, [base, badges, hasBackground]);
 
-	const selected = LOGO_TEMPLATES.find(template => template.id === value);
+	const selected = LOGO_TEMPLATES.find(template => template.ID === value);
 
 	return (
 		<div className={'space-y-2'}>
@@ -68,10 +70,10 @@ export function TemplateGallery({
 			    picker is expected to have then comes from the browser instead of being reimplemented. */}
 			<div className={'flex flex-wrap gap-2'}>
 				{previews.map(preview => {
-					const isSelected = preview.id === value;
+					const isSelected = preview.ID === value;
 					return (
 						<label
-							key={preview.id}
+							key={preview.ID}
 							title={preview.label}
 							className={cn(
 								'flex size-14 shrink-0 cursor-pointer items-center justify-center rounded-sm border transition-colors',
@@ -82,9 +84,9 @@ export function TemplateGallery({
 							<input
 								type={'radio'}
 								name={'logo-template'}
-								value={preview.id}
+								value={preview.ID}
 								checked={isSelected}
-								onChange={() => onChange(preview.id)}
+								onChange={() => onChange(preview.ID)}
 								className={'sr-only'}
 							/>
 							{/* biome-ignore lint/performance/noImgElement: local data-URI preview; next/image cannot optimize a data URL. */}

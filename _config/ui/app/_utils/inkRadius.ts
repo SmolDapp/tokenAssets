@@ -35,7 +35,12 @@ const EDGE_OUTER = 0.98;
 // the real question: is there one flat colour out here, or is this a gradient?
 const EDGE_MAJORITY = 0.55;
 const EDGE_BUCKET = 16;
+// Buckets per channel, which is also the stride that keeps a packed three-channel key collision
+// free. Derived from EDGE_BUCKET so a change to the bucket size cannot silently merge two colours.
+const EDGE_BUCKET_COUNT = 256 / EDGE_BUCKET;
 const EDGE_OPAQUE = 200;
+// Below this many opaque pixels the ring is not a rim, and its dominant colour means nothing.
+const EDGE_MIN_SAMPLES = 32;
 
 export type TInkMeasurement = {
 	ratio: number;
@@ -74,8 +79,8 @@ function readEdgeColor(data: Uint8ClampedArray, size: number, radius: number): s
 			const green = data[index + 1];
 			const blue = data[index + 2];
 			const key =
-				Math.floor(red / EDGE_BUCKET) * 4096 +
-				Math.floor(green / EDGE_BUCKET) * 64 +
+				Math.floor(red / EDGE_BUCKET) * EDGE_BUCKET_COUNT * EDGE_BUCKET_COUNT +
+				Math.floor(green / EDGE_BUCKET) * EDGE_BUCKET_COUNT +
 				Math.floor(blue / EDGE_BUCKET);
 			const bucket = buckets.get(key) || {count: 0, red: 0, green: 0, blue: 0};
 			bucket.count++;
@@ -86,7 +91,7 @@ function readEdgeColor(data: Uint8ClampedArray, size: number, radius: number): s
 			total++;
 		}
 	}
-	if (total < 32) {
+	if (total < EDGE_MIN_SAMPLES) {
 		return null;
 	}
 	let winner = {count: 0, red: 0, green: 0, blue: 0};
