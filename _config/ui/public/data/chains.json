@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4304,
+	"totalTokens": 4305,
 	"chains": [
 		{
 			"id": "1",
@@ -9,18 +9,18 @@
 			"explorer": "https://etherscan.io"
 		},
 		{
+			"id": "8453",
+			"name": "Base",
+			"slug": "base",
+			"count": 930,
+			"explorer": "https://basescan.org"
+		},
+		{
 			"id": "43114",
 			"name": "Avalanche",
 			"slug": "avalanche",
 			"count": 45,
 			"explorer": "https://snowtrace.io"
-		},
-		{
-			"id": "8453",
-			"name": "Base",
-			"slug": "base",
-			"count": 929,
-			"explorer": "https://basescan.org"
 		},
 		{
 			"id": "10",
@@ -44,18 +44,18 @@
 			"explorer": "https://explorer.inkonchain.com"
 		},
 		{
-			"id": "42220",
-			"name": "Celo",
-			"slug": "celo",
-			"count": 28,
-			"explorer": "https://celoscan.io"
-		},
-		{
 			"id": "1101",
 			"name": "Polygon zkEVM",
 			"slug": "polygon-zkevm",
 			"count": 2,
 			"explorer": "https://zkevm.polygonscan.com"
+		},
+		{
+			"id": "42220",
+			"name": "Celo",
+			"slug": "celo",
+			"count": 28,
+			"explorer": "https://celoscan.io"
 		},
 		{
 			"id": "56",
@@ -106,18 +106,18 @@
 			"explorer": "https://fraxscan.com"
 		},
 		{
-			"id": "747474",
-			"name": "Katana",
-			"slug": "katana",
-			"count": 15,
-			"explorer": "https://katanascan.com"
-		},
-		{
 			"id": "60808",
 			"name": "BOB",
 			"slug": "bob",
 			"count": 34,
 			"explorer": "https://explorer.gobob.xyz"
+		},
+		{
+			"id": "747474",
+			"name": "Katana",
+			"slug": "katana",
+			"count": 15,
+			"explorer": "https://katanascan.com"
 		},
 		{
 			"id": "34443",
