@@ -13,6 +13,10 @@ jobs:
         env:
             # Mirror of _config/ui/app/_utils/svgSafety.ts and .github/scripts/forbidden-svg-pattern.mjs — keep all three in sync.
             SVG_FORBIDDEN_PATTERN: 'data:image/(png|jpe?g|gif|webp|bmp|avif)|data:[^,]{0,256};[[:space:]]*base64|href[[:space:]]*=[[:space:]]*["'']?(https?:|//)|<script|javascript:|[^a-zA-Z0-9_-]on[a-z]+[[:space:]]*='
+            # Warned about, never rejected: a <text> logo renders from whatever font the viewer has, so
+            # its PNGs can disagree with the SVG. The submit form outlines text to paths automatically;
+            # PRs opened by hand bypass it, which is exactly what this workflow sees.
+            SVG_TEXT_PATTERN: '<(text|tspan)[[:space:]>]'
 
         steps:
             # Safe by design: the token is contents:read only and no code
@@ -74,6 +78,9 @@ jobs:
                     if [ "$(wc -c < "$svg")" -gt 153600 ]; then
                       echo "Error: $svg is larger than 150KB"
                       FAILED=1
+                    fi
+                    if grep -qziE "$SVG_TEXT_PATTERN" "$svg"; then
+                      echo "::warning file=$svg::Contains <text> — the PNGs may not match on a renderer without the font. Consider outlining the text to paths."
                     fi
                   done <<< "$CHANGED_SVGS"
                   if [ $FAILED -eq 1 ]; then exit 1; fi
