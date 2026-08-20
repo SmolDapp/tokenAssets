@@ -3,6 +3,12 @@ module.exports = {
 		remotePatterns: [{protocol: 'https', hostname: 'assets.smold.app'}]
 	},
 	serverExternalPackages: ['@resvg/resvg-js'],
+	// The submit routes read these at runtime with `fs`, which the bundler cannot see. Without this
+	// they are missing from the deployed function and resvg silently drops every glyph again.
+	outputFileTracingIncludes: {
+		'/api/submit': ['./app/_assets/fonts/**'],
+		'/api/submit/network': ['./app/_assets/fonts/**']
+	},
 	// biome-ignore lint/suspicious/noExplicitAny: webpack config is untyped
 	webpack(config: any) {
 		// Grab the existing rule that handles SVG imports

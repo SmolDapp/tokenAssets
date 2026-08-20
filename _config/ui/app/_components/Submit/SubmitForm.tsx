@@ -748,7 +748,7 @@ export function SubmitForm({
 								<img
 									src={svgDataURL}
 									alt={`${svgFileName} preview`}
-									className={'size-12 shrink-0 rounded-full bg-white object-contain p-1.5'}
+									className={'size-12 shrink-0 rounded-full bg-white object-contain p-px'}
 								/>
 							)}
 							<div className={'flex flex-col items-center gap-1'}>

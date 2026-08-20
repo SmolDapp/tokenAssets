@@ -3,6 +3,10 @@
 
 import {isForbiddenSvg} from '@utils/svgSafety';
 
+// Byte length (not UTF-16 code units) so client, server and the CI's `wc -c` cap agree: a multibyte
+// SVG under 153,600 code units can still exceed 150KB on disk.
+export const MAX_SVG_BYTES = 153_600;
+
 const EVM_ADDRESS_RE = /^0x[0-9a-fA-F]{40}$/;
 const NON_EVM_CHAINS = new Set(['1151111081099710', 'btcm']);
 const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -154,9 +158,7 @@ export function validateSubmission(
 				message:
 					'The SVG must be a pure vector — no scripts, event handlers, external links or embedded rasters.'
 			});
-		} else if (new TextEncoder().encode(input.svgText).length > 153_600) {
-			// Byte length (not UTF-16 code units) so client, server and the CI's `wc -c` cap agree:
-			// a multibyte SVG under 153,600 code units can still exceed 150KB on disk.
+		} else if (new TextEncoder().encode(input.svgText).length > MAX_SVG_BYTES) {
 			errors.push({field: 'svg', message: 'The SVG must be under 150KB'});
 		}
 	}

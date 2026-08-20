@@ -1,7 +1,8 @@
 import {Octokit} from '@octokit/core';
 import {findAddableChain} from '@utils/allChains.server';
-import {isSquareEnough, renderPngBase64} from '@utils/svgRaster.server';
+import {isSquareEnough, outlineSvgText, renderPngBase64} from '@utils/svgRaster.server';
 import {isForbiddenSvg} from '@utils/svgSafety';
+import {MAX_SVG_BYTES} from '@utils/tokenSubmission';
 import {NextResponse} from 'next/server';
 import {getToken} from 'next-auth/jwt';
 import {createPullRequest} from 'octokit-plugin-create-pull-request';
@@ -48,7 +49,7 @@ function validateLogoSvg(svg: string, which: string): string | null {
 	if (isForbiddenSvg(svg)) {
 		return `The ${which} SVG must be a pure vector — no scripts, event handlers, external links or embedded rasters.`;
 	}
-	if (new TextEncoder().encode(svg).length > 153_600) {
+	if (new TextEncoder().encode(svg).length > MAX_SVG_BYTES) {
 		return `The ${which} SVG must be under 150KB.`;
 	}
 	return null;
@@ -109,6 +110,8 @@ export async function POST(request: Request): Promise<Response> {
 		return NextResponse.json({error: nativeError}, {status: 400});
 	}
 
+	let chainLogoSvg = chainSvg;
+	let nativeLogoSvg = nativeSvg;
 	let chainPng32 = '';
 	let chainPng128 = '';
 	let nativePng32 = '';
@@ -117,12 +120,34 @@ export async function POST(request: Request): Promise<Response> {
 		if (!isSquareEnough(chainSvg) || !isSquareEnough(nativeSvg)) {
 			return NextResponse.json({error: 'Each logo must be roughly square.'}, {status: 400});
 		}
-		chainPng32 = renderPngBase64(chainSvg, 32);
-		chainPng128 = renderPngBase64(chainSvg, 128);
-		nativePng32 = renderPngBase64(nativeSvg, 32);
-		nativePng128 = renderPngBase64(nativeSvg, 128);
+		// Outline before rasterizing so the committed SVGs and their PNGs are the same shapes, and
+		// neither needs the submitter's font to render.
+		chainLogoSvg = outlineSvgText(chainSvg);
+		nativeLogoSvg = outlineSvgText(nativeSvg);
+		chainPng32 = renderPngBase64(chainLogoSvg, 32);
+		chainPng128 = renderPngBase64(chainLogoSvg, 128);
+		nativePng32 = renderPngBase64(nativeLogoSvg, 32);
+		nativePng128 = renderPngBase64(nativeLogoSvg, 128);
 	} catch {
 		return NextResponse.json({error: 'Could not rasterize the SVG to PNG.'}, {status: 400});
+	}
+	// Both checks passed on the submitted SVGs, but outlining rewrites them: a text-heavy logo can grow
+	// past the cap, and usvg re-encodes an embedded data URI as base64 — which the CI greps for. Re-run
+	// them on the exact bytes we are about to commit so we never open a PR our own CI rejects.
+	const outlinedLogos = [chainLogoSvg, nativeLogoSvg];
+	if (outlinedLogos.some(logo => new TextEncoder().encode(logo).length > MAX_SVG_BYTES)) {
+		return NextResponse.json(
+			{error: 'The SVG is too complex — it exceeds 150KB once the text is outlined.'},
+			{status: 400}
+		);
+	}
+	if (outlinedLogos.some(isForbiddenSvg)) {
+		return NextResponse.json(
+			{
+				error: 'The logo could not be converted safely — remove any embedded image from the SVG, or outline its text yourself before submitting.'
+			},
+			{status: 400}
+		);
 	}
 
 	const infoJson = `${JSON.stringify(
@@ -182,10 +207,10 @@ export async function POST(request: Request): Promise<Response> {
 				{
 					commit: `feat: add ${chain.name} network`,
 					files: {
-						[`${chainFolder}/logo.svg`]: chainSvg,
+						[`${chainFolder}/logo.svg`]: chainLogoSvg,
 						[`${chainFolder}/logo-32.png`]: {content: chainPng32, encoding: 'base64'},
 						[`${chainFolder}/logo-128.png`]: {content: chainPng128, encoding: 'base64'},
-						[`${tokenFolder}/logo.svg`]: nativeSvg,
+						[`${tokenFolder}/logo.svg`]: nativeLogoSvg,
 						[`${tokenFolder}/logo-32.png`]: {content: nativePng32, encoding: 'base64'},
 						[`${tokenFolder}/logo-128.png`]: {content: nativePng128, encoding: 'base64'},
 						[`${tokenFolder}/info.json`]: infoJson

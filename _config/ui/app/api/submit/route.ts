@@ -2,9 +2,11 @@ import {Octokit} from '@octokit/core';
 import {CHAINS} from '@utils/constants';
 import {readBlobText, readFolderEntries} from '@utils/githubRepo.server';
 import {mergeTokenInfo, parseInfoJson, serializeInfoJson, type TTokenInfo} from '@utils/infoJson';
-import {isSquareEnough, renderPngBase64} from '@utils/svgRaster.server';
+import {isSquareEnough, outlineSvgText, renderPngBase64} from '@utils/svgRaster.server';
+import {isForbiddenSvg} from '@utils/svgSafety';
 import {
 	isValidAddress,
+	MAX_SVG_BYTES,
 	parseTags,
 	type TSubmissionInput,
 	type TValidationScope,
@@ -251,6 +253,7 @@ export async function POST(request: Request): Promise<Response> {
 	// Skipped entirely when the edit keeps the current logo: feeding an empty string to resvg would throw
 	// and surface as a misleading "could not rasterize". logo.svg is never written without both PNGs,
 	// because the CI requires all three logo files together in a folder.
+	let logoSvg = svg;
 	let png32 = '';
 	let png128 = '';
 	if (hasNewLogo) {
@@ -258,10 +261,30 @@ export async function POST(request: Request): Promise<Response> {
 			if (!isSquareEnough(svg)) {
 				return NextResponse.json({error: 'The logo must be roughly square.'}, {status: 400});
 			}
-			png32 = renderPngBase64(svg, 32);
-			png128 = renderPngBase64(svg, 128);
+			// Outline before rasterizing so the committed SVG and its PNGs are the same shapes, and
+			// neither needs the submitter's font to render.
+			logoSvg = outlineSvgText(svg);
+			png32 = renderPngBase64(logoSvg, 32);
+			png128 = renderPngBase64(logoSvg, 128);
 		} catch {
 			return NextResponse.json({error: 'Could not rasterize the SVG to PNG.'}, {status: 400});
+		}
+		// Both checks passed on the submitted SVG, but outlining rewrites it: a text-heavy logo can grow
+		// past the cap, and usvg re-encodes an embedded data URI as base64 — which the CI greps for. Re-run
+		// them on the exact bytes we are about to commit so we never open a PR our own CI rejects.
+		if (new TextEncoder().encode(logoSvg).length > MAX_SVG_BYTES) {
+			return NextResponse.json(
+				{error: 'The SVG is too complex — it exceeds 150KB once the text is outlined.'},
+				{status: 400}
+			);
+		}
+		if (isForbiddenSvg(logoSvg)) {
+			return NextResponse.json(
+				{
+					error: 'The logo could not be converted safely — remove any embedded image from the SVG, or outline its text yourself before submitting.'
+				},
+				{status: 400}
+			);
 		}
 	}
 
@@ -269,7 +292,7 @@ export async function POST(request: Request): Promise<Response> {
 		[`${folder}/info.json`]: infoJson
 	};
 	if (hasNewLogo) {
-		files[`${folder}/logo.svg`] = svg;
+		files[`${folder}/logo.svg`] = logoSvg;
 		files[`${folder}/logo-32.png`] = {content: png32, encoding: 'base64'};
 		files[`${folder}/logo-128.png`] = {content: png128, encoding: 'base64'};
 	}
