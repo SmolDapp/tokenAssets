@@ -4,7 +4,9 @@
 
 import {GITHUB_RAW_TOKENS_URI} from '@utils/constants';
 import {parseInfoJson, type TTokenInfo} from '@utils/infoJson';
-import {toFolderAddress} from '@utils/tokenSubmission';
+import {isValidAddress, toFolderAddress} from '@utils/tokenSubmission';
+
+const PATH_SEGMENT_RE = /^[a-zA-Z0-9]+$/;
 
 export type TTokenPrefill = {
 	// null for the token folders that carry logos but no info.json — a normal case, not a failure.
@@ -15,7 +17,19 @@ export type TTokenPrefill = {
 };
 
 export async function fetchTokenPrefill(chainID: string, address: string): Promise<TTokenPrefill> {
-	const folder = `${GITHUB_RAW_TOKENS_URI}/${chainID}/${toFolderAddress(address)}`;
+	if (!isValidAddress(chainID, address)) {
+		throw new Error('Invalid address');
+	}
+	// Checked on the exact strings that get interpolated, not on what they derive from: both must be a
+	// single alphanumeric path segment, so neither can carry a "/" or a ".." that would walk the request
+	// out of this repo's tokens folder. The current caller already constrains them; this keeps that true
+	// for the next one.
+	const folderAddress = toFolderAddress(address);
+	if (!PATH_SEGMENT_RE.test(chainID) || !PATH_SEGMENT_RE.test(folderAddress)) {
+		throw new Error('Invalid token reference');
+	}
+
+	const folder = `${GITHUB_RAW_TOKENS_URI}/${chainID}/${folderAddress}`;
 	const [infoResponse, svgResponse] = await Promise.all([
 		fetch(`${folder}/info.json`, {cache: 'no-store'}),
 		fetch(`${folder}/logo.svg`, {cache: 'no-store'})
