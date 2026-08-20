@@ -53,6 +53,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
 	-webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+	-webkit-text-fill-color: #ffffff;
 	transition: background-color 5000s ease-in-out 0s;
 }
 input::-webkit-outer-spin-button,
