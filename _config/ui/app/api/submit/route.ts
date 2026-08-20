@@ -6,7 +6,6 @@ import {isSquareEnough, outlineSvgText, renderPngBase64} from '@utils/svgRaster.
 import {isForbiddenSvg} from '@utils/svgSafety';
 import {
 	isValidAddress,
-	MAX_SVG_BYTES,
 	parseTags,
 	type TSubmissionInput,
 	type TValidationScope,
@@ -269,15 +268,9 @@ export async function POST(request: Request): Promise<Response> {
 		} catch {
 			return NextResponse.json({error: 'Could not rasterize the SVG to PNG.'}, {status: 400});
 		}
-		// Both checks passed on the submitted SVG, but outlining rewrites it: a text-heavy logo can grow
-		// past the cap, and usvg re-encodes an embedded data URI as base64 — which the CI greps for. Re-run
-		// them on the exact bytes we are about to commit so we never open a PR our own CI rejects.
-		if (new TextEncoder().encode(logoSvg).length > MAX_SVG_BYTES) {
-			return NextResponse.json(
-				{error: 'The SVG is too complex — it exceeds 150KB once the text is outlined.'},
-				{status: 400}
-			);
-		}
+		// The safety check passed on the submitted SVG, but outlining rewrites it: usvg re-encodes an
+		// embedded data URI as base64, which is what the CI greps for. Re-run it on the exact bytes we
+		// are about to commit so we never open a PR our own CI rejects.
 		if (isForbiddenSvg(logoSvg)) {
 			return NextResponse.json(
 				{

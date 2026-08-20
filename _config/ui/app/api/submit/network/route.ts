@@ -2,7 +2,6 @@ import {Octokit} from '@octokit/core';
 import {findAddableChain} from '@utils/allChains.server';
 import {isSquareEnough, outlineSvgText, renderPngBase64} from '@utils/svgRaster.server';
 import {isForbiddenSvg} from '@utils/svgSafety';
-import {MAX_SVG_BYTES} from '@utils/tokenSubmission';
 import {NextResponse} from 'next/server';
 import {getToken} from 'next-auth/jwt';
 import {createPullRequest} from 'octokit-plugin-create-pull-request';
@@ -49,7 +48,7 @@ function validateLogoSvg(svg: string, which: string): string | null {
 	if (isForbiddenSvg(svg)) {
 		return `The ${which} SVG must be a pure vector — no scripts, event handlers, external links or embedded rasters.`;
 	}
-	if (new TextEncoder().encode(svg).length > MAX_SVG_BYTES) {
+	if (new TextEncoder().encode(svg).length > 153_600) {
 		return `The ${which} SVG must be under 150KB.`;
 	}
 	return null;
@@ -131,17 +130,10 @@ export async function POST(request: Request): Promise<Response> {
 	} catch {
 		return NextResponse.json({error: 'Could not rasterize the SVG to PNG.'}, {status: 400});
 	}
-	// Both checks passed on the submitted SVGs, but outlining rewrites them: a text-heavy logo can grow
-	// past the cap, and usvg re-encodes an embedded data URI as base64 — which the CI greps for. Re-run
-	// them on the exact bytes we are about to commit so we never open a PR our own CI rejects.
-	const outlinedLogos = [chainLogoSvg, nativeLogoSvg];
-	if (outlinedLogos.some(logo => new TextEncoder().encode(logo).length > MAX_SVG_BYTES)) {
-		return NextResponse.json(
-			{error: 'The SVG is too complex — it exceeds 150KB once the text is outlined.'},
-			{status: 400}
-		);
-	}
-	if (outlinedLogos.some(isForbiddenSvg)) {
+	// The safety check passed on the submitted SVGs, but outlining rewrites them: usvg re-encodes an
+	// embedded data URI as base64, which is what the CI greps for. Re-run it on the exact bytes we are
+	// about to commit so we never open a PR our own CI rejects.
+	if ([chainLogoSvg, nativeLogoSvg].some(isForbiddenSvg)) {
 		return NextResponse.json(
 			{
 				error: 'The logo could not be converted safely — remove any embedded image from the SVG, or outline its text yourself before submitting.'
