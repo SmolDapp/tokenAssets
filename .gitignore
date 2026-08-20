@@ -6,6 +6,9 @@ scripts/
 !_config/ui/scripts/
 _config/ui/scripts/*
 !_config/ui/scripts/audit*.mjs
+# The audit report is an output, not a source: half a megabyte that changes wholesale on every run.
+# Regenerate it with `npm run audit`; /audit says so when the file is absent.
+_config/ui/public/data/audit.json
 .DS_Store
 node_modules
 .vscode
