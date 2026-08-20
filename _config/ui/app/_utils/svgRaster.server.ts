@@ -26,8 +26,12 @@ const FONT_OPTIONS = {
 };
 
 const TEXT_ELEMENT_PATTERN = /<(text|tspan)[\s>]/i;
-const TITLE_PATTERN = /<title(?:\s[^>]*)?>[\s\S]*?<\/title>/i;
-const DESC_PATTERN = /<desc(?:\s[^>]*)?>[\s\S]*?<\/desc>/i;
+// Bounded quantifiers (vs `*`) keep the scan linear, the same reason forbidden-svg-pattern.mjs bounds
+// its `data:` arm: an unbounded version backtracks quadratically on a 150KB logo made of `<title `
+// repetitions with no closing tag — measured 4.2s of CPU for a single request, against 29ms bounded.
+// An accessible name longer than the content bound simply is not restored, as before this existed.
+const TITLE_PATTERN = /<title(?:\s[^>]{0,256})?>[\s\S]{0,512}?<\/title>/i;
+const DESC_PATTERN = /<desc(?:\s[^>]{0,256})?>[\s\S]{0,512}?<\/desc>/i;
 const OPEN_SVG_TAG_PATTERN = /<svg[^>]*>/i;
 
 // usvg keeps gradients, filters and opacity but discards `<title>` and `<desc>` — the accessible name
