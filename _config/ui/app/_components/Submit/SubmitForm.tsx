@@ -10,6 +10,7 @@ import ArrowDown from '@icons/arrow-down.svg';
 import {DEFAULT_CHAIN} from '@utils/constants';
 import type {TTokenInfo} from '@utils/infoJson';
 import {canFetchOnchain, fetchOnchainToken} from '@utils/onchainToken';
+import {containsTextElement} from '@utils/svgSafety';
 import {fetchTokenPrefill} from '@utils/tokenPrefill';
 import {
 	isValidAddress,
@@ -451,8 +452,12 @@ export function SubmitForm({
 		// An unchanged logo is never re-sent: rewriting an identical SVG would also re-rasterize both
 		// PNGs, putting three no-op files in the diff. Compared on the trimmed form because that is what
 		// the server writes, so a stored file differing only by trailing whitespace still counts as equal.
+		//
+		// Equal input no longer means equal output though: the route outlines `<text>` to paths, so
+		// re-sending the bytes already on the CDN is what converts a text logo. Skipping that would leave
+		// every existing one unfixable from this form.
 		let svgToSend = svgText;
-		if (isEditing && svgText.trim() === baseSvgText.trim()) {
+		if (isEditing && svgText.trim() === baseSvgText.trim() && !containsTextElement(svgText)) {
 			svgToSend = '';
 		}
 		const input: TSubmissionInput = {...currentInput(), svgText: svgToSend};

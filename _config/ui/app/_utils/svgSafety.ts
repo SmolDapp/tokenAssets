@@ -12,3 +12,13 @@ const FORBIDDEN_SVG_PATTERN =
 export function isForbiddenSvg(svg: string): boolean {
 	return FORBIDDEN_SVG_PATTERN.test(svg);
 }
+
+// Mirrors the detection in svgRaster.server.ts, which cannot be imported here: it pulls in resvg, a
+// native server-only package. Kept in this module because both the client and the server need it.
+const TEXT_ELEMENT_PATTERN = /<(text|tspan)[\s>]/i;
+
+// The submit route outlines `<text>` to paths, so an SVG containing text is never committed as-is —
+// re-submitting the exact bytes already on the CDN still produces a different file.
+export function containsTextElement(svg: string): boolean {
+	return TEXT_ELEMENT_PATTERN.test(svg);
+}
