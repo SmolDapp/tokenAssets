@@ -2,5 +2,6 @@
   "name": "vS Token",
   "symbol": "vS",
   "decimals": 18,
+  "description": "Elegant DeFi protocol for Sonic airdrop recipients: Transform illiquid vesting NFTs into tradeable vS tokens. Immediate liquidity, market-driven pricing, immutable contracts, zero penalty burns. Your airdrop, liquid today.",
   "website": "https://github.com/b1rdmania/vs-token-mvp"
 }
