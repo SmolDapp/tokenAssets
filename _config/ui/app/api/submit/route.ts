@@ -1,14 +1,17 @@
 import {Octokit} from '@octokit/core';
 import {CHAINS} from '@utils/constants';
+import {readBlobText, readFolderEntries} from '@utils/githubRepo.server';
+import {mergeTokenInfo, parseInfoJson, serializeInfoJson, type TTokenInfo} from '@utils/infoJson';
 import {isSquareEnough, renderPngBase64} from '@utils/svgRaster.server';
 import {
-	buildInfoJson,
+	isValidAddress,
 	parseTags,
 	type TSubmissionInput,
+	type TValidationScope,
 	toFolderAddress,
-	validateSubmission
+	validateSubmission,
+	validateTags
 } from '@utils/tokenSubmission';
-import {findToken} from '@utils/tokens.server';
 import {NextResponse} from 'next/server';
 import {getToken} from 'next-auth/jwt';
 import {createPullRequest} from 'octokit-plugin-create-pull-request';
@@ -44,6 +47,26 @@ function isRateLimited(ip: string): boolean {
 	return recent.length > RATE_MAX;
 }
 
+// A label reaches the PR title, the commit message and the branch name. On an edit it comes from the
+// file on disk, which predates the current validation rules, so it is not bound by them — and even a
+// validated symbol may carry backticks or brackets that break out of a markdown code span.
+function safeLabel(value: string, fallback: string): string {
+	const cleaned = value.trim().replace(/[^A-Za-z0-9._+-]/g, '');
+	if (!cleaned) {
+		return fallback;
+	}
+	return cleaned.slice(0, 32);
+}
+
+// The project link is validated for scheme and whitespace but not for markdown. Left as-is it can close
+// its own autolink and render an arbitrary link next to it, which is exactly what a reviewer reads.
+function safeURL(value: string): string {
+	return value
+		.trim()
+		.replace(/[<>`[\]()*_~|\\]/g, '')
+		.slice(0, 200);
+}
+
 type TSubmitBody = {
 	chainID?: string;
 	address?: string;
@@ -54,6 +77,9 @@ type TSubmitBody = {
 	description?: string;
 	website?: string;
 	tags?: string;
+	// True only when the caller means to edit a token that already exists. Absent means "add a new
+	// token", which keeps the old contract — and the old 409 — intact for every existing caller.
+	isEdit?: boolean;
 };
 
 export async function POST(request: Request): Promise<Response> {
@@ -102,41 +128,38 @@ export async function POST(request: Request): Promise<Response> {
 	if (!chain) {
 		return NextResponse.json({error: 'Unsupported chain.'}, {status: 400});
 	}
-	const validationErrors = validateSubmission(input);
+
+	// Checked before the address is used to build any path: the strict form is what stops a "/" or a
+	// backtick from injecting a folder or markdown further down.
+	if (!isValidAddress(input.chainID, input.address)) {
+		return NextResponse.json({error: 'Enter a valid contract address for the selected chain'}, {status: 400});
+	}
+
+	const isEdit = body.isEdit === true;
+	const svg = `${input.svgText.trim()}\n`;
+	const hasNewLogo = input.svgText.length > 0;
+	const folderAddress = toFolderAddress(input.address);
+	const folder = `tokens/${input.chainID}/${folderAddress}`;
+
+	// An edit brings a logo only when it replaces one, never brings a project link for the many tokens
+	// that have none, and carries name/symbol/decimals over from the base file untouched. Taking the flag
+	// from the body is safe here because it only relaxes requirements: the folder cross-check below still
+	// decides whether this really is an edit, so a caller cannot use it to slip a new token through.
+	const scope: TValidationScope = {
+		requireLogo: !isEdit,
+		requireWebsite: !isEdit,
+		requireMeta: !isEdit
+	};
+	const tags = parseTags(body.tags || '');
+	const validationErrors = [...validateSubmission(input, scope), ...validateTags(tags)];
 	if (validationErrors.length > 0) {
 		return NextResponse.json({error: validationErrors[0].message}, {status: 400});
 	}
 
-	const svg = `${input.svgText.trim()}\n`;
-	const folderAddress = toFolderAddress(input.address);
-	// Reject addresses already in the CDN before opening a PR — mirrors the client-side guard so a
-	// direct API call (bypassing the disabled button) can't open a duplicate-address PR either.
-	if (findToken(input.chainID, folderAddress)) {
-		return NextResponse.json({error: 'This token already exists in the CDN.'}, {status: 409});
-	}
-	const folder = `tokens/${input.chainID}/${folderAddress}`;
-	const infoJson = buildInfoJson(input, parseTags(body.tags || ''));
-	const label = input.symbol.trim() || input.address;
-
-	// Explorer links so a reviewer can eyeball the token + check the contract is verified in one click.
-	let explorerLine = '- **Explorer:** not available for this chain';
-	if (chain.explorer) {
-		explorerLine = `- **Explorer:** [token page](${chain.explorer}/token/${input.address}) · [contract code](${chain.explorer}/address/${input.address}#code)`;
-	}
-
-	let png32 = '';
-	let png128 = '';
-	try {
-		if (!isSquareEnough(svg)) {
-			return NextResponse.json({error: 'The logo must be roughly square.'}, {status: 400});
-		}
-		png32 = renderPngBase64(svg, 32);
-		png128 = renderPngBase64(svg, 128);
-	} catch {
-		return NextResponse.json({error: 'Could not rasterize the SVG to PNG.'}, {status: 400});
-	}
-
 	const [owner, repoName] = repo.split('/');
+	if (!owner || !repoName) {
+		return NextResponse.json({error: 'Server misconfiguration: invalid GITHUB_SUBMIT_REPO.'}, {status: 500});
+	}
 	const octokit = new SubmitOctokit({auth: token});
 
 	// Pre-flight scope check. Opening the PR forks the repo and writes a branch (createRef); when the
@@ -165,6 +188,123 @@ export async function POST(request: Request): Promise<Response> {
 		);
 	}
 
+	// Existence is resolved against the live base repo, not against public/data/tokens/<id>.json: that
+	// snapshot is committed at build time, so a token merged since the last deploy is invisible to it —
+	// and writing a path that already exists updates it silently. Asking GitHub also compares the exact
+	// case-sensitive folder, which is what a Solana address in a different case would otherwise slip past.
+	let entries: Awaited<ReturnType<typeof readFolderEntries>>;
+	try {
+		entries = await readFolderEntries(octokit, owner, repoName, base, folder);
+	} catch {
+		return NextResponse.json({error: 'Could not read the token from GitHub — try again.'}, {status: 502});
+	}
+	const folderExists = entries !== null;
+
+	if (!isEdit && folderExists) {
+		return NextResponse.json({error: 'This token already exists in the CDN.'}, {status: 409});
+	}
+	if (isEdit && !folderExists) {
+		return NextResponse.json(
+			{error: 'This token is not on the CDN yet — submit it as a new token.'},
+			{status: 404}
+		);
+	}
+
+	// name/symbol/decimals come from the file on disk rather than from the request, so a crafted POST
+	// cannot rename a token. A folder with no info.json has nothing to take them from, which would leave
+	// the request as the only source — so an edit is refused there, exactly as it is when the file cannot
+	// be parsed. Those folders are still reachable through a hand-written pull request.
+	let baseInfo: TTokenInfo | null = null;
+	if (isEdit) {
+		const infoEntry = entries?.find(entry => entry.name === 'info.json');
+		if (!infoEntry) {
+			return NextResponse.json(
+				{error: 'This token has no info.json yet — open a pull request manually to add one.'},
+				{status: 400}
+			);
+		}
+		let baseRaw: string;
+		try {
+			baseRaw = await readBlobText(octokit, owner, repoName, infoEntry.sha);
+		} catch {
+			return NextResponse.json({error: 'Could not read the token from GitHub — try again.'}, {status: 502});
+		}
+		baseInfo = parseInfoJson(baseRaw);
+		if (!baseInfo) {
+			return NextResponse.json(
+				{error: "This token's info.json has a field this form cannot edit — open a pull request manually."},
+				{status: 400}
+			);
+		}
+	}
+
+	const info = mergeTokenInfo({base: baseInfo, input, tags});
+	const infoJson = serializeInfoJson(info);
+	const label = safeLabel(info.symbol, input.address);
+
+	// Explorer links so a reviewer can eyeball the token + check the contract is verified in one click.
+	let explorerLine = '- **Explorer:** not available for this chain';
+	if (chain.explorer) {
+		explorerLine = `- **Explorer:** [token page](${chain.explorer}/token/${input.address}) · [contract code](${chain.explorer}/address/${input.address}#code)`;
+	}
+
+	// Skipped entirely when the edit keeps the current logo: feeding an empty string to resvg would throw
+	// and surface as a misleading "could not rasterize". logo.svg is never written without both PNGs,
+	// because the CI requires all three logo files together in a folder.
+	let png32 = '';
+	let png128 = '';
+	if (hasNewLogo) {
+		try {
+			if (!isSquareEnough(svg)) {
+				return NextResponse.json({error: 'The logo must be roughly square.'}, {status: 400});
+			}
+			png32 = renderPngBase64(svg, 32);
+			png128 = renderPngBase64(svg, 128);
+		} catch {
+			return NextResponse.json({error: 'Could not rasterize the SVG to PNG.'}, {status: 400});
+		}
+	}
+
+	const files: Record<string, string | {content: string; encoding: 'base64'}> = {
+		[`${folder}/info.json`]: infoJson
+	};
+	if (hasNewLogo) {
+		files[`${folder}/logo.svg`] = svg;
+		files[`${folder}/logo-32.png`] = {content: png32, encoding: 'base64'};
+		files[`${folder}/logo-128.png`] = {content: png128, encoding: 'base64'};
+	}
+
+	let intro = 'Submitted via the Token Assets submit form.';
+	let title = `Add ${label} on ${chain.name}`;
+	let commit = `feat: add ${label} on ${chain.name}`;
+	let branchPrefix = 'submit';
+	let bodyLines = [
+		`- **Chain:** ${chain.name} (\`${input.chainID}\`)`,
+		`- **Address:** \`${input.address}\``,
+		`- **Symbol:** ${safeLabel(input.symbol, '?')} · **Decimals:** ${input.decimals}`,
+		`- **Project:** <${safeURL(input.website)}>`
+	];
+	if (isEdit) {
+		intro = 'Edited via the Token Assets submit form.';
+		title = `Update ${label} on ${chain.name}`;
+		commit = `chore: update ${label} on ${chain.name}`;
+		branchPrefix = 'edit';
+		// An edit prints no field value. description legitimately contains newlines and markdown lists,
+		// so interpolating it would let a submission forge extra body lines — a fake "- **Address:**"
+		// above the real one, for instance. The diff shows the values anyway.
+		let logoLine = '- **Logo:** unchanged';
+		if (hasNewLogo) {
+			logoLine = '- **Logo:** replaced';
+		}
+		bodyLines = [
+			`- **Chain:** ${chain.name} (\`${input.chainID}\`)`,
+			`- **Address:** \`${input.address}\``,
+			`- **Folder:** \`${folder}\``,
+			logoLine
+		];
+	}
+	bodyLines.push(explorerLine);
+
 	try {
 		const pr = await octokit.createPullRequest({
 			owner,
@@ -173,33 +313,24 @@ export async function POST(request: Request): Promise<Response> {
 			// directly — no fork, so no createRef-on-fork `repo`-scope escalation. Contributors WITHOUT push
 			// are still auto-forked by the plugin, so their PR still comes from their own fork.
 			forceFork: false,
-			title: `Add ${label} on ${chain.name}`,
-			body: [
-				'Submitted via the Token Assets submit form.',
-				'',
-				`- **Chain:** ${chain.name} (\`${input.chainID}\`)`,
-				`- **Address:** \`${input.address}\``,
-				`- **Symbol:** ${input.symbol} · **Decimals:** ${input.decimals}`,
-				`- **Project:** <${input.website.trim()}>`,
-				explorerLine
-			].join('\n'),
+			title,
+			body: [intro, '', ...bodyLines].join('\n'),
 			base,
-			head: `submit/${input.chainID}-${folderAddress}-${Date.now()}`,
+			// Without this the plugin happily commits an unchanged tree, pushes a branch and opens a PR
+			// with an empty diff. Submitting an edit without changing anything is the most likely accident
+			// in this flow, so it has to fail before any ref is written.
+			createWhenEmpty: false,
+			head: `${branchPrefix}/${input.chainID}-${folderAddress}-${Date.now()}`,
 			changes: [
 				{
-					commit: `feat: add ${label} on ${chain.name}`,
-					files: {
-						[`${folder}/logo.svg`]: svg,
-						[`${folder}/logo-32.png`]: {content: png32, encoding: 'base64'},
-						[`${folder}/logo-128.png`]: {content: png128, encoding: 'base64'},
-						[`${folder}/info.json`]: infoJson
-					}
+					commit,
+					files
 				}
 			]
 		});
 		const url = pr?.data?.html_url;
 		if (!url) {
-			return NextResponse.json({error: 'No changes to submit — this token may already exist.'}, {status: 409});
+			return NextResponse.json({error: 'No changes to submit.'}, {status: 409});
 		}
 		return NextResponse.json({prUrl: url});
 	} catch (error) {

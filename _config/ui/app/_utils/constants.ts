@@ -36,6 +36,13 @@ export const DEFAULT_CHAIN: TChainInfo = CHAINS.find(chain => chain.slug === 'et
 export const SITE_URI = 'https://tokens.smold.app';
 export const ASSETS_BASE_URI = 'https://assets.smold.app';
 export const GITHUB_URI = 'https://github.com/SmolDapp/tokenAssets';
+// Read straight from the repo because the assets CDN does not serve info.json. Must resolve to the same
+// repo and branch the submit route writes to (GITHUB_SUBMIT_REPO / GITHUB_SUBMIT_BASE): the form shows
+// and diffs against what it reads here, so pointing the two at different trees would make an edit erase
+// fields it never displayed. Read on the client, hence the NEXT_PUBLIC_ twins.
+const SUBMIT_REPO = process.env.NEXT_PUBLIC_GITHUB_SUBMIT_REPO || 'SmolDapp/tokenAssets';
+const SUBMIT_BASE = process.env.NEXT_PUBLIC_GITHUB_SUBMIT_BASE || 'main';
+export const GITHUB_RAW_TOKENS_URI = `https://raw.githubusercontent.com/${SUBMIT_REPO}/${SUBMIT_BASE}/tokens`;
 export const SMOLD_APP_URI = 'https://smold.app';
 export const BRAND_GREEN = '#123524';
 

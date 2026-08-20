@@ -8,23 +8,57 @@ import {Input} from '@components/ui/input';
 import {useTokens} from '@hooks/useTokens';
 import ArrowDown from '@icons/arrow-down.svg';
 import {DEFAULT_CHAIN} from '@utils/constants';
+import type {TTokenInfo} from '@utils/infoJson';
 import {canFetchOnchain, fetchOnchainToken} from '@utils/onchainToken';
+import {fetchTokenPrefill} from '@utils/tokenPrefill';
 import {
 	isValidAddress,
+	parseTags,
+	type TErasableField,
 	type TSubmissionInput,
 	type TValidationError,
+	type TValidationScope,
+	toFolderAddress,
 	validateSubmission,
+	validateTags,
 	validateTokenMeta
 } from '@utils/tokenSubmission';
 import {useRouter} from 'next/navigation';
 import {signIn} from 'next-auth/react';
 import type {ReactElement, ReactNode} from 'react';
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 
 type TMetaStatus = 'idle' | 'loading' | 'ready' | 'error' | 'unsupported';
+type TPrefillStatus = 'idle' | 'loading' | 'ready' | 'error';
+// Set from a route answer that contradicts the local token list, and cleared as soon as the address or
+// chain changes.
+type TForcedMode = 'edit' | 'create' | null;
+
+// What survives the GitHub sign-in redirect, stashed in sessionStorage just before signIn().
+type TStash = {
+	chainID: string;
+	address: string;
+	svgText: string;
+	svgFileName: string;
+	name: string;
+	symbol: string;
+	decimals: string;
+	description: string;
+	website: string;
+	tagsRaw: string;
+};
+
+const ERASABLE_FIELDS: TErasableField[] = ['website', 'description', 'tags'];
 
 const inputClassName = 'border border-white/15 bg-white/5 text-white placeholder:text-white/30 focus:border-white/40';
 const STASH_KEY = 'token-submit-stash';
+
+// Identifies the token whose values are in the form. Keyed on the folder the submission would write to,
+// like every other "same token" decision here, so re-pasting an address in a different case is not
+// mistaken for a different token.
+function prefillKey(chainID: string, address: string): string {
+	return `${chainID}/${toFolderAddress(address)}`;
+}
 
 const labelClassName = 'block font-medium font-mono text-white/50 text-xs uppercase tracking-[0.1em]';
 
@@ -86,16 +120,64 @@ export function SubmitForm({
 	const [submitError, setSubmitError] = useState('');
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [prURL, setPrURL] = useState<string | null>(null);
+	const [baseInfo, setBaseInfo] = useState<TTokenInfo | null>(null);
+	const [baseSvgText, setBaseSvgText] = useState('');
+	const [prefillStatus, setPrefillStatus] = useState<TPrefillStatus>('idle');
+	const [prefillNonce, setPrefillNonce] = useState(0);
+	const [confirmErasure, setConfirmErasure] = useState(false);
+	const [forcedMode, setForcedMode] = useState<TForcedMode>(null);
+	// `<chainID>/<address>` of the token whose values are already in the form, so the prefill applies
+	// once and never overwrites what the user typed.
+	const appliedPrefillKeyRef = useRef('');
 
 	// Cross-checked against the same per-chain token list the browse pages use, so a submission
 	// for an address already in the CDN is caught before the user fills out the rest of the form.
-	const {findToken} = useTokens(chainID);
+	// Matched on the folder the submission would write to, not on a lowercased address: a Solana
+	// address typed in a different case resolves to a different folder and is genuinely new.
+	const {findByFolderAddress, isLoading: isTokenListLoading, hasError: hasTokenListError} = useTokens(chainID);
 	const existingToken = useMemo(() => {
 		if (!isValidAddress(chainID, address)) {
 			return undefined;
 		}
-		return findToken(address.trim());
-	}, [findToken, chainID, address]);
+		return findByFolderAddress(address.trim());
+	}, [findByFolderAddress, chainID, address]);
+
+	// The token list starts empty and fills in asynchronously, so "no match" is only meaningful once it
+	// has loaded. Without this the form flickers through the add state on a token that does exist.
+	//
+	// That list is a build-time snapshot while the route resolves existence against GitHub live, so the
+	// two can disagree — a token merged since the last index refresh, or a folder deleted from main. The
+	// route's answer wins: it sets `forcedMode` and the form switches instead of dead-ending on a status
+	// the user has no way to act on.
+	let isEditing = Boolean(existingToken) && !isTokenListLoading && !hasTokenListError;
+	if (forcedMode === 'edit') {
+		isEditing = true;
+	}
+	if (forcedMode === 'create') {
+		isEditing = false;
+	}
+	// name/symbol/decimals are carried over from the base file untouched, so they are neither shown
+	// nor re-validated. That also keeps the tokens whose symbol or name predates the current rules
+	// editable instead of permanently stuck.
+	const metaLocked = isEditing && baseInfo !== null;
+
+	// Fields that hold a value on disk and would be written away by this submission. An edit replaces
+	// the whole file, so removing them is legitimate — but it has to be confirmed rather than happen as
+	// a side effect of a collapsed accordion.
+	const erasures = useMemo(() => {
+		if (!isEditing || !baseInfo) {
+			return [];
+		}
+		return ERASABLE_FIELDS.filter(field => {
+			if (field === 'website') {
+				return Boolean(baseInfo.website) && !website.trim();
+			}
+			if (field === 'description') {
+				return Boolean(baseInfo.description) && !description.trim();
+			}
+			return Boolean(baseInfo.tags?.length) && parseTags(tagsRaw).length === 0;
+		});
+	}, [isEditing, baseInfo, website, description, tagsRaw]);
 
 	const svgDataURL = useMemo(() => {
 		if (!svgText) {
@@ -103,6 +185,84 @@ export function SubmitForm({
 		}
 		return `data:image/svg+xml,${encodeURIComponent(svgText)}`;
 	}, [svgText]);
+
+	// Read the token's current metadata and logo as soon as the address resolves to something already on
+	// the CDN, and fill the form with them: an edit rewrites the whole file, so the form has to start
+	// from what is on disk or submitting would wipe every field the user did not retype. A 404 on
+	// info.json is a normal answer (some folders have logos only); anything else must surface as an error,
+	// because an empty form standing in for a failed read looks exactly like a deliberate erasure.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: prefillNonce is an intentional re-run trigger for the Retry button, not read inside the effect.
+	useEffect(() => {
+		// A mode forced by the route is authoritative and does not wait on the local list. Otherwise
+		// "not in the list" only means something once the list has actually loaded — bailing out while it
+		// is in flight is also what lets values restored from the sign-in stash survive the mount.
+		if (forcedMode !== 'edit') {
+			if (isTokenListLoading || hasTokenListError) {
+				return;
+			}
+			if (!existingToken) {
+				appliedPrefillKeyRef.current = '';
+				setBaseInfo(null);
+				setBaseSvgText('');
+				setPrefillStatus('idle');
+				setConfirmErasure(false);
+				return;
+			}
+		}
+		let cancelled = false;
+		setPrefillStatus('loading');
+		fetchTokenPrefill(chainID, address.trim())
+			.then(prefill => {
+				if (cancelled) {
+					return;
+				}
+				setBaseInfo(prefill.info);
+				setBaseSvgText(prefill.svgText);
+				setPrefillStatus('ready');
+				// Applied once per token: re-running on every render would fight the user's typing, and
+				// the sign-in restore claims this key first so it is not overwritten either.
+				const key = prefillKey(chainID, address);
+				if (appliedPrefillKeyRef.current === key) {
+					return;
+				}
+				appliedPrefillKeyRef.current = key;
+				setWebsite(prefill.info?.website || '');
+				setDescription(prefill.info?.description || '');
+				setTagsRaw((prefill.info?.tags || []).join(', '));
+				setSvgText(prefill.svgText);
+				setSvgError('');
+				setErrors([]);
+				// Belongs to the token that was just left, not to this one: going straight from one
+				// existing token to another would otherwise carry a ticked confirmation across.
+				setConfirmErasure(false);
+				let fileName = '';
+				if (prefill.svgText) {
+					fileName = 'Current logo';
+				}
+				setSvgFileName(fileName);
+				// Description and tags sit behind a collapsed accordion; leaving it shut would hide the
+				// very values this submission is about to rewrite.
+				if (prefill.info?.description || prefill.info?.tags?.length) {
+					setShowOptional(true);
+				}
+			})
+			.catch(() => {
+				if (cancelled) {
+					return;
+				}
+				setPrefillStatus('error');
+			});
+		return () => {
+			cancelled = true;
+		};
+	}, [existingToken, isTokenListLoading, hasTokenListError, forcedMode, chainID, address, prefillNonce]);
+
+	// A forced mode belongs to one address on one chain. Editing either invalidates it, so the form goes
+	// back to trusting the local token list.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: clearing on address/chain change is the point; forcedMode is written here, not read.
+	useEffect(() => {
+		setForcedMode(null);
+	}, [chainID, address]);
 
 	// Auto-read name/symbol/decimals whenever the address or chain changes. Debounced and race-safe:
 	// a newer address/chain cancels the in-flight result so stale metadata never lands.
@@ -224,7 +384,7 @@ export function SubmitForm({
 		}
 		sessionStorage.removeItem(STASH_KEY);
 		try {
-			const stash = JSON.parse(raw) as Record<string, string>;
+			const stash = JSON.parse(raw) as Partial<TStash>;
 			setChainID(stash.chainID || DEFAULT_CHAIN.id);
 			setAddress(stash.address || '');
 			setSvgText(stash.svgText || '');
@@ -235,6 +395,12 @@ export function SubmitForm({
 			setDescription(stash.description || '');
 			setWebsite(stash.website || '');
 			setTagsRaw(stash.tagsRaw || '');
+			// Claim the prefill key for the token being restored. Without this the prefill resolves a
+			// moment later on a fresh mount, finds an unclaimed ref, and overwrites everything the user
+			// typed before being sent to GitHub — silently, and the submission then has nothing to change.
+			if (stash.address) {
+				appliedPrefillKeyRef.current = prefillKey(stash.chainID || DEFAULT_CHAIN.id, stash.address);
+			}
 		} catch {
 			// ignore a corrupt stash
 		}
@@ -282,10 +448,20 @@ export function SubmitForm({
 	}
 
 	async function handleSubmit(): Promise<void> {
-		if (existingToken) {
-			return;
+		// An unchanged logo is never re-sent: rewriting an identical SVG would also re-rasterize both
+		// PNGs, putting three no-op files in the diff. Compared on the trimmed form because that is what
+		// the server writes, so a stored file differing only by trailing whitespace still counts as equal.
+		let svgToSend = svgText;
+		if (isEditing && svgText.trim() === baseSvgText.trim()) {
+			svgToSend = '';
 		}
-		const validationErrors = validateSubmission(currentInput());
+		const input: TSubmissionInput = {...currentInput(), svgText: svgToSend};
+		const scope: TValidationScope = {
+			requireLogo: !isEditing,
+			requireWebsite: !isEditing,
+			requireMeta: !metaLocked
+		};
+		const validationErrors = [...validateSubmission(input, scope), ...validateTags(parseTags(tagsRaw))];
 		setErrors(validationErrors);
 		if (validationErrors.length > 0) {
 			return;
@@ -304,17 +480,36 @@ export function SubmitForm({
 				body: JSON.stringify({
 					chainID,
 					address: address.trim(),
-					svg: svgText,
+					svg: svgToSend,
 					name,
 					symbol,
 					decimals,
 					description,
 					website,
-					tags: tagsRaw
+					tags: tagsRaw,
+					// Absent for a new token, which keeps the add-only contract — and its 409 — intact.
+					isEdit: isEditing
 				})
 			});
 			const data = (await response.json()) as {error?: string; prUrl?: string};
 			if (!response.ok) {
+				// The route resolves existence against the live repo; the local token list is a snapshot.
+				// When they disagree, switch the form to what the route says instead of leaving the user
+				// on a status they cannot act on. The prefill then reloads for the new mode.
+				if (response.status === 409 && !isEditing) {
+					setForcedMode('edit');
+					setSubmitError(
+						'This token is already on the CDN — switched to editing it. Review and submit again.'
+					);
+					return;
+				}
+				if (response.status === 404 && isEditing) {
+					setForcedMode('create');
+					setSubmitError(
+						'This token is not on the CDN yet — switched to adding it. Review and submit again.'
+					);
+					return;
+				}
 				setSubmitError(data.error || 'Submission failed — please try again.');
 				return;
 			}
@@ -344,6 +539,11 @@ export function SubmitForm({
 		setShowOptional(false);
 		setErrors([]);
 		setSubmitError('');
+		setBaseInfo(null);
+		setBaseSvgText('');
+		setPrefillStatus('idle');
+		setConfirmErasure(false);
+		setForcedMode(null);
 	}
 
 	// name/symbol/decimals must pass the same checks the submission does, whether they were typed
@@ -352,12 +552,26 @@ export function SubmitForm({
 	const metaFieldsValid = validateTokenMeta(name, symbol, decimals).length === 0;
 	// Show the editable metadata fields when the chain has no RPC, OR when an on-chain read
 	// succeeded but returned values that don't pass validation (pre-filled, so the user can fix).
-	const showManualFields = metaStatus === 'unsupported' || (metaStatus === 'ready' && !metaFieldsValid);
-	const metaReady = (metaStatus === 'ready' || metaStatus === 'unsupported') && metaFieldsValid;
+	// Never in an edit that has a base file to carry those three fields over from.
+	const showManualFields =
+		!metaLocked && (metaStatus === 'unsupported' || (metaStatus === 'ready' && !metaFieldsValid));
+	const metaReady = metaLocked || ((metaStatus === 'ready' || metaStatus === 'unsupported') && metaFieldsValid);
+	const needsErasureConfirm = erasures.length > 0 && !confirmErasure;
 
 	// The submit button is the single status surface (fixed size → no layout shift):
 	// disabled until everything is present, a spinner while reading the chain or opening the PR.
-	const canSubmit = metaReady && !existingToken && svgText.length > 0 && website.trim().length > 0;
+	// An edit needs no project link (the vast majority of tokens on disk have none) but does need the
+	// logo the prefill loaded, so that submitting never blanks it.
+	let canSubmit = metaReady && svgText.length > 0 && website.trim().length > 0;
+	if (isEditing) {
+		canSubmit = metaReady && prefillStatus === 'ready' && !needsErasureConfirm && svgText.length > 0;
+	}
+	// Without the list there is no way to tell an addition from an edit, and guessing "addition" would
+	// send the user into a 409 with nothing to act on. `hasError` is sticky per chain, so a reload is the
+	// way out — say so rather than failing at submit time.
+	if (hasTokenListError && forcedMode === null) {
+		canSubmit = false;
+	}
 	const isBusy = isSubmitting || metaStatus === 'loading';
 
 	let submitContent: ReactNode = 'Open pull request →';
@@ -367,10 +581,22 @@ export function SubmitForm({
 				<span className={'sr-only'}>{isSubmitting ? 'Submitting…' : 'Reading token metadata…'}</span>
 			</span>
 		);
+	} else if (hasTokenListError && forcedMode === null) {
+		submitContent = 'Token list unavailable — reload';
+	} else if (isEditing && prefillStatus === 'error') {
+		submitContent = 'Could not read this token';
+	} else if (isEditing && prefillStatus !== 'ready') {
+		submitContent = 'Reading current details…';
+	} else if (isEditing && needsErasureConfirm) {
+		submitContent = 'Confirm the removal';
+	} else if (isEditing && !svgText) {
+		submitContent = 'Add a logo';
+	} else if (isEditing && !signedIn) {
+		submitContent = 'Sign in with GitHub →';
+	} else if (isEditing) {
+		submitContent = 'Update this token →';
 	} else if (metaStatus === 'error') {
 		submitContent = 'Token not readable';
-	} else if ((metaStatus === 'ready' || metaStatus === 'unsupported') && existingToken) {
-		submitContent = 'Token already exists';
 	} else if (showManualFields && !metaFieldsValid) {
 		submitContent = 'Fill in the token details';
 	} else if (metaReady && !svgText) {
@@ -412,7 +638,35 @@ export function SubmitForm({
 					/>
 				</Field>
 
-				{metaStatus === 'error' && (
+				{isEditing && (
+					<div className={'space-y-1.5 rounded-sm border border-white/20 bg-white/5 p-4'}>
+						<p className={'font-mono text-white/70 text-xs leading-relaxed'}>
+							{'This token is already on the CDN, you are editing it.'}
+						</p>
+						{prefillStatus === 'loading' && (
+							<p className={'font-mono text-white/40 text-xxs'}>{'Reading its current details…'}</p>
+						)}
+						{prefillStatus === 'error' && (
+							<div
+								role={'alert'}
+								className={'flex items-center justify-between gap-2'}>
+								<p className={'font-mono text-error text-xxs leading-relaxed'}>
+									{'Could not read its current details — editing is disabled until it loads.'}
+								</p>
+								<button
+									type={'button'}
+									onClick={() => setPrefillNonce(nonce => nonce + 1)}
+									className={
+										'shrink-0 font-mono text-white/70 text-xxs underline underline-offset-4 hover:text-white'
+									}>
+									{'Retry'}
+								</button>
+							</div>
+						)}
+					</div>
+				)}
+
+				{metaStatus === 'error' && !metaLocked && (
 					<div
 						className={
 							'flex items-center justify-between gap-2 rounded-sm border border-error/40 bg-error/10 p-3'
@@ -578,6 +832,25 @@ export function SubmitForm({
 						</div>
 					)}
 				</div>
+
+				{erasures.length > 0 && (
+					<div className={'space-y-2 rounded-sm border border-white/25 bg-white/5 p-3'}>
+						<p className={'font-mono text-white/70 text-xs leading-relaxed'}>
+							{`This submission removes ${erasures.join(', ')} from the token.`}
+						</p>
+						<label className={'flex cursor-pointer items-center gap-2'}>
+							<input
+								type={'checkbox'}
+								checked={confirmErasure}
+								onChange={() => setConfirmErasure(value => !value)}
+								className={'size-3.5 rounded-sm border-white/30 bg-white/5 text-white'}
+							/>
+							<span className={'font-mono text-white/50 text-xxs uppercase tracking-[0.1em]'}>
+								{'Remove them'}
+							</span>
+						</label>
+					</div>
+				)}
 
 				{errors.length > 0 && (
 					<div

@@ -3,6 +3,7 @@
 import {CHAINS} from '@utils/constants';
 import {isNewToken} from '@utils/helpers';
 import {rankBySearchScore} from '@utils/searchScore';
+import {toFolderAddress} from '@utils/tokenSubmission';
 import type {TToken} from '@utils/types';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
@@ -80,6 +81,7 @@ type TUseTokensResult = {
 	hasNextPage: boolean;
 	fetchNextPage: () => void;
 	findToken: (address: string) => TToken | undefined;
+	findByFolderAddress: (address: string) => TToken | undefined;
 };
 
 export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
@@ -162,12 +164,25 @@ export function useTokens(chainID: string, searchQuery = ''): TUseTokensResult {
 		[allTokens]
 	);
 
+	// Matches on the folder the submission would actually write to, so it is case-sensitive for Solana
+	// and lowercased for EVM. findToken lowercases both sides, which means a base58 address typed in a
+	// different case matches an existing token there while resolving to a different — new — folder.
+	// Anything that decides "this token exists" before writing must use this one.
+	const findByFolderAddress = useCallback(
+		(address: string): TToken | undefined => {
+			const folderAddress = toFolderAddress(address);
+			return allTokens.find(token => toFolderAddress(token.address) === folderAddress);
+		},
+		[allTokens]
+	);
+
 	return {
 		tokens: visibleTokens,
 		isLoading,
 		hasError,
 		hasNextPage: visibleCount < filteredTokens.length,
 		fetchNextPage,
-		findToken
+		findToken,
+		findByFolderAddress
 	};
 }

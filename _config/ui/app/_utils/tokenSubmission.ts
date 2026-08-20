@@ -1,5 +1,5 @@
-// Builds and validates a token submission. The on-disk info.json holds ONLY non-derivable data:
-// address / chainID / logoURI come from the folder path, so they are never stored here.
+// Builds and validates a token submission. Reading and writing the resulting info.json lives in
+// infoJson.ts.
 
 import {isForbiddenSvg} from '@utils/svgSafety';
 
@@ -37,15 +37,6 @@ function isValidSolanaAddress(value: string): boolean {
 	return base58Decode(value)?.length === 32;
 }
 
-export type TTokenInfo = {
-	name: string;
-	symbol: string;
-	decimals: number;
-	description?: string;
-	website?: string;
-	tags?: string[];
-};
-
 export type TSubmissionInput = {
 	chainID: string;
 	address: string;
@@ -58,9 +49,29 @@ export type TSubmissionInput = {
 };
 
 export type TValidationError = {
-	field: 'address' | 'svg' | 'name' | 'symbol' | 'decimals' | 'website';
+	field: 'address' | 'svg' | 'name' | 'symbol' | 'decimals' | 'website' | 'description' | 'tags';
 	message: string;
 };
+
+// The optional info.json fields, i.e. the ones an edit can leave empty and thereby remove.
+export type TErasableField = 'website' | 'description' | 'tags';
+
+// The three requirements that differ between adding a token and editing one, kept independent because
+// they genuinely vary independently: an edit never has to bring a logo, the vast majority of tokens on
+// disk have no website at all, and some carry a name or symbol that predates the current rules
+// (e.g. the symbol "yvCurve-stETH-frxETH-f"). Re-validating those on edit would make them uneditable.
+export type TValidationScope = {
+	requireLogo: boolean;
+	requireWebsite: boolean;
+	requireMeta: boolean;
+};
+
+const CREATE_SCOPE: TValidationScope = {requireLogo: true, requireWebsite: true, requireMeta: true};
+
+const MAX_DESCRIPTION = 2000;
+const MAX_TAGS = 10;
+const MAX_TAG_LENGTH = 32;
+const TAG_RE = /^[a-z0-9][a-z0-9 -]*$/;
 
 export function isNonEvmChain(chainID: string): boolean {
 	return NON_EVM_CHAINS.has(chainID);
@@ -123,56 +134,70 @@ export function validateTokenMeta(name: string, symbol: string, decimals: string
 	return errors;
 }
 
-export function validateSubmission(input: TSubmissionInput): TValidationError[] {
+export function validateSubmission(
+	input: TSubmissionInput,
+	scope: TValidationScope = CREATE_SCOPE
+): TValidationError[] {
 	const errors: TValidationError[] = [];
 
 	if (!isValidAddress(input.chainID, input.address)) {
 		errors.push({field: 'address', message: 'Enter a valid contract address for the selected chain'});
 	}
-	if (!input.svgText.includes('<svg')) {
-		errors.push({field: 'svg', message: 'Upload the token logo as an SVG file'});
-	} else if (isForbiddenSvg(input.svgText)) {
-		errors.push({
-			field: 'svg',
-			message: 'The SVG must be a pure vector — no scripts, event handlers, external links or embedded rasters.'
-		});
-	} else if (new TextEncoder().encode(input.svgText).length > 153_600) {
-		// Byte length (not UTF-16 code units) so client, server and the CI's `wc -c` cap agree:
-		// a multibyte SVG under 153,600 code units can still exceed 150KB on disk.
-		errors.push({field: 'svg', message: 'The SVG must be under 150KB'});
+	// An edit that leaves the logo alone sends no SVG at all. One that does send an SVG faces exactly
+	// the same checks as a new submission.
+	if (scope.requireLogo || input.svgText.length > 0) {
+		if (!input.svgText.includes('<svg')) {
+			errors.push({field: 'svg', message: 'Upload the token logo as an SVG file'});
+		} else if (isForbiddenSvg(input.svgText)) {
+			errors.push({
+				field: 'svg',
+				message:
+					'The SVG must be a pure vector — no scripts, event handlers, external links or embedded rasters.'
+			});
+		} else if (new TextEncoder().encode(input.svgText).length > 153_600) {
+			// Byte length (not UTF-16 code units) so client, server and the CI's `wc -c` cap agree:
+			// a multibyte SVG under 153,600 code units can still exceed 150KB on disk.
+			errors.push({field: 'svg', message: 'The SVG must be under 150KB'});
+		}
 	}
 
-	errors.push(...validateTokenMeta(input.name, input.symbol, input.decimals));
+	// Skipped when editing a token that already has an info.json: name/symbol/decimals are carried over
+	// from that file untouched, so re-checking the values the client echoed back would reject the tokens
+	// on disk whose symbol or name predates the current rules.
+	if (scope.requireMeta) {
+		errors.push(...validateTokenMeta(input.name, input.symbol, input.decimals));
+	}
 
 	const website = input.website.trim();
-	if (!website) {
+	if (scope.requireWebsite && !website) {
 		errors.push({field: 'website', message: 'A project link is required.'});
-	} else if (!/^https?:\/\//i.test(website)) {
+	} else if (website && !/^https?:\/\//i.test(website)) {
 		errors.push({field: 'website', message: 'Project link must start with http:// or https://.'});
-	} else if (/\s/.test(website)) {
+	} else if (website && /\s/.test(website)) {
 		errors.push({field: 'website', message: 'Project link cannot contain spaces.'});
+	}
+
+	// Free text is bounded because description and tags flow into a public repo and into every
+	// downstream consumer of info.json.
+	if (input.description.trim().length > MAX_DESCRIPTION) {
+		errors.push({field: 'description', message: `Description must be ${MAX_DESCRIPTION} characters or fewer`});
 	}
 
 	return errors;
 }
 
-// Assumes the input already passed validateSubmission. Empty optionals are omitted, not written as blanks.
-export function buildInfoJson(input: TSubmissionInput, tags: string[]): string {
-	const info: TTokenInfo = {
-		name: input.name.trim(),
-		symbol: input.symbol.trim(),
-		decimals: Number(input.decimals)
-	};
-	const description = input.description.trim();
-	if (description) {
-		info.description = description;
+// Tags are parsed before they can be counted, so this is separate from validateSubmission. parseTags
+// has already trimmed and lowercased them, hence the lowercase-only character set. Spaces are allowed
+// because tags on disk use them.
+export function validateTags(tags: string[]): TValidationError[] {
+	if (tags.length > MAX_TAGS) {
+		return [{field: 'tags', message: `Use ${MAX_TAGS} tags or fewer`}];
 	}
-	const website = input.website.trim();
-	if (website) {
-		info.website = website;
+	if (tags.some(tag => tag.length > MAX_TAG_LENGTH)) {
+		return [{field: 'tags', message: `Each tag must be ${MAX_TAG_LENGTH} characters or fewer`}];
 	}
-	if (tags.length > 0) {
-		info.tags = tags;
+	if (tags.some(tag => !TAG_RE.test(tag))) {
+		return [{field: 'tags', message: 'Tags may only use letters, numbers, spaces and hyphens'}];
 	}
-	return `${JSON.stringify(info, null, 2)}\n`;
+	return [];
 }
