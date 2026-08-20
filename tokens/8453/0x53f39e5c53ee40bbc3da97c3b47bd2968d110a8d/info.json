@@ -1,0 +1,10 @@
+{
+  "name": "Aligned Token",
+  "symbol": "ALIGN",
+  "decimals": 18,
+  "description": "Token overview\n\n- Total supply: 10,000,000,000 ALIGN.\n- Initial circulating supply: approximately 16% of total supply at TGE.\n\nToken contracts\n\nThe official ALIGN token contract addresses are:\n\n- Ethereum Mainnet: 0x50614CC8e44F7814549c223aA31db9296e58057c\n- Base: 0x53f39e5C53EE40bbc3Da97C3B47BD2968d110a8D",
+  "website": "https://alignedlayer.com/",
+  "tags": [
+    "infrastructure"
+  ]
+}
