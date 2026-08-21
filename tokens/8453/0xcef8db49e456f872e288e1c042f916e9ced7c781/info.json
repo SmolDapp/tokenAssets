@@ -1,0 +1,19 @@
+{
+  "name": "Reserve Magnificent 7 DTF (Base)",
+  "symbol": "MAG7",
+  "decimals": 18,
+  "description": "The Reserve Magnificent 7 DTF offers equal-weight exposure to seven of the largest publicly traded stocks, commonly known as the “Magnificent 7.” The basket comprises Alphabet (GOOGL), Amazon (AMZN), Apple (AAPL), Meta Platforms (META), Microsoft (MSFT), Nvidia (NVDA), and Tesla (TSLA) stocks in equal weights and rebalances every two months. MAG7 bundles Coinbase Tokenized Stocks on Base, each of which is backed by actual shares held in regulated US brokerage accounts.",
+  "website": "https://app.reserve.org/base/index-dtf/0xcef8db49e456f872e288e1c042f916e9ced7c781/overview",
+  "tags": [
+    "rwa",
+    "dtf",
+    "index",
+    "reserve",
+    "stocks",
+    "tokenized equities",
+    "defi",
+    "decentralized token fund",
+    "ai",
+    "hyperscalers"
+  ]
+}
