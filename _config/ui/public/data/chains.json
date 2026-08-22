@@ -16,18 +16,18 @@
 			"explorer": "https://basescan.org"
 		},
 		{
-			"id": "43114",
-			"name": "Avalanche",
-			"slug": "avalanche",
-			"count": 45,
-			"explorer": "https://snowtrace.io"
-		},
-		{
 			"id": "10",
 			"name": "Optimism",
 			"slug": "optimism",
 			"count": 462,
 			"explorer": "https://optimistic.etherscan.io"
+		},
+		{
+			"id": "43114",
+			"name": "Avalanche",
+			"slug": "avalanche",
+			"count": 45,
+			"explorer": "https://snowtrace.io"
 		},
 		{
 			"id": "42161",
@@ -106,18 +106,18 @@
 			"explorer": "https://fraxscan.com"
 		},
 		{
-			"id": "60808",
-			"name": "BOB",
-			"slug": "bob",
-			"count": 34,
-			"explorer": "https://explorer.gobob.xyz"
-		},
-		{
 			"id": "747474",
 			"name": "Katana",
 			"slug": "katana",
 			"count": 15,
 			"explorer": "https://katanascan.com"
+		},
+		{
+			"id": "60808",
+			"name": "BOB",
+			"slug": "bob",
+			"count": 34,
+			"explorer": "https://explorer.gobob.xyz"
 		},
 		{
 			"id": "34443",
