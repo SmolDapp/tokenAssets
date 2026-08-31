@@ -1,18 +1,18 @@
 {
-	"totalTokens": 4309,
+	"totalTokens": 4312,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1777,
+			"count": 1778,
 			"explorer": "https://etherscan.io"
 		},
 		{
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 934,
+			"count": 935,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -96,7 +96,7 @@
 			"id": "1151111081099710",
 			"name": "Solana",
 			"slug": "solana",
-			"count": 38
+			"count": 39
 		},
 		{
 			"id": "5000",
