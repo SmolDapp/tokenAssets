@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4308,
+	"totalTokens": 4309,
 	"chains": [
 		{
 			"id": "1",
@@ -12,7 +12,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 933,
+			"count": 934,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -42,6 +42,13 @@
 			"slug": "ink",
 			"count": 34,
 			"explorer": "https://explorer.inkonchain.com"
+		},
+		{
+			"id": "1135",
+			"name": "Lisk",
+			"slug": "lisk",
+			"count": 18,
+			"explorer": "https://blockscout.lisk.com"
 		},
 		{
 			"id": "1101",
@@ -153,13 +160,6 @@
 			"slug": "gnosis",
 			"count": 26,
 			"explorer": "https://gnosisscan.io"
-		},
-		{
-			"id": "1135",
-			"name": "Lisk",
-			"slug": "lisk",
-			"count": 18,
-			"explorer": "https://blockscout.lisk.com"
 		},
 		{
 			"id": "59144",
