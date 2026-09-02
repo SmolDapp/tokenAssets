@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4313,
+	"totalTokens": 4314,
 	"chains": [
 		{
 			"id": "1",
@@ -12,15 +12,8 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 936,
+			"count": 937,
 			"explorer": "https://basescan.org"
-		},
-		{
-			"id": "10",
-			"name": "Optimism",
-			"slug": "optimism",
-			"count": 462,
-			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
 			"id": "43114",
@@ -28,6 +21,13 @@
 			"slug": "avalanche",
 			"count": 45,
 			"explorer": "https://snowtrace.io"
+		},
+		{
+			"id": "10",
+			"name": "Optimism",
+			"slug": "optimism",
+			"count": 462,
+			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
 			"id": "42161",
