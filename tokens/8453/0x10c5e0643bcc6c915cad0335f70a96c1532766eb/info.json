@@ -1,0 +1,10 @@
+{
+  "name": "Syncrate Gold",
+  "symbol": "SGLD",
+  "decimals": 18,
+  "description": "SGLD is a tokenized gold asset issued by Syncrate Technologies Inc. with each token representing a direct ownership to one troy ounce of physical LMBA-grade gold bars.",
+  "website": "https://syncrate.org/sgld",
+  "tags": [
+    "real-world assets"
+  ]
+}
