@@ -1,0 +1,11 @@
+{
+  "name": "Alchemic USD Base",
+  "symbol": "alUSDb",
+  "decimals": 18,
+  "description": "alUSDb is a synthetic decentralized stablecoin that oscillates between being a tightly pegged stablecoin and a discounted and fully-redeemable zero-coupon bond.",
+  "website": "https://alchemix.fi/",
+  "tags": [
+    "stablecoin",
+    "defi"
+  ]
+}
