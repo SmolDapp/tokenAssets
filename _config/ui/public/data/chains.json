@@ -16,18 +16,18 @@
 			"explorer": "https://basescan.org"
 		},
 		{
-			"id": "43114",
-			"name": "Avalanche",
-			"slug": "avalanche",
-			"count": 45,
-			"explorer": "https://snowtrace.io"
-		},
-		{
 			"id": "10",
 			"name": "Optimism",
 			"slug": "optimism",
 			"count": 462,
 			"explorer": "https://optimistic.etherscan.io"
+		},
+		{
+			"id": "43114",
+			"name": "Avalanche",
+			"slug": "avalanche",
+			"count": 45,
+			"explorer": "https://snowtrace.io"
 		},
 		{
 			"id": "42161",
