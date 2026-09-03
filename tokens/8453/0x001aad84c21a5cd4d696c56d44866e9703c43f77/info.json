@@ -1,0 +1,15 @@
+{
+  "name": "Cluster Protocol",
+  "symbol": "CP",
+  "decimals": 18,
+  "description": "Cluster Protocol is the orchestration layer for autonomous Private AI workflows. It gives developers and agents one place to run serverless inference across 500+ models, access GPU compute, licensed datasets, and settle all of it onchain through x402 payment rails all on native Base. Its most recent round, announced in April 2026, was led by DAO5 (Tekin Salimi), with Paper Ventures, JPEG Trading, and Mapleblock Capital participating. The network token, $CP, has a fixed supply of 5,000,000,000 and is deployed on Base.",
+  "website": "https://www.clusterprotocol.ai/",
+  "tags": [
+    "private ai",
+    "ai infra",
+    "ai inference",
+    "x402",
+    "ai models",
+    "base native"
+  ]
+}
