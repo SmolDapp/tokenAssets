@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4316,
+	"totalTokens": 4317,
 	"chains": [
 		{
 			"id": "1",
@@ -12,7 +12,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 939,
+			"count": 940,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -106,18 +106,18 @@
 			"explorer": "https://mantlescan.xyz/"
 		},
 		{
-			"id": "252",
-			"name": "Fraxtal",
-			"slug": "fraxtal",
-			"count": 34,
-			"explorer": "https://fraxscan.com"
-		},
-		{
 			"id": "747474",
 			"name": "Katana",
 			"slug": "katana",
 			"count": 15,
 			"explorer": "https://katanascan.com"
+		},
+		{
+			"id": "252",
+			"name": "Fraxtal",
+			"slug": "fraxtal",
+			"count": 34,
+			"explorer": "https://fraxscan.com"
 		},
 		{
 			"id": "60808",
