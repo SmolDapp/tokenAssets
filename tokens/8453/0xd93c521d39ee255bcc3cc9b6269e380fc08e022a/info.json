@@ -1,0 +1,10 @@
+{
+  "name": "Syncrate Token",
+  "symbol": "SYNC",
+  "decimals": 18,
+  "description": "Syncrate is building the onchain financial layer for gold, starting with SGLD, a tokenized gold asset each representing 1 troy ounce of physical, LMBA-grade gold bars.",
+  "website": "https://syncrate.org",
+  "tags": [
+    "real-world assets"
+  ]
+}
