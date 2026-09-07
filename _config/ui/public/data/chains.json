@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4324,
+	"totalTokens": 4325,
 	"chains": [
 		{
 			"id": "1",
@@ -12,7 +12,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 947,
+			"count": 948,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -127,18 +127,18 @@
 			"explorer": "https://explorer.gobob.xyz"
 		},
 		{
-			"id": "34443",
-			"name": "Mode",
-			"slug": "mode",
-			"count": 32,
-			"explorer": "https://modescan.io"
-		},
-		{
 			"id": "250",
 			"name": "Fantom",
 			"slug": "fantom",
 			"count": 82,
 			"explorer": "https://ftmscan.com"
+		},
+		{
+			"id": "34443",
+			"name": "Mode",
+			"slug": "mode",
+			"count": 32,
+			"explorer": "https://modescan.io"
 		},
 		{
 			"id": "1868",
