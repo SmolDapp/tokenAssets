@@ -1,9 +1,7 @@
 # Token Assets
 
 The goal of this project is to unify the cryptocurrency token assets under one
-CDN with pragmatic access.
-
-The CDN supports SVG and PNGs (small, larger).
+CDN with pragmatic access. The CDN supports SVG and PNGs (small, larger).
 
 ## Usage
 
@@ -12,6 +10,10 @@ Currently the API/CDN endpoint is at:
 ```
 https://assets.smold.app/token/[chainID]/[tokenAddress]/[fileName].[ext]
 ```
+
+## How to submit a new token
+
+Use [tokens.smold.app](https://tokens.smold.app/submit) to submit a new token
 
 ## Usage
 
@@ -68,7 +70,7 @@ Environment Variables: None
 - 1151111081099710: Solana
 - btcm: Bitcoin
 
-## Contributing
+## Contributing (alternate)
 
 You will need an SVG file of the logo of the asset. You can use
 [Inkscape](https://inkscape.org/) or a web tool like
