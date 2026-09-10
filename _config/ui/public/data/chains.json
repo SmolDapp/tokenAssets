@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4329,
+	"totalTokens": 4334,
 	"chains": [
 		{
 			"id": "1",
@@ -237,6 +237,12 @@
 			"slug": "robinhood",
 			"count": 28,
 			"explorer": "https://robinhoodchain.blockscout.com"
+		},
+		{
+			"id": "5042",
+			"name": "Arc",
+			"slug": "arc",
+			"count": 5
 		},
 		{
 			"id": "5330",
