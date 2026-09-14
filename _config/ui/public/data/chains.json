@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4328,
+	"totalTokens": 4335,
 	"chains": [
 		{
 			"id": "1",
@@ -12,7 +12,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 951,
+			"count": 952,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -237,6 +237,12 @@
 			"slug": "robinhood",
 			"count": 28,
 			"explorer": "https://robinhoodchain.blockscout.com"
+		},
+		{
+			"id": "5042",
+			"name": "Arc",
+			"slug": "arc",
+			"count": 6
 		},
 		{
 			"id": "5330",
