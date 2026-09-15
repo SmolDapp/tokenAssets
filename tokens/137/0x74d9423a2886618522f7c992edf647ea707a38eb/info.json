@@ -1,0 +1,9 @@
+{
+  "name": "CAD Coin",
+  "symbol": "CADC",
+  "decimals": 6,
+  "website": "https://loon.finance/",
+  "tags": [
+    "stablecoin"
+  ]
+}
