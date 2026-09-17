@@ -1,0 +1,7 @@
+{
+  "name": "The Stonks Exchange",
+  "symbol": "STONKEX",
+  "decimals": 18,
+  "description": "The home of memestocks on base.",
+  "website": "https://www.thestonks.exchange/"
+}
