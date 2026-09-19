@@ -1,0 +1,63 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 背景渐变：深邃深空星夜 -->
+    <radialGradient id="spaceGrad" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#0E1D3F"/>
+      <stop offset="55%" stop-color="#071024"/>
+      <stop offset="100%" stop-color="#020611"/>
+    </radialGradient>
+
+    <!-- 9999万足真金渐变：由浅入深，流淌至厚重赤金 -->
+    <!-- 从上到下倾斜流向，顶部灿烂流光，底部汇聚为深沉高贵的9999万足金 -->
+    <linearGradient id="pure9999Gold" x1="30%" y1="0%" x2="70%" y2="100%">
+      <!-- 顶部朝阳初升：灿烂晨曦亮金 -->
+      <stop offset="0%" stop-color="#FFF8D6"/>
+      <stop offset="12%" stop-color="#FEE066"/>
+      <!-- 中段稳健流淌：皇家正金 (24K Standard) -->
+      <stop offset="42%" stop-color="#F59E0B"/>
+      <!-- 下段淬炼加深：9999万足赤金底蕴 (Rich Pure Gold) -->
+      <stop offset="75%" stop-color="#D97706"/>
+      <stop offset="90%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#883806"/>
+    </linearGradient>
+
+    <!-- 币面外轮廓呼应 9999 纯金光环 -->
+    <linearGradient id="rim9999" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.4"/>
+      <stop offset="40%" stop-color="#38BDF8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#B45309" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- 极光铂金横梁渐变 (与浓郁 9999 金形成顶级金银呼应) -->
+    <linearGradient id="platinumBeam" gradientUnits="userSpaceOnUse" x1="216" y1="256" x2="387" y2="256">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+
+    <!-- 立体景深阴影 -->
+    <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- 满铺暗夜宇宙底色，彻底杜绝透明马赛克 -->
+  <rect width="512" height="512" fill="url(#spaceGrad)"/>
+
+  <!-- 精工科技微光环 (Coin Halo) -->
+  <circle cx="256" cy="256" r="238" stroke="url(#rim9999)" stroke-width="2" fill="none"/>
+
+  <!-- G 主体与横梁 (9999 纯金渐深质感) -->
+  <g filter="url(#softGlow)">
+    <path d="M 386.7 156.4 A 155 155 0 1 0 386.7 355.6" 
+          stroke="url(#pure9999Gold)" 
+          stroke-width="28" 
+          stroke-linecap="round"/>
+    
+    <!-- 极光铂金穿透横梁 -->
+    <path d="M 386.7 256 H 216" 
+          stroke="url(#platinumBeam)" 
+          stroke-width="28" 
+          stroke-linecap="round"/>
+  </g>
+</svg>
