@@ -1,0 +1,15 @@
+{
+  "name": "Nock",
+  "symbol": "NOCK",
+  "decimals": 16,
+  "description": "Nockchain is programmable money secured by useful compute. Its Proof of Useful Work turns mining energy into verifiable computation with Zero Knowledge Proofs. Today, Nockchain supports verifiable AI matrix multiplications (AIPoW) and verifiable Nock ISA computations (ZKPoW). Instead of wasting Proof of Work, Nockchain makes computation itself the economic resource securing the network.",
+  "website": "https://nockchain.org",
+  "tags": [
+    "l1",
+    "zk",
+    "pouw",
+    "pow",
+    "zkvm",
+    "zkpow"
+  ]
+}
