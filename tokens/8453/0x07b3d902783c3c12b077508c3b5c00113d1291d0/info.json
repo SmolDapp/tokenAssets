@@ -1,0 +1,11 @@
+{
+  "name": "Doppler",
+  "symbol": "XDP",
+  "decimals": 18,
+  "description": "Doppler Finance is building infrastructure for tokenized capital markets across yield, collateral utility, and tokenized real-world assets. Its stack combines regulated custody, fully audited reserves, and strictly vetted strategies designed for safety, transparency, and scale. Doppler Finance is focused on helping institutions and users access productive onchain opportunities through infrastructure built for real-world standards.",
+  "website": "https://doppler.finance/",
+  "tags": [
+    "cedefi",
+    "rwa"
+  ]
+}
