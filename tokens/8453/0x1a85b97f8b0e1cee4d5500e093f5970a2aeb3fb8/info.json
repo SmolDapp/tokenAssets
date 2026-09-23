@@ -1,0 +1,15 @@
+{
+  "name": "Aerostrategy",
+  "symbol": "AEROSTRAT",
+  "decimals": 18,
+  "description": "AEROSTRAT is the deflationary token of Aerostrategy on Base. A swap tax funds veAERO purchases, and the voting rewards earned from Aerodrome go toward AEROSTRAT buybacks and burns, reducing supply over time.",
+  "website": "https://aerostrategy.finance",
+  "tags": [
+    "defi",
+    "aerodrome",
+    "veaero",
+    "base",
+    "buy-and-burn",
+    "tax"
+  ]
+}
