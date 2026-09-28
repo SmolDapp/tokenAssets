@@ -1,0 +1,13 @@
+{
+  "name": "Mordiem",
+  "symbol": "MDM",
+  "decimals": 18,
+  "description": "Mordiem is the unifying bridge across the decentralized AI landscape. Compute is scattered across dozens of networks, each with its own token, pricing, and rules: Mordiem brings them together into a single, provider-neutral unit of AI inference. Backed by real held capacity, routed to wherever compute is best, and open to everyone. One token, every ecosystem.",
+  "website": "https://mordiem.com",
+  "tags": [
+    "ai",
+    "compute",
+    "dpin",
+    "defi"
+  ]
+}
