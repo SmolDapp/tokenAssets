@@ -1,0 +1,9 @@
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><clipPath id="tokenclip"><circle cx="120" cy="120" r="120"/></clipPath></defs><g clip-path="url(#tokenclip)"><rect width="240" height="240" fill="#FFFFFF"/><svg x="28.80" y="96.34" width="182.40" height="47.33" viewBox="0 0 501 130">
+ <defs>
+  <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="linearGradient-1">
+   <stop stop-color="#000051" offset="0%"/>
+   <stop stop-color="#6F74DD" offset="100%"/>
+  </linearGradient>
+ </defs>
+ <path stroke="none" transform="translate(0.2, 0.9)" fill="url(#linearGradient-1)" fill-rule="nonzero" d="M446.2,0 C467.9,0 483.3,6.7 496.4,18 L476.2,42.2 C467.4,34.8 458.5,30.5 446.3,30.5 C428.5,30.5 414.7,45.5 414.7,64.4 L414.7,64.8 C414.7,84.8 428.7,99.1 448.3,99.1 C456.6,99.1 463,97.3 468.1,94 L468.1,79 L443.7,79 L443.7,53.9 L500.6,53.9 L500.6,109.6 C487.5,120.4 469.3,128.7 446.9,128.7 C408.4,128.6 379.6,102.1 379.6,64.7 L379.6,64.3 C379.6,28.3 407.9,0 446.2,0 Z M108.5,2.4 L108.5,32.5 L71.4,32.5 L71.4,126.2 L37.1,126.2 L37.1,32.5 L0,32.5 L0,2.4 L108.5,2.4 Z M378.5,2.4 L378.5,32.5 L341.4,32.5 L341.4,126.2 L307.1,126.2 L307.2,32.5 L270,32.5 L270,2.4 L378.5,2.4 Z M159.7,2.4 L189.2,50.3 L218.7,2.4 L255,2.4 L255,126.1 L220.9,126.1 L220.9,55 L189.3,103.4 L188.6,103.4 L157.1,55.3 L157.1,126 L123.5,126 L123.5,2.4 L159.7,2.4 Z"/>
+</svg></g></svg>

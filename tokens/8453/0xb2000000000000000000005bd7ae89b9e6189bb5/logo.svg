@@ -1,0 +1,12 @@
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><clipPath id="tokenclip"><circle cx="120" cy="120" r="120"/></clipPath></defs><g clip-path="url(#tokenclip)"><svg x="0" y="0" width="240" height="240" viewBox="0 0 192 192" preserveAspectRatio="xMidYMid slice"><g fill="none">
+<g clip-path="url(#clip0_32_51)">
+<rect width="192" height="192" fill="white"/>
+<path d="M154.5 0H37.5C16.7893 0 0 16.7893 0 37.5V154.5C0 175.211 16.7893 192 37.5 192H154.5C175.211 192 192 175.211 192 154.5V37.5C192 16.7893 175.211 0 154.5 0Z" fill="#121215"/>
+<path d="M54.3221 23.8125L23.8125 137.678L137.678 168.188L168.188 54.3221L54.3221 23.8125ZM107.649 116.179L75.8312 107.649L84.3609 75.8312L116.192 84.3609L107.649 116.179Z" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_32_51">
+<rect width="192" height="192" fill="white"/>
+</clipPath>
+</defs>
+</g></svg></g></svg>
