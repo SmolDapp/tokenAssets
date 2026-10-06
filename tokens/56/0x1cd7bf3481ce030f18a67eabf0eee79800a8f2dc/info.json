@@ -1,0 +1,11 @@
+{
+  "name": "AXPAX",
+  "symbol": "AXPA",
+  "decimals": 18,
+  "description": "AXPAX (AXPA) is a fixed-supply BEP-20 token on BNB Smart Chain with a total supply of 100,000,000 AXPA.",
+  "website": "https://www.axpax.eu",
+  "tags": [
+    "token",
+    "bnb chain"
+  ]
+}
