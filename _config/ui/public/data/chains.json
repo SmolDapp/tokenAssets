@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4395,
+	"totalTokens": 4396,
 	"chains": [
 		{
 			"id": "1",
@@ -75,7 +75,7 @@
 			"id": "137",
 			"name": "Polygon",
 			"slug": "polygon",
-			"count": 114,
+			"count": 115,
 			"explorer": "https://polygonscan.com"
 		},
 		{
