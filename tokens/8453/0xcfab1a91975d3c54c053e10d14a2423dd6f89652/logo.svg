@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="#E4222E"/>
+  <g fill="none" stroke="#fff" stroke-width="38" stroke-linecap="round">
+    <!-- Vertical stem (centered at x=256) -->
+    <line x1="256" y1="96" x2="256" y2="416"/>
+    <!-- Top horizontal bar (extends right, like F) -->
+    <line x1="256" y1="96" x2="380" y2="96"/>
+    <!-- Middle crossbar (centered on stem) -->
+    <line x1="160" y1="224" x2="352" y2="224"/>
+    <!-- Bottom crossbar (centered on stem) -->
+    <line x1="160" y1="336" x2="352" y2="336"/>
+  </g>
+</svg>
