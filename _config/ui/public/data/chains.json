@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4401,
+	"totalTokens": 4405,
 	"chains": [
 		{
 			"id": "1",
@@ -12,7 +12,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1010,
+			"count": 1011,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -33,7 +33,7 @@
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
-			"count": 137,
+			"count": 138,
 			"explorer": "https://arbiscan.io"
 		},
 		{
@@ -235,14 +235,14 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 28,
+			"count": 29,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
 			"id": "5042",
 			"name": "Arc",
 			"slug": "arc",
-			"count": 7
+			"count": 8
 		},
 		{
 			"id": "5330",
