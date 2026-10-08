@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#B87FB5"/>
+      <stop offset="0.55" stop-color="#2A2140"/>
+      <stop offset="1" stop-color="#AFA2DF"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.12" r="0.6">
+      <stop offset="0" stop-color="#8F79DA" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#8F79DA" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cut" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5EE7FF"/>
+      <stop offset="1" stop-color="#FFB4EF"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="url(#bg)"/>
+  <rect width="256" height="256" fill="url(#glow)"/>
+  <g transform="translate(128 128) scale(4.4) translate(-30.26 -30.75)" fill="#FFFFFF">
+    <path fill-rule="evenodd" d="M18.4209 36.1844C18.4209 42.7246 23.7228 48.0264 30.263 48.0264C36.8032 48.0264 42.105 42.7245 42.105 36.1843C42.105 29.6442 36.8032 24.3423 30.263 24.3423V32.5657C30.4125 32.5492 30.5645 32.5407 30.7184 32.5407C32.9823 32.5407 34.8175 34.3759 34.8175 36.6399C34.8175 38.9038 32.9823 40.739 30.7184 40.739C28.4544 40.739 26.6192 38.9038 26.6192 36.6399C26.6192 36.4859 26.6277 36.3339 26.6442 36.1844H18.4209Z"/>
+    <rect x="18.4209" y="13.4871" width="23.6841" height="7.89471"/>
+    <path fill-rule="evenodd" fill="url(#cut)" d="M42.1048 13.4871H42.105V21.396C37.8653 21.642 34.4705 25.0368 34.2246 29.2765H26.3154C26.3154 20.5562 33.3846 13.4871 42.1048 13.4871Z"/>
+  </g>
+</svg>
