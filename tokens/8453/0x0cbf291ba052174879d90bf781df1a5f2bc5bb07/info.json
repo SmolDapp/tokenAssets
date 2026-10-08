@@ -1,0 +1,12 @@
+{
+  "name": "boar",
+  "symbol": "boar",
+  "decimals": 18,
+  "description": "$boar is the community token of BOAR, an open-source app that keeps a small AI and a library of knowledge on your phone. It answers with no signal, shows its sources, and no server receives your questions. The app is free and needs no token.",
+  "website": "https://boarapp.com",
+  "tags": [
+    "ai",
+    "privacy",
+    "opensource"
+  ]
+}
