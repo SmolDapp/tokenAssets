@@ -1,11 +1,11 @@
 {
-	"totalTokens": 4410,
+	"totalTokens": 4413,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1779,
+			"count": 1780,
 			"explorer": "https://etherscan.io"
 		},
 		{
@@ -75,7 +75,7 @@
 			"id": "137",
 			"name": "Polygon",
 			"slug": "polygon",
-			"count": 115,
+			"count": 116,
 			"explorer": "https://polygonscan.com"
 		},
 		{
@@ -96,7 +96,7 @@
 			"id": "1151111081099710",
 			"name": "Solana",
 			"slug": "solana",
-			"count": 40
+			"count": 41
 		},
 		{
 			"id": "5000",
