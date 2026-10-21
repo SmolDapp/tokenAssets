@@ -1,25 +1,25 @@
 {
-	"totalTokens": 4432,
+	"totalTokens": 4439,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1780,
+			"count": 1781,
 			"explorer": "https://etherscan.io"
 		},
 		{
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1033,
+			"count": 1034,
 			"explorer": "https://basescan.org"
 		},
 		{
 			"id": "10",
 			"name": "Optimism",
 			"slug": "optimism",
-			"count": 462,
+			"count": 463,
 			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
@@ -33,14 +33,14 @@
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
-			"count": 138,
+			"count": 139,
 			"explorer": "https://arbiscan.io"
 		},
 		{
 			"id": "57073",
 			"name": "Ink",
 			"slug": "ink",
-			"count": 34,
+			"count": 35,
 			"explorer": "https://explorer.inkonchain.com"
 		},
 		{
@@ -127,18 +127,18 @@
 			"explorer": "https://explorer.gobob.xyz"
 		},
 		{
-			"id": "250",
-			"name": "Fantom",
-			"slug": "fantom",
-			"count": 82,
-			"explorer": "https://ftmscan.com"
-		},
-		{
 			"id": "34443",
 			"name": "Mode",
 			"slug": "mode",
 			"count": 32,
 			"explorer": "https://modescan.io"
+		},
+		{
+			"id": "250",
+			"name": "Fantom",
+			"slug": "fantom",
+			"count": 82,
+			"explorer": "https://ftmscan.com"
 		},
 		{
 			"id": "1868",
@@ -235,14 +235,14 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 30,
+			"count": 31,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
 			"id": "5042",
 			"name": "Arc",
 			"slug": "arc",
-			"count": 9
+			"count": 10
 		},
 		{
 			"id": "5330",
