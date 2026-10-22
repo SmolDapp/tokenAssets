@@ -1,0 +1,10 @@
+{
+  "name": "Wrapped Doomsday",
+  "symbol": "wDOOM",
+  "decimals": 18,
+  "description": "1:1 Vault-Backed Wrapped Doomsday (wDOOM) on Base Mainnet, bridged from the sovereign Doomsday Network Layer-1 Proof-of-Work blockchain.",
+  "website": "https://doomsday.network",
+  "tags": [
+    "defi"
+  ]
+}
