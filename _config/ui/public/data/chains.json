@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4441,
+	"totalTokens": 4442,
 	"chains": [
 		{
 			"id": "1",
@@ -33,7 +33,7 @@
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
-			"count": 140,
+			"count": 141,
 			"explorer": "https://arbiscan.io"
 		},
 		{
