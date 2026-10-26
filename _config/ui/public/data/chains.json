@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4439,
+	"totalTokens": 4441,
 	"chains": [
 		{
 			"id": "1",
@@ -33,7 +33,7 @@
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
-			"count": 139,
+			"count": 140,
 			"explorer": "https://arbiscan.io"
 		},
 		{
@@ -235,7 +235,7 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 31,
+			"count": 32,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
