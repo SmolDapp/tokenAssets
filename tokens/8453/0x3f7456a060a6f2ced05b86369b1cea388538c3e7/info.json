@@ -1,0 +1,10 @@
+{
+  "name": "VNX",
+  "symbol": "VNX",
+  "decimals": 9,
+  "description": "The VNX Community Hub is a decentralized platform enhancing the adoption of VNX stablecoins. It offers yield-generating opportunities like liquidity pools and vaults, empowering businesses and investors to maximize asset potential. The Hub features a robust community governance model, enabling participants to propose, vote, and influence key decisions, while active contributors gain exclusive incentives and rewards.",
+  "website": "https://vnx.community/",
+  "tags": [
+    "defi"
+  ]
+}
