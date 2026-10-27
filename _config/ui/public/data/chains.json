@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4442,
+	"totalTokens": 4443,
 	"chains": [
 		{
 			"id": "1",
@@ -12,7 +12,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1034,
+			"count": 1035,
 			"explorer": "https://basescan.org"
 		},
 		{
