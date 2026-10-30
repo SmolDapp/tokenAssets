@@ -44,6 +44,13 @@
 			"explorer": "https://explorer.inkonchain.com"
 		},
 		{
+			"id": "60808",
+			"name": "BOB",
+			"slug": "bob",
+			"count": 34,
+			"explorer": "https://explorer.gobob.xyz"
+		},
+		{
 			"id": "1135",
 			"name": "Lisk",
 			"slug": "lisk",
@@ -65,6 +72,13 @@
 			"explorer": "https://celoscan.io"
 		},
 		{
+			"id": "100",
+			"name": "Gnosis",
+			"slug": "gnosis",
+			"count": 26,
+			"explorer": "https://gnosisscan.io"
+		},
+		{
 			"id": "56",
 			"name": "BSC",
 			"slug": "bsc",
@@ -77,6 +91,13 @@
 			"slug": "polygon",
 			"count": 116,
 			"explorer": "https://polygonscan.com"
+		},
+		{
+			"id": "34443",
+			"name": "Mode",
+			"slug": "mode",
+			"count": 32,
+			"explorer": "https://modescan.io"
 		},
 		{
 			"id": "130",
@@ -120,20 +141,6 @@
 			"explorer": "https://fraxscan.com"
 		},
 		{
-			"id": "60808",
-			"name": "BOB",
-			"slug": "bob",
-			"count": 34,
-			"explorer": "https://explorer.gobob.xyz"
-		},
-		{
-			"id": "34443",
-			"name": "Mode",
-			"slug": "mode",
-			"count": 32,
-			"explorer": "https://modescan.io"
-		},
-		{
 			"id": "250",
 			"name": "Fantom",
 			"slug": "fantom",
@@ -155,11 +162,11 @@
 			"explorer": "https://berascan.com"
 		},
 		{
-			"id": "100",
-			"name": "Gnosis",
-			"slug": "gnosis",
-			"count": 26,
-			"explorer": "https://gnosisscan.io"
+			"id": "324",
+			"name": "ZkSync Era",
+			"slug": "zksync-era",
+			"count": 7,
+			"explorer": "https://explorer.zksync.io/"
 		},
 		{
 			"id": "59144",
@@ -167,13 +174,6 @@
 			"slug": "linea",
 			"count": 14,
 			"explorer": "https://lineascan.build"
-		},
-		{
-			"id": "324",
-			"name": "ZkSync Era",
-			"slug": "zksync-era",
-			"count": 7,
-			"explorer": "https://explorer.zksync.io/"
 		},
 		{
 			"id": "81457",
