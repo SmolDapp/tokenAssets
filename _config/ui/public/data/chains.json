@@ -9,6 +9,13 @@
 			"explorer": "https://etherscan.io"
 		},
 		{
+			"id": "8453",
+			"name": "Base",
+			"slug": "base",
+			"count": 1047,
+			"explorer": "https://basescan.org"
+		},
+		{
 			"id": "43114",
 			"name": "Avalanche",
 			"slug": "avalanche",
@@ -16,18 +23,18 @@
 			"explorer": "https://snowtrace.io"
 		},
 		{
+			"id": "10",
+			"name": "Optimism",
+			"slug": "optimism",
+			"count": 463,
+			"explorer": "https://optimistic.etherscan.io"
+		},
+		{
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
 			"count": 148,
 			"explorer": "https://arbiscan.io"
-		},
-		{
-			"id": "8453",
-			"name": "Base",
-			"slug": "base",
-			"count": 1047,
-			"explorer": "https://basescan.org"
 		},
 		{
 			"id": "57073",
@@ -77,13 +84,6 @@
 			"slug": "bsc",
 			"count": 221,
 			"explorer": "https://bscscan.com"
-		},
-		{
-			"id": "10",
-			"name": "Optimism",
-			"slug": "optimism",
-			"count": 463,
-			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
 			"id": "137",
