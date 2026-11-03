@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+<defs>
+<clipPath id="rh-round"><circle cx="120" cy="120" r="120"/></clipPath>
+<linearGradient id="rim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55545c"/><stop offset="0.55" stop-color="#2c2b30"/><stop offset="1" stop-color="#050505"/></linearGradient>
+<radialGradient id="face" cx="0.35" cy="0.3" r="0.85"><stop offset="0" stop-color="#46454b"/><stop offset="0.55" stop-color="#2a292e"/><stop offset="1" stop-color="#0b0b0c"/></radialGradient>
+<linearGradient id="paint0" x1="31.2652" y1="63.1324" x2="25.9731" y2="1.66354" gradientUnits="userSpaceOnUse"><stop stop-color="#E9D276"/><stop offset="1" stop-color="#A18B2F"/></linearGradient>
+<linearGradient id="paint1" x1="41.0615" y1="51.6907" x2="35.9859" y2="2.58582" gradientUnits="userSpaceOnUse"><stop stop-color="#9F9FA2"/><stop offset="1" stop-color="#D7D7D7"/></linearGradient>
+</defs>
+<g clip-path="url(#rh-round)">
+<rect width="240" height="240" fill="url(#rim)"/>
+<circle cx="120" cy="120" r="108" fill="url(#face)"/>
+<g transform="translate(70.14 64.8) scale(1.725)">
+<path d="M37.5659 55.4667C26.4385 55.4667 17.3414 46.08 17.3414 35.1289V1.42222C17.3414 0.64 16.6911 0 15.8963 0H1.44512C0.650304 0 0 0.64 0 1.42222V35.0151C0 50.7591 13.0856 64.0924 29.0758 64C44.6109 63.9076 57.2268 51.7547 57.7759 36.5796C57.234 47.104 48.3899 55.4667 37.5659 55.4667Z" fill="url(#paint0)"/>
+<path d="M56.3581 0H41.9069C41.1121 0 40.4618 0.64 40.4618 1.42222V35.2356C40.4618 41.3653 35.6784 46.6347 29.4572 46.9191C22.8169 47.2249 17.3398 42.0196 17.3398 35.5556C17.3398 46.5493 26.4007 55.4667 37.5715 55.4667C48.7423 55.4667 57.2324 47.104 57.7743 36.5796C57.7888 36.2382 57.8032 35.8969 57.8032 35.5556V1.42222C57.8032 0.64 57.1529 0 56.3581 0Z" fill="url(#paint1)"/>
+</g>
+</g>
+</svg>
