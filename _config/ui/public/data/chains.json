@@ -1,26 +1,19 @@
 {
-	"totalTokens": 4444,
+	"totalTokens": 4506,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1781,
+			"count": 1792,
 			"explorer": "https://etherscan.io"
 		},
 		{
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1036,
+			"count": 1049,
 			"explorer": "https://basescan.org"
-		},
-		{
-			"id": "43114",
-			"name": "Avalanche",
-			"slug": "avalanche",
-			"count": 45,
-			"explorer": "https://snowtrace.io"
 		},
 		{
 			"id": "10",
@@ -30,10 +23,17 @@
 			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
+			"id": "43114",
+			"name": "Avalanche",
+			"slug": "avalanche",
+			"count": 45,
+			"explorer": "https://snowtrace.io"
+		},
+		{
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
-			"count": 141,
+			"count": 149,
 			"explorer": "https://arbiscan.io"
 		},
 		{
@@ -235,7 +235,7 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 32,
+			"count": 62,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
