@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+<defs>
+<clipPath id="rh-round"><circle cx="120" cy="120" r="120"/></clipPath>
+<radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#1d4a34"/><stop offset="0.45" stop-color="#11301f"/><stop offset="1" stop-color="#0b180f"/></radialGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eff3f4"/><stop offset="0.45" stop-color="#c3cacc"/><stop offset="1" stop-color="#98a0a3"/></linearGradient>
+</defs>
+<g clip-path="url(#rh-round)">
+<rect width="240" height="240" fill="url(#glow)"/>
+<g transform="translate(43.7 78.1) scale(0.3016)">
+<rect x="228" y="0" width="50" height="50" rx="8" fill="#2F7D5C"/>
+<rect x="171" y="57"  width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="228" y="57"  width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="285" y="57"  width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="114" y="114" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="171" y="114" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="228" y="114" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="285" y="114" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="342" y="114" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="57"  y="171" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="114" y="171" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="171" y="171" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="228" y="171" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="285" y="171" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="342" y="171" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="399" y="171" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="0"   y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="57"  y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="114" y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="171" y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="228" y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="285" y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="342" y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="399" y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+<rect x="456" y="228" width="50" height="50" rx="8" fill="url(#metal)"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+<defs>
+<clipPath id="rh-round"><circle cx="120" cy="120" r="120"/></clipPath>
+<linearGradient id="bg" x1="0" y1="0.35" x2="1" y2="0"><stop offset="0" stop-color="#89abd9"/><stop offset="0.6" stop-color="#a3b8dc"/><stop offset="1" stop-color="#bcbfc8"/></linearGradient>
+</defs>
+<g clip-path="url(#rh-round)">
+<rect width="240" height="240" fill="url(#bg)"/>
+<g transform="translate(58.56 58.56) scale(2.7932)">
+<rect x="0" y="0" width="20" height="20" fill="#191918"/>
+<rect x="24" y="0" width="20" height="20" fill="#d5d5d5"/>
+<rect x="0" y="24" width="20" height="20" fill="#d5d5d5"/>
+<rect x="24" y="24" width="20" height="20" fill="#191918"/>
+</g>
+</g>
+</svg>
