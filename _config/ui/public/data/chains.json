@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4506,
+	"totalTokens": 4508,
 	"chains": [
 		{
 			"id": "1",
@@ -12,7 +12,7 @@
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1049,
+			"count": 1050,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -202,6 +202,13 @@
 			"slug": "subtensor-evm",
 			"count": 1,
 			"explorer": "https://evm.taostats.io"
+		},
+		{
+			"id": "999",
+			"name": "HyperEVM",
+			"slug": "hyperevm",
+			"count": 1,
+			"explorer": "https://hyperevmscan.io"
 		},
 		{
 			"id": "1750",
