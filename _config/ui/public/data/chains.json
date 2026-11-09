@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4508,
+	"totalTokens": 4513,
 	"chains": [
 		{
 			"id": "1",
@@ -271,6 +271,12 @@
 			"slug": "plume",
 			"count": 18,
 			"explorer": "https://explorer.plume.org"
+		},
+		{
+			"id": "99901",
+			"name": "Chain 99901",
+			"slug": "chain-99901",
+			"count": 5
 		},
 		{
 			"id": "728126428",
