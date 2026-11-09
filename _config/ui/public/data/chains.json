@@ -1,5 +1,5 @@
 {
-	"totalTokens": 4513,
+	"totalTokens": 4516,
 	"chains": [
 		{
 			"id": "1",
@@ -276,7 +276,7 @@
 			"id": "99901",
 			"name": "Chain 99901",
 			"slug": "chain-99901",
-			"count": 5
+			"count": 8
 		},
 		{
 			"id": "728126428",
