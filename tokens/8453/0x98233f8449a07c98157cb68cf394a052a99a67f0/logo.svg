@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+  <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff18a"/>
+    <stop offset=".28" stop-color="#ffd52f"/>
+    <stop offset=".58" stop-color="#ffb900"/>
+    <stop offset=".82" stop-color="#e18a00"/>
+    <stop offset="1" stop-color="#ffdc4b"/>
+  </linearGradient>
+  <radialGradient id="night" cx="48%" cy="46%" r="68%">
+    <stop offset="0" stop-color="#06152f"/>
+    <stop offset=".68" stop-color="#020b20"/>
+    <stop offset="1" stop-color="#00030d"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2=".15">
+    <stop offset="0" stop-color="#f2a90f"/>
+    <stop offset=".22" stop-color="#ffd53a"/>
+    <stop offset=".5" stop-color="#ffe04d"/>
+    <stop offset=".78" stop-color="#f0a812"/>
+    <stop offset="1" stop-color="#c97a06"/>
+  </linearGradient>
+  <linearGradient id="roof" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#f8b814"/>
+    <stop offset=".48" stop-color="#fff078"/>
+    <stop offset="1" stop-color="#e69a09"/>
+  </linearGradient>
+  <linearGradient id="beam" x1="0" y1="0" x2="1" y2=".15">
+    <stop offset="0" stop-color="#fff3a0" stop-opacity="1"/>
+    <stop offset=".45" stop-color="#ffcf2e" stop-opacity=".95"/>
+    <stop offset="1" stop-color="#c9810a" stop-opacity=".95"/>
+  </linearGradient>
+  <linearGradient id="wave" x1="0" y1="0" x2="1" y2=".15">
+    <stop offset="0" stop-color="#f5a900"/>
+    <stop offset=".3" stop-color="#ffe34b"/>
+    <stop offset=".62" stop-color="#ffdc38"/>
+    <stop offset="1" stop-color="#d88705"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+    <stop offset="0" stop-color="#fff2b0" stop-opacity="1"/>
+    <stop offset=".35" stop-color="#ffc021" stop-opacity="1"/>
+    <stop offset=".58" stop-color="#ff9a00" stop-opacity=".6"/>
+    <stop offset=".82" stop-color="#e07800" stop-opacity=".2"/>
+    <stop offset="1" stop-color="#c06000" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="pane" cx="50%" cy="50%" r="60%">
+    <stop offset="0" stop-color="#ffffff"/>
+    <stop offset=".55" stop-color="#fff8d0"/>
+    <stop offset="1" stop-color="#ffe377"/>
+  </radialGradient>
+  <radialGradient id="spill" cx="50%" cy="50%" r="50%">
+    <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+    <stop offset=".45" stop-color="#fff8d8" stop-opacity=".55"/>
+    <stop offset="1" stop-color="#fff0b0" stop-opacity="0"/>
+  </radialGradient>
+  <clipPath id="disc"><circle cx="256" cy="256" r="246"/></clipPath>
+  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#ffc21a"/>
+    <stop offset=".5" stop-color="#ffe95c"/>
+    <stop offset="1" stop-color="#ffbf18"/>
+  </linearGradient>
+</defs>
+
+<!-- circular medallion -->
+<circle cx="256" cy="256" r="256" fill="#0b0b0b"/>
+<circle cx="256" cy="256" r="249" fill="none" stroke="url(#rim)" stroke-width="9.5"/>
+<circle cx="256" cy="256" r="244.5" fill="url(#night)"/>
+
+<!-- lamp glow (behind the lantern) -->
+<ellipse cx="252" cy="166" rx="88" ry="70" fill="url(#glow)"/>
+
+<!-- lighthouse beam -->
+<path d="M292 153 L520 106.8 L520 228.2 L292 185 Z" fill="url(#beam)" clip-path="url(#disc)"/>
+
+<!-- spire and cap -->
+<path d="M250.8 100 L255.5 52 L260.2 100 Z" fill="url(#roof)"/>
+<path d="M253.6 98 L255.5 56 L257.6 98 Z" fill="#fff07a" opacity=".7"/>
+<path d="M244 99 Q255 95.5 266 99 L266 106 Q255 103 244 106 Z" fill="url(#roof)"/>
+<path d="M245 106 Q255 103.5 265 106 L265 111 Q255 108.5 245 111 Z" fill="#2a1804"/>
+
+<!-- roof -->
+<path d="M193 145 L255.5 107 Q262 106 269 111 L309 145 L255 137 Z" fill="url(#roof)"/>
+<path d="M193 145 L255 137 L309 145 L255 145 Z" fill="#f6b91c" opacity=".45"/>
+
+<!-- lantern room -->
+<path d="M209 145 L298 145 L298 192 Q255 181 209 193 Z" fill="#4a2a04"/>
+<path d="M209 145 L298 145 L298 150 L209 150 Z" fill="#5a3404"/>
+<path d="M210 151 L228 151 L228 184 L210 188 Z" fill="url(#glass)"/>
+<path d="M235 149 L267 149 L267 184 L235 184 Z" fill="url(#pane)"/>
+<path d="M274 150 L292 151 L292 188 L274 184 Z" fill="url(#glass)"/>
+<path d="M228 148 L235 148 L235 188 L228 188 Z" fill="#8a5206"/>
+<path d="M267 148 L274 148 L274 188 L267 188 Z" fill="#8a5206"/>
+<path d="M208 188 Q254 177 299 188 L299 198 Q254 187 208 199 Z" fill="#ffc51c"/>
+
+<!-- soft halo over the lantern frame -->
+<ellipse cx="251" cy="166" rx="40" ry="24" fill="url(#spill)"/>
+
+<!-- gallery railings -->
+<path d="M189 196 Q255 178 313 196 L313 219 Q255 205 189 220 Z" fill="none" stroke="#ffd52a" stroke-width="5"/>
+<path d="M193 199 L193 218 M218 192 L218 215 M255 188 L255 212 M291 192 L291 215 M309 198 L309 218" stroke="#ffd52a" stroke-width="4"/>
+<path d="M189 219 Q255 204 313 219" fill="none" stroke="#fff06a" stroke-width="4"/>
+<path d="M180 220 Q255 197 323 220 L323 235 Q255 218 180 235 Z" fill="url(#roof)"/>
+<path d="M180 229 Q255 211 323 229 L323 236 Q255 222 180 238 Z" fill="#e99b08"/>
+<path d="M180 231 Q255 213 323 231" fill="none" stroke="#ffdf39" stroke-width="4"/>
+<path d="M181 235 Q189 241 199 244 M322 235 Q314 241 305 244" fill="none" stroke="#e89a08" stroke-width="3"/>
+
+<!-- tower -->
+<path d="M203 236 Q255 225 305 236 L333 402 Q256 424 172 402 Z" fill="url(#gold)"/>
+<path d="M202 235 Q255 223 306 235 L307 245 Q255 235 201 247 Z" fill="#050d20"/>
+<path d="M197 265 Q255 253 311 265 L313 276 Q255 264 195 278 Z" fill="#050d20"/>
+<path d="M199 284 L207 282 L178 402 L171 401 Z" fill="#ffc21b" opacity=".65"/>
+<path d="M302 283 L310 285 L334 401 L325 403 Z" fill="#d98a08" opacity=".55"/>
+
+<!-- arched doorway -->
+<path d="M238 400 L238 361 Q238 346 253 346 Q268 346 268 361 L268 405 Z" fill="#020a1b"/>
+
+<!-- tower foot flare -->
+<linearGradient id="foot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c97a06"/><stop offset=".25" stop-color="#f6c232"/><stop offset=".7" stop-color="#f9b521"/><stop offset="1" stop-color="#e09410"/></linearGradient>
+<path d="M314 405 Q324 396 333 394 Q372 407 409 427 Q368 424 334 414 Q322 410 314 405 Z" fill="url(#foot)"/>
+
+<!-- waves (two crescents, measured from the original) -->
+<g clip-path="url(#disc)">
+<path d="M101 426 C135 400 170 392 200 393 C245 395 285 420 330 433 C352 438 372 437 390 434 C360 446 330 449 300 443 C255 433 235 418 200 412 C160 405 130 413 101 426 Z" fill="url(#wave)"/>
+<path d="M116 433 C140 425 160 422 185 423 C220 425 245 440 275 450 C283 452 288 454 293 455 C270 459 250 458 230 452 C205 444 185 434 160 432 C142 431 128 432 116 433 Z" fill="url(#wave)"/>
+<path d="M103 425 C136 401 170 393 200 394 C245 396 285 421 330 434" fill="none" stroke="#ffe066" stroke-width="1.6" opacity=".8"/>
+</g>
+</svg>
