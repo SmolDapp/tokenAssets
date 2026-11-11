@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240"><defs><clipPath id="tokenclip"><circle cx="120" cy="120" r="120"/></clipPath>
+<linearGradient id="paint0_linear_1826_3476" x1="5.83251" y1="31.1601" x2="20.1337" y2="16.9867" gradientUnits="userSpaceOnUse">
+<stop stop-color="#006BB4"/>
+<stop offset="0.5" stop-color="#00A64F"/>
+<stop offset="1" stop-color="#B3D035"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1826_3476" x1="11.2276" y1="15.031" x2="25.4177" y2="0.970595" gradientUnits="userSpaceOnUse">
+<stop stop-color="#CA1589"/>
+<stop offset="0.6" stop-color="#EF6B22"/>
+<stop offset="1" stop-color="#F8B141"/>
+</linearGradient>
+</defs><g clip-path="url(#tokenclip)"><rect width="240" height="240" fill="#FFFFFF"/><g transform="translate(54.646 52.800) scale(4.20001)"><path d="M19.1896 16.0009L4.99998 30.3215L6.66303 31.9999L20.8526 17.6794L19.1896 16.0009Z" fill="url(#paint0_linear_1826_3476)"/><path d="M24.4577 -3.00683e-05L10.2681 14.3206L11.9311 15.999L26.1207 1.67838L24.4577 -3.00683e-05Z" fill="url(#paint1_linear_1826_3476)"/></g></g></svg>
