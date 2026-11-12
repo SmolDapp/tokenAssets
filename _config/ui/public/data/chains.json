@@ -1,18 +1,18 @@
 {
-	"totalTokens": 4516,
+	"totalTokens": 4524,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1792,
+			"count": 1793,
 			"explorer": "https://etherscan.io"
 		},
 		{
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1050,
+			"count": 1054,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -242,7 +242,7 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 62,
+			"count": 64,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
@@ -276,7 +276,7 @@
 			"id": "99901",
 			"name": "Chain 99901",
 			"slug": "chain-99901",
-			"count": 8
+			"count": 9
 		},
 		{
 			"id": "728126428",

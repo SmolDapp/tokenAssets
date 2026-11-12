@@ -45,14 +45,10 @@ jobs:
                   git diff --quiet && git diff --cached --quiet || git commit -a -m "[bot] - Update lists"
 
             - name: Temporarily disable "include administrators" branch protection
-              uses: benjefferies/branch-protection-bot@958128d33ada137a4c6012f838fc7c914c999190 # master 2024-02-22
               if: always()
-              with:
-                  access_token: ${{ secrets.ACCESS_TOKEN }}
-                  owner: smoldapp
-                  repo: tokenAssets
-                  branch: ${{ github.event.repository.default_branch }}
-                  enforce_admins: false
+              env:
+                  GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+              run: gh api -X DELETE repos/smoldapp/tokenAssets/branches/${{ github.event.repository.default_branch }}/protection/enforce_admins
 
             - name: Push changes
               uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0
@@ -61,11 +57,7 @@ jobs:
                   branch: ${{ github.ref }}
 
             - name: Enable "include administrators" branch protection
-              uses: benjefferies/branch-protection-bot@958128d33ada137a4c6012f838fc7c914c999190 # master 2024-02-22
               if: always() # Force to always run this step to ensure "include administrators" is always turned back on
-              with:
-                  access_token: ${{ secrets.ACCESS_TOKEN }}
-                  owner: smoldapp
-                  repo: tokenAssets
-                  branch: ${{ github.event.repository.default_branch }}
-                  enforce_admins: true
+              env:
+                  GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+              run: gh api -X POST repos/smoldapp/tokenAssets/branches/${{ github.event.repository.default_branch }}/protection/enforce_admins
