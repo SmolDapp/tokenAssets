@@ -51,6 +51,13 @@
 			"explorer": "https://explorer.gobob.xyz"
 		},
 		{
+			"id": "42220",
+			"name": "Celo",
+			"slug": "celo",
+			"count": 28,
+			"explorer": "https://celoscan.io"
+		},
+		{
 			"id": "1135",
 			"name": "Lisk",
 			"slug": "lisk",
@@ -63,13 +70,6 @@
 			"slug": "polygon-zkevm",
 			"count": 2,
 			"explorer": "https://zkevm.polygonscan.com"
-		},
-		{
-			"id": "42220",
-			"name": "Celo",
-			"slug": "celo",
-			"count": 28,
-			"explorer": "https://celoscan.io"
 		},
 		{
 			"id": "100",
