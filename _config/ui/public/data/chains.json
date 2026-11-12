@@ -1,26 +1,19 @@
 {
-	"totalTokens": 4517,
+	"totalTokens": 4524,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1792,
+			"count": 1793,
 			"explorer": "https://etherscan.io"
 		},
 		{
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1050,
+			"count": 1054,
 			"explorer": "https://basescan.org"
-		},
-		{
-			"id": "10",
-			"name": "Optimism",
-			"slug": "optimism",
-			"count": 463,
-			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
 			"id": "43114",
@@ -28,6 +21,13 @@
 			"slug": "avalanche",
 			"count": 45,
 			"explorer": "https://snowtrace.io"
+		},
+		{
+			"id": "10",
+			"name": "Optimism",
+			"slug": "optimism",
+			"count": 463,
+			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
 			"id": "42161",
@@ -242,7 +242,7 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 62,
+			"count": 64,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
