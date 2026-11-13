@@ -1,11 +1,11 @@
 {
-	"totalTokens": 4524,
+	"totalTokens": 4525,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1793,
+			"count": 1794,
 			"explorer": "https://etherscan.io"
 		},
 		{
