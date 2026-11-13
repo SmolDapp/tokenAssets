@@ -1,0 +1,14 @@
+{
+  "name": "BIG COIN",
+  "symbol": "BC",
+  "decimals": 18,
+  "description": "BIG COIN (BC) is a digital token built on the BNB Smart Chain (BEP-20). The project aims to provide a transparent and accessible digital asset for blockchain transactions and community participation.",
+  "website": "https://youandme.cc/ymcoin/whitepaper",
+  "tags": [
+    "cryptocurrency",
+    "bnb smart chain",
+    "bep20",
+    "digital asset",
+    "defi"
+  ]
+}
