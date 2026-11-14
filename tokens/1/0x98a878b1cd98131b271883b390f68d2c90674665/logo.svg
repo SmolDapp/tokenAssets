@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_2" data-name="레이어 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="5 5 594 594" width="600" height="600">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: url(#_무제_그라디언트_103);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2, .cls-6 {
+        stroke-width: 10px;
+      }
+
+      .cls-2 {
+        stroke: url(#_무제_그라디언트_142);
+      }
+
+      .cls-3 {
+        stroke: url(#_무제_그라디언트_142-2);
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        stroke-width: 8px;
+      }
+
+      .cls-4 {
+        stroke: url(#_무제_그라디언트_142-4);
+      }
+
+      .cls-4, .cls-5 {
+        fill: none;
+      }
+
+      .cls-5 {
+        stroke: url(#_무제_그라디언트_142-3);
+      }
+
+      .cls-6 {
+        stroke: url(#_무제_그라디언트_103-2);
+      }
+
+      .cls-7 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="_무제_그라디언트_103" data-name="무제 그라디언트 103" x1="927.9" y1="0" x2="927.9" y2="603.97" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dc143c"/>
+      <stop offset="1" stop-color="#1e1e1e"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_103-2" data-name="무제 그라디언트 103" x1="301.98" x2="301.98" xlink:href="#_무제_그라디언트_103"/>
+    <linearGradient id="_무제_그라디언트_142" data-name="무제 그라디언트 142" x1="1554.8" y1="0" x2="1554.8" y2="603.97" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dc143c"/>
+      <stop offset=".53" stop-color="#1e1e1e"/>
+      <stop offset=".99" stop-color="#969696"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_142-2" data-name="무제 그라디언트 142" x1="1554.8" y1="27.67" x2="1554.8" y2="576.3" xlink:href="#_무제_그라디언트_142"/>
+    <linearGradient id="_무제_그라디언트_142-3" data-name="무제 그라디언트 142" x1="927.9" y1="27.67" x2="927.9" y2="576.3" xlink:href="#_무제_그라디언트_142"/>
+    <linearGradient id="_무제_그라디언트_142-4" data-name="무제 그라디언트 142" x1="302" y1="27.67" x2="302" y2="576.3" xlink:href="#_무제_그라디언트_142"/>
+  </defs>
+  <g id="_레이어_1-2" data-name="레이어 1">
+    <g>
+      <circle class="cls-1" cx="927.9" cy="301.98" r="296.98"/>
+      <circle class="cls-6" cx="301.98" cy="301.98" r="296.98"/>
+      <circle class="cls-2" cx="1554.8" cy="301.98" r="296.98"/>
+      <circle class="cls-3" cx="1554.8" cy="301.98" r="270.32"/>
+      <path class="cls-7" d="M1405.99,417.41v-10.22l241.03-241.03h68.87v34.43l-241.03,241.03h-68.87v-24.21ZM1405.99,200.59v-34.43h68.87l68.87,68.87-51.65,51.65-86.08-86.08ZM1578.16,372.75l51.65-51.65,86.08,86.08v34.43h-68.87l-68.87-68.87Z"/>
+      <circle class="cls-5" cx="927.9" cy="301.98" r="270.32"/>
+      <circle class="cls-4" cx="302" cy="301.98" r="270.32"/>
+      <g>
+        <polygon class="cls-7" points="413.89 240.93 471.06 183.76 328.29 183.76 271.13 183.76 270.99 183.76 270.99 183.9 71.06 383.83 71.06 392.32 71.06 412.41 128.22 412.41 270.99 269.65 270.99 326.67 242.55 326.67 185.38 383.83 270.99 383.83 270.99 412.41 271.13 412.41 328.15 412.41 328.29 412.41 328.29 240.93 413.89 240.93"/>
+        <polygon class="cls-7" points="499.64 183.76 413.89 269.51 356.73 269.51 356.73 326.67 442.47 326.67 528.22 240.93 528.22 183.76 499.64 183.76"/>
+      </g>
+      <path class="cls-7" d="M777.2,212.01v-34.43h68.87l68.87,68.87-51.65,51.65-86.08-86.08ZM880.5,315.3l137.73-137.73h68.87v34.43l-137.73,137.73v103.3h-68.87v-137.73Z"/>
+    </g>
+  </g>
+</svg>
