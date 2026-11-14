@@ -1,11 +1,11 @@
 {
-	"totalTokens": 4524,
+	"totalTokens": 4528,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1793,
+			"count": 1794,
 			"explorer": "https://etherscan.io"
 		},
 		{
@@ -242,7 +242,7 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 64,
+			"count": 67,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
