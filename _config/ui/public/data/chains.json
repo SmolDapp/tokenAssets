@@ -1,18 +1,18 @@
 {
-	"totalTokens": 4528,
+	"totalTokens": 4549,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1794,
+			"count": 1797,
 			"explorer": "https://etherscan.io"
 		},
 		{
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1054,
+			"count": 1055,
 			"explorer": "https://basescan.org"
 		},
 		{
@@ -33,14 +33,14 @@
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
-			"count": 149,
+			"count": 159,
 			"explorer": "https://arbiscan.io"
 		},
 		{
 			"id": "57073",
 			"name": "Ink",
 			"slug": "ink",
-			"count": 35,
+			"count": 42,
 			"explorer": "https://explorer.inkonchain.com"
 		},
 		{
