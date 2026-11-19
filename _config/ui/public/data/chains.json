@@ -155,18 +155,18 @@
 			"explorer": "https://soneium.blockscout.com"
 		},
 		{
-			"id": "80094",
-			"name": "Berachain",
-			"slug": "berachain",
-			"count": 9,
-			"explorer": "https://berascan.com"
-		},
-		{
 			"id": "324",
 			"name": "ZkSync Era",
 			"slug": "zksync-era",
 			"count": 7,
 			"explorer": "https://explorer.zksync.io/"
+		},
+		{
+			"id": "80094",
+			"name": "Berachain",
+			"slug": "berachain",
+			"count": 9,
+			"explorer": "https://berascan.com"
 		},
 		{
 			"id": "59144",
