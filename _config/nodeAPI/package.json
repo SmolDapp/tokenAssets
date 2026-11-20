@@ -13,7 +13,7 @@
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx"
 	},
 	"dependencies": {
-		"next": "^16.2.10",
+		"next": "^16.4.6",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"styled-jsx": "^5.1.2"
@@ -42,8 +42,11 @@
 	"resolutions": {
 		"lodash": "^4.18.1",
 		"flatted": "^3.4.2",
-		"js-yaml": "^4.3.0",
-		"postcss": "^8.5.19",
-		"eslint-plugin-react-hooks": "^4.6.0"
+		"js-yaml": "^4.3.2",
+		"postcss": "^8.5.23",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"**/@typescript-eslint/typescript-estree/minimatch": "^11.0.1",
+		"**/@next/eslint-plugin-next/glob": "^10.5.0",
+		"**/@next/eslint-plugin-next/**/minimatch": "^11.0.1"
 	}
 }
