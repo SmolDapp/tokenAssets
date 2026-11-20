@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="38 Bits">
+  <title>38 Bits</title>
+  <rect width="512" height="512" rx="112" fill="#070a0f"/>
+  <g>
+    <rect x="135" y="69" width="110" height="110" rx="22" fill="#c9b078"/>
+    <rect x="274" y="76" width="96" height="96" rx="17" fill="none" stroke="#c9b078" stroke-opacity=".34" stroke-width="11"/>
+    <rect x="142" y="208" width="96" height="96" rx="17" fill="none" stroke="#c9b078" stroke-opacity=".34" stroke-width="11"/>
+    <rect x="267" y="201" width="110" height="110" rx="22" fill="#c9b078"/>
+    <rect x="135" y="333" width="110" height="110" rx="22" fill="#c9b078"/>
+    <rect x="274" y="340" width="96" height="96" rx="17" fill="none" stroke="#c9b078" stroke-opacity=".34" stroke-width="11"/>
+  </g>
+</svg>
