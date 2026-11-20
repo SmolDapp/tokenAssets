@@ -1,39 +1,39 @@
 {
-	"totalTokens": 4551,
+	"totalTokens": 4574,
 	"chains": [
 		{
 			"id": "1",
 			"name": "Ethereum",
 			"slug": "ethereum",
-			"count": 1798,
+			"count": 1799,
 			"explorer": "https://etherscan.io"
 		},
 		{
 			"id": "43114",
 			"name": "Avalanche",
 			"slug": "avalanche",
-			"count": 45,
+			"count": 47,
 			"explorer": "https://snowtrace.io"
 		},
 		{
 			"id": "8453",
 			"name": "Base",
 			"slug": "base",
-			"count": 1056,
+			"count": 1062,
 			"explorer": "https://basescan.org"
 		},
 		{
 			"id": "10",
 			"name": "Optimism",
 			"slug": "optimism",
-			"count": 463,
+			"count": 465,
 			"explorer": "https://optimistic.etherscan.io"
 		},
 		{
 			"id": "42161",
 			"name": "Arbitrum",
 			"slug": "arbitrum",
-			"count": 159,
+			"count": 162,
 			"explorer": "https://arbiscan.io"
 		},
 		{
@@ -47,7 +47,7 @@
 			"id": "42220",
 			"name": "Celo",
 			"slug": "celo",
-			"count": 28,
+			"count": 30,
 			"explorer": "https://celoscan.io"
 		},
 		{
@@ -82,14 +82,14 @@
 			"id": "56",
 			"name": "BSC",
 			"slug": "bsc",
-			"count": 221,
+			"count": 224,
 			"explorer": "https://bscscan.com"
 		},
 		{
 			"id": "137",
 			"name": "Polygon",
 			"slug": "polygon",
-			"count": 116,
+			"count": 118,
 			"explorer": "https://polygonscan.com"
 		},
 		{
@@ -117,7 +117,7 @@
 			"id": "1151111081099710",
 			"name": "Solana",
 			"slug": "solana",
-			"count": 41
+			"count": 42
 		},
 		{
 			"id": "5000",
@@ -127,18 +127,18 @@
 			"explorer": "https://mantlescan.xyz/"
 		},
 		{
-			"id": "747474",
-			"name": "Katana",
-			"slug": "katana",
-			"count": 15,
-			"explorer": "https://katanascan.com"
-		},
-		{
 			"id": "252",
 			"name": "Fraxtal",
 			"slug": "fraxtal",
 			"count": 34,
 			"explorer": "https://fraxscan.com"
+		},
+		{
+			"id": "747474",
+			"name": "Katana",
+			"slug": "katana",
+			"count": 15,
+			"explorer": "https://katanascan.com"
 		},
 		{
 			"id": "250",
@@ -242,7 +242,7 @@
 			"id": "4663",
 			"name": "Robinhood",
 			"slug": "robinhood",
-			"count": 67,
+			"count": 68,
 			"explorer": "https://robinhoodchain.blockscout.com"
 		},
 		{
