@@ -127,18 +127,18 @@
 			"explorer": "https://mantlescan.xyz/"
 		},
 		{
-			"id": "747474",
-			"name": "Katana",
-			"slug": "katana",
-			"count": 15,
-			"explorer": "https://katanascan.com"
-		},
-		{
 			"id": "252",
 			"name": "Fraxtal",
 			"slug": "fraxtal",
 			"count": 34,
 			"explorer": "https://fraxscan.com"
+		},
+		{
+			"id": "747474",
+			"name": "Katana",
+			"slug": "katana",
+			"count": 15,
+			"explorer": "https://katanascan.com"
 		},
 		{
 			"id": "250",
@@ -155,18 +155,18 @@
 			"explorer": "https://soneium.blockscout.com"
 		},
 		{
-			"id": "324",
-			"name": "ZkSync Era",
-			"slug": "zksync-era",
-			"count": 7,
-			"explorer": "https://explorer.zksync.io/"
-		},
-		{
 			"id": "80094",
 			"name": "Berachain",
 			"slug": "berachain",
 			"count": 9,
 			"explorer": "https://berascan.com"
+		},
+		{
+			"id": "324",
+			"name": "ZkSync Era",
+			"slug": "zksync-era",
+			"count": 7,
+			"explorer": "https://explorer.zksync.io/"
 		},
 		{
 			"id": "59144",
