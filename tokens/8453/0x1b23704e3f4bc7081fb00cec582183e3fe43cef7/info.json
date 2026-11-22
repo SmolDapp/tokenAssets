@@ -1,0 +1,8 @@
+{
+  "name": "Alien Base Token",
+  "symbol": "ALB",
+  "decimals": 18,
+  "description": "Current ALB token of Alien Base, a DEX on Base. Legacy ALB migrates 1:1 to this contract.",
+  "website": "https://docs.alienbase.xyz/alb-esalb-and-govalb/alb-token",
+  "tags": ["defi"]
+}
