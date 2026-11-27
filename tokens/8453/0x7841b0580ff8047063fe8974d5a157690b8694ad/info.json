@@ -1,0 +1,14 @@
+{
+  "name": "Trends N Solutions",
+  "symbol": "TNS",
+  "decimals": 18,
+  "description": "Trends N Solutions (TNS) is a fixed-supply (10B) ERC-20 digital asset on Base Mainnet by Trends N Solutions. It enforces a 1.00% hardcoded max fee ceiling, 24-hour fee-change timelock, no mint or blacklist functions, and permanently burned initial Uniswap V2 liquidity.",
+  "website": "https://tns.trendsnsolutions.com/",
+  "tags": [
+    "base",
+    "erc20",
+    "utility",
+    "trends n solutions",
+    "tns"
+  ]
+}

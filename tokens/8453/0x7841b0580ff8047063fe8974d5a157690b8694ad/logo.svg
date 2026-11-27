@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <radialGradient id="rim" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#3e3e41"/>
+      <stop offset="100%" stop-color="#2c2c2f"/>
+    </radialGradient>
+    <radialGradient id="core" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#19191c"/>
+      <stop offset="100%" stop-color="#070709"/>
+    </radialGradient>
+    <linearGradient id="gTL" x1="0%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffe600"/>
+      <stop offset="55%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#ff7700"/>
+    </linearGradient>
+    <linearGradient id="gBL" x1="0%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#ff9900"/>
+      <stop offset="100%" stop-color="#ea4400"/>
+    </linearGradient>
+    <linearGradient id="gR" x1="0%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#ff8000"/>
+      <stop offset="100%" stop-color="#e63e00"/>
+    </linearGradient>
+  </defs>
+  <circle cx="16" cy="16" r="15.6" fill="url(#rim)"/>
+  <circle cx="16" cy="16" r="12.95" fill="url(#core)" stroke="#cc9a22" stroke-width="0.45"/>
+  <g fill="none" stroke="#f05a00" stroke-width="0.56" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M9.625,5.375 L6.812,10.75 L9.625,15.969 L6.812,21.188 L9.625,26.562"/>
+    <path d="M17.625,5.375 L20,9.625 L26.125,9.625"/>
+    <path d="M17.625,26.562 L20,22.312 L26.125,22.312"/>
+  </g>
+  <polygon points="19.188,10.75 16.438,15.513 10.938,15.513 8.188,10.75 10.937,5.987 16.438,5.987" fill="url(#gTL)"/>
+  <polygon points="19.188,21.188 16.438,25.951 10.938,25.951 8.188,21.188 10.937,16.424 16.438,16.424" fill="url(#gBL)"/>
+  <polygon points="28.438,15.969 25.688,20.732 20.188,20.732 17.438,15.969 20.187,11.206 25.688,11.206" fill="url(#gR)"/>
+  <polygon points="13.561,10.531 11.064,10.531 12.312,8.368 14.81,8.368" fill="#ffffff"/>
+  <polygon points="13.94,10.75 15.189,8.587 16.437,10.75 15.189,12.913" fill="#ffffff"/>
+  <polygon points="13.561,10.969 14.81,13.132 12.313,13.132 11.064,10.969" fill="#ffffff"/>
+  <polygon points="13.561,20.969 11.064,20.969 12.312,18.806 14.81,18.806" fill="#ffffff"/>
+  <polygon points="13.94,21.187 15.189,19.025 16.437,21.187 15.189,23.35" fill="#ffffff"/>
+  <polygon points="13.561,21.406 14.81,23.569 12.313,23.569 11.064,21.406" fill="#ffffff"/>
+  <polygon points="22.811,15.75 20.314,15.75 21.562,13.587 24.06,13.587" fill="#ffffff"/>
+  <polygon points="23.19,15.969 24.439,13.806 25.687,15.969 24.439,18.132" fill="#ffffff"/>
+  <polygon points="22.811,16.188 24.06,18.35 21.563,18.35 20.314,16.187" fill="#ffffff"/>
+</svg>
