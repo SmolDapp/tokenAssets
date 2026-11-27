@@ -1,0 +1,12 @@
+{
+  "name": "Brazilian Real Stablecoin",
+  "symbol": "BRS",
+  "decimals": 6,
+  "description": "BRS is Nora Finance’s Brazilian real stablecoin, fully backed and pegged 1:1 to BRL. Built for fast, 24/7 transfers, it connects Brazil’s currency to global DeFi markets across multiple blockchains. ([Nora Finance (https://www.nora.finance/)](<https://www.nora.finance/>))",
+  "website": "https://nora.finance",
+  "tags": [
+    "stablecoin",
+    "defi",
+    "brazil"
+  ]
+}
