@@ -1,0 +1,10 @@
+{
+  "name": "cRECY",
+  "symbol": "cRECY",
+  "decimals": 18,
+  "description": "The Recy Network is an Ethereum-based waste traceability and waste management finance protocol. It records and audits sustainable waste treatment on-chain. Its ERC-20 utility token, cRECY (22M max supply), is minted strictly from verified sustainable waste treatment reports allowing the stakeholders involved to mint cRECYs.",
+  "website": "https://recy.life",
+  "tags": [
+    "defi"
+  ]
+}
